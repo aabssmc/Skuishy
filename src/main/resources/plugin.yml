@@ -1,0 +1,7 @@
+name: Skuishy
+version: '${version}'
+main: lol.aabss.skuishy.Skuishy
+api-version: '1.13'
+depend: [Skript]
+authors: [aabss]
+website: https://aabss.lol
