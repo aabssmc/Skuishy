@@ -48,7 +48,7 @@ public class PlayerTexture {
     }
     public static Image imgTexture(UUID uuid) throws Exception {
         String url = (String) urlTexture(uuid);
-        URL skinurl = new URL("http://www.digitalphotoartistry.com/rose1.jpg");
+        URL skinurl = new URL(url);
         Image image = ImageIO.read(skinurl);
         return image;
     }
