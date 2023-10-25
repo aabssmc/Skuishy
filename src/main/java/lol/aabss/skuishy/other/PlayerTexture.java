@@ -5,7 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -46,10 +46,10 @@ public class PlayerTexture {
         }
         return url;
     }
-    public static Image imgTexture(UUID uuid) throws Exception {
+    public static BufferedImage imgTexture(UUID uuid) throws Exception {
         String url = (String) urlTexture(uuid);
         URL skinurl = new URL(url);
-        Image image = ImageIO.read(skinurl);
+        BufferedImage image = ImageIO.read(skinurl);
         return image;
     }
 }
