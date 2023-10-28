@@ -15,6 +15,3 @@
 
 ## Conditions
 - [Player - Mainhand](https://skripthub.net/docs/?id=9847)
-
-
-<a href="http://example.com/" target="_blank">Hello, world!</a>
