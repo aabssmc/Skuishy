@@ -5,6 +5,7 @@
 # SYNTAXES
 
 ## Expressions
+- <a href="https://skripthub.net/docs/?id=9846" target="_blank">Player - Mainhand</a>
 - [Player - Mainhand](https://skripthub.net/docs/?id=9846)
 - [Skins - Face of Player](https://skripthub.net/docs/?id=9841)
 - [Skins - Player Skin Signature](https://skripthub.net/docs/?id=9842)
