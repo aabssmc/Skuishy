@@ -17,4 +17,4 @@
 - [Player - Mainhand](https://skripthub.net/docs/?id=9847)
 
 
-<script src='https://cdn.jsdelivr.net/gh/eddymens/markdown-external-link-script@v2.0.0/main.min.js'></script>
+<a href="http://example.com/" target="_blank">Hello, world!</a>
