@@ -5,7 +5,6 @@
 # SYNTAXES
 
 ## Expressions
-- <a href="https://skripthub.net/docs/?id=9846" target="_blank">Player - Mainhand</a>
 - [Player - Mainhand](https://skripthub.net/docs/?id=9846)
 - [Skins - Face of Player](https://skripthub.net/docs/?id=9841)
 - [Skins - Player Skin Signature](https://skripthub.net/docs/?id=9842)
@@ -16,3 +15,6 @@
 
 ## Conditions
 - [Player - Mainhand](https://skripthub.net/docs/?id=9847)
+
+
+<script src='https://cdn.jsdelivr.net/gh/eddymens/markdown-external-link-script@v2.0.0/main.min.js'></script>
