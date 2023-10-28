@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.other;
+package lol.aabss.skuishy.other.skins;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

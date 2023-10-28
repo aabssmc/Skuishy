@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.other;
+package lol.aabss.skuishy.other.skins;
 
 import javax.annotation.Nullable;
 import java.awt.*;

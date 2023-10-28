@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'lol.aabss'
-version = '1.1'
+version = '1.2'
 
 repositories {
     mavenCentral()
@@ -27,6 +27,7 @@ dependencies {
         transitive = false
     }
     implementation (group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1')
+    compileOnly 'org.json:json:20231013'
 }
 
 def targetJavaVersion = 17

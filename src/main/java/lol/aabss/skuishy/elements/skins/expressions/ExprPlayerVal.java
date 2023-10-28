@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.expressions;
+package lol.aabss.skuishy.elements.skins.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
@@ -10,13 +10,13 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.PlayerValue;
+import lol.aabss.skuishy.other.skins.PlayerValue;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
 import javax.annotation.Nullable;
 
-@Name("Player Skin Value")
+@Name("Skins - Player Skin Value")
 @Description("Sends the value of the player's skin .")
 @Examples({
         "command sendvalue <player>:",
