@@ -27,7 +27,9 @@ import java.awt.image.BufferedImage;
 public class ExprPlayerTexImg extends SimpleExpression<BufferedImage> {
 
     static {
-        Skript.registerExpression(ExprPlayerTexImg.class, BufferedImage.class, ExpressionType.PROPERTY, "[the] [skin] texture of %player% as image", "%player%'s [skin] texture as image");
+        Skript.registerExpression(ExprPlayerTexImg.class, BufferedImage.class, ExpressionType.PROPERTY,
+                "[the] [skin] texture of %player% as image",
+                "%player%'s [skin] texture as image");
     }
 
     private Expression<Player> player;
@@ -58,7 +60,8 @@ public class ExprPlayerTexImg extends SimpleExpression<BufferedImage> {
     @Override
     protected BufferedImage @NotNull [] get(@NotNull Event event) {
         try {
-            return new BufferedImage[] {PlayerTexture.imgTexture(player.getSingle(event))};
+            var player = this.player.getSingle(event);
+            return new BufferedImage[] {PlayerTexture.imgTexture(player)};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

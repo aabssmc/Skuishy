@@ -5,7 +5,7 @@ import com.destroystokyo.paper.profile.ProfileProperty;
 import org.bukkit.entity.Player;
 
 public class Property {
-    public static ProfileProperty jo(Player p) {
+    public static ProfileProperty getProfileProperties(Player p) {
         PlayerProfile playerProfile = p.getPlayerProfile();
         ProfileProperty prop = null;
         for (ProfileProperty property : playerProfile.getProperties()) {

@@ -26,7 +26,10 @@ import org.jetbrains.annotations.NotNull;
 public class ExprPlayerVal extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprPlayerVal.class, String.class, ExpressionType.PROPERTY, "[the] [(texture|skin)] value of %player%", "%player%'s [(texture|skin)] value");
+        Skript.registerExpression(ExprPlayerVal.class, String.class, ExpressionType.PROPERTY,
+                "[the] [(texture|skin)] value of %player%",
+                "%player%'s [(texture|skin)] value"
+        );
     }
 
     private Expression<Player> player;
@@ -57,7 +60,7 @@ public class ExprPlayerVal extends SimpleExpression<String> {
     protected String @NotNull [] get(@NotNull Event event) {
         Player p = player.getSingle(event);
         assert p != null;
-        return new String[]{Property.jo(p).getValue()};
+        return new String[]{Property.getProfileProperties(p).getValue()};
     }
 
 }
