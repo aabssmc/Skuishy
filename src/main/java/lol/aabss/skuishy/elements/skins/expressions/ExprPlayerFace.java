@@ -13,8 +13,8 @@ import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.skins.PlayerFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
@@ -28,7 +28,7 @@ import java.util.Objects;
 public class ExprPlayerFace extends SimpleExpression<BufferedImage> {
 
     static {
-        Skript.registerExpression(ExprPlayerFace.class, BufferedImage.class, ExpressionType.COMBINED, "[the] face of %player% (at|with) size %number% with[:out] (a|an) outer[( |-)]layer", "%player%'s face (at|with) size %number% with[:out] (a|an) outer[( |-)]layer");
+        Skript.registerExpression(ExprPlayerFace.class, BufferedImage.class, ExpressionType.PROPERTY, "[the] face of %player% (at|with) size %number% with[:out] (a|an) [outer[( |-)]]layer", "%player%'s face (at|with) size %number% with[:out] (a|an) [outer[( |-)]]layer");
     }
 
     private Expression<Player> player;
@@ -38,7 +38,7 @@ public class ExprPlayerFace extends SimpleExpression<BufferedImage> {
     private boolean layer;
 
     @Override
-    public Class<? extends BufferedImage> getReturnType() {
+    public @NotNull Class<? extends BufferedImage> getReturnType() {
         return BufferedImage.class;
     }
 
@@ -49,7 +49,7 @@ public class ExprPlayerFace extends SimpleExpression<BufferedImage> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parser) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, ParseResult parser) {
         player = (Expression<Player>) exprs[0];
         size = (Expression<Number>) exprs[1];
         layer = parser.hasTag("out");
@@ -57,20 +57,18 @@ public class ExprPlayerFace extends SimpleExpression<BufferedImage> {
     }
 
     @Override
-    @Nullable
-    public String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return "Player Skin Face";
     }
 
     @Override
-    @Nullable
-    protected BufferedImage[] get(Event event) {
+    protected BufferedImage @NotNull [] get(@NotNull Event event) {
         try {
-            if (layer == true){
-                return new BufferedImage[] {PlayerFace.get(Objects.requireNonNull(player.getSingle(event)).getUniqueId(), size.getSingle(event), true)};
+            if (layer){
+                return new BufferedImage[] {PlayerFace.get(Objects.requireNonNull(player.getSingle(event)), size.getSingle(event), true)};
             }
             else{
-                return new BufferedImage[] {PlayerFace.get(Objects.requireNonNull(player.getSingle(event)).getUniqueId(), size.getSingle(event), false)};
+                return new BufferedImage[] {PlayerFace.get(Objects.requireNonNull(player.getSingle(event)), size.getSingle(event), false)};
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

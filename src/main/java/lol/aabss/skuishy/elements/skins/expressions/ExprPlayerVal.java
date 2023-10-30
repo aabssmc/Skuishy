@@ -10,11 +10,10 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.PlayerValue;
+import lol.aabss.skuishy.other.skins.Property;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Skins - Player Skin Value")
 @Description("Sends the value of the player's skin .")
@@ -27,13 +26,13 @@ import javax.annotation.Nullable;
 public class ExprPlayerVal extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprPlayerVal.class, String.class, ExpressionType.COMBINED, "[the] [(texture|skin)] value of %player%", "%player%'s [(texture|skin)] value");
+        Skript.registerExpression(ExprPlayerVal.class, String.class, ExpressionType.PROPERTY, "[the] [(texture|skin)] value of %player%", "%player%'s [(texture|skin)] value");
     }
 
     private Expression<Player> player;
 
     @Override
-    public Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
@@ -44,25 +43,21 @@ public class ExprPlayerVal extends SimpleExpression<String> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parser) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
         player = (Expression<Player>) exprs[0];
         return true;
     }
 
     @Override
-    @Nullable
-    public String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return "Player Skin Value ";
     }
 
     @Override
-    @Nullable
-    protected String[] get(Event event) {
-        try {
-            return new String[] {PlayerValue.Value(player.getSingle(event).getUniqueId())};
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    protected String @NotNull [] get(@NotNull Event event) {
+        Player p = player.getSingle(event);
+        assert p != null;
+        return new String[]{Property.jo(p).getValue()};
     }
 
 }

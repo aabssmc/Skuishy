@@ -13,11 +13,12 @@ import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.skins.PlayerTexture;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
+import java.util.Objects;
 
 @Name("Skins - Player Skin Texture (URL)")
-@Description("Gets the player's skin as a url.")
+@Description("sticking out your gyat for the rizzler, your so skibidi, your so fanum tax, i jus wana be ur sigma ):")
 @Examples({
         "send texture of player as url"
 })
@@ -26,13 +27,13 @@ import javax.annotation.Nullable;
 public class ExprPlayerTexURL extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprPlayerTexURL.class, String.class, ExpressionType.COMBINED, "[the] [skin] texture of %player% as url", "%player%'s [skin] texture as url");
+        Skript.registerExpression(ExprPlayerTexURL.class, String.class, ExpressionType.PROPERTY, "[the] [skin] texture of %player% as url", "%player%'s [skin] texture as url");
     }
 
     private Expression<Player> player;
 
     @Override
-    public Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
@@ -43,24 +44,25 @@ public class ExprPlayerTexURL extends SimpleExpression<String> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parser) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
         player = (Expression<Player>) exprs[0];
         return true;
     }
 
     @Override
-    @Nullable
-    public String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return "Player Skin Texture URL";
     }
 
     @Override
-    @Nullable
-    protected String[] get(Event event) {
+    protected String @NotNull [] get(@NotNull Event event) {
         try {
-            return new String[] {PlayerTexture.urlTexture(player.getSingle(event).getUniqueId())};
+            return new String[] {PlayerTexture.urlTexture(Objects.requireNonNull(player.getSingle(event)))};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 }
+
+
+//sticking out your gyat for the rizzler, your so skibidi, your so fanum tax, i jus wana be ur sigma ):

@@ -1,0 +1,63 @@
+package lol.aabss.skuishy.elements.events;
+
+import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
+import ch.njol.skript.lang.Literal;
+import ch.njol.skript.lang.SkriptEvent;
+import ch.njol.skript.lang.SkriptParser.ParseResult;
+import ch.njol.skript.lang.util.SimpleEvent;
+import ch.njol.skript.registrations.EventValues;
+import ch.njol.skript.util.Getter;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.player.PlayerChangedMainHandEvent;
+import org.jetbrains.annotations.NotNull;
+
+@SuppressWarnings("unused")
+@Name("Player - On Main Hand Change")
+@Description("Called when a player changes their main hand in the client settings.")
+@Examples({
+        "on main hand change:",
+        "\tif event-string is \"left\":",
+        "\t\tsend \"eww! weirdo!!!\" to player"
+})
+@Since("1.3")
+public class EvtMainHandChange extends SkriptEvent {
+    static {
+        Skript.registerEvent("On Main Hand Change", SimpleEvent.class, PlayerChangedMainHandEvent.class, "[on] [player] main([-| ])hand (switch|swap|change)");
+        EventValues.registerEventValue(PlayerChangedMainHandEvent.class, Player.class, new Getter<Player, PlayerChangedMainHandEvent>() {
+            @Override
+            public Player get(PlayerChangedMainHandEvent e) {
+                return e.getPlayer();
+            }
+        }, 0);
+
+        EventValues.registerEventValue(PlayerChangedMainHandEvent.class, String.class, new Getter<String, PlayerChangedMainHandEvent>() {
+            @Override
+            public String get(PlayerChangedMainHandEvent e) {
+                return e.getMainHand().toString().toLowerCase();
+            }
+        }, 0);
+
+
+    }
+
+    @Override
+    public boolean init(Literal<?> @NotNull [] args, int matchedPattern, @NotNull ParseResult parseResult) {
+        return true;
+    }
+
+    @Override
+    public boolean check(@NotNull Event e) {
+        return true;
+    }
+
+    @Override
+    public @NotNull String toString(Event e, boolean debug) {
+        return "Player main hand change";
+    }
+
+}

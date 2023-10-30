@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.player.conditions;
+package lol.aabss.skuishy.elements.conditions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
@@ -11,6 +11,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -21,7 +22,7 @@ import java.util.Objects;
     @Examples({
             "on join:",
             "\tif player's main hand is left:",
-            "\t\tsend \"you are not normal\" to player",
+            "\t\tsend \"you are not normal\" to player"
     })
     @Since("1.2")
     public class CondMainHand extends Condition {
@@ -38,7 +39,7 @@ import java.util.Objects;
 
         @SuppressWarnings("unchecked")
         @Override
-        public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parser) {
+        public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parser) {
             this.player = (Expression<Player>) expressions[0];
             matpat = matchedPattern;
             if (parser.hasTag("right")){
@@ -50,13 +51,13 @@ import java.util.Objects;
             return true;
         }
 
-        @Override
-    public String toString(@Nullable Event event, boolean debug) {
-        return "Mainhand of " + player.toString(event, debug);
+    @Override
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
+        return "main hand of " + player.toString(event, debug);
     }
 
     @Override
-    public boolean check(Event event) {
+    public boolean check(@NotNull Event event) {
         Player p = player.getSingle(event);
         assert p != null;
         String mh = p.getMainHand().toString().toLowerCase();

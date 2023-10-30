@@ -2,7 +2,6 @@ package lol.aabss.skuishy;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -13,8 +12,7 @@ public class Skuishy extends JavaPlugin {
     private SkriptAddon addon;
 
     public void onEnable() {
-        int pluginId = 20162;
-        Metrics metrics = new Metrics(this, pluginId);
+        Metrics metrics = new Metrics(this, 20162);
         instance = this;
         try {
             addon = Skript.registerAddon(this)

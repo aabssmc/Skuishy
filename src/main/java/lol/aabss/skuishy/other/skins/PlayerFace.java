@@ -1,15 +1,15 @@
 package lol.aabss.skuishy.other.skins;
 
+import org.bukkit.entity.Player;
+
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.UUID;
 
 public class PlayerFace {
-    public static BufferedImage get(UUID uuid, @Nullable Number size, boolean lay) throws Exception {
-        BufferedImage image = PlayerTexture.imgTexture(uuid);
+    public static BufferedImage get(Player player, @Nullable Number size, boolean lay) throws Exception {
+        BufferedImage image = PlayerTexture.imgTexture(player);
         BufferedImage img2 = image.getSubimage(8,8,16,16);
-
         Number num = size;
         assert num != null;
         BufferedImage face = new BufferedImage(num.intValue(), num.intValue(), img2.getType());

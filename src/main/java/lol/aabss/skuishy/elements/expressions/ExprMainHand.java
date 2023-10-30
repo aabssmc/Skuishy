@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.player.expressions;
+package lol.aabss.skuishy.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
@@ -12,8 +12,7 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Player - Main Hand")
 @Description("Gets the player's selected main hand.")
@@ -24,13 +23,13 @@ import javax.annotation.Nullable;
 public class ExprMainHand extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprMainHand.class, String.class, ExpressionType.COMBINED, "[the] main[(-| )]hand of %player%", "%player%'s main[(-| )]hand");
+        Skript.registerExpression(ExprMainHand.class, String.class, ExpressionType.PROPERTY, "[the] main[(-| )]hand of %player%", "%player%'s main[(-| )]hand");
     }
 
     private Expression<Player> player;
 
     @Override
-    public Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
@@ -41,20 +40,21 @@ public class ExprMainHand extends SimpleExpression<String> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parser) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parser) {
+        if (exprs.length == 0){
+            return false;
+        }
         player = (Expression<Player>) exprs[0];
         return true;
     }
 
     @Override
-    @Nullable
-    public String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return "Main hand";
     }
 
     @Override
-    @Nullable
-    protected String[] get(Event event) {
+    protected String @NotNull [] get(@NotNull Event event) {
         Player p = player.getSingle(event);
         assert p != null;
         return new String[]{p.getMainHand().toString().toLowerCase()};

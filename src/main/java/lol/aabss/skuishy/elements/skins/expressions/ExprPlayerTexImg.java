@@ -13,8 +13,8 @@ import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.skins.PlayerTexture;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.awt.image.BufferedImage;
 
 @Name("Skins - Player Skin Texture (Image)")
@@ -27,14 +27,14 @@ import java.awt.image.BufferedImage;
 public class ExprPlayerTexImg extends SimpleExpression<BufferedImage> {
 
     static {
-        Skript.registerExpression(ExprPlayerTexImg.class, BufferedImage.class, ExpressionType.COMBINED, "[the] [skin] texture of %player% as image", "%player%'s [skin] texture as image");
+        Skript.registerExpression(ExprPlayerTexImg.class, BufferedImage.class, ExpressionType.PROPERTY, "[the] [skin] texture of %player% as image", "%player%'s [skin] texture as image");
     }
 
     private Expression<Player> player;
 
 
     @Override
-    public Class<? extends BufferedImage> getReturnType() {
+    public @NotNull Class<? extends BufferedImage> getReturnType() {
         return BufferedImage.class;
     }
 
@@ -45,22 +45,20 @@ public class ExprPlayerTexImg extends SimpleExpression<BufferedImage> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parser) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
         player = (Expression<Player>) exprs[0];
         return true;
     }
 
     @Override
-    @Nullable
-    public String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return "Player Skin Texture Image";
     }
 
     @Override
-    @Nullable
-    protected BufferedImage[] get(Event event) {
+    protected BufferedImage @NotNull [] get(@NotNull Event event) {
         try {
-            return new BufferedImage[] {PlayerTexture.imgTexture(player.getSingle(event).getUniqueId())};
+            return new BufferedImage[] {PlayerTexture.imgTexture(player.getSingle(event))};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
