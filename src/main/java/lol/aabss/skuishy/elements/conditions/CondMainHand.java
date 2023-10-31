@@ -14,48 +14,43 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 
-    @Name("Player - Main Hand")
-    @Description("Checks the player's main hand.")
-    @Examples({
-            "on join:",
-            "\tif player's main hand is left:",
-            "\t\tsend \"you are not normal\" to player"
-    })
-    @Since("1.2")
-    public class CondMainHand extends Condition {
+@Name("Player - Main Hand")
+@Description("Checks the player's main hand.")
+@Examples({
+        "on join:",
+        "\tif player's main hand is left:",
+        "\t\tsend \"you are not normal\" to player"
+})
+@Since("1.2")
+public class CondMainHand extends Condition {
+    enum MainHandSide {
+        LEFT, RIGHT, UNKNOWN;
+    }
 
-        enum MainHandSide {
-            LEFT, RIGHT, UNKNOWN;
-        }
 
+    static {
+        Skript.registerCondition(CondMainHand.class,
+                "%players%'s main hand (0:is|1:is( not|n't)) (:left|:right)",
+                "main hand of %players% (0:is|1:is( not|n't)) (:left|:right)"
+        );
+    }
 
-        static {
-            Skript.registerCondition(CondMainHand.class,
-                    "%players%'s main hand (0:is|1:is( not|'nt)) (:left|:right)",
-                    "main hand of %players% (0:is|1:is( not|'nt)) (:left|:right)"
-            );
-        }
+    Expression<Player> player;
 
-        Expression<Player> player;
+    MainHandSide side;
 
-        int matpat;
-
-        MainHandSide side;
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parser) {
-            this.player = (Expression<Player>) expressions[0];
-            matpat = matchedPattern;
-            boolean negated = parser.mark == 1;
-            if (parser.hasTag("right")) side = MainHandSide.RIGHT;
-            else if (parser.hasTag("left")) side = MainHandSide.LEFT;
-            setNegated(negated);
-            return true;
-        }
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parser) {
+        this.player = (Expression<Player>) expressions[0];
+        boolean negated = parser.mark == 1;
+        if (parser.hasTag("right")) side = MainHandSide.RIGHT;
+        else if (parser.hasTag("left")) side = MainHandSide.LEFT;
+        setNegated(negated);
+        return true;
+    }
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug) {
