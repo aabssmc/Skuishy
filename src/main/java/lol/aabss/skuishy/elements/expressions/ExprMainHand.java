@@ -5,6 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -20,13 +21,15 @@ import org.jetbrains.annotations.NotNull;
         "send player's main hand"
 })
 @Since("1.2")
-public class ExprMainHand extends SimpleExpression<String> {
+public class ExprMainHand extends PropertyExpression<Player, String> {
 
     static {
-        Skript.registerExpression(ExprMainHand.class, String.class, ExpressionType.PROPERTY, "[the] main[(-| )]hand of %player%", "%player%'s main[(-| )]hand");
+        register(ExprMainHand.class, String.class,
+                "[the] main[(-| )]hand",
+                "players"
+        );
     }
 
-    private Expression<Player> player;
 
     @Override
     public @NotNull Class<? extends String> getReturnType() {
@@ -41,10 +44,7 @@ public class ExprMainHand extends SimpleExpression<String> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parser) {
-        if (exprs.length == 0){
-            return false;
-        }
-        player = (Expression<Player>) exprs[0];
+        setExpr((Expression<Player>) exprs[0]);
         return true;
     }
 
@@ -54,8 +54,9 @@ public class ExprMainHand extends SimpleExpression<String> {
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event event) {
-        Player p = player.getSingle(event);
+    protected String @NotNull [] get(@NotNull Event event, Player[] source) {
+        if (source.length < 1) return new String[0];
+        Player p = source[0];
         assert p != null;
         return new String[]{p.getMainHand().toString().toLowerCase()};
     }

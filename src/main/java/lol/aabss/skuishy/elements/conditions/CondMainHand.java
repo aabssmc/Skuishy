@@ -27,56 +27,52 @@ import java.util.Objects;
     @Since("1.2")
     public class CondMainHand extends Condition {
 
+        enum MainHandSide {
+            LEFT, RIGHT, UNKNOWN;
+        }
+
+
         static {
-            Skript.registerCondition(CondMainHand.class, "(%player%'s main[(-| )]hand|main[(-| )]hand of %player%) (is|are) (:right|:left)", "(%player%'s main[(-| )]hand|main[(-| )]hand of %player%) (isn't|is not|aren't|are not) (:right|:left)");
+            Skript.registerCondition(CondMainHand.class,
+                    "%players%'s main hand (0:is|1:is( not|'nt)) (:left|:right)",
+                    "main hand of %players% (0:is|1:is( not|'nt)) (:left|:right)"
+            );
         }
 
         Expression<Player> player;
 
         int matpat;
 
-        String side;
+        MainHandSide side;
 
         @SuppressWarnings("unchecked")
         @Override
         public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parser) {
             this.player = (Expression<Player>) expressions[0];
             matpat = matchedPattern;
-            if (parser.hasTag("right")){
-                side = "right";
-            }
-            else if (parser.hasTag("left")){
-                side = "left";
-            }
+            boolean negated = parser.mark == 1;
+            if (parser.hasTag("right")) side = MainHandSide.RIGHT;
+            else if (parser.hasTag("left")) side = MainHandSide.LEFT;
+            setNegated(negated);
             return true;
         }
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug) {
-        return "main hand of " + player.toString(event, debug);
+        return "main hand of " + player.toString(event, debug) + " is " + side.toString();
     }
 
     @Override
     public boolean check(@NotNull Event event) {
         Player p = player.getSingle(event);
         assert p != null;
-        String mh = p.getMainHand().toString().toLowerCase();
-        if (Objects.equals(side, "right")){
-            if (matpat == 0){
-                return mh.equals("right");
-            }
-            else{
-                return !mh.equals("right");
-            }
-        }
-        else if (Objects.equals(side, "left")){
-            if (matpat == 0){
-                return mh.equals("left");
-            }
-            else{
-                return !mh.equals("left");
-            }
-        }
-        return false;
+        String mh = p.getMainHand().toString();
+
+        if (side == MainHandSide.LEFT && MainHandSide.valueOf(mh) == MainHandSide.LEFT)
+            return !isNegated();
+        else if (side == MainHandSide.RIGHT && MainHandSide.valueOf(mh) == MainHandSide.RIGHT)
+            return !isNegated();
+
+        return isNegated();
     }
 }

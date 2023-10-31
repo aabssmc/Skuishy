@@ -48,7 +48,9 @@ public class ExprPlayerSig extends PropertyExpression<Player, String> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
+        setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }
 }

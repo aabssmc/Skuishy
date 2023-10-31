@@ -5,6 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -23,16 +24,14 @@ import org.jetbrains.annotations.NotNull;
 })
 @Since("1.0")
 
-public class ExprPlayerVal extends SimpleExpression<String> {
+public class ExprPlayerVal extends PropertyExpression<Player, String> {
 
     static {
-        Skript.registerExpression(ExprPlayerVal.class, String.class, ExpressionType.PROPERTY,
-                "[the] [(texture|skin)] value of %player%",
-                "%player%'s [(texture|skin)] value"
+       register(ExprPlayerVal.class, String.class,
+                "[the] texture|skin value",
+                "players"
         );
     }
-
-    private Expression<Player> player;
 
     @Override
     public @NotNull Class<? extends String> getReturnType() {
@@ -47,18 +46,19 @@ public class ExprPlayerVal extends SimpleExpression<String> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
-        player = (Expression<Player>) exprs[0];
+        setExpr ((Expression<Player>) exprs[0]);
         return true;
     }
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return "Player Skin Value ";
+        return getExpr().toString(event, debug) + " Skin Value ";
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event event) {
-        Player p = player.getSingle(event);
+    protected String @NotNull [] get(@NotNull Event event, Player[] source) {
+        if (source.length < 1) return new String[0];
+        Player p = source[0];
         assert p != null;
         return new String[]{Property.getProfileProperties(p).getValue()};
     }
