@@ -1,17 +1,14 @@
-package lol.aabss.skuishy.elements.skins.expressions;
+package lol.aabss.skuishy.elements.expressions.skins;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
-import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.Property;
+import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -19,8 +16,9 @@ import org.jetbrains.annotations.NotNull;
 @Name("Skins - Player Skin Value")
 @Description("Sends the value of the player's skin .")
 @Examples({
-        "command sendvalue <player>:",
-        "\tsend arg-1's skin value"
+        "command send-value <player>:",
+        "\ttrigger:",
+        "\t\tsend arg-1's skin value"
 })
 @Since("1.0")
 
@@ -28,7 +26,7 @@ public class ExprPlayerVal extends PropertyExpression<Player, String> {
 
     static {
        register(ExprPlayerVal.class, String.class,
-                "[the] texture|skin value",
+                "[the] (texture|skin) value",
                 "players"
         );
     }
@@ -60,7 +58,7 @@ public class ExprPlayerVal extends PropertyExpression<Player, String> {
         if (source.length < 1) return new String[0];
         Player p = source[0];
         assert p != null;
-        return new String[]{Property.getProfileProperties(p).getValue()};
+        return new String[]{SkinWrapper.getProfileProperties(p).getValue()};
     }
 
 }

@@ -1,17 +1,14 @@
-package lol.aabss.skuishy.elements.skins.expressions;
+package lol.aabss.skuishy.elements.expressions.skins;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
-import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.PlayerTexture;
+import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -21,7 +18,9 @@ import java.awt.image.BufferedImage;
 @Name("Skins - Player Skin Texture (Image)")
 @Description("Gets the player's skin as a image.")
 @Examples({
-        "set {_texture} to skin texture of player as image"
+        "command set-texture <player>:",
+        "\ttrigger:",
+        "\t\tset {_texture} to skin texture image of player"
 })
 @Since("1.0")
 
@@ -60,7 +59,7 @@ public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> 
         try {
             if (source.length < 1) return new BufferedImage[0];
             var player = source[0];
-            return new BufferedImage[] {PlayerTexture.imgTexture(player)};
+            return new BufferedImage[] {SkinWrapper.imgTexture(player)};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

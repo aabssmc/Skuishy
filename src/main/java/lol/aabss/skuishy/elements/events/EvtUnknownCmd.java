@@ -18,21 +18,21 @@ import org.jetbrains.annotations.NotNull;
 @Description("Thrown when a player executes a command that is not defined.")
 @Examples({
         "on unknown command:",
-        "\tset unknown command message to \"that doesnt exist\""
+        "\tset unknown command message to \"that doesn't exist\""
 })
 @Since("1.3")
 @RequiredPlugins("Paper 1.13+")
 public class EvtUnknownCmd extends SkriptEvent {
     static {
         Skript.registerEvent("unknown command", SimpleEvent.class, UnknownCommandEvent.class, "[on] unknown command");
-        EventValues.registerEventValue(UnknownCommandEvent.class, CommandSender.class, new Getter<CommandSender, UnknownCommandEvent>() {
+        EventValues.registerEventValue(UnknownCommandEvent.class, CommandSender.class, new Getter<>() {
             @Override
             public CommandSender get(UnknownCommandEvent e) {
                 return e.getSender();
             }
         }, 0);
 
-        EventValues.registerEventValue(UnknownCommandEvent.class, String.class, new Getter<String, UnknownCommandEvent>() {
+        EventValues.registerEventValue(UnknownCommandEvent.class, String.class, new Getter<>() {
             @Override
             public String get(UnknownCommandEvent e) {
                 return e.getCommandLine();

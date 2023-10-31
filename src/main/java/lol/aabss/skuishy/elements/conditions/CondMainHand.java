@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 @Since("1.2")
 public class CondMainHand extends Condition {
     enum MainHandSide {
-        LEFT, RIGHT, UNKNOWN;
+        LEFT, RIGHT
     }
 
 
