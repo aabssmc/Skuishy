@@ -27,7 +27,10 @@ import java.util.Objects;
 public class ExprPlayerTexURL extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprPlayerTexURL.class, String.class, ExpressionType.PROPERTY, "[the] [skin] texture of %player% as url", "%player%'s [skin] texture as url");
+        Skript.registerExpression(ExprPlayerTexURL.class, String.class, ExpressionType.PROPERTY,
+                "[the] [skin] texture of %player% as url",
+                "%player%'s [skin] texture as url"
+        );
     }
 
     private Expression<Player> player;

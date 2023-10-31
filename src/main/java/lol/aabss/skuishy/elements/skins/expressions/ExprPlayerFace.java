@@ -1,14 +1,14 @@
 package lol.aabss.skuishy.elements.skins.expressions;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
-import ch.njol.skript.lang.util.SimpleExpression;
+import ch.njol.skript.registrations.Classes;
+import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.skins.PlayerFace;
 import org.bukkit.entity.Player;
@@ -16,26 +16,41 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 
 @Name("Skins - Face of Player")
 @Description("Gets the player's face.")
 @Examples({
-        "set {_texture} to face of player with an outer layer"
+        "set {_texture} to face of player with an outer layer",
+        "set {_texture} to player's face with size 10 with a layer"
 })
 @Since("1.0")
 
-public class ExprPlayerFace extends SimpleExpression<BufferedImage> {
+
+class ExprPlayerFace extends PropertyExpression<Player, BufferedImage> {
 
     static {
-        Skript.registerExpression(ExprPlayerFace.class, BufferedImage.class, ExpressionType.PROPERTY, "[the] face of %player% (at|with) size %number% with[:out] (a|an) [outer[( |-)]]layer", "%player%'s face (at|with) size %number% with[:out] (a|an) [outer[( |-)]]layer");
+        register(ExprPlayerFace.class, BufferedImage.class,
+                "face [(at|with)] size %-number%] (:with|:without) (a|an) [outer[( |-)]]layer",
+                "players"
+        );
     }
 
-    private Expression<Player> player;
-
     private Expression<Number> size;
+    private boolean without;
 
-    private boolean layer;
+    @Override
+    protected BufferedImage @NotNull [] get(@NotNull Event event, Player[] source) {
+        Player player = source[0] != null ? source[0] : null;
+        Number size = null;
+        if (this.size != null) size = this.size.getSingle(event);
+        if (player == null || size == null) return new BufferedImage[0];
+        try {
+            var buffer = PlayerFace.get(player, size, !without);
+            return new BufferedImage[]{buffer};
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public @NotNull Class<? extends BufferedImage> getReturnType() {
@@ -43,35 +58,19 @@ public class ExprPlayerFace extends SimpleExpression<BufferedImage> {
     }
 
     @Override
-    public boolean isSingle() {
-        return true;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, ParseResult parser) {
-        player = (Expression<Player>) exprs[0];
-        size = (Expression<Number>) exprs[1];
-        layer = parser.hasTag("out");
-        return true;
-    }
-
-    @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return "Player Skin Face";
+        if (this.size != null) {
+            return Classes.getDebugMessage(getExpr()) + "'face with size " + this.size.toString(event, debug) +
+                    (without ? "without" : "with") + " an layer";
+        }
+        return Classes.getDebugMessage(getExpr()) + "'face " +
+                (without ? "without" : "with") + " an layer";
     }
 
     @Override
-    protected BufferedImage @NotNull [] get(@NotNull Event event) {
-        try {
-            if (layer){
-                return new BufferedImage[] {PlayerFace.get(Objects.requireNonNull(player.getSingle(event)), size.getSingle(event), true)};
-            }
-            else{
-                return new BufferedImage[] {PlayerFace.get(Objects.requireNonNull(player.getSingle(event)), size.getSingle(event), false)};
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
+        this.size = LiteralUtils.defendExpression(exprs[1]);
+        this.without = parseResult.hasTag("without");
+        return LiteralUtils.canInitSafely(this.size);
     }
 }
