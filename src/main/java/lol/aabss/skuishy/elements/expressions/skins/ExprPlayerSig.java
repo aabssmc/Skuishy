@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.skins.expressions;
+package lol.aabss.skuishy.elements.expressions.skins;
 
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 public class ExprPlayerSig extends PropertyExpression<Player, String> {
 
     static {
-        register(ExprPlayerSig.class, String.class, "[the] [texture|skin] signature", "players");
+        register(ExprPlayerSig.class, String.class, "[the] (texture|skin) signature", "players");
     }
 
 

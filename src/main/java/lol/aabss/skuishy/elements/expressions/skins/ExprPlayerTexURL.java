@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.skins.expressions;
+package lol.aabss.skuishy.elements.expressions.skins;
 
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -13,26 +13,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.image.BufferedImage;
-
-@Name("Skins - Player Skin Texture (Image)")
-@Description("Gets the player's skin as a image.")
+@Name("Skins - Player Skin Texture (URL)")
+@Description("sticking out your gyat for the rizzler, your so skibidi, your so fanum tax, i jus wana be ur sigma ):")
 @Examples({
-        "set {_texture} to skin texture of player as image"
+        "command send-texture <player>:",
+        "\ttrigger:",
+        "\t\tsend texture url of arg-1"
 })
 @Since("1.0")
 
-public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> {
+public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
 
     static {
-        register(ExprPlayerTexImg.class, BufferedImage.class,
-                "[the] [skin] texture image",
-                "players");
+        register(ExprPlayerTexURL.class, String.class,
+                "[the] [skin] texture url",
+                "players"
+        );
     }
 
     @Override
-    public @NotNull Class<? extends BufferedImage> getReturnType() {
-        return BufferedImage.class;
+    public @NotNull Class<? extends String> getReturnType() {
+        return String.class;
     }
 
     @Override
@@ -49,17 +50,20 @@ public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> 
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return getExpr().toString(event, debug ) + " Skin Texture Image";
+        return getExpr().toString(event, debug) + " Skin Texture URL";
     }
 
     @Override
-    protected BufferedImage @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
+    protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         try {
-            if (source.length < 1) return new BufferedImage[0];
+            if (source.length < 1) return new String[0];
             var player = source[0];
-            return new BufferedImage[] {SkinWrapper.imgTexture(player)};
+            return new String[] {SkinWrapper.urlTexture(player)};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 }
+
+
+//sticking out your gyat for the rizzler, your so skibidi, your so fanum tax, i jus wana be ur sigma ):

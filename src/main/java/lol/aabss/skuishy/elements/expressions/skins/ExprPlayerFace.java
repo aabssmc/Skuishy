@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.skins.expressions;
+package lol.aabss.skuishy.elements.expressions.skins;
 
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -20,8 +20,10 @@ import java.awt.image.BufferedImage;
 @Name("Skins - Face of Player")
 @Description("Gets the player's face.")
 @Examples({
-        "set {_texture} to face of player with an outer layer",
-        "set {_texture} to player's face with size 10 with a layer"
+        "command face-texture <player>:",
+        "\ttrigger:",
+        "\t\tset {_texture} to arg-1 face at size 10 with an outer layer",
+        "\t\tset {_texture} to face with a layer of player"
 })
 @Since("1.0")
 
