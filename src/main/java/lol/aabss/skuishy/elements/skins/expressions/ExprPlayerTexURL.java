@@ -1,22 +1,17 @@
 package lol.aabss.skuishy.elements.skins.expressions;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
-import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.PlayerTexture;
+import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 @Name("Skins - Player Skin Texture (URL)")
 @Description("sticking out your gyat for the rizzler, your so skibidi, your so fanum tax, i jus wana be ur sigma ):")
@@ -61,7 +56,7 @@ public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
         try {
             if (source.length < 1) return new String[0];
             var player = source[0];
-            return new String[] {PlayerTexture.urlTexture(player)};
+            return new String[] {SkinWrapper.urlTexture(player)};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

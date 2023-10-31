@@ -1,17 +1,14 @@
 package lol.aabss.skuishy.elements.skins.expressions;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
-import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.Property;
+import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +57,7 @@ public class ExprPlayerVal extends PropertyExpression<Player, String> {
         if (source.length < 1) return new String[0];
         Player p = source[0];
         assert p != null;
-        return new String[]{Property.getProfileProperties(p).getValue()};
+        return new String[]{SkinWrapper.getProfileProperties(p).getValue()};
     }
 
 }

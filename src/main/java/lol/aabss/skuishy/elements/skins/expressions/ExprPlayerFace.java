@@ -10,7 +10,7 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.PlayerFace;
+import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +46,7 @@ public class ExprPlayerFace extends PropertyExpression<Player, BufferedImage> {
         if (this.size != null) size = this.size.getSingle(event);
         if (player == null) return new BufferedImage[0];
         try {
-            var buffer = PlayerFace.get(player, size == null ? 16 : size, !without);
+            var buffer = SkinWrapper.get(player, size == null ? 16 : size, !without);
             return new BufferedImage[]{buffer};
         } catch (Exception e) {
             throw new RuntimeException(e);

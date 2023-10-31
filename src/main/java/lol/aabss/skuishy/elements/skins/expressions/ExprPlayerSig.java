@@ -9,7 +9,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.Property;
+import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +34,7 @@ public class ExprPlayerSig extends PropertyExpression<Player, String> {
     protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         Player p = source[0] != null ? source[0] : null;
         assert p != null;
-        return new String[]{Property.getProfileProperties(p).getSignature()};
+        return new String[]{SkinWrapper.getProfileProperties(p).getSignature()};
     }
 
     @Override
