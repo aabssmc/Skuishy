@@ -5,6 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -24,16 +25,14 @@ import java.util.Objects;
 })
 @Since("1.0")
 
-public class ExprPlayerTexURL extends SimpleExpression<String> {
+public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
 
     static {
-        Skript.registerExpression(ExprPlayerTexURL.class, String.class, ExpressionType.PROPERTY,
-                "[the] [skin] texture of %player% as url",
-                "%player%'s [skin] texture as url"
+        register(ExprPlayerTexURL.class, String.class,
+                "[the] [skin] texture url",
+                "players"
         );
     }
-
-    private Expression<Player> player;
 
     @Override
     public @NotNull Class<? extends String> getReturnType() {
@@ -48,19 +47,21 @@ public class ExprPlayerTexURL extends SimpleExpression<String> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
-        player = (Expression<Player>) exprs[0];
+        setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return "Player Skin Texture URL";
+        return getExpr().toString(event, debug) + " Skin Texture URL";
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event event) {
+    protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         try {
-            return new String[] {PlayerTexture.urlTexture(Objects.requireNonNull(player.getSingle(event)))};
+            if (source.length < 1) return new String[0];
+            var player = source[0];
+            return new String[] {PlayerTexture.urlTexture(player)};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

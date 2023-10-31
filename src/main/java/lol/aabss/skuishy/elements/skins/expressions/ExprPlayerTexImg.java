@@ -5,6 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -24,16 +25,13 @@ import java.awt.image.BufferedImage;
 })
 @Since("1.0")
 
-public class ExprPlayerTexImg extends SimpleExpression<BufferedImage> {
+public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> {
 
     static {
-        Skript.registerExpression(ExprPlayerTexImg.class, BufferedImage.class, ExpressionType.PROPERTY,
-                "[the] [skin] texture of %player% as image",
-                "%player%'s [skin] texture as image");
+        register(ExprPlayerTexImg.class, BufferedImage.class,
+                "[the] [skin] texture image",
+                "players");
     }
-
-    private Expression<Player> player;
-
 
     @Override
     public @NotNull Class<? extends BufferedImage> getReturnType() {
@@ -48,19 +46,20 @@ public class ExprPlayerTexImg extends SimpleExpression<BufferedImage> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
-        player = (Expression<Player>) exprs[0];
+        setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return "Player Skin Texture Image";
+        return getExpr().toString(event, debug ) + " Skin Texture Image";
     }
 
     @Override
-    protected BufferedImage @NotNull [] get(@NotNull Event event) {
+    protected BufferedImage @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         try {
-            var player = this.player.getSingle(event);
+            if (source.length < 1) return new BufferedImage[0];
+            var player = source[0];
             return new BufferedImage[] {PlayerTexture.imgTexture(player)};
         } catch (Exception e) {
             throw new RuntimeException(e);

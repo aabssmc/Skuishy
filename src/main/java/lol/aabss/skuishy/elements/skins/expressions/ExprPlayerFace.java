@@ -26,11 +26,11 @@ import java.awt.image.BufferedImage;
 @Since("1.0")
 
 
-class ExprPlayerFace extends PropertyExpression<Player, BufferedImage> {
+public class ExprPlayerFace extends PropertyExpression<Player, BufferedImage> {
 
     static {
         register(ExprPlayerFace.class, BufferedImage.class,
-                "face [(at|with)] size %-number%] (:with|:without) (a|an) [outer[( |-)]]layer",
+                "face [(at|with) size %-number%] (:with|:without) (a|an) [outer[( |-)]]layer",
                 "players"
         );
     }
@@ -39,13 +39,14 @@ class ExprPlayerFace extends PropertyExpression<Player, BufferedImage> {
     private boolean without;
 
     @Override
-    protected BufferedImage @NotNull [] get(@NotNull Event event, Player[] source) {
+    protected BufferedImage @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
+        if (source.length < 1) return new BufferedImage[0];
         Player player = source[0] != null ? source[0] : null;
         Number size = null;
         if (this.size != null) size = this.size.getSingle(event);
-        if (player == null || size == null) return new BufferedImage[0];
+        if (player == null) return new BufferedImage[0];
         try {
-            var buffer = PlayerFace.get(player, size, !without);
+            var buffer = PlayerFace.get(player, size == null ? 16 : size, !without);
             return new BufferedImage[]{buffer};
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -61,15 +62,22 @@ class ExprPlayerFace extends PropertyExpression<Player, BufferedImage> {
     public @NotNull String toString(Event event, boolean debug) {
         if (this.size != null) {
             return Classes.getDebugMessage(getExpr()) + "'face with size " + this.size.toString(event, debug) +
-                    (without ? "without" : "with") + " an layer";
+                    (without ? " without" : " with") + " an layer";
         }
         return Classes.getDebugMessage(getExpr()) + "'face " +
                 (without ? "without" : "with") + " an layer";
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
-        this.size = LiteralUtils.defendExpression(exprs[1]);
+        if (matchedPattern == 1) {
+            setExpr((Expression<? extends Player>) exprs[0]);
+            this.size = (Expression<Number>) exprs[1];
+        } else if (matchedPattern == 0) {
+            setExpr((Expression<? extends Player>) exprs[1]);
+            this.size = (Expression<Number>) exprs[0];
+        }
         this.without = parseResult.hasTag("without");
         return LiteralUtils.canInitSafely(this.size);
     }

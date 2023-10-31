@@ -26,7 +26,8 @@ import org.jetbrains.annotations.NotNull;
 public class ExprUnkwnCmdMsg extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprUnkwnCmdMsg.class, String.class, ExpressionType.SIMPLE, "[the] unknown command message");
+        Skript.registerExpression(ExprUnkwnCmdMsg.class, String.class, ExpressionType.SIMPLE,
+                "[the] unknown command message");
     }
 
     @Override
@@ -40,7 +41,6 @@ public class ExprUnkwnCmdMsg extends SimpleExpression<String> {
     }
 
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parser) {
         if (!getParser().isCurrentEvent(UnknownCommandEvent.class)){
@@ -61,7 +61,7 @@ public class ExprUnkwnCmdMsg extends SimpleExpression<String> {
             String cmdline = String.valueOf(((UnknownCommandEvent) e).message());
             return new String[]{cmdline};
         }
-        return null;
+        return new String[0];
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ExprUnkwnCmdMsg extends SimpleExpression<String> {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(String.class);
         }
-        return null;
+        return CollectionUtils.array();
     }
 
 
