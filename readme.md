@@ -22,3 +22,8 @@
 - [Player - Stop Glowing](https://skripthub.net/docs/?id=9878)
 - [Plugin - Disable Plugin](https://skripthub.net/docs/?id=9875)
 - [Plugin - Enable Plugin](https://skripthub.net/docs/?id=9876)
+
+
+## Events:
+- [Player - On Main Hand Change](https://skripthub.net/docs/?id=9858)
+- [Player - On Unknown Command](https://skripthub.net/docs/?id=9859)
