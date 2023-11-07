@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 public class ExprPlayerSig extends PropertyExpression<Player, String> {
 
     static {
-        register(ExprPlayerSig.class, String.class, "[the] (texture|skin) signature", "players");
+        register(ExprPlayerSig.class, String.class, "(texture|skin) signature", "players");
     }
 
 

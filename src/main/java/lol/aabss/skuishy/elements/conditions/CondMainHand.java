@@ -28,8 +28,6 @@ public class CondMainHand extends Condition {
     enum MainHandSide {
         LEFT, RIGHT
     }
-
-
     static {
         Skript.registerCondition(CondMainHand.class,
                 "%players%'s main hand (0:is|1:is( not|n't)) (:left|:right)",

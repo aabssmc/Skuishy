@@ -2,6 +2,7 @@ package lol.aabss.skuishy.other.skins;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.Base64;
+import java.util.Collections;
 
 public abstract class SkinWrapper {
     public static BufferedImage get(Player player, @Nullable Number size, boolean lay) throws Exception {
@@ -76,4 +78,16 @@ public abstract class SkinWrapper {
             throw new RuntimeException(e);
         }
     }
+
+    public static void setSkin(Player player, String skin){
+        if (player.getName().equals(skin)){
+            player.getPlayerProfile().getProperties().removeAll(Collections.singleton("textures"));
+        }
+        PlayerProfile newprofile = Bukkit.createProfile(skin);
+        newprofile.complete();
+        PlayerProfile profile = player.getPlayerProfile();
+        profile.setProperties(newprofile.getProperties());
+        player.setPlayerProfile(profile);
+    }
+
 }

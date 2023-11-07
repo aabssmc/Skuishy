@@ -14,7 +14,7 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Skins - Player Skin Texture (URL)")
-@Description("sticking out your gyat for the rizzler, your so skibidi, your so fanum tax, i jus wana be ur sigma ):")
+@Description("Gets the player's skin as a url.")
 @Examples({
         "command send-texture <player>:",
         "\ttrigger:",
@@ -26,7 +26,7 @@ public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
 
     static {
         register(ExprPlayerTexURL.class, String.class,
-                "[the] [skin] texture url",
+                "[skin] texture url",
                 "players"
         );
     }
@@ -64,6 +64,3 @@ public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
         }
     }
 }
-
-
-//sticking out your gyat for the rizzler, your so skibidi, your so fanum tax, i jus wana be ur sigma ):

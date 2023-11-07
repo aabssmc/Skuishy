@@ -22,7 +22,7 @@ public class ExprMainHand extends PropertyExpression<Player, String> {
 
     static {
         register(ExprMainHand.class, String.class,
-                "[the] main[(-| )]hand",
+                "main[(-| )]hand",
                 "players"
         );
     }

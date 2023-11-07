@@ -17,22 +17,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.image.BufferedImage;
 
-@Name("Skins - Face of Player")
-@Description("Gets the player's face.")
+@Name("Skins - Face of Player as image")
+@Description("Gets the player's face as image.")
 @Examples({
         "command face-texture <player>:",
         "\ttrigger:",
-        "\t\tset {_texture} to arg-1 face at size 10 with an outer layer",
-        "\t\tset {_texture} to face with a layer of player"
+        "\t\tset {_texture} to arg-1's face at size 8 with an outer layer as image"
 })
 @Since("1.0")
 
 
-public class ExprPlayerFace extends PropertyExpression<Player, BufferedImage> {
+public class ExprPlayerFaceImg extends PropertyExpression<Player, BufferedImage> {
 
     static {
-        register(ExprPlayerFace.class, BufferedImage.class,
-                "face [(at|with) size %-number%] (:with|:without) (a|an) [outer[( |-)]]layer",
+        register(ExprPlayerFaceImg.class, BufferedImage.class,
+                "face [(at|with) size %-number%] (:with|:without) (a|an) [outer[( |-)]]layer as image",
                 "players"
         );
     }
@@ -64,10 +63,10 @@ public class ExprPlayerFace extends PropertyExpression<Player, BufferedImage> {
     public @NotNull String toString(Event event, boolean debug) {
         if (this.size != null) {
             return Classes.getDebugMessage(getExpr()) + "'face with size " + this.size.toString(event, debug) +
-                    (without ? " without" : " with") + " an layer";
+                    (without ? " without" : " with") + " an layer as image";
         }
         return Classes.getDebugMessage(getExpr()) + "'face " +
-                (without ? "without" : "with") + " an layer";
+                (without ? "without" : "with") + " an layer as image";
     }
 
     @Override

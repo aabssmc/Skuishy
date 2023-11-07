@@ -16,7 +16,7 @@ public class PlayerTexture {
         // Gets the player's value
         Player p = player.getPlayer();
         assert p != null;
-        String value = Property.getProfileProperties(p).getValue();
+        String value = SkinWrapper.getProfileProperties(p).getValue();
         byte[] playerBytes = Base64.getDecoder().decode(value);
         String playerString = new String(playerBytes);
         Object obj2 = new JSONParser().parse(new StringReader(playerString));

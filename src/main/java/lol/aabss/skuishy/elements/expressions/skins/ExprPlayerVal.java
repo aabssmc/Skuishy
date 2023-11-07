@@ -26,7 +26,7 @@ public class ExprPlayerVal extends PropertyExpression<Player, String> {
 
     static {
        register(ExprPlayerVal.class, String.class,
-                "[the] (texture|skin) value",
+                "(texture|skin) value",
                 "players"
         );
     }

@@ -28,7 +28,7 @@ public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> 
 
     static {
         register(ExprPlayerTexImg.class, BufferedImage.class,
-                "[the] [skin] texture image",
+                "[skin] texture image",
                 "players");
     }
 
