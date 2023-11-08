@@ -11,14 +11,14 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.util.Color;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.Glow;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-@Name("Player - Glow Color")
-@Description("Makes a player glow a color")
+@Name("Entity - Glow Color")
+@Description("Makes a entity glow a color")
 @Examples({
         "make player glow red",
         "wait 10 seconds",
@@ -30,29 +30,30 @@ public class EffGlowColor extends Effect {
 
     static {
         Skript.registerEffect(EffGlowColor.class,
-                "make %players% glow %color%"
+                "make %entities% glow %color%"
         );
     }
 
-    private Expression<Player> player;
+    private Expression<Entity> entity;
     private Expression<Color> color;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
-        player = (Expression<Player>) expressions[0];
+        entity = (Expression<Entity>) expressions[0];
         color = (Expression<Color>) expressions[1];
         return true;
     }
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug)  {
-        return "make " + player + " glowing " + color;
+        return "make " + entity + " glowing " + color;
     }
 
     @Override
     protected void execute(@NotNull Event event) {
-        Player p = player.getSingle(event);
-        Glow.mainGlow(p, color, event);
+        for(Entity e : entity.getAll(event)){
+            Glow.mainGlow(e, color, event);
+        }
     }
 }

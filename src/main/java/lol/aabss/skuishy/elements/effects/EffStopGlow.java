@@ -10,15 +10,15 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Scoreboard;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-@Name("Player - Stop Glowing")
-@Description("Makes a player stop glowing")
+@Name("Entity - Stop Glowing")
+@Description("Makes a entity stop glowing")
 @Examples({
         "make player glow red",
         "wait 10 seconds",
@@ -30,30 +30,30 @@ public class EffStopGlow extends Effect {
 
     static {
         Skript.registerEffect(EffStopGlow.class,
-                "make %players% stop glow[ing]", "[skuishy] remove glowing from %player%"
+                "make %entities% stop glow[ing]", "[skuishy] remove glowing from %entities%"
         );
     }
 
-    private Expression<Player> player;
+    private Expression<Entity> entity;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
-        player = (Expression<Player>) expressions[0];
+        entity = (Expression<Entity>) expressions[0];
         return true;
     }
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug)  {
-        return "make " + player + " stop glowing";
+        return "make " + entity + " stop glowing";
     }
 
     @Override
     protected void execute(@NotNull Event event) {
-        Player p = player.getSingle(event);
-        assert p != null;
-        Scoreboard mainScoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
-        mainScoreboard.getTeams().forEach(team -> team.removeEntry(p.getName()));
-        p.setGlowing(false);
+        for(Entity e : entity.getAll(event)){
+            Scoreboard mainScoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+            mainScoreboard.getTeams().forEach(team -> team.removeEntity(e));
+            e.setGlowing(false);
+        }
     }
 }

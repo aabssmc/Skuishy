@@ -5,7 +5,7 @@ import ch.njol.skript.util.Color;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Glow {
-    public static void mainGlow(Player p, Expression<Color> tc, @NotNull Event e) {
+    public static void mainGlow(Entity p, Expression<Color> tc, @NotNull Event e) {
         Color color = tc.getSingle(e);
         assert color != null;
         org.bukkit.Color c = color.asBukkitColor();
@@ -75,12 +75,12 @@ public class Glow {
         return Math.sqrt(Math.pow(r2 - r1, 2) + Math.pow(g2 - g1, 2) + Math.pow(b2 - b1, 2));
     }
 
-    public static void setGlow(Player p, NamedTextColor c) {
+    public static void setGlow(Entity p, NamedTextColor c) {
         Scoreboard mainScoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
         mainScoreboard.getTeams().forEach(team -> {
             ChatColor teamColor = getTeamColor(team);
             if (teamColor != null) {
-                team.removeEntry(p.getName());
+                team.removeEntity(p);
             }
         });
         Team glow = mainScoreboard.getTeam(c + "team");
@@ -88,7 +88,7 @@ public class Glow {
             glow = mainScoreboard.registerNewTeam(c + "team");
             glow.color(c);
         }
-        glow.addEntry(p.getName());
+        glow.addEntity(p);
         p.setGlowing(true);
     }
 
