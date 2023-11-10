@@ -29,7 +29,8 @@ public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> 
     static {
         register(ExprPlayerTexImg.class, BufferedImage.class,
                 "[skin] texture image",
-                "players");
+                "players"
+        );
     }
 
     @Override

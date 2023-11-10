@@ -27,7 +27,10 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
 
 
     static {
-        register(ExprPlayerSkin.class, String.class, "[minecraft] skin", "players");
+        register(ExprPlayerSkin.class, String.class,
+                "[minecraft] skin",
+                "players"
+        );
     }
 
     private Expression<Player> player;

@@ -27,7 +27,8 @@ public class ExprUnkwnCmdMsg extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprUnkwnCmdMsg.class, String.class, ExpressionType.SIMPLE,
-                "[the] unknown command message");
+                "[the] unknown command message"
+        );
     }
 
     @Override
