@@ -44,7 +44,6 @@ public abstract class SkinWrapper {
             if (property.getName().equals("textures")) {
                 prop = property;
                 break;
-                // add break statement for that for loop, cause when for loop matches the condition it's should stop looping
             }
         }
         return prop;
@@ -53,7 +52,6 @@ public abstract class SkinWrapper {
     static final JSONParser JSON_PARSER = new JSONParser();
 
     public static String urlTexture(Player player) throws Exception {
-        // Gets the player's value
         Player p = player.getPlayer();
         assert p != null;
         String value = getProfileProperties(p).getValue();

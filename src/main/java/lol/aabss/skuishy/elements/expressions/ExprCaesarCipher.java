@@ -35,44 +35,33 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
     }
 
     boolean isDe;
-
     Expression<Integer> shift;
-
     Expression<String> value;
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
         value = (Expression<String>) exprs[0];
-        if (parseResult.hasTag("de")){
-            isDe = true;
-            if (exprs[1] == null){
-                shift = null;
-                return true;
-            }
+        isDe = parseResult.hasTag("de");
+        if (exprs[1] != null){
             shift = (Expression<Integer>) exprs[1];
-            return true;
-        }
-        isDe = false;
-        if (exprs[1] == null){
-            shift = null;
-            return true;
-        }
-        shift = (Expression<Integer>) exprs[1];
-        return true;
+        } return true;
     }
 
     @Override
     protected String @NotNull [] get(@NotNull Event e) {
+        String Value = value.getSingle(e);
+        if (Value == null) return null;
         if (shift == null){
             if (isDe){
-                return new String[]{CaesarCipher.decrypt(value.getSingle(e), 7)};
+                return new String[]{CaesarCipher.decrypt(Value, 7)};
             }
-            return new String[]{CaesarCipher.encrypt(value.getSingle(e), 7)};
+            return new String[]{CaesarCipher.encrypt(Value, 7)};
         }
         if (isDe){
-            return new String[]{CaesarCipher.decrypt(value.getSingle(e), shift.getSingle(e))};
+            return new String[]{CaesarCipher.decrypt(Value, shift.getSingle(e))};
         }
-        return new String[]{CaesarCipher.encrypt(value.getSingle(e), shift.getSingle(e))};
+        return new String[]{CaesarCipher.encrypt(Value, shift.getSingle(e))};
     }
 
     @Override
@@ -82,11 +71,11 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
 
     @Override
     public @NotNull Class<? extends String> getReturnType() {
-        return null;
+        return String.class;
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "caesar cipher " + (isDe ? "de" : "en") + "crypted from string \"" + value + "\"";
+        return "caesar cipher " + (isDe ? "de" : "en") + "crypted from string \"" + value.toString(e, debug) + "\"";
     }
 }
