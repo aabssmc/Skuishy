@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 public class CondIsGlowing extends Condition {
 
     static {
-        Skript.registerCondition(CondMainHand.class,
+        Skript.registerCondition(CondIsGlowing.class,
                 "%players%'s (0:is|1:is( not|n't)) glowing"
         );
     }
