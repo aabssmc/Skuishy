@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class PlayerFace {
     public static BufferedImage get(Player player, @Nullable Number size, boolean lay) throws Exception {
-        BufferedImage image = PlayerTexture.imgTexture(player);
+        BufferedImage image = SkinWrapper.imgTexture(player);
         BufferedImage img2 = image.getSubimage(8,8,8,8);
         assert size != null;
         BufferedImage face = new BufferedImage(size.intValue(), size.intValue(), img2.getType());

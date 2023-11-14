@@ -8,7 +8,6 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -58,7 +57,7 @@ public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
         try {
             if (source.length < 1) return new String[0];
             var player = source[0];
-            return new String[] {SkinWrapper.urlTexture(player)};
+            return new String[] {player.getPlayerProfile().getTextures().getSkin().toString()};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
