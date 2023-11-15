@@ -14,8 +14,8 @@ import org.bukkit.event.command.UnknownCommandEvent;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-@Name("Player - On Unknown Command")
-@Description("Thrown when a player executes a command that is not defined.")
+@Name("Other - On Unknown Command")
+@Description("Thrown when someone executes a command that is not defined.")
 @Examples({
         "on unknown command:",
         "\tset unknown command message to \"that doesn't exist\""
