@@ -1,6 +1,7 @@
 package lol.aabss.skuishy.elements.events;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,14 +15,21 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class EvtShieldBlock extends SkriptEvent {
+@Name("Player - On Shield Break")
+@Description("Thrown when someone's shield gets broken.")
+@Examples({
+        "on shield break:",
+        "\tbroadcast \"%player%'s shield broke!!\""
+})
+@Since("1.5")
+public class EvtShieldBreak extends SkriptEvent {
 
     static{
         Skript.registerEvent(
-                "On Shield Block",
+                "On Shield Break",
                 SimpleEvent.class,
                 ShieldBreakEvent.class,
-                "[on] [player] shield (block|disable|break)"
+                "[on] [player] shield (disable|break)"
         );
         EventValues.registerEventValue(ShieldBreakEvent.class, Player.class, new Getter<Player, ShieldBreakEvent>() {
             @Override
