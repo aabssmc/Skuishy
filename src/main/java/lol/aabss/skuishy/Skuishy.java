@@ -2,6 +2,8 @@ package lol.aabss.skuishy;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
+import lol.aabss.skuishy.events.ShieldBreak;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -12,7 +14,14 @@ public class Skuishy extends JavaPlugin {
     private SkriptAddon addon;
 
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new ShieldBreak(), this);
         Metrics metrics = new Metrics(this, 20162);
+        if (!Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")){
+            getLogger().warning("ProtocolLib is not found, ProtocolLib syntaxes will not load.");
+        }
+        else{
+            getLogger().info("ProtocolLib found!");
+        }
         instance = this;
         try {
             addon = Skript.registerAddon(this)

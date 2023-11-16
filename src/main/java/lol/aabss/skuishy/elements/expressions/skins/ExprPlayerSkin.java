@@ -47,7 +47,6 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
         if (mode == Changer.ChangeMode.SET) {
             assert p != null;
             SkinWrapper.setSkin(p, (String) delta[0]);
-
         }
         else if (mode == Changer.ChangeMode.RESET) {
             assert p != null;
@@ -59,10 +58,7 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
 
     @Override
     public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(String.class);
-        }
-        else if (mode == Changer.ChangeMode.RESET) {
+        if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.RESET) {
             return CollectionUtils.array(String.class);
         }
         return CollectionUtils.array();
