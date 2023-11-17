@@ -1,5 +1,7 @@
 [![SkriptHubViewTheDocs](http://skripthub.net/static/addon/ViewTheDocsButton.png)](http://skripthub.net/docs/?addon=Skuishy)
 
+## You need [Skript 2.7.0](https://github.com/SkriptLang/Skript) and up to use.
+
 ## Please suggest syntax ideas in my discord [here](https://discord.gg/66DF7pMdnp)
 
 # SYNTAXES
