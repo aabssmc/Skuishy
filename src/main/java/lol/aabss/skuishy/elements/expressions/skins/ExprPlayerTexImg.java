@@ -38,11 +38,6 @@ public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> 
         return BufferedImage.class;
     }
 
-    @Override
-    public boolean isSingle() {
-        return true;
-    }
-
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {

@@ -30,7 +30,7 @@ public class EffStopGlow extends Effect {
 
     static {
         Skript.registerEffect(EffStopGlow.class,
-                "make %entities% stop glow[ing]", "[skuishy] remove glowing from %entities%"
+                "make %entities% stop glowing", "[skuishy] remove glowing from %entities%"
         );
     }
 
