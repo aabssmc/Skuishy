@@ -3,7 +3,6 @@ version: '${version}'
 main: lol.aabss.skuishy.Skuishy
 api-version: '1.18'
 depend: [Skript]
-softdepend: [BuycraftX]
 authors: [aabss]
 website: https://aabss.lol
 commands:
