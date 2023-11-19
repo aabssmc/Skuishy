@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.main.effects;
+package lol.aabss.skuishy.elements.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
@@ -8,52 +8,48 @@ import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
-import ch.njol.skript.util.Color;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.Glow;
-import org.bukkit.entity.Entity;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-@Name("Entity - Glow Color")
-@Description("Makes a entity glow a color")
+@Name("Plugin - Disable Plugin")
+@Description("Disables a plugin")
 @Examples({
-        "make player glow red",
-        "wait 10 seconds",
-        "make player stop glowing "
+        "disable plugin \"Essentials\""
 })
 @Since("1.4")
 
-public class EffGlowColor extends Effect {
+public class EffDisablePlugin extends Effect {
 
     static {
-        Skript.registerEffect(EffGlowColor.class,
-                "make %entities% glow %color%"
+        Skript.registerEffect(EffDisablePlugin.class,
+                "disable plugin %string%"
         );
     }
 
-    private Expression<Entity> entity;
-    private Expression<Color> color;
+    private Expression<String> plugin;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
-        entity = (Expression<Entity>) expressions[0];
-        color = (Expression<Color>) expressions[1];
+        plugin = (Expression<String>) expressions[0];
         return true;
     }
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug)  {
-        return "make " + entity + " glowing " + color;
+        return "disable plugin " + plugin;
     }
 
     @Override
     protected void execute(@NotNull Event event) {
-        for(Entity e : entity.getAll(event)){
-            Glow.mainGlow(e, color, event);
+        Plugin plugin2 = Bukkit.getPluginManager().getPlugin(plugin.getSingle(event));
+        if (plugin2 != null){
+            Bukkit.getPluginManager().disablePlugin(plugin2);
         }
     }
 }

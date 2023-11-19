@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.main.events;
+package lol.aabss.skuishy.elements.events;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.*;

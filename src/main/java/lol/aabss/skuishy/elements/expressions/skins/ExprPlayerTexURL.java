@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.main.expressions.skins;
+package lol.aabss.skuishy.elements.expressions.skins;
 
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -8,25 +8,24 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-@Name("Skins - Player Skin Value")
-@Description("Sends the value of the player's skin .")
+@Name("Skins - Player Skin Texture (URL)")
+@Description("Gets the player's skin as a url.")
 @Examples({
-        "command send-value <player>:",
+        "command send-texture <player>:",
         "\ttrigger:",
-        "\t\tsend arg-1's skin value"
+        "\t\tsend texture url of arg-1"
 })
 @Since("1.0")
 
-public class ExprPlayerVal extends PropertyExpression<Player, String> {
+public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
 
     static {
-       register(ExprPlayerVal.class, String.class,
-                "(texture|skin) value",
+        register(ExprPlayerTexURL.class, String.class,
+                "[skin] texture url",
                 "players"
         );
     }
@@ -39,21 +38,23 @@ public class ExprPlayerVal extends PropertyExpression<Player, String> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
-        setExpr ((Expression<Player>) exprs[0]);
+        setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return getExpr().toString(event, debug) + " Skin Value ";
+        return getExpr().toString(event, debug) + " Skin Texture URL";
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event event, Player[] source) {
-        if (source.length < 1) return new String[0];
-        Player p = source[0];
-        assert p != null;
-        return new String[]{SkinWrapper.getProfileProperties(p).getValue()};
+    protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
+        try {
+            if (source.length < 1) return new String[0];
+            var player = source[0];
+            return new String[] {player.getPlayerProfile().getTextures().getSkin().toString()};
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
 }
