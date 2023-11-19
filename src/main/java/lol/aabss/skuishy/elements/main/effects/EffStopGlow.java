@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.effects;
+package lol.aabss.skuishy.elements.main.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;

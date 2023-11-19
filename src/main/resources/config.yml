@@ -1,0 +1,8 @@
+# This is the config.yml for Skuishy!
+
+# Tebex/Buycraft settings:
+# If you do not have tebex installed, you may ignore this.
+
+# DO NOT SHARE THIS WITH ANYONE!
+# https://docs.tebex.io/creators/faq#how-can-i-find-my-secret-key
+tebex-secret: 'INSERT-TEBEX-KEY-HERE'

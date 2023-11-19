@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.expressions;
+package lol.aabss.skuishy.elements.main.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
