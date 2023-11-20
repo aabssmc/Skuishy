@@ -2,7 +2,10 @@ name: Skuishy
 version: '${version}'
 main: lol.aabss.skuishy.Skuishy
 api-version: '1.18'
-depend: [Skript]
+depend:
+  - Skript
+softdepend:
+  - ProtocolLib
 authors: [aabss]
 website: https://aabss.lol
 commands:
