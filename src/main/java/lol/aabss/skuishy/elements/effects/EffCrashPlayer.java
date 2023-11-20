@@ -53,7 +53,7 @@ public class EffCrashPlayer extends Effect {
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "crash" + player + "'s client";
+        return "crash" + player.toString(e, debug) + "'s client";
     }
 
     @SuppressWarnings("unchecked")
