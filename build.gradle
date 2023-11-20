@@ -16,6 +16,9 @@ repositories {
     maven {
         url = 'https://repo.skriptlang.org/releases'
     }
+    repositories {
+        maven { url "https://repo.dmulloy2.net/repository/public/" }
+    }
 }
 
 dependencies {
@@ -23,6 +26,9 @@ dependencies {
     compileOnly 'com.github.SkriptLang:Skript:2.6.2'
     implementation 'org.bstats:bstats-bukkit:3.0.2'
     implementation 'com.google.code.gson:gson:2.10.1'
+    compileOnly 'com.comphenix.protocol:ProtocolLib:5.1.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+
 }
 
 def targetJavaVersion = 17
