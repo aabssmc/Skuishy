@@ -32,7 +32,8 @@ public class EffCrashPlayer extends Effect {
 
     static{
         Skript.registerEffect(EffCrashPlayer.class,
-                "(close|crash) %players%'[s] (client|game)"
+                "crash %players%['[s] (client|game)]",
+                "close %players%'[s] (client|game)"
         );
     }
 
