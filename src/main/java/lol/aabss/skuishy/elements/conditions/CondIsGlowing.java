@@ -52,7 +52,7 @@ public class CondIsGlowing extends Condition {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         player = (Expression<Player>) exprs[0];
         is = (matchedPattern == 0);
         return true;

@@ -54,7 +54,7 @@ public class EvtUnknownCmd extends SkriptEvent {
 
     @Override
     public @NotNull String toString(Event e, boolean debug) {
-        return "Player unknown command event";
+        return "player unknown command event";
     }
 
 }

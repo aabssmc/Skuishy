@@ -45,7 +45,7 @@ public class EffStopGlow extends Effect {
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug)  {
-        return "make " + entity + " stop glowing";
+        return "make " + entity.toString(event, debug) + " stop glowing";
     }
 
     @Override

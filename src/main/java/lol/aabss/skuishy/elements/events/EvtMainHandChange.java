@@ -57,7 +57,7 @@ public class EvtMainHandChange extends SkriptEvent {
 
     @Override
     public @NotNull String toString(Event e, boolean debug) {
-        return "Player main hand change";
+        return "player main hand change";
     }
 
 }

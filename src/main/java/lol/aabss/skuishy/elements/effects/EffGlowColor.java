@@ -47,7 +47,7 @@ public class EffGlowColor extends Effect {
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug)  {
-        return "make " + entity + " glowing " + color;
+        return "make " + entity.toString(event, debug) + " glowing " + color.toString(event, debug);
     }
 
     @Override

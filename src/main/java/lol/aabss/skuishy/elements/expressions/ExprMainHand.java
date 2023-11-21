@@ -42,7 +42,7 @@ public class ExprMainHand extends PropertyExpression<Player, String> {
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return "Main hand";
+        return "main hand";
     }
 
     @Override

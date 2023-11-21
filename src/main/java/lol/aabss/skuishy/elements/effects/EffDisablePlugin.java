@@ -42,7 +42,7 @@ public class EffDisablePlugin extends Effect {
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug)  {
-        return "disable plugin " + plugin;
+        return "disable plugin " + plugin.toString(event, debug);
     }
 
     @Override
