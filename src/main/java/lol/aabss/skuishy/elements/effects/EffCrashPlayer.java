@@ -41,15 +41,16 @@ public class EffCrashPlayer extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Player p = player.getSingle(e);
+        Player[] players = player.getArray(e);
         PacketContainer packet = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.MOUNT);
-        assert p != null;
-        packet.getIntegers().write(0, p.getEntityId());
-        List<Integer> ids = new ArrayList<>();
-        ids.add(p.getEntityId());
-        int[] idsArray = ArrayUtils.toPrimitive(ids.toArray(new Integer[0]));
-        packet.getIntegerArrays().write(0, idsArray);
-        ProtocolLibrary.getProtocolManager().sendServerPacket(p, packet);
+        for (Player p: players){
+            packet.getIntegers().write(0, p.getEntityId());
+            List<Integer> ids = new ArrayList<>();
+            ids.add(p.getEntityId());
+            int[] idsArray = ArrayUtils.toPrimitive(ids.toArray(new Integer[0]));
+            packet.getIntegerArrays().write(0, idsArray);
+            ProtocolLibrary.getProtocolManager().sendServerPacket(p, packet);
+        }
     }
 
     @Override
@@ -63,4 +64,5 @@ public class EffCrashPlayer extends Effect {
         player = (Expression<Player>) exprs[0];
         return true;
     }
+
 }

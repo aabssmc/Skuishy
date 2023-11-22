@@ -2,7 +2,7 @@ package lol.aabss.skuishy;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import lol.aabss.skuishy.events.ShieldBreak;
+import lol.aabss.skuishy.events.CustomEvents;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,7 +14,7 @@ public class Skuishy extends JavaPlugin implements CommandExecutor {
     private SkriptAddon addon;
 
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new ShieldBreak(), this);
+        getServer().getPluginManager().registerEvents(new CustomEvents(), this);
         Metrics metrics = new Metrics(this, 20162);
         instance = this;
         try {

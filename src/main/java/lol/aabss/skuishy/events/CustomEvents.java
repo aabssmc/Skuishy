@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.inventory.PlayerInventory;
 
-public class ShieldBreak implements Listener {
+public class CustomEvents implements Listener {
 
     @EventHandler
     public void onShieldBreak(PlayerStatisticIncrementEvent e) {
