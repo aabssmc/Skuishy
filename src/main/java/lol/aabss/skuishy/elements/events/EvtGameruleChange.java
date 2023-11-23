@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 public class EvtGameruleChange extends SkriptEvent {
 
     static {
-        Skript.registerEvent("On Gamerule Change", EvtGameruleChange.class, WorldGameRuleChangeEvent.class,
+        Skript.registerEvent("on gamerule change", EvtGameruleChange.class, WorldGameRuleChangeEvent.class,
                 "game[( |-)]rule change [of %-gamerule%] [in %-world%]",
                 "game[( |-)]rule change [in %-world%] [of %-gamerule%]"
         );

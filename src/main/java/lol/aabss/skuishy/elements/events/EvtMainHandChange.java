@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 @Since("1.3")
 public class EvtMainHandChange extends SkriptEvent {
     static {
-        Skript.registerEvent("On Main Hand Change", SimpleEvent.class, PlayerChangedMainHandEvent.class,
+        Skript.registerEvent("on main hand change", SimpleEvent.class, PlayerChangedMainHandEvent.class,
                 "[player] main([-| ])hand (switch|swap|change)"
         );
         EventValues.registerEventValue(PlayerChangedMainHandEvent.class, Player.class, new Getter<Player, PlayerChangedMainHandEvent>() {
