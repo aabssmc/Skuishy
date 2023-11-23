@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-
 public class ExprEventInstrument extends EventValueExpression<Instrument> {
 
     static{

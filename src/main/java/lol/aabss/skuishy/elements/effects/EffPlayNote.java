@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -13,6 +17,13 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+
+@Name("Notes - Play Note")
+@Description("Plays a note block note.")
+@Examples({
+        "play note E flat with instrument banjo at player for player"
+})
+@Since("1.6")
 
 public class EffPlayNote extends Effect {
 

@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.expressions.notes;
 
 import ch.njol.skript.classes.Changer;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,6 +18,13 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+
+@Name("Notes - Block Instrument")
+@Description("The instrument of a note block.")
+@Examples({
+        "send instrument of target block"
+})
+@Since("1.6")
 
 public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
 

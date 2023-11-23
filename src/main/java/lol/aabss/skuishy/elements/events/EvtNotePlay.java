@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.events;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,6 +18,14 @@ import org.bukkit.event.block.NotePlayEvent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+
+@Name("Notes - On Note Play")
+@Description("Called when a note block is played.")
+@Examples({
+        "on note play:",
+        "\tbroadcast \"%event-block% has been played\""
+})
+@Since("1.6")
 
 public class EvtNotePlay extends SkriptEvent {
 

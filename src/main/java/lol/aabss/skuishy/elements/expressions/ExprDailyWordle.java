@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -23,6 +27,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+@Name("Other - Daily Wordle")
+@Description("The daily wordle.")
+@Examples({
+        "send daily wordle"
+})
+@Since("1.6")
 
 public class ExprDailyWordle extends SimpleExpression<String> {
 

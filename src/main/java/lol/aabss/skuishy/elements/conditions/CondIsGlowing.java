@@ -9,13 +9,13 @@ import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-@Name("Player - Is Glowing")
+@Name("Entity - Is Glowing")
 @Description("Checks whether a player is glowing.")
 @Examples({
         "if player is glowing:",
@@ -27,33 +27,34 @@ public class CondIsGlowing extends Condition {
 
     static{
         Skript.registerCondition(CondIsGlowing.class,
-                "%players% (is|are) glowing",
-                "%players% (isn't|is not|aren't|are not) glowing"
+                "%entities% (is|are) glowing",
+                "%entities% (isn't|is not|aren't|are not) glowing"
         );
     }
 
-    Expression<Player> player;
+    Expression<Entity> entities;
     boolean is;
 
     @Override
     public boolean check(@NotNull Event e) {
-        Player p = player.getSingle(e);
-        assert p != null;
-        if (is){
-            return p.isGlowing();
+        for (final Entity entity : entities.getArray(e)){
+            if (is){
+                return entity.isGlowing();
+            }
+            return !entity.isGlowing();
         }
-        return !p.isGlowing();
+        return true;
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return player.toString(e,debug) + " is glowing";
+        return entities.toString(e,debug) + " is glowing";
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        player = (Expression<Player>) exprs[0];
+        entities = (Expression<Entity>) exprs[0];
         is = (matchedPattern == 0);
         return true;
     }
