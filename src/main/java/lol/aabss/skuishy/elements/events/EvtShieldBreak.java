@@ -25,11 +25,8 @@ import javax.annotation.Nullable;
 public class EvtShieldBreak extends SkriptEvent {
 
     static{
-        Skript.registerEvent(
-                "On Shield Break",
-                SimpleEvent.class,
-                ShieldBreakEvent.class,
-                "[on] [player] shield (disable|break)"
+        Skript.registerEvent("On Shield Break", SimpleEvent.class, ShieldBreakEvent.class,
+                "[player] shield (disable|break)"
         );
         EventValues.registerEventValue(ShieldBreakEvent.class, Player.class, new Getter<Player, ShieldBreakEvent>() {
             @Override

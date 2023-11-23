@@ -30,8 +30,8 @@ public class EvtGameruleChange extends SkriptEvent {
 
     static {
         Skript.registerEvent("On Gamerule Change", EvtGameruleChange.class, WorldGameRuleChangeEvent.class,
-                "[on] game[( |-)]rule change [of %-gamerule%] [in %-world%]",
-                "[on] game[( |-)]rule change [in %-world%] [of %-gamerule%]"
+                "game[( |-)]rule change [of %-gamerule%] [in %-world%]",
+                "game[( |-)]rule change [in %-world%] [of %-gamerule%]"
         );
         EventValues.registerEventValue(WorldGameRuleChangeEvent.class, World.class, new Getter<>() {
             @Override

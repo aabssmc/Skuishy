@@ -24,7 +24,9 @@ import org.jetbrains.annotations.NotNull;
 @RequiredPlugins("Paper 1.13+")
 public class EvtUnknownCmd extends SkriptEvent {
     static {
-        Skript.registerEvent("unknown command", SimpleEvent.class, UnknownCommandEvent.class, "[on] unknown command");
+        Skript.registerEvent("unknown command", SimpleEvent.class, UnknownCommandEvent.class,
+                "unknown command"
+        );
         EventValues.registerEventValue(UnknownCommandEvent.class, CommandSender.class, new Getter<>() {
             @Override
             public CommandSender get(UnknownCommandEvent e) {
