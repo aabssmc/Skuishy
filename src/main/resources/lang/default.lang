@@ -1,0 +1,39 @@
+version: 1.6
+
+types:
+    tone: tone¦s @a
+    instrument: instrument¦s @a
+
+tone:
+    g: G
+    a: A
+    b: B
+    c: C
+    d: D
+    e: E
+    f: F
+
+instrument:
+    banjo: banjo
+    bass_drum: bass drum
+    bass_guitar: bass guitar
+    bell: bell
+    bit: bit
+    chime: chime
+    cow_bell: cow bell
+    creeper: creeper
+    custom_head: custom, custom head, head
+    didgeridoo: didgeridoo
+    dragon: dragon
+    flute: flute
+    guitar: guitar
+    iron_xylophone: iron xylophone
+    piano: piano, harp
+    piglin: piglin
+    pling: pling
+    skeleton: skeleton
+    snare_drum: snare drum
+    sticks: sticks, hat
+    wither_skeleton: wither skeleton
+    xylophone: xylophone
+    zombie: zombie

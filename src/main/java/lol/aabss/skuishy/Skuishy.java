@@ -19,6 +19,7 @@ public class Skuishy extends JavaPlugin implements CommandExecutor {
         instance = this;
         try {
             addon = Skript.registerAddon(this)
+                    .setLanguageFileDirectory("lang")
                     .loadClasses("lol.aabss.skuishy", "elements");
         } catch (IOException e) {
             e.printStackTrace();
