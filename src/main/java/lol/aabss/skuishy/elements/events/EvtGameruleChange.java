@@ -30,8 +30,8 @@ public class EvtGameruleChange extends SkriptEvent {
 
     static {
         Skript.registerEvent("on gamerule change", EvtGameruleChange.class, WorldGameRuleChangeEvent.class,
-                "game[( |-)]rule change [of %-gamerule%] [in %-world%]",
-                "game[( |-)]rule change [in %-world%] [of %-gamerule%]"
+                "game[( |-)]rule change [of %-gamerules%] [in %-worlds%]",
+                "game[( |-)]rule change [in %-worlds%] [of %-gamerules%]"
         );
         EventValues.registerEventValue(WorldGameRuleChangeEvent.class, World.class, new Getter<>() {
             @Override
@@ -63,44 +63,36 @@ public class EvtGameruleChange extends SkriptEvent {
 
     }
 
-    Literal<World> world;
-    Literal<GameRule<?>> gamerule;
+    Literal<World> worlds;
+    Literal<GameRule<?>> gamerules;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Literal<?> @NotNull [] exprs, int matchedPattern, @NotNull SkriptParser.ParseResult parseResult) {
         if (matchedPattern == 0){
-            gamerule = (Literal<GameRule<?>>) exprs[0];
-            world = (Literal<World>) exprs[1];
+            gamerules = (Literal<GameRule<?>>) exprs[0];
+            worlds = (Literal<World>) exprs[1];
         }
         else{
-            world = (Literal<World>) exprs[0];
-            gamerule = (Literal<GameRule<?>>) exprs[1];
+            worlds = (Literal<World>) exprs[0];
+            gamerules = (Literal<GameRule<?>>) exprs[1];
         }
         return true;
     }
 
     @Override
     public boolean check(@NotNull Event e) {
-        if (e instanceof WorldGameRuleChangeEvent){
-            if (world == null){
-                if (gamerule == null){
-                    return true;
-                }
-                else{
-                    return gamerule.getSingle(e) == ((WorldGameRuleChangeEvent) e).getGameRule();
-                }}
-            else{
-                if (((WorldGameRuleChangeEvent) e).getWorld() == world.getSingle(e)){
-                    if (gamerule == null){
-                        return true;
+        if (e instanceof WorldGameRuleChangeEvent) {
+            for (World world : worlds.getArray(e)) {
+                if (world.equals(((WorldGameRuleChangeEvent) e).getWorld())) {
+                    for (GameRule<?> gameRule : gamerules.getArray(e) ) {
+                        if (gameRule.equals(((WorldGameRuleChangeEvent) e).getGameRule())){
+                            return true;
+                        }
                     }
-                    else{
-                        return gamerule.getSingle(e) == ((WorldGameRuleChangeEvent) e).getGameRule();
-                    }}
-                else{
-                    return false;
-                }}}
+                }
+            }
+        }
         return false;
     }
 
