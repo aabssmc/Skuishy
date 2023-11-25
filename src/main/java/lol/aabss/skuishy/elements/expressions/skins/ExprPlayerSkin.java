@@ -71,7 +71,7 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return Classes.getDebugMessage(getExpr()) + " cape ";
+        return Classes.getDebugMessage(getExpr()) + " skin";
     }
 
     @Override
