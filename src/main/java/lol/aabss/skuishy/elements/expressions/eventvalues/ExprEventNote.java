@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.expressions.notes;
+package lol.aabss.skuishy.elements.expressions.eventvalues;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
@@ -34,8 +34,6 @@ public class ExprEventNote extends EventValueExpression<Note> {
         if (mode == Changer.ChangeMode.SET) {
             assert delta != null;
             ((NotePlayEvent) e).setNote((Note) delta[0]);
-        } else {
-            assert false;
         }
     }
 
