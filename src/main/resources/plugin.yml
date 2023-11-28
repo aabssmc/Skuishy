@@ -6,6 +6,7 @@ depend:
   - Skript
 softdepend:
   - ProtocolLib
+  - DecentHolograms
 authors: [aabss]
 website: https://aabss.lol
 commands:

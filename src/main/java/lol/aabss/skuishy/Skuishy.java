@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Skuishy extends JavaPlugin implements CommandExecutor {
 
-    private static Skuishy instance;
+    public static Skuishy instance;
     private SkriptAddon addon;
 
     public void onEnable() {
@@ -18,9 +18,13 @@ public class Skuishy extends JavaPlugin implements CommandExecutor {
         Metrics metrics = new Metrics(this, 20162);
         instance = this;
         try {
-            addon = Skript.registerAddon(this)
-                    .setLanguageFileDirectory("lang")
-                    .loadClasses("lol.aabss.skuishy", "elements");
+            addon = Skript.registerAddon(this);
+            addon.setLanguageFileDirectory("lang");
+            addon.loadClasses("lol.aabss.skuishy", "elements.skript");
+            if (getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
+                addon.loadClasses("lol.aabss.skuishy", "elements.decentholograms");
+                Skript.info("DecentHolograms found!");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
