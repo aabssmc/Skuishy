@@ -6,11 +6,9 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
@@ -41,14 +39,17 @@ public class ExprDailyWordle extends SimpleExpression<String> {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             df.setTimeZone(TimeZone.getTimeZone("America/New_York"));
             String url = "https://www.nytimes.com/svc/wordle/v2/" + df.format(date) + ".json";
-            HttpClient http = HttpClients.createMinimal();
-            HttpGet get = new HttpGet(url);
-            HttpResponse response = http.execute(get);
-            String body = EntityUtils.toString(response.getEntity());
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get().
+                    build();
+            assert request.body() != null;
+            Response response = client.newCall(request).execute();
             JSONParser parser = new JSONParser();
-            JSONObject ea = (JSONObject) parser.parse(body);
+            JSONObject ea = (JSONObject) parser.parse(response.toString());
             return new String[]{ea.get("solution").toString()};
-        } catch (IOException | ParseException ex) {
+        } catch (ParseException | IOException ex) {
             throw new RuntimeException(ex);
         }
     }
