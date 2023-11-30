@@ -11,10 +11,9 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class EffUpdateHologram extends Effect {
-
-    Expression<Hologram> holo;
 
     static{
         Skript.registerEffect(EffUpdateHologram.class,
@@ -22,9 +21,11 @@ public class EffUpdateHologram extends Effect {
         );
     }
 
+    Expression<Hologram> holo;
+
     @Override
     protected void execute(@NotNull Event e) {
-        DHAPI.updateHologram(holo.getSingle(e).getName());
+        DHAPI.updateHologram(Objects.requireNonNull(holo.getSingle(e)).getName());
     }
 
     @Override

@@ -20,11 +20,7 @@ public class Skuishy extends JavaPlugin implements CommandExecutor {
         try {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
-            addon.loadClasses("lol.aabss.skuishy", "elements.skript");
-            if (getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
-                addon.loadClasses("lol.aabss.skuishy", "elements.decentholograms");
-                Skript.info("DecentHolograms found!");
-            }
+            addon.loadClasses("lol.aabss.skuishy", "elements");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -19,13 +19,6 @@ import java.util.Objects;
 
 public class EffEditLineHologram extends Effect {
 
-    String changetype;
-    Expression<Hologram> hologram;
-    Expression<String> text;
-    Expression<Integer> line;
-    Expression<Integer> page;
-    Variable<?> var;
-
     static{
         Skript.registerEffect(EffEditLineHologram.class,
                 "add [line] of [hologram] %hologram% to show [text] %string%",
@@ -37,27 +30,47 @@ public class EffEditLineHologram extends Effect {
         );
     }
 
+    String changetype;
+    Expression<Hologram> hologram;
+    Expression<String> text;
+    Expression<Integer> line;
+    Expression<Integer> page;
+    Variable<?> var;
+
     @Override
     protected void execute(@NotNull Event e) {
         if (Objects.equals(changetype, "add")){
-            DHAPI.addHologramLine(hologram.getSingle(e), text.getSingle(e));
+            DHAPI.addHologramLine(Objects.requireNonNull(hologram.getSingle(e)),
+                    text.getSingle(e));
         }
         else if (Objects.equals(changetype, "remove")){
-            DHAPI.removeHologramLine(hologram.getSingle(e), line.getSingle(e));
+            DHAPI.removeHologramLine(Objects.requireNonNull(hologram.getSingle(e)),
+                    Objects.requireNonNull(line.getSingle(e)));
         }
         else if (Objects.equals(changetype, "create")){
-            DHAPI.createHologramLine(DHAPI.getHologramPage(hologram.getSingle(e), page.getSingle(e)), text.getSingle(e));
+            DHAPI.createHologramLine(Objects.requireNonNull(DHAPI.getHologramPage(
+                    Objects.requireNonNull(hologram.getSingle(e)),
+                    Objects.requireNonNull(page.getSingle(e)))),
+                    text.getSingle(e));
         }
         else if (Objects.equals(changetype, "insert")){
-            DHAPI.insertHologramLine(hologram.getSingle(e), line.getSingle(e), text.getSingle(e));
+            DHAPI.insertHologramLine(Objects.requireNonNull(hologram.getSingle(e)),
+                    Objects.requireNonNull(line.getSingle(e)),
+                    text.getSingle(e));
         }
         else if (Objects.equals(changetype, "set")){
-            DHAPI.setHologramLine(hologram.getSingle(e), line.getSingle(e), text.getSingle(e));
+            DHAPI.setHologramLine(Objects.requireNonNull(hologram.getSingle(e)),
+                    Objects.requireNonNull(line.getSingle(e)),
+                    text.getSingle(e));
         }
         else if (Objects.equals(changetype, "get")){
-            HologramPage page = DHAPI.getHologramPage(hologram.getSingle(e), this.page.getSingle(e));
-            HologramLine line = DHAPI.getHologramLine(page, this.line.getSingle(e));
-            Variables.setVariable(var.getName().toString(), line, e, var.isLocal());
+            HologramPage page = DHAPI.getHologramPage(Objects.requireNonNull(hologram.getSingle(e)),
+                    Objects.requireNonNull(this.page.getSingle(e)));
+            assert page != null;
+            HologramLine line = DHAPI.getHologramLine(page,
+                    Objects.requireNonNull(this.line.getSingle(e)));
+            Variables.setVariable(var.getName().toString(),
+                    line, e, var.isLocal());
         }
     }
 

@@ -11,10 +11,9 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class EffDeleteHologram extends Effect {
-
-    Expression<Hologram> hologram;
 
     static{
         Skript.registerEffect(EffDeleteHologram.class,
@@ -22,9 +21,11 @@ public class EffDeleteHologram extends Effect {
         );
     }
 
+    Expression<Hologram> hologram;
+
     @Override
     protected void execute(@NotNull Event e) {
-        DHAPI.removeHologram(hologram.getSingle(e).getName());
+        DHAPI.removeHologram(Objects.requireNonNull(hologram.getSingle(e)).getName());
     }
 
     @Override

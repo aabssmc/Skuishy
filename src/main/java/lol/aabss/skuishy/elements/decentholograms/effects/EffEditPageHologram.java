@@ -18,11 +18,6 @@ import java.util.Objects;
 
 public class EffEditPageHologram extends Effect {
 
-    String changetype;
-    Expression<Hologram> hologram;
-    Expression<Integer> page;
-    Variable<?> var;
-
     static{
         Skript.registerEffect(EffEditPageHologram.class,
                 "add [page] of [hologram] %hologram%",
@@ -32,19 +27,27 @@ public class EffEditPageHologram extends Effect {
         );
     }
 
+    String changetype;
+    Expression<Hologram> hologram;
+    Expression<Integer> page;
+    Variable<?> var;
+
     @Override
     protected void execute(@NotNull Event e) {
         if (Objects.equals(changetype, "add")){
-            DHAPI.addHologramPage(hologram.getSingle(e));
+            DHAPI.addHologramPage(Objects.requireNonNull(hologram.getSingle(e)));
         }
         else if (Objects.equals(changetype, "remove")){
-            DHAPI.removeHologramPage(hologram.getSingle(e), page.getSingle(e));
+            DHAPI.removeHologramPage(Objects.requireNonNull(hologram.getSingle(e)),
+                    Objects.requireNonNull(page.getSingle(e)));
         }
         else if (Objects.equals(changetype, "insert")){
-            DHAPI.insertHologramPage(hologram.getSingle(e), page.getSingle(e));
+            DHAPI.insertHologramPage(Objects.requireNonNull(hologram.getSingle(e)),
+                    Objects.requireNonNull(page.getSingle(e)));
         }
         else if (Objects.equals(changetype, "get")){
-            HologramPage page = DHAPI.getHologramPage(hologram.getSingle(e), this.page.getSingle(e));
+            HologramPage page = DHAPI.getHologramPage(Objects.requireNonNull(hologram.getSingle(e)),
+                    Objects.requireNonNull(this.page.getSingle(e)));
             Variables.setVariable(var.getName().toString(), page, e, var.isLocal());
         }
     }

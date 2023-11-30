@@ -20,6 +20,7 @@ import org.skriptlang.skript.lang.entry.util.ExpressionEntryData;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Name("DecentHolograms - Create Hologram")
 @Examples({
@@ -32,11 +33,6 @@ public class SecCreateHologram extends Section {
 
     static final EntryValidator.EntryValidatorBuilder ENTRY_VALIDATOR = EntryValidator.builder();
 
-    Expression<String> name;
-    Expression<Location> location;
-    Expression<String> lines;
-    boolean persistent;
-
     static {
         Skript.registerSection(SecCreateHologram.class,
                 "(create|make) [a] [new] [:persistent] [(decent [hologram[s]]|dh)] hologram"
@@ -45,6 +41,11 @@ public class SecCreateHologram extends Section {
         ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("location", null, false, Location.class));
         ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("lines", null, false, String.class));
     }
+
+    Expression<String> name;
+    Expression<Location> location;
+    Expression<String> lines;
+    boolean persistent;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -67,7 +68,10 @@ public class SecCreateHologram extends Section {
 
     @Override
     protected @Nullable TriggerItem walk(@NotNull Event e) {
-        DHAPI.createHologram(name.getSingle(e), location.getSingle(e), persistent, Arrays.asList(lines.getArray(e)));
+        DHAPI.createHologram(
+                Objects.requireNonNull(name.getSingle(e)),
+                Objects.requireNonNull(location.getSingle(e)),
+                persistent, Arrays.asList(lines.getArray(e)));
         return super.walk(e, false);
     }
 

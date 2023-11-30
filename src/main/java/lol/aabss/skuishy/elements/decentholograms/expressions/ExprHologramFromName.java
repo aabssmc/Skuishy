@@ -12,12 +12,9 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-
-import static lol.aabss.skuishy.Skuishy.instance;
+import java.util.Objects;
 
 public class ExprHologramFromName extends SimpleExpression<Hologram> {
-
-    Expression<String> name;
 
     static{
         Skript.registerExpression(ExprHologramFromName.class, Hologram.class, ExpressionType.SIMPLE,
@@ -25,16 +22,17 @@ public class ExprHologramFromName extends SimpleExpression<Hologram> {
         );
     }
 
+    Expression<String> name;
+
     @Override
     protected @Nullable Hologram[] get(@NotNull Event e) {
-        assert name != null;
-        Hologram hologram = DHAPI.getHologram(name.getSingle(e));
+        Hologram hologram = DHAPI.getHologram(Objects.requireNonNull(name.getSingle(e)));
         return new Hologram[]{hologram};
     }
 
     @Override
     public boolean isSingle() {
-        return false;
+        return true;
     }
 
     @Override
@@ -50,9 +48,6 @@ public class ExprHologramFromName extends SimpleExpression<Hologram> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        if (!instance.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
-            Skript.error("Decent holograms is not installed");
-        }
         name = (Expression<String>) exprs[0];
         return true;
     }

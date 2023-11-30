@@ -12,11 +12,9 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class EffMoveHologram extends Effect {
-
-    Expression<Hologram> hologram;
-    Expression<Location> location;
 
     static{
         Skript.registerEffect(EffMoveHologram.class,
@@ -24,9 +22,12 @@ public class EffMoveHologram extends Effect {
         );
     }
 
+    Expression<Hologram> hologram;
+    Expression<Location> location;
+
     @Override
     protected void execute(@NotNull Event e) {
-        DHAPI.moveHologram(hologram.getSingle(e), location.getSingle(e));
+        DHAPI.moveHologram(Objects.requireNonNull(hologram.getSingle(e)), Objects.requireNonNull(location.getSingle(e)));
     }
 
     @Override
