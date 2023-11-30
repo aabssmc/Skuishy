@@ -12,30 +12,30 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class EffDeleteHologram extends Effect {
+public class EffUpdateHologram extends Effect {
 
-    Expression<Hologram> hologram;
+    Expression<Hologram> holo;
 
     static{
-        Skript.registerEffect(EffDeleteHologram.class,
-                "(delete|remove) [(decent [hologram[s]]|dh)] hologram %hologram%"
+        Skript.registerEffect(EffUpdateHologram.class,
+                "update [(decent [hologram[s]]|dh)] %hologram%"
         );
     }
 
     @Override
     protected void execute(@NotNull Event e) {
-        DHAPI.removeHologram(hologram.getSingle(e).getName());
+        DHAPI.updateHologram(holo.getSingle(e).getName());
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "delete hologram";
+        return "update hologram";
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        hologram = (Expression<Hologram>) exprs[0];
+        holo = (Expression<Hologram>) exprs[0];
         return true;
     }
 }
