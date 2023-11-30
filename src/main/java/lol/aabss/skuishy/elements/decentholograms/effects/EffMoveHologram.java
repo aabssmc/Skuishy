@@ -20,7 +20,7 @@ public class EffMoveHologram extends Effect {
 
     static{
         Skript.registerEffect(EffMoveHologram.class,
-                "(move|teleport) [(decent [hologram[s]]|dh)] hologram %hologram% to %location%"
+                "(move|teleport) [(decent [hologram[s]]|dh)] [hologram] %hologram% to %location%"
         );
     }
 

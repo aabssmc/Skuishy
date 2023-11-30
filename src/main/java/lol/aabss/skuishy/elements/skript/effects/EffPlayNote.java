@@ -29,7 +29,7 @@ public class EffPlayNote extends Effect {
 
     static{
         Skript.registerEffect(EffPlayNote.class,
-                "play [note [block sound]] %note% with instrument %instrument% at %locations% for %players%"
+                "play [note] %note% with [instrument] %instrument% at [location] %locations% for %players%"
         );
     }
 
@@ -63,10 +63,6 @@ public class EffPlayNote extends Effect {
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "play " +
-                instrument.toString(e, debug) + " " +
-                note.toString(e, debug) + " at " +
-                locations.toString(e, debug) + " for " +
-                players.toString(e, debug);
+        return "play note";
     }
 }

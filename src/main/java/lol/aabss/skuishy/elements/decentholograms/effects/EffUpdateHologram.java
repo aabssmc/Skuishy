@@ -18,7 +18,7 @@ public class EffUpdateHologram extends Effect {
 
     static{
         Skript.registerEffect(EffUpdateHologram.class,
-                "update [(decent [hologram[s]]|dh)] %hologram%"
+                "update [(decent [hologram[s]]|dh)] [hologram] %hologram%"
         );
     }
 

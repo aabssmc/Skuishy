@@ -18,7 +18,7 @@ public class EffDeleteHologram extends Effect {
 
     static{
         Skript.registerEffect(EffDeleteHologram.class,
-                "(delete|remove) [(decent [hologram[s]]|dh)] hologram %hologram%"
+                "(delete|remove) [(decent [hologram[s]]|dh)] [hologram] %hologram%"
         );
     }
 

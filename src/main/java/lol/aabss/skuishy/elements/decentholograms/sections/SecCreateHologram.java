@@ -34,7 +34,7 @@ public class SecCreateHologram extends Section {
 
     Expression<String> name;
     Expression<Location> location;
-    Expression<String[]> lines;
+    Expression<String> lines;
     boolean persistent;
 
     static {
@@ -43,7 +43,7 @@ public class SecCreateHologram extends Section {
         );
         ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("name", null, false, String.class));
         ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("location", null, false, Location.class));
-        ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("lines", null, false, String[].class));
+        ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("lines", null, false, String.class));
     }
 
     @SuppressWarnings("unchecked")
@@ -55,17 +55,19 @@ public class SecCreateHologram extends Section {
                         @NotNull SectionNode sectionNode,
                         @NotNull List<TriggerItem> triggerItems) {
         EntryContainer container = ENTRY_VALIDATOR.build().validate(sectionNode);
-        assert container != null;
+        if (container == null) return false;
         persistent = parseResult.hasTag("persistent");
-        name = (Expression<String>) container.get("name", false);
-        location = (Expression<Location>) container.get("location", false);
-        lines = (Expression<String[]>) container.get("lines", false);
-        return true;
+        name = (Expression<String>) container.getOptional("name", false);
+        if (name == null) return false;
+        location = (Expression<Location>) container.getOptional("location", false);
+        if (location == null) return false;
+        lines = (Expression<String>) container.getOptional("lines", false);
+        return lines != null;
     }
 
     @Override
     protected @Nullable TriggerItem walk(@NotNull Event e) {
-        DHAPI.createHologram(name.getSingle(e), location.getSingle(e), persistent, Arrays.asList(lines.getSingle(e)));
+        DHAPI.createHologram(name.getSingle(e), location.getSingle(e), persistent, Arrays.asList(lines.getArray(e)));
         return super.walk(e, false);
     }
 

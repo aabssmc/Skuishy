@@ -2,7 +2,6 @@ package lol.aabss.skuishy.elements;
 
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
-import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
@@ -22,7 +21,6 @@ public class Types {
                 .name("note")
                 .description("Represents a note block note.")
                 .since("1.6")
-                .defaultExpression(new EventValueExpression<>(Note.class))
                 .parser(new Parser<Note>() {
 
                     @Override
