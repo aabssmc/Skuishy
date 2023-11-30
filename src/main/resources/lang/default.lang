@@ -37,3 +37,40 @@ instrument:
     wither_skeleton: wither skeleton
     xylophone: xylophone
     zombie: zombie
+
+structure:
+    ancient_city: ancient city
+    bastion_remnant: bastion remnant
+    buried_treasure: buried treasure
+    desert_pyramid: desert pyramid
+    end_city: end city
+    fortress: fortress, nether fortress
+    igloo: igloo
+    jungle_pyramid: jungle pyramid
+    mansion: mansion, woodland mansion
+    mineshaft: mineshaft
+    mineshaft_mesa: mesa mineshaft, mineshaft mesa
+    monument: monument, ocean monument
+    nether_fossil: nether fossil
+    ocean_ruin_cold: cold ocean ruin, ocean ruin cold
+    ocean_ruin_warm: warm ocean ruin, ocean ruin warm
+    pillager_outpost: pillager outpost
+    ruined_portal: ruined portal, ruinedportal
+    ruined_portal_desert: desert ruined portal, ruinedportal desert, desert ruinedportal, ruined portal desert
+    ruined_portal_jungle: jungle ruined portal, ruinedportal jungle, jungle ruinedportal, ruined portal jungle
+    ruined_portal_mountain: mountain ruined portal, ruinedportal mountain, mountain ruinedportal, ruined portal mountain
+    ruined_portal_nether: nether ruined portal, ruinedportal nether, nether ruinedportal, ruined portal nether
+    ruined_portal_ocean: ocean ruined portal, ruinedportal ocean, ocean ruinedportal, ruined portal ocean
+    ruined_portal_swamp: swamp ruined portal, ruinedportal swamp, swamp ruinedportal, ruined portal swamp
+    shipwreck: shipwreck
+    shipwreck_beached: beached shipwreck, shipwreck beached
+    stronghold: stronghold
+    swamp_hut: swamp hut, witch hut
+    trail_ruins: trail ruins
+    village_desert: desert village, village desert
+    village_plains: plains village, village plains
+    village_savanna: savanna village, village savanna
+    village_snowy: snowy village, village snowy
+    village_taiga: taiga village, village taiga
+
+

@@ -8,6 +8,7 @@ import ch.njol.skript.util.EnumUtils;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
+import org.bukkit.generator.structure.Structure;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -124,6 +125,69 @@ public class Types {
                         @Override
                         public @NotNull String toString(Hologram holo, int flags) {
                             return toVariableNameString(holo);
+                        }
+                    })
+            );
+            Classes.registerClass(new ClassInfo<>(Structure.class, "generatedstructure")
+                    .user("generated ?structures?")
+                    .name("generated structure")
+                    .description("Represents a generated structure.")
+                    .since("1.7")
+                    .parser(new Parser<Structure>() {
+                        @Override
+                        @Nullable
+                        public Structure parse(@NotNull String input, @NotNull ParseContext context) {
+                            return switch (input) {
+                                case "ancient city" -> Structure.ANCIENT_CITY;
+                                case "bastion remnant" -> Structure.BASTION_REMNANT;
+                                case "buried treasure" -> Structure.BURIED_TREASURE;
+                                case "desert pyramid" -> Structure.DESERT_PYRAMID;
+                                case "end city" -> Structure.END_CITY;
+                                case "fortress", "nether fortress" -> Structure.FORTRESS;
+                                case "igloo" -> Structure.IGLOO;
+                                case "jungle pyramid" -> Structure.JUNGLE_PYRAMID;
+                                case "mansion", "woodland mansion" -> Structure.MANSION;
+                                case "mineshaft" -> Structure.MINESHAFT;
+                                case "mineshaft mesa", "mesa mineshaft" -> Structure.MINESHAFT_MESA;
+                                case "monument", "ocean monument" -> Structure.MONUMENT;
+                                case "nether fossil" -> Structure.NETHER_FOSSIL;
+                                case "ocean ruin cold", "cold ocean ruin" -> Structure.OCEAN_RUIN_COLD;
+                                case "ocean ruin warm", "warm ocean ruin" -> Structure.OCEAN_RUIN_WARM;
+                                case "pillager outpost" -> Structure.PILLAGER_OUTPOST;
+                                case "ruined portal", "ruinedportal" -> Structure.RUINED_PORTAL;
+                                case "ruined portal desert", "desert ruined portal", "ruinedportal desert", "desert ruinedportal" -> Structure.RUINED_PORTAL_DESERT;
+                                case "ruined portal jungle", "jungle ruined portal", "ruinedportal jungle", "jungle ruinedportal" -> Structure.RUINED_PORTAL_JUNGLE;
+                                case "ruined portal mountain", "mountain ruined portal", "ruinedportal mountain", "mountain ruinedportal" -> Structure.RUINED_PORTAL_MOUNTAIN;
+                                case "ruined portal nether", "nether ruined portal", "ruinedportal nether", "nether ruinedportal" -> Structure.RUINED_PORTAL_NETHER;
+                                case "ruined portal ocean", "ocean ruined portal", "ruinedportal ocean", "ocean ruinedportal" -> Structure.RUINED_PORTAL_OCEAN;
+                                case "ruined portal swamp", "swamp ruined portal", "ruinedportal swamp", "swamp ruinedportal" -> Structure.RUINED_PORTAL_SWAMP;
+                                case "shipwreck" -> Structure.SHIPWRECK;
+                                case "shipwreck beached", "beached shipwreck" -> Structure.SHIPWRECK_BEACHED;
+                                case "stronghold" -> Structure.STRONGHOLD;
+                                case "swamp hut", "witch village" -> Structure.SWAMP_HUT;
+                                case "trail ruins" -> Structure.TRAIL_RUINS;
+                                case "village desert", "desert village" -> Structure.VILLAGE_DESERT;
+                                case "village plains", "plains village" -> Structure.VILLAGE_PLAINS;
+                                case "village savanna", "savanna village" -> Structure.VILLAGE_SAVANNA;
+                                case "village snowy", "snowy village" -> Structure.VILLAGE_SNOWY;
+                                case "village taiga", "taiga village" -> Structure.VILLAGE_TAIGA;
+                                default -> null;
+                            };
+                        }
+
+                        @Override
+                        public boolean canParse(@NotNull ParseContext context) {
+                            return true;
+                        }
+
+                        @Override
+                        public @NotNull String toVariableNameString(Structure structure) {
+                            return structure.getStructureType().toString().toLowerCase().replaceAll("_", " ");
+                        }
+
+                        @Override
+                        public @NotNull String toString(Structure structure, int flags) {
+                            return toVariableNameString(structure);
                         }
                     })
             );
