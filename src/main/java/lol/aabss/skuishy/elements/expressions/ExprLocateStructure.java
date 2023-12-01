@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 public class ExprLocateStructure extends SimpleExpression<Location> {
 
     static{
-        Skript.registerExpression(ExprLocateBiome.class, Location.class, ExpressionType.COMBINED,
+        Skript.registerExpression(ExprLocateStructure.class, Location.class, ExpressionType.COMBINED,
                 "nearest [:unexplored] [structure] %generatedstructure% in radius %integer% around %location%"
         );
     }
