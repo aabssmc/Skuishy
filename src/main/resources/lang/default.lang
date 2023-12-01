@@ -73,4 +73,28 @@ structure:
     village_snowy: snowy village, village snowy
     village_taiga: taiga village, village taiga
 
-
+memorykey:
+    admiring_disabled: admiring disabled
+    admiring_item: admiring item
+    angry_at: angry at
+    golem_detected_recently: golem detected recently
+    has_hunting_cooldown: has hunting cooldown
+    home: home
+    hunted_recently: hunted recently
+    is_tempted: is tempted
+    item_pickup_cooldown_ticks: item pickup cooldown ticks
+    job_site: job site
+    last_slept: last slept
+    last_woken: last woken
+    last_worked_at_poi: last worked at poi
+    liked_noteblock_cooldown_ticks: liked noteblock cooldown ticks
+    liked_noteblock_position: liked noteblock position
+    liked_player: liked player
+    long_jump_cooling_down: long jump cooling down
+    meeting_point: meeting point
+    play_dead_ticks: play dead ticks
+    potential_job_site: potential job site
+    ram_cooldown_ticks: ram cooldown ticks
+    sniffer_explored_positions: sniffer explored positions
+    temptation_cooldown_ticks: temptation cooldown ticks
+    universal_anger: universal anger

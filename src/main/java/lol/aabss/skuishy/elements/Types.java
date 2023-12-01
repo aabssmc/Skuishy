@@ -8,6 +8,7 @@ import ch.njol.skript.util.EnumUtils;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
+import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.generator.structure.Structure;
 import org.jetbrains.annotations.NotNull;
 
@@ -188,6 +189,60 @@ public class Types {
                         @Override
                         public @NotNull String toString(Structure structure, int flags) {
                             return toVariableNameString(structure);
+                        }
+                    })
+            );
+            Classes.registerClass(new ClassInfo<>(MemoryKey.class, "memorykey")
+                    .user("memory ?keys?")
+                    .name("memory key")
+                    .description("Represents a living entity's memory key.")
+                    .since("1.7")
+                    .parser(new Parser<MemoryKey<?>>() {
+                        @Override
+                        @Nullable
+                        public MemoryKey<?> parse(@NotNull String input, @NotNull ParseContext context) {
+                            return switch (input) {
+                                case "admiring disabled" -> MemoryKey.ADMIRING_DISABLED;
+                                case "admiring item" -> MemoryKey.ADMIRING_ITEM;
+                                case "angry at" -> MemoryKey.ANGRY_AT;
+                                case "golem detected recently" -> MemoryKey.GOLEM_DETECTED_RECENTLY;
+                                case "has hunting cooldown" -> MemoryKey.HAS_HUNTING_COOLDOWN;
+                                case "home" -> MemoryKey.HOME;
+                                case "hunted recently" -> MemoryKey.HUNTED_RECENTLY;
+                                case "is tempted" -> MemoryKey.IS_TEMPTED;
+                                case "item pickup cooldown ticks" -> MemoryKey.ITEM_PICKUP_COOLDOWN_TICKS;
+                                case "job site" -> MemoryKey.JOB_SITE;
+                                case "last slept" -> MemoryKey.LAST_SLEPT;
+                                case "last woken" -> MemoryKey.LAST_WOKEN;
+                                case "last worked at poi" -> MemoryKey.LAST_WORKED_AT_POI;
+                                case "liked noteblock cooldown ticks" -> MemoryKey.LIKED_NOTEBLOCK_COOLDOWN_TICKS;
+                                case "liked noteblock position" -> MemoryKey.LIKED_NOTEBLOCK_POSITION;
+                                case "liked player" -> MemoryKey.LIKED_PLAYER;
+                                case "long jump cooling down" -> MemoryKey.LONG_JUMP_COOLING_DOWN;
+                                case "meeting point" -> MemoryKey.MEETING_POINT;
+                                case "play dead ticks" -> MemoryKey.PLAY_DEAD_TICKS;
+                                case "potential job site" -> MemoryKey.POTENTIAL_JOB_SITE;
+                                case "ram cooldown ticks" -> MemoryKey.RAM_COOLDOWN_TICKS;
+                                case "sniffer explored positions" -> MemoryKey.SNIFFER_EXPLORED_POSITIONS;
+                                case "temptation cooldown ticks" -> MemoryKey.TEMPTATION_COOLDOWN_TICKS;
+                                case "universal anger" -> MemoryKey.UNIVERSAL_ANGER;
+                                default -> null;
+                            };
+                        }
+
+                        @Override
+                        public boolean canParse(@NotNull ParseContext context) {
+                            return true;
+                        }
+
+                        @Override
+                        public @NotNull String toVariableNameString(MemoryKey memoryKey) {
+                            return memoryKey.toString().toLowerCase().replaceAll("_", " ");
+                        }
+
+                        @Override
+                        public @NotNull String toString(MemoryKey memoryKey, int flags) {
+                            return toVariableNameString(memoryKey);
                         }
                     })
             );
