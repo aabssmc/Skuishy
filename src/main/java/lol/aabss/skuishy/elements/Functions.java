@@ -3,15 +3,11 @@ package lol.aabss.skuishy.elements;
 import ch.njol.skript.lang.function.Parameter;
 import ch.njol.skript.lang.function.SimpleJavaFunction;
 import ch.njol.skript.registrations.DefaultClasses;
-import ch.njol.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import static ch.njol.skript.lang.function.Functions.registerFunction;
 
 public class Functions {
-    private static String str(double n) {
-        return StringUtils.toString(n, 4);
-    }
 
     static {
         Parameter<?>[] numbersParam = new Parameter[]{new Parameter<>("ns", DefaultClasses.NUMBER, false, null)};
