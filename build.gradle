@@ -28,7 +28,6 @@ dependencies {
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.1.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.5'
 }
 
