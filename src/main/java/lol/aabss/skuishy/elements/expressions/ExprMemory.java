@@ -19,29 +19,36 @@ public class ExprMemory extends SimpleExpression<Object> {
 
     static{
         Skript.registerExpression(ExprMemory.class, Object.class, ExpressionType.COMBINED,
-                "memory[[ ]key] %memorykey% of %livingentity%",
-                "%livingentity%'s memory[[ ]key] %memorykey%"
+                "memory[[ ]key] %memorykeys% of %livingentitys%",
+                "%livingentitys%'s memory[[ ]key] %memorykeys%"
         );
     }
 
-    Expression<LivingEntity> entity;
-    Expression<MemoryKey<Object>> memorykey;
+    private Expression<LivingEntity> entity;
+    private Expression<MemoryKey<Object>> memorykey;
 
     @Override
     protected @Nullable Object[] get(@NotNull Event e) {
-        LivingEntity ent = entity.getSingle(e);
-        MemoryKey<Object> mem = memorykey.getSingle(e);
-        assert ent != null; assert mem != null;
-        return new Object[]{ent.getMemory(mem)};
+        LivingEntity[] ent = entity.getArray(e);
+        MemoryKey<Object>[] mem = memorykey.getArray(e);
+        for (LivingEntity livingEntity : ent){
+            for (MemoryKey<Object> memoryKey : mem){
+                return new Object[]{livingEntity.getMemory(memoryKey)};
+            }
+        }
+        return new Object[0];
     }
 
     @Override
     public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
-            LivingEntity ent = entity.getSingle(e);
-            MemoryKey<Object> mem = memorykey.getSingle(e);
-            assert ent != null; assert mem != null;
-            ent.setMemory(mem, delta[0]);
+            LivingEntity[] ent = entity.getArray(e);
+            MemoryKey<Object>[] mem = memorykey.getArray(e);
+            for (LivingEntity livingEntity : ent){
+                for (MemoryKey<Object> memoryKey : mem){
+                    livingEntity.setMemory(memoryKey, delta[0]);
+                }
+            }
         } else {
             assert false;
         }
