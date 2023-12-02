@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.decentholograms.effects;
+package lol.aabss.skuishy.elements.effects.decentholograms;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Effect;
@@ -7,39 +7,36 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
-import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class EffMoveHologram extends Effect {
+public class EffUpdateHologram extends Effect {
 
     static{
-        Skript.registerEffect(EffMoveHologram.class,
-                "(move|teleport) [(decent [hologram[s]]|dh)] [hologram] %hologram% to %location%"
+        Skript.registerEffect(EffUpdateHologram.class,
+                "update [(decent [hologram[s]]|dh)] [hologram] %hologram%"
         );
     }
 
-    Expression<Hologram> hologram;
-    Expression<Location> location;
+    Expression<Hologram> holo;
 
     @Override
     protected void execute(@NotNull Event e) {
-        DHAPI.moveHologram(Objects.requireNonNull(hologram.getSingle(e)), Objects.requireNonNull(location.getSingle(e)));
+        DHAPI.updateHologram(Objects.requireNonNull(holo.getSingle(e)).getName());
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "move hologram";
+        return "update hologram";
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        hologram = (Expression<Hologram>) exprs[0];
-        location = (Expression<Location>) exprs[1];
+        holo = (Expression<Hologram>) exprs[0];
         return true;
     }
 }

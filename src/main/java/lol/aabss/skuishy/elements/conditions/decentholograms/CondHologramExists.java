@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.decentholograms.conditions;
+package lol.aabss.skuishy.elements.conditions.decentholograms;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Condition;
