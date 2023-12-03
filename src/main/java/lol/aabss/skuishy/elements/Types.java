@@ -15,8 +15,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-import static lol.aabss.skuishy.Skuishy.instance;
-
 public class Types {
     static{
         Classes.registerClass(new ClassInfo<>(Note.class, "note")
@@ -106,8 +104,7 @@ public class Types {
                     }
                 })
         );
-        if (instance.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
-            Classes.registerClass(new ClassInfo<>(Hologram.class, "hologram")
+        Classes.registerClass(new ClassInfo<>(Hologram.class, "hologram")
                     .user("holograms?")
                     .name("hologram")
                     .description("Represents a decent hologram hologram.")
@@ -129,8 +126,8 @@ public class Types {
                             return toVariableNameString(holo);
                         }
                     })
-            );
-            Classes.registerClass(new ClassInfo<>(Structure.class, "generatedstructure")
+        );
+        Classes.registerClass(new ClassInfo<>(Structure.class, "generatedstructure")
                     .user("generated ?structures?")
                     .name("generated structure")
                     .description("Represents a generated structure.")
@@ -192,8 +189,8 @@ public class Types {
                             return toVariableNameString(structure);
                         }
                     })
-            );
-            Classes.registerClass(new ClassInfo<>(MemoryKey.class, "memorykey")
+        );
+        Classes.registerClass(new ClassInfo<>(MemoryKey.class, "memorykey")
                     .user("memory ?keys?")
                     .name("memory key")
                     .description("Represents a living entity's memory key.")
@@ -246,8 +243,8 @@ public class Types {
                             return toVariableNameString(memoryKey);
                         }
                     })
-            );
-            Classes.registerClass(new ClassInfo<>(Datapack.class, "datapack")
+        );
+        Classes.registerClass(new ClassInfo<>(Datapack.class, "datapack")
                     .user("datapacks?")
                     .name("datapack")
                     .description("Represents a datapack.")
@@ -269,6 +266,6 @@ public class Types {
                             return toVariableNameString(data);
                         }
                     })
-            );
-    }}
+        );
+    }
 }

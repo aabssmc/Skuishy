@@ -32,8 +32,8 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
         );
     }
 
-    public ExprItemDamage(Class<? extends Integer> c) {
-        super(c);
+    public ExprItemDamage() {
+        super(Integer.class);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class CondHologramExists extends Condition {
 
     static{
         Skript.registerCondition(CondHologramExists.class,
-                "[hologram] %hologram% exists",
+                "[hologram] %hologram% (does) exists",
                 "[hologram] %hologram% does(n't| not) exist"
         );
     }
