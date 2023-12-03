@@ -60,7 +60,7 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
     @Override
     public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(String.class);
+            return CollectionUtils.array(Integer.class);
         }
         return CollectionUtils.array();
     }

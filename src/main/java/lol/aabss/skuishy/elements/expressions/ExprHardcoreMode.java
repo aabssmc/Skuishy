@@ -57,7 +57,7 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
     @Override
     public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(String.class);
+            return CollectionUtils.array(Boolean.class);
         }
         return CollectionUtils.array();
     }

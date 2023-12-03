@@ -268,8 +268,8 @@ public class Types {
                         }
                     })
         );
-        EnumUtils<SpawnCategory> categorys = new EnumUtils<>(SpawnCategory.class, "spawn category");
-        Classes.registerClass(new ClassInfo<>(SpawnCategory.class, "spawncategry")
+        EnumUtils<SpawnCategory> categorys = new EnumUtils<>(SpawnCategory.class, "spawncategory");
+        Classes.registerClass(new ClassInfo<>(SpawnCategory.class, "spawncategory")
                 .user("spawn ?categor(y|ies)")
                 .name("spawn category")
                 .description("Represents a spawn category.")
