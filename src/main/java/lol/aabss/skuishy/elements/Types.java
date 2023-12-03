@@ -9,6 +9,7 @@ import eu.decentsoftware.holograms.api.holograms.Hologram;
 import io.papermc.paper.datapack.Datapack;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.generator.structure.Structure;
 import org.jetbrains.annotations.NotNull;
@@ -266,6 +267,36 @@ public class Types {
                             return toVariableNameString(data);
                         }
                     })
+        );
+        EnumUtils<SpawnCategory> categorys = new EnumUtils<>(SpawnCategory.class, "spawn category");
+        Classes.registerClass(new ClassInfo<>(SpawnCategory.class, "spawncategry")
+                .user("spawn ?categor(y|ies)")
+                .name("spawn category")
+                .description("Represents a spawn category.")
+                .since("1.8")
+                .parser(new Parser<SpawnCategory>() {
+
+                    @Override
+                    @Nullable
+                    public SpawnCategory parse(@NotNull String input, @NotNull ParseContext context) {
+                        return categorys.parse(input);
+                    }
+
+                    @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return true;
+                    }
+
+                    @Override
+                    public @NotNull String toVariableNameString(SpawnCategory category) {
+                        return category.name().replaceAll("_", " ").toLowerCase();
+                    }
+
+                    @Override
+                    public @NotNull String toString(SpawnCategory category, int flags) {
+                        return toVariableNameString(category);
+                    }
+                })
         );
     }
 }

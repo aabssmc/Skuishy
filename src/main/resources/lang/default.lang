@@ -98,3 +98,13 @@ memorykey:
     sniffer_explored_positions: sniffer explored positions
     temptation_cooldown_ticks: temptation cooldown ticks
     universal_anger: universal anger
+
+spawncategory:
+    ambient: ambient
+    animal: animal
+    axolotl: axolotl
+    misc: misc, miscellaneous
+    monster: monster
+    water_ambient: water ambient
+    water_animal: water animal
+    water_underground_creature: water underground creature
