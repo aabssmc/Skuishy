@@ -71,4 +71,4 @@
 
 
 
-![Downloads](https://img.shields.io/github/downloads/aabssmc/Skuishy/total)
+![Downloads](https://img.shields.io/github/downloads/aabssmc/Skuishy/total) ![Versions](https://img.shields.io/github/versions/aabssmc/Skuishy/total)
