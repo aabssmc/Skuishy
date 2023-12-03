@@ -1,3 +1,5 @@
+# Skuishy ![Downloads](https://img.shields.io/github/downloads/aabssmc/Skuishy/total)
+
 [![SkriptHubViewTheDocs](http://skripthub.net/static/addon/ViewTheDocsButton.png)](http://skripthub.net/docs/?addon=Skuishy)
 
 ## You need [Skript 2.7.0](https://github.com/SkriptLang/Skript) and up to use.
