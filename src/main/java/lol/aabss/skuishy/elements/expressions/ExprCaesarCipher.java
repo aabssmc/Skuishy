@@ -34,9 +34,9 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
         );
     }
 
-    boolean isDe;
-    Expression<Integer> shift;
-    Expression<String> value;
+    private boolean isDe;
+    private Expression<Integer> shift;
+    private Expression<String> value;
 
     @SuppressWarnings("unchecked")
     @Override

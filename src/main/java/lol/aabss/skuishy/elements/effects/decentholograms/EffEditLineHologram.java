@@ -30,12 +30,12 @@ public class EffEditLineHologram extends Effect {
         );
     }
 
-    String changetype;
-    Expression<Hologram> hologram;
-    Expression<String> text;
-    Expression<Integer> line;
-    Expression<Integer> page;
-    Variable<?> var;
+    private String changetype;
+    private Expression<Hologram> hologram;
+    private Expression<String> text;
+    private Expression<Integer> line;
+    private Expression<Integer> page;
+    private Variable<?> var;
 
     @Override
     protected void execute(@NotNull Event e) {

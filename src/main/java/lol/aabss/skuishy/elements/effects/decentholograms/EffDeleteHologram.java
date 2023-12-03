@@ -21,7 +21,7 @@ public class EffDeleteHologram extends Effect {
         );
     }
 
-    Expression<Hologram> hologram;
+    private Expression<Hologram> hologram;
 
     @Override
     protected void execute(@NotNull Event e) {

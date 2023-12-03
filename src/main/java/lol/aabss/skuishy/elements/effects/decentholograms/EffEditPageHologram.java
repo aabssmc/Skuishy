@@ -27,10 +27,10 @@ public class EffEditPageHologram extends Effect {
         );
     }
 
-    String changetype;
-    Expression<Hologram> hologram;
-    Expression<Integer> page;
-    Variable<?> var;
+    private String changetype;
+    private Expression<Hologram> hologram;
+    private Expression<Integer> page;
+    private Variable<?> var;
 
     @Override
     protected void execute(@NotNull Event e) {

@@ -32,9 +32,9 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
         );
     }
 
-    Expression<Biome> biome;
-    Expression<Integer> radius;
-    Expression<Location> location;
+    private Expression<Biome> biome;
+    private Expression<Integer> radius;
+    private Expression<Location> location;
 
     @Override
     protected @Nullable Location[] get(@NotNull Event e) {

@@ -42,10 +42,10 @@ public class SecCreateHologram extends Section {
         ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("lines", null, false, String.class));
     }
 
-    Expression<String> name;
-    Expression<Location> location;
-    Expression<String> lines;
-    boolean persistent;
+    private Expression<String> name;
+    private Expression<Location> location;
+    private Expression<String> lines;
+    private boolean persistent;
 
     @SuppressWarnings("unchecked")
     @Override

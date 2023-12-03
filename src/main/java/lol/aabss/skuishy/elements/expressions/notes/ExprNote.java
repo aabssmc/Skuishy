@@ -31,9 +31,9 @@ public class ExprNote extends SimpleExpression<Note> {
         );
     }
 
-    Expression<Note.Tone> tone;
-    String accidental;
-    Expression<Integer> octave;
+    private Expression<Note.Tone> tone;
+    private String accidental;
+    private Expression<Integer> octave;
 
     @SuppressWarnings("DataFlowIssue")
     @Override

@@ -31,8 +31,8 @@ public class ExprLocateRaid extends SimpleExpression<Location> {
         );
     }
 
-    Expression<Integer> radius;
-    Expression<Location> location;
+    private Expression<Integer> radius;
+    private Expression<Location> location;
 
     @Override
     protected @Nullable Location[] get(@NotNull Event e) {

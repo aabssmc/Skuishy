@@ -22,7 +22,7 @@ public class ExprHologramFromName extends SimpleExpression<Hologram> {
         );
     }
 
-    Expression<String> name;
+    private Expression<String> name;
 
     @Override
     protected @Nullable Hologram[] get(@NotNull Event e) {

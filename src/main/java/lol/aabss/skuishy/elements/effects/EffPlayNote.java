@@ -33,10 +33,10 @@ public class EffPlayNote extends Effect {
         );
     }
 
-    Expression<Note> note;
-    Expression<Instrument> instrument;
-    Expression<Location> locations;
-    Expression<Player> players;
+    private Expression<Note> note;
+    private Expression<Instrument> instrument;
+    private Expression<Location> locations;
+    private Expression<Player> players;
 
     @SuppressWarnings("unchecked")
     @Override

@@ -22,8 +22,8 @@ public class EffMoveHologram extends Effect {
         );
     }
 
-    Expression<Hologram> hologram;
-    Expression<Location> location;
+    private Expression<Hologram> hologram;
+    private Expression<Location> location;
 
     @Override
     protected void execute(@NotNull Event e) {

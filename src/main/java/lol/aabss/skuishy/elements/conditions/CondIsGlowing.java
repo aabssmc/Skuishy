@@ -32,8 +32,8 @@ public class CondIsGlowing extends Condition {
         );
     }
 
-    Expression<Entity> entities;
-    boolean is;
+    private Expression<Entity> entities;
+    private boolean is;
 
     @Override
     public boolean check(@NotNull Event e) {

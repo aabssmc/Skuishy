@@ -21,8 +21,8 @@ public class CondHologramExists extends Condition {
         );
     }
 
-    Expression<String> name;
-    boolean is;
+    private Expression<String> name;
+    private boolean is;
 
     @Override
     public boolean check(@NotNull Event e) {

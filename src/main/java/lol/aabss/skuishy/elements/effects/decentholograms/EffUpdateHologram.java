@@ -21,7 +21,7 @@ public class EffUpdateHologram extends Effect {
         );
     }
 
-    Expression<Hologram> holo;
+    private Expression<Hologram> holo;
 
     @Override
     protected void execute(@NotNull Event e) {

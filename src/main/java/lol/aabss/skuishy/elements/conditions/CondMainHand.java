@@ -35,9 +35,9 @@ public class CondMainHand extends Condition {
         );
     }
 
-    Expression<Player> player;
+    private Expression<Player> player;
 
-    MainHandSide side;
+    private MainHandSide side;
 
     @SuppressWarnings("unchecked")
     @Override

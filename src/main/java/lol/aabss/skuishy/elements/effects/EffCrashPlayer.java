@@ -37,7 +37,7 @@ public class EffCrashPlayer extends Effect {
         );
     }
 
-    Expression<Player> player;
+    private Expression<Player> player;
 
     @Override
     protected void execute(@NotNull Event e) {

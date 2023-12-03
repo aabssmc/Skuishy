@@ -32,10 +32,10 @@ public class ExprLocateStructure extends SimpleExpression<Location> {
         );
     }
 
-    Expression<Structure> structure;
-    Expression<Integer> radius;
-    Expression<Location> location;
-    boolean unexplored;
+    private Expression<Structure> structure;
+    private Expression<Integer> radius;
+    private Expression<Location> location;
+    private boolean unexplored;
 
     @Override
     protected @Nullable Location[] get(@NotNull Event e) {

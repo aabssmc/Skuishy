@@ -6,6 +6,7 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
+import io.papermc.paper.datapack.Datapack;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.bukkit.entity.memory.MemoryKey;
@@ -246,6 +247,28 @@ public class Types {
                         }
                     })
             );
-        }
-    }
+            Classes.registerClass(new ClassInfo<>(Datapack.class, "datapack")
+                    .user("datapacks?")
+                    .name("datapack")
+                    .description("Represents a datapack.")
+                    .since("1.7")
+                    .parser(new Parser<Datapack>() {
+
+                        @Override
+                        public boolean canParse(@NotNull ParseContext context) {
+                            return false;
+                        }
+
+                        @Override
+                        public @NotNull String toVariableNameString(Datapack data) {
+                            return data.getName().toLowerCase().replaceAll("_", " ");
+                        }
+
+                        @Override
+                        public @NotNull String toString(Datapack data, int flags) {
+                            return toVariableNameString(data);
+                        }
+                    })
+            );
+    }}
 }
