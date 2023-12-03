@@ -4,6 +4,7 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.config.SectionNode;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.Section;
 import ch.njol.skript.lang.SkriptParser;
@@ -28,6 +29,7 @@ import java.util.Objects;
         "\tname: \"big juice\"",
         "\tlocation: player's location",
         "\tlines: \"&fi love the juicy juices\", \"&7(they are really juicy)\""})
+@Since("1.7")
 
 public class SecCreateHologram extends Section {
 

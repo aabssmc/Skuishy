@@ -1,6 +1,7 @@
 package lol.aabss.skuishy.elements.expressions.decentholograms;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,6 +15,12 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+@Name("Decent Holograms - Hologram Name")
+@Description("Gets a hologram by its name.")
+@Examples({
+        "set {_holo} to hologram named \"poopy\""
+})
+@Since("1.7")
 public class ExprHologramFromName extends SimpleExpression<Hologram> {
 
     static{

@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.effects.decentholograms;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,7 +19,12 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
-
+@Name("Decent Holograms - Edit Page")
+@Description("Edits a page of a hologram.")
+@Examples({
+        "..."
+})
+@Since("1.7")
 public class EffEditPageHologram extends Effect {
 
     static{

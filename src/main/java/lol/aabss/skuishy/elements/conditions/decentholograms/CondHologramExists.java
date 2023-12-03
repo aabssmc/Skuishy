@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.conditions.decentholograms;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -12,6 +16,12 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+@Name("Decent Holograms - Hologram Exists")
+@Description("Returns true if a hologram exists.")
+@Examples({
+        "set {_holo} to hologram named \"poopy\""
+})
+@Since("1.7")
 public class CondHologramExists extends Condition {
 
     static{

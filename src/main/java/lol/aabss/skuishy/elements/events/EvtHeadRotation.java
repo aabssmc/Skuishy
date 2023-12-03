@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.events;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -13,7 +17,12 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-
+@Name("On Head Rotation")
+@Description("Called when a player rotates their head.")
+@Examples({
+        "on head rotate:"
+})
+@Since("1.7")
 public class EvtHeadRotation extends SkriptEvent {
 
     static {

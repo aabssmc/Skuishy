@@ -2,6 +2,10 @@ package lol.aabss.skuishy.elements.events;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.command.EffectCommandEvent;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -13,6 +17,13 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@Name("Other - Hologram Name")
+@Description("Gets a hologram by its name.")
+@Examples({
+        "on effect command:",
+        "\tbroadcast \"ok\""
+})
+@Since("1.7")
 public class EvtEffectCommand extends SkriptEvent {
 
     static {

@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.events.decentholograms;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,6 +19,12 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@Name("Decent Holograms - Hologram Click")
+@Description("Called when a hologram gets clicked.")
+@Examples({
+        "on hologram click:"
+})
+@Since("1.7")
 public class EvtHologramClick extends SkriptEvent {
 
     static{

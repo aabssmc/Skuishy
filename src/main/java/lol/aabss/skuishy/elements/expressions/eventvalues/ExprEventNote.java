@@ -3,7 +3,10 @@ package lol.aabss.skuishy.elements.expressions.eventvalues;
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.expressions.base.EventValueExpression;
+import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
+import ch.njol.skript.lang.SkriptParser;
+import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.Note;
 import org.bukkit.event.Event;
@@ -27,6 +30,15 @@ public class ExprEventNote extends EventValueExpression<Note> {
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "event note";
+    }
+
+    @Override
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+        if (getParser().isCurrentEvent(NotePlayEvent.class)){
+            return true;
+        }
+        Skript.error("'note' can not be used outside of Note Play Event");
+        return false;
     }
 
     @Override

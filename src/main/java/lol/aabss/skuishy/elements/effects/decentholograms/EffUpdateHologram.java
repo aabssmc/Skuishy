@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.effects.decentholograms;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -12,7 +16,12 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
-
+@Name("Decent Holograms - Update Hologram")
+@Description("Updates a hologram.")
+@Examples({
+        "update hologram {_holo}"
+})
+@Since("1.7")
 public class EffUpdateHologram extends Effect {
 
     static{

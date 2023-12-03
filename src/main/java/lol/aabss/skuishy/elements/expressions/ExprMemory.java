@@ -2,6 +2,10 @@ package lol.aabss.skuishy.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,6 +18,13 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+
+@Name("Entity - Memory")
+@Description("Gets/sets the memory of a entity.")
+@Examples({
+        "send memory last slept of target entity"
+})
+@Since("1.7")
 
 public class ExprMemory extends SimpleExpression<Object> {
 
