@@ -33,7 +33,7 @@ import java.util.Objects;
 
 public class SecCreateHologram extends Section {
 
-    static final EntryValidator.EntryValidatorBuilder ENTRY_VALIDATOR = EntryValidator.builder();
+    private static final EntryValidator.EntryValidatorBuilder ENTRY_VALIDATOR = EntryValidator.builder();
 
     static {
         Skript.registerSection(SecCreateHologram.class,

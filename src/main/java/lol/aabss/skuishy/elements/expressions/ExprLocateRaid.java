@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 public class ExprLocateRaid extends SimpleExpression<Location> {
 
     static{
-        Skript.registerExpression(ExprLocateBiome.class, Location.class, ExpressionType.COMBINED,
+        Skript.registerExpression(ExprLocateRaid.class, Location.class, ExpressionType.COMBINED,
                 "nearest raid in radius %integer% around %location%"
         );
     }
