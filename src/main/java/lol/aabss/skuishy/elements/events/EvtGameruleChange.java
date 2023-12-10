@@ -18,7 +18,7 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 @Name("World - On Gamerule Change")
-@Description("Called when a player changes their main hand in the client settings.")
+@Description("Called when a gamerule is changed.")
 @Examples({
         "on gamerule change in \"world\":",
         "\tif gamerule is doDaylightCyle",
