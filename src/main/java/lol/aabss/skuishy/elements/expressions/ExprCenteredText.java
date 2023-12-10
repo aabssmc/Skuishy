@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 @Examples({
         "send centered player's name in tiny caps"
 })
-@Since("1.8")
+@Since("1.7.5")
 
 public class ExprCenteredText extends SimpleExpression<String> {
 

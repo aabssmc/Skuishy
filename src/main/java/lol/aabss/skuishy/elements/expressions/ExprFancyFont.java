@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 @Examples({
         "send player's name in tiny caps"
 })
-@Since("1.8")
+@Since("1.7.5")
 
 public class ExprFancyFont extends SimpleExpression<String> {
 
