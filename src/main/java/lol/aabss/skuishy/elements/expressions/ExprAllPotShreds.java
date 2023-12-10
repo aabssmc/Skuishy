@@ -28,13 +28,13 @@ public class ExprAllPotShreds extends SimpleExpression<Material> {
 
     static{
         Skript.registerExpression(ExprAllPotShreds.class, Material.class, ExpressionType.SIMPLE,
-                "[all [[of] the]] pot shreds of %block%"
+                "[all [[of] the]] pot shr(a|e)ds of %block%"
         );
     }
 
     private Expression<Block> block;
 
-    @Override
+    @Override 
     protected @Nullable Material[] get(@NotNull Event e) {
         if (block instanceof DecoratedPot){
             return ((DecoratedPot) block).getSherds().values().toArray(new Material[0]);
