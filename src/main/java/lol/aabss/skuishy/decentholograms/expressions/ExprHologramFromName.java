@@ -9,6 +9,7 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,9 +26,11 @@ import java.util.Objects;
 public class ExprHologramFromName extends SimpleExpression<Hologram> {
 
     static{
-        Skript.registerExpression(ExprHologramFromName.class, Hologram.class, ExpressionType.SIMPLE,
-                "[(decent [hologram[s]]|dh)] hologram (from name|named) %string%"
-        );
+        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+            Skript.registerExpression(ExprHologramFromName.class, Hologram.class, ExpressionType.SIMPLE,
+                    "[(decent [hologram[s]]|dh)] hologram (from name|named) %string%"
+            );
+        }
     }
 
     private Expression<String> name;

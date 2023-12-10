@@ -9,6 +9,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -36,12 +37,14 @@ public class SecCreateHologram extends Section {
     private static final EntryValidator.EntryValidatorBuilder ENTRY_VALIDATOR = EntryValidator.builder();
 
     static {
-        Skript.registerSection(SecCreateHologram.class,
-                "(create|make) [a] [new] [:persistent] [(decent [hologram[s]]|dh)] hologram"
-        );
-        ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("name", null, false, String.class));
-        ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("location", null, false, Location.class));
-        ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("lines", null, false, String.class));
+        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+            Skript.registerSection(SecCreateHologram.class,
+                    "(create|make) [a] [new] [:persistent] [(decent [hologram[s]]|dh)] hologram"
+            );
+            ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("name", null, false, String.class));
+            ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("location", null, false, Location.class));
+            ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("lines", null, false, String.class));
+        }
     }
 
     private Expression<String> name;

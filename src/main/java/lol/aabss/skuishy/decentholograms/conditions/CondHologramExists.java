@@ -7,6 +7,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,10 +25,12 @@ import java.util.Objects;
 public class CondHologramExists extends Condition {
 
     static{
-        Skript.registerCondition(CondHologramExists.class,
-                "[hologram] %hologram% (does) exists",
-                "[hologram] %hologram% does(n't| not) exist"
-        );
+        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+            Skript.registerCondition(CondHologramExists.class,
+                    "[hologram] %hologram% (does) exists",
+                    "[hologram] %hologram% does(n't| not) exist"
+            );
+        }
     }
 
     private Expression<String> name;

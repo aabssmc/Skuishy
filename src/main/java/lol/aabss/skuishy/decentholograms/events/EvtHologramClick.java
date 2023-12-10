@@ -9,6 +9,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.event.HologramClickEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.ClickType;
@@ -27,27 +28,29 @@ import javax.annotation.Nullable;
 public class EvtHologramClick extends SkriptEvent {
 
     static{
-        Skript.registerEvent("hologram click", EvtHologramClick.class, HologramClickEvent.class,
-                "[(decent [hologram[s]]|dh)] holo[gram] click"
-        );
-        EventValues.registerEventValue(HologramClickEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(HologramClickEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(HologramClickEvent.class, ClickType.class, new Getter<>() {
-            @Override
-            public ClickType get(HologramClickEvent e) {
-                return ClickType.valueOf(e.getClick().name());
-            }
-        }, 0);
-        EventValues.registerEventValue(HologramClickEvent.class, Hologram.class, new Getter<>() {
-            @Override
-            public Hologram get(HologramClickEvent e) {
-                return e.getHologram();
-            }
-        }, 0);
+        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null){
+            Skript.registerEvent("hologram click", EvtHologramClick.class, HologramClickEvent.class,
+                    "[(decent [hologram[s]]|dh)] holo[gram] click"
+            );
+            EventValues.registerEventValue(HologramClickEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(HologramClickEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(HologramClickEvent.class, ClickType.class, new Getter<>() {
+                @Override
+                public ClickType get(HologramClickEvent e) {
+                    return ClickType.valueOf(e.getClick().name());
+                }
+            }, 0);
+            EventValues.registerEventValue(HologramClickEvent.class, Hologram.class, new Getter<>() {
+                @Override
+                public Hologram get(HologramClickEvent e) {
+                    return e.getHologram();
+                }
+            }, 0);
+        }
     }
 
     @Override

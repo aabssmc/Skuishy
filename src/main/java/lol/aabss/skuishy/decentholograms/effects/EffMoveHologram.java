@@ -8,6 +8,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -26,9 +27,11 @@ import java.util.Objects;
 public class EffMoveHologram extends Effect {
 
     static{
-        Skript.registerEffect(EffMoveHologram.class,
-                "(move|teleport) [(decent [hologram[s]]|dh)] [hologram] %hologram% to %location%"
-        );
+        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+            Skript.registerEffect(EffMoveHologram.class,
+                    "(move|teleport) [(decent [hologram[s]]|dh)] [hologram] %hologram% to %location%"
+            );
+        }
     }
 
     private Expression<Hologram> hologram;

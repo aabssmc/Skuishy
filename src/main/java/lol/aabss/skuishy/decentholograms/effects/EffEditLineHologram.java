@@ -12,6 +12,7 @@ import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramLine;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,14 +29,16 @@ import java.util.Objects;
 public class EffEditLineHologram extends Effect {
 
     static{
-        Skript.registerEffect(EffEditLineHologram.class,
-                "add [line] of [hologram] %hologram% to show [text] %string%",
-                "remove [line] %integer% of [hologram] %hologram%",
-                "create line from [page] %integer% of [hologram] %hologram% to show [text] %string%",
-                "insert [line] %integer% of [hologram] %hologram% to show [text] %string%",
-                "set [line] %integer% of [hologram] %hologram% to show [text] %string%",
-                "get [line] %integer% of [hologram] %hologram% from [page] %integer% and store it in %object%"
-        );
+        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+            Skript.registerEffect(EffEditLineHologram.class,
+                    "add [line] of [hologram] %hologram% to show [text] %string%",
+                    "remove [line] %integer% of [hologram] %hologram%",
+                    "create line from [page] %integer% of [hologram] %hologram% to show [text] %string%",
+                    "insert [line] %integer% of [hologram] %hologram% to show [text] %string%",
+                    "set [line] %integer% of [hologram] %hologram% to show [text] %string%",
+                    "get [line] %integer% of [hologram] %hologram% from [page] %integer% and store it in %object%"
+            );
+        }
     }
 
     private String changetype;

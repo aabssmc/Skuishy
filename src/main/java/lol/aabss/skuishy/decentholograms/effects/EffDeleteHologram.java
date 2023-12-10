@@ -8,6 +8,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,9 +25,11 @@ import java.util.Objects;
 public class EffDeleteHologram extends Effect {
 
     static{
-        Skript.registerEffect(EffDeleteHologram.class,
-                "(delete|remove) [(decent [hologram[s]]|dh)] [hologram] %hologram%"
-        );
+        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+            Skript.registerEffect(EffDeleteHologram.class,
+                    "(delete|remove) [(decent [hologram[s]]|dh)] [hologram] %hologram%"
+            );
+        }
     }
 
     private Expression<Hologram> hologram;

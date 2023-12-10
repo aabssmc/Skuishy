@@ -11,6 +11,7 @@ import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,12 +28,14 @@ import java.util.Objects;
 public class EffEditPageHologram extends Effect {
 
     static{
-        Skript.registerEffect(EffEditPageHologram.class,
-                "add [page] of [hologram] %hologram%",
-                "remove [page] %integer% of [hologram] %hologram%",
-                "insert [page] %integer% of [hologram] %hologram%",
-                "get [page] %integer% of [hologram] %hologram% and store it in %object%"
-        );
+        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+            Skript.registerEffect(EffEditPageHologram.class,
+                    "add [page] of [hologram] %hologram%",
+                    "remove [page] %integer% of [hologram] %hologram%",
+                    "insert [page] %integer% of [hologram] %hologram%",
+                    "get [page] %integer% of [hologram] %hologram% and store it in %object%"
+            );
+        }
     }
 
     private String changetype;
