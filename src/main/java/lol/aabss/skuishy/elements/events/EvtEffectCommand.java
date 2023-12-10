@@ -17,8 +17,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-@Name("Other - Hologram Name")
-@Description("Gets a hologram by its name.")
+@Name("Other - Effect Command")
+@Description("Called when someone uses a skript effect command.")
 @Examples({
         "on effect command:",
         "\tbroadcast \"ok\""
