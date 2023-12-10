@@ -21,6 +21,7 @@ import java.util.Objects;
         "set {_holo} to hologram named \"poopy\""
 })
 @Since("1.7")
+@RequiredPlugins("DecentHolograms")
 public class ExprHologramFromName extends SimpleExpression<Hologram> {
 
     static{

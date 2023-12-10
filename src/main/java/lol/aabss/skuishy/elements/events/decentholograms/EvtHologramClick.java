@@ -1,10 +1,7 @@
 package lol.aabss.skuishy.elements.events.decentholograms;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -25,6 +22,8 @@ import javax.annotation.Nullable;
         "on hologram click:"
 })
 @Since("1.7")
+@RequiredPlugins("DecentHolograms")
+
 public class EvtHologramClick extends SkriptEvent {
 
     static{

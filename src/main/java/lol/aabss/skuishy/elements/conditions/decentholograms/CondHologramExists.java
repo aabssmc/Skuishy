@@ -1,10 +1,7 @@
 package lol.aabss.skuishy.elements.conditions.decentholograms;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -22,6 +19,8 @@ import java.util.Objects;
         "set {_holo} to hologram named \"poopy\""
 })
 @Since("1.7")
+@RequiredPlugins("DecentHolograms")
+
 public class CondHologramExists extends Condition {
 
     static{

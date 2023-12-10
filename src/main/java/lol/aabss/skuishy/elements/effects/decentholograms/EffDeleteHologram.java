@@ -1,10 +1,7 @@
 package lol.aabss.skuishy.elements.effects.decentholograms;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -22,6 +19,8 @@ import java.util.Objects;
         "..."
 })
 @Since("1.7")
+@RequiredPlugins("DecentHolograms")
+
 public class EffDeleteHologram extends Effect {
 
     static{
