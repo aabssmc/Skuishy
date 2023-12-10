@@ -30,6 +30,7 @@ import java.util.Objects;
         "\tname: \"big juice\"",
         "\tlocation: player's location",
         "\tlines: \"&fi love the juicy juices\", \"&7(they are really juicy)\""})
+@Description("Creates a decent hologram")
 @Since("1.7")
 @RequiredPlugins("DecentHolograms")
 

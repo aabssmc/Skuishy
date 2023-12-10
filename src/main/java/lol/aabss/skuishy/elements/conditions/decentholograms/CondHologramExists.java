@@ -16,7 +16,7 @@ import java.util.Objects;
 @Name("Decent Holograms - Hologram Exists")
 @Description("Returns true if a hologram exists.")
 @Examples({
-        "set {_holo} to hologram named \"poopy\""
+        "if hologram named \"hello\" exists:"
 })
 @Since("1.7")
 @RequiredPlugins("DecentHolograms")
