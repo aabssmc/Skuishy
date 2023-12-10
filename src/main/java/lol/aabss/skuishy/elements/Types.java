@@ -8,6 +8,7 @@ import ch.njol.skript.util.EnumUtils;
 import io.papermc.paper.datapack.Datapack;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
+import org.bukkit.block.DecoratedPot;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.generator.structure.Structure;
@@ -255,7 +256,7 @@ public class Types {
                 .user("spawn ?categor(y|ies)")
                 .name("spawn category")
                 .description("Represents a spawn category.")
-                .since("1.8")
+                .since("1.7.5")
                 .parser(new Parser<SpawnCategory>() {
 
                     @Override
@@ -276,6 +277,36 @@ public class Types {
 
                     @Override
                     public @NotNull String toString(SpawnCategory category, int flags) {
+                        return toVariableNameString(category);
+                    }
+                })
+        );
+        EnumUtils<DecoratedPot.Side> sides = new EnumUtils<>(DecoratedPot.Side.class, "potside");
+        Classes.registerClass(new ClassInfo<>(DecoratedPot.Side.class, "potside")
+                .user("[decorated] pot ?sides?")
+                .name("decorated pot side")
+                .description("Represents the side of a decorated pot.")
+                .since("1.9")
+                .parser(new Parser<DecoratedPot.Side>() {
+
+                    @Override
+                    @Nullable
+                    public DecoratedPot.Side parse(@NotNull String input, @NotNull ParseContext context) {
+                        return sides.parse(input);
+                    }
+
+                    @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return true;
+                    }
+
+                    @Override
+                    public @NotNull String toVariableNameString(DecoratedPot.Side category) {
+                        return category.name().replaceAll("_", " ").toLowerCase();
+                    }
+
+                    @Override
+                    public @NotNull String toString(DecoratedPot.Side category, int flags) {
                         return toVariableNameString(category);
                     }
                 })

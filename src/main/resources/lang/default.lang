@@ -108,3 +108,9 @@ spawncategory:
     water_ambient: water ambient
     water_animal: water animal
     water_underground_creature: water underground creature
+
+potside:
+    back: back
+    front: front
+    left: left
+    right: right
