@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.expressions;
 
 import ch.njol.skript.classes.Changer;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -11,6 +15,13 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+
+@Name("Entity - Freeze Ticks")
+@Description("Gets/Sets the freeze ticks of entities")
+@Examples({
+        "lock freeze ticks of player"
+})
+@Since("1.9")
 
 public class ExprFreezeTicks extends PropertyExpression<Entity, Integer> {
 
@@ -24,20 +35,21 @@ public class ExprFreezeTicks extends PropertyExpression<Entity, Integer> {
 
     @Override
     protected Integer @NotNull [] get(@NotNull Event e, Entity @NotNull [] source) {
-        Entity entity = getExpr().getSingle(e);
-        assert entity != null;
-        if (max){
-            return new Integer[]{entity.getMaxFreezeTicks()};
+        for (Entity entity : getExpr().getArray(e)){
+            if (max){
+                return new Integer[]{entity.getMaxFreezeTicks()};
+            }
+            return new Integer[]{entity.getFreezeTicks()};
         }
-        return new Integer[]{entity.getFreezeTicks()};
+        return new Integer[0];
     }
 
     @Override
     public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
-        Entity entity = getExpr().getSingle(e);
-        assert entity != null;
         if (mode == Changer.ChangeMode.SET) {
-            entity.setFreezeTicks((Integer) delta[0]);
+            for (Entity entity : getExpr().getArray(e)){
+                entity.setFreezeTicks((Integer) delta[0]);
+            }
         } else {
             assert false;
         }

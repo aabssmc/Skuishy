@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -11,11 +15,18 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@Name("Entity - Lock Freeze Ticks")
+@Description("Locks/Unlocks freeze ticks of player")
+@Examples({
+        "lock freeze ticks of player"
+})
+@Since("1.9")
+
 public class EffLockFreezeTicks extends Effect {
 
     static{
         Skript.registerEffect(EffLockFreezeTicks.class,
-                "[:un]lock (freeze|frozen) ticks of %entity%"
+                "[:un]lock (freeze|frozen) ticks of %entities%"
         );
     }
 
