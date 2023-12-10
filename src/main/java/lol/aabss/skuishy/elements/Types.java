@@ -5,7 +5,6 @@ import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
-import eu.decentsoftware.holograms.api.holograms.Hologram;
 import io.papermc.paper.datapack.Datapack;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
@@ -105,35 +104,12 @@ public class Types {
                     }
                 })
         );
-        Classes.registerClass(new ClassInfo<>(Hologram.class, "hologram")
-                    .user("holograms?")
-                    .name("hologram")
-                    .description("Represents a decent hologram hologram.")
-                    .since("1.6")
-                    .parser(new Parser<Hologram>() {
-
-                        @Override
-                        public boolean canParse(@NotNull ParseContext context) {
-                            return false;
-                        }
-
-                        @Override
-                        public @NotNull String toVariableNameString(Hologram holo) {
-                            return holo.getName().toLowerCase().replaceAll("_", " ");
-                        }
-
-                        @Override
-                        public @NotNull String toString(Hologram holo, int flags) {
-                            return toVariableNameString(holo);
-                        }
-                    })
-        );
         Classes.registerClass(new ClassInfo<>(Structure.class, "generatedstructure")
                     .user("generated ?structures?")
                     .name("generated structure")
                     .description("Represents a generated structure.")
                     .since("1.7")
-                    .parser(new Parser<Structure>() {
+                    .parser(new Parser<>() {
                         @Override
                         @Nullable
                         public Structure parse(@NotNull String input, @NotNull ParseContext context) {
@@ -155,12 +131,18 @@ public class Types {
                                 case "ocean ruin warm", "warm ocean ruin" -> Structure.OCEAN_RUIN_WARM;
                                 case "pillager outpost" -> Structure.PILLAGER_OUTPOST;
                                 case "ruined portal", "ruinedportal" -> Structure.RUINED_PORTAL;
-                                case "ruined portal desert", "desert ruined portal", "ruinedportal desert", "desert ruinedportal" -> Structure.RUINED_PORTAL_DESERT;
-                                case "ruined portal jungle", "jungle ruined portal", "ruinedportal jungle", "jungle ruinedportal" -> Structure.RUINED_PORTAL_JUNGLE;
-                                case "ruined portal mountain", "mountain ruined portal", "ruinedportal mountain", "mountain ruinedportal" -> Structure.RUINED_PORTAL_MOUNTAIN;
-                                case "ruined portal nether", "nether ruined portal", "ruinedportal nether", "nether ruinedportal" -> Structure.RUINED_PORTAL_NETHER;
-                                case "ruined portal ocean", "ocean ruined portal", "ruinedportal ocean", "ocean ruinedportal" -> Structure.RUINED_PORTAL_OCEAN;
-                                case "ruined portal swamp", "swamp ruined portal", "ruinedportal swamp", "swamp ruinedportal" -> Structure.RUINED_PORTAL_SWAMP;
+                                case "ruined portal desert", "desert ruined portal", "ruinedportal desert", "desert ruinedportal" ->
+                                        Structure.RUINED_PORTAL_DESERT;
+                                case "ruined portal jungle", "jungle ruined portal", "ruinedportal jungle", "jungle ruinedportal" ->
+                                        Structure.RUINED_PORTAL_JUNGLE;
+                                case "ruined portal mountain", "mountain ruined portal", "ruinedportal mountain", "mountain ruinedportal" ->
+                                        Structure.RUINED_PORTAL_MOUNTAIN;
+                                case "ruined portal nether", "nether ruined portal", "ruinedportal nether", "nether ruinedportal" ->
+                                        Structure.RUINED_PORTAL_NETHER;
+                                case "ruined portal ocean", "ocean ruined portal", "ruinedportal ocean", "ocean ruinedportal" ->
+                                        Structure.RUINED_PORTAL_OCEAN;
+                                case "ruined portal swamp", "swamp ruined portal", "ruinedportal swamp", "swamp ruinedportal" ->
+                                        Structure.RUINED_PORTAL_SWAMP;
                                 case "shipwreck" -> Structure.SHIPWRECK;
                                 case "shipwreck beached", "beached shipwreck" -> Structure.SHIPWRECK_BEACHED;
                                 case "stronghold" -> Structure.STRONGHOLD;

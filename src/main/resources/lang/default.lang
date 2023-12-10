@@ -38,7 +38,7 @@ instrument:
     xylophone: xylophone
     zombie: zombie
 
-structure:
+generatedstructure:
     ancient_city: ancient city
     bastion_remnant: bastion remnant
     buried_treasure: buried treasure

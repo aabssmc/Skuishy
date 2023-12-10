@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.sections;
+package lol.aabss.skuishy.decentholograms.sections;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.config.SectionNode;

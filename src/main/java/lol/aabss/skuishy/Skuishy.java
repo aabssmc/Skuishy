@@ -3,6 +3,7 @@ package lol.aabss.skuishy;
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import lol.aabss.skuishy.events.CustomEvents;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,6 +22,14 @@ public class Skuishy extends JavaPlugin implements CommandExecutor {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
             addon.loadClasses("lol.aabss.skuishy", "elements");
+            if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null){
+                getLogger().info("DecentHolograms found! Enabling DecentHolograms elements...");
+                addon.loadClasses("lol.aabss.skuishy", "decentholograms");
+                getLogger().info("DecentHolograms elements loaded!");
+            }
+            else{
+                getLogger().info("DecentHolograms not found, skipping!");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

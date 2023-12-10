@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.effects.decentholograms;
+package lol.aabss.skuishy.decentholograms.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.*;

@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.expressions.decentholograms;
+package lol.aabss.skuishy.decentholograms.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.*;
