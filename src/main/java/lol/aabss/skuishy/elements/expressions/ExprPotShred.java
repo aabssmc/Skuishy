@@ -23,15 +23,15 @@ import javax.annotation.Nullable;
 @Name("Block - Decorated Pot Shred")
 @Description("Gets/Sets the shred of a decorated pot side")
 @Examples({
-        "set pot shreds side left of target block to player's tool"
+        "set pot shred side left of target block to player's tool"
 })
 @Since("1.9")
 public class ExprPotShred extends SimpleExpression<Material> {
 
     static{
         Skript.registerExpression(ExprPotShred.class, Material.class,  ExpressionType.COMBINED,
-                "[the] [decorated] pot shr(e|a)rds of [side] %potside% of %block%",
-                "%block%[']s [decorated] pot shr(e|a)rds of [side] %potside%"
+                "[the] [decorated] pot shr(e|a)rd of [side] %potside% of %block%",
+                "%block%[']s [decorated] pot shr(e|a)rd of [side] %potside%"
         );
     }
 

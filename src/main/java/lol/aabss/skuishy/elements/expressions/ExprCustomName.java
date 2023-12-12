@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 @Examples({
         "set custom name of target entity to \"poopies\""
 })
-@Since("1.8")
+@Since("1.7.5")
 public class ExprCustomName extends PropertyExpression<Entity, String> {
 
     static {

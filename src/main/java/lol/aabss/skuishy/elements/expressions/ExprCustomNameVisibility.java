@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 @Examples({
         "set custom name visibility of target entity to true"
 })
-@Since("1.8")
+@Since("1.7.5")
 public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean> {
 
     static {
