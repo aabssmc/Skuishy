@@ -64,6 +64,8 @@
 - [Entity - Spawn Limit](https://skripthub.net/docs/?id=9948)
 - [Other - Centerd Text](https://skripthub.net/docs/?id=9951)
 - [Other - Fancy Font](https://skripthub.net/docs/?id=9950)
+- [Entity - Custom Name](https://skripthub.net/docs/?id=9960)
+- [Entity - Custom Name Visibility](https://skripthub.net/docs/?id=9961)
 
 ## Functions:
 - [Mean](https://skripthub.net/docs/?id=9921)
