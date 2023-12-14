@@ -30,6 +30,14 @@ public class Skuishy extends JavaPlugin implements CommandExecutor {
             else{
                 getLogger().info("DecentHolograms not found, skipping!");
             }
+            if (Bukkit.getServer().getPluginManager().getPlugin("Vivecraft-Spigot-Extensions") != null){
+                getLogger().info("Vivecraft-Spigot-Extensions found! Enabling Vivecraft-Spigot-Extensions elements...");
+                addon.loadClasses("lol.aabss.skuishy", "vivecraft");
+                getLogger().info("Vivecraft-Spigot-Extensions elements loaded!");
+            }
+            else{
+                getLogger().info("Vivecraft-Spigot-Extensions not found, skipping!");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
