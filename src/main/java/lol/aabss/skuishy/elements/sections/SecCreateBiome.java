@@ -43,7 +43,7 @@ import static lol.aabss.skuishy.other.GetVersion.version;
         "\t\tfoliage color: blue",
         "\t\tgrass color modifier: swamp"
 })
-@Description("Creates a new biome\n# REQUIRES 1.19+ & ALL COLOR ARE HEX CODES (without #s)")
+@Description("Creates a new biome\n# REQUIRES 1.19+")
 @Since("1.9")
 
 public class SecCreateBiome extends Section {
