@@ -30,6 +30,8 @@ public class CondNotBoolean extends Condition {
 
     private Expression<Boolean> bool;
 
+    
+
     @Override
     public boolean check(@NotNull Event e) {
         Boolean bool = this.bool.getSingle(e);

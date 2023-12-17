@@ -114,3 +114,18 @@ potside:
     front: front
     left: left
     right: right
+
+tempmod:
+    back: back
+    front: front
+    left: left
+    right: right
+
+grasscolor:
+    none: none
+    dark_forest: dark forest
+    swamp: swamp
+
+tempmod:
+    none: none
+    frozen: frozen

@@ -6,6 +6,7 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
 import io.papermc.paper.datapack.Datapack;
+import lol.aabss.skuishy.elements.sections.SecCreateBiome;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.bukkit.block.DecoratedPot;
@@ -307,6 +308,66 @@ public class Types {
 
                     @Override
                     public @NotNull String toString(DecoratedPot.Side category, int flags) {
+                        return toVariableNameString(category);
+                    }
+                })
+        );
+        EnumUtils<SecCreateBiome.TemperatureModifier> tempmod = new EnumUtils<>(SecCreateBiome.TemperatureModifier.class, "tempmod");
+        Classes.registerClass(new ClassInfo<>(SecCreateBiome.TemperatureModifier.class, "tempmod")
+                .user("temp[erature] ?mod[ifier]s?")
+                .name("temperature modifier")
+                .description("Represents the modifier of a biome's temperature.")
+                .since("1.9")
+                .parser(new Parser<SecCreateBiome.TemperatureModifier>() {
+
+                    @Override
+                    @Nullable
+                    public SecCreateBiome.TemperatureModifier parse(@NotNull String input, @NotNull ParseContext context) {
+                        return tempmod.parse(input);
+                    }
+
+                    @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return true;
+                    }
+
+                    @Override
+                    public @NotNull String toVariableNameString(SecCreateBiome.TemperatureModifier category) {
+                        return category.name().replaceAll("_", " ").toLowerCase();
+                    }
+
+                    @Override
+                    public @NotNull String toString(SecCreateBiome.TemperatureModifier category, int flags) {
+                        return toVariableNameString(category);
+                    }
+                })
+        );
+        EnumUtils<SecCreateBiome.GrassColorModifier> grasscolor = new EnumUtils<>(SecCreateBiome.GrassColorModifier.class, "grasscolor");
+        Classes.registerClass(new ClassInfo<>(SecCreateBiome.GrassColorModifier.class, "grasscolor")
+                .user("grass ?[color] ?mod[ifier]s?")
+                .name("grass color modifier")
+                .description("Represents the modifier of a biome's grass color.")
+                .since("1.9")
+                .parser(new Parser<SecCreateBiome.GrassColorModifier>() {
+
+                    @Override
+                    @Nullable
+                    public SecCreateBiome.GrassColorModifier parse(@NotNull String input, @NotNull ParseContext context) {
+                        return grasscolor.parse(input);
+                    }
+
+                    @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return true;
+                    }
+
+                    @Override
+                    public @NotNull String toVariableNameString(SecCreateBiome.GrassColorModifier category) {
+                        return category.name().replaceAll("_", " ").toLowerCase();
+                    }
+
+                    @Override
+                    public @NotNull String toString(SecCreateBiome.GrassColorModifier category, int flags) {
                         return toVariableNameString(category);
                     }
                 })
