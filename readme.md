@@ -4,6 +4,8 @@
 
 ## You need [Skript 2.7.0](https://github.com/SkriptLang/Skript) and up to use.
 
+## DOWNLOAD AT [MODRINTH.COM/PLUGIN/SKUISHY](https://modrinth.com/plugin/skuishy)
+
 ## Please suggest syntax ideas in my discord [here](https://discord.gg/66DF7pMdnp)
 
 # SYNTAXES
