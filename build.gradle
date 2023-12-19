@@ -29,6 +29,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
     compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.5'
     implementation 'com.cjcrafter:vivecraft:3.0.0'
+    implementation files('gradle/VulcanAPI.jar')
 }
 
 def targetJavaVersion = 17
