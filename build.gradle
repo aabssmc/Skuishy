@@ -7,29 +7,40 @@ version = '1.9'
 
 repositories {
     mavenCentral()
+    // paper
     maven {
         url = 'https://repo.papermc.io/repository/maven-public/'
     }
+    // skipt
     maven {
         url = 'https://repo.skriptlang.org/releases'
     }
+    // protocolib
     maven {
         url = "https://repo.dmulloy2.net/repository/public/"
     }
+    // jitpack
     maven {
         url = "https://jitpack.io"
     }
 }
 
 dependencies {
+    // paper
     compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
+    // skript
     compileOnly 'com.github.SkriptLang:Skript:2.7.0'
+    // protocollib
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.1.0'
+    // decent holograms
+    compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.5'
+    // vivecraft
+    implementation 'com.cjcrafter:vivecraft:3.0.0'
+    // vulcan
+    implementation files('gradle/VulcanAPI.jar')
+    // other things
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
-    compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.5'
-    implementation 'com.cjcrafter:vivecraft:3.0.0'
-    implementation files('gradle/VulcanAPI.jar')
 }
 
 def targetJavaVersion = 17
