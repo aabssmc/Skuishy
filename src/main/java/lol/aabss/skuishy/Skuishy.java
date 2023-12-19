@@ -3,6 +3,7 @@ package lol.aabss.skuishy;
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import lol.aabss.skuishy.events.CustomEvents;
+import lol.aabss.skuishy.hooks.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,19 +26,19 @@ public class Skuishy extends JavaPlugin implements CommandExecutor {
             addon.loadClasses("lol.aabss.skuishy", "elements");
             if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null){
                 getLogger().info("DecentHolograms found! Enabling DecentHolograms elements...");
-                addon.loadClasses("lol.aabss.skuishy", "decentholograms");
+                addon.loadClasses("lol.aabss.skuishy", "hooks.decentholograms");
                 getLogger().info("DecentHolograms elements loaded!");
             } else getLogger().info("DecentHolograms not found, skipping!");
 
             if (Bukkit.getServer().getPluginManager().getPlugin("Vivecraft-Spigot-Extensions") != null) {
                 getLogger().info("Vivecraft-Spigot-Extensions found! Enabling Vivecraft-Spigot-Extensions elements...");
-                addon.loadClasses("lol.aabss.skuishy", "vivecraft");
+                addon.loadClasses("lol.aabss.skuishy", "hooks.vivecraft");
                 getLogger().info("Vivecraft-Spigot-Extensions elements loaded!");
             } else getLogger().info("Vivecraft-Spigot-Extensions not found, skipping!");
 
             if (Bukkit.getServer().getPluginManager().getPlugin("Vulcan") != null) {
                 getLogger().info("Vulcan found! Enabling Vulcan elements...");
-                addon.loadClasses("lol.aabss.skuishy", "vulcan");
+                addon.loadClasses("lol.aabss.skuishy", "hooks.vulcan");
                 getLogger().info("Vulcan elements loaded!");
             } else getLogger().info("Vulcan not found, skipping!");
         } catch (IOException e) {
