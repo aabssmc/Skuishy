@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -10,12 +14,17 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-
+@Name("TickManager - Sprint Server")
+@Description("Makes the server sprint.")
+@Examples({
+        "request the game to sprint for 10 ticks"
+})
+@Since("1.9")
 public class EffSprintGame extends Effect {
 
     static{
         Skript.registerEffect(EffStepGame.class,
-                "[request [[the] game|[the] server] to] sprint by %integer% [tick[s]]"
+                "[request [([the] game|[the] server)] to] sprint (by|for) %integer% [tick[s]]"
         );
     }
 
@@ -23,7 +32,7 @@ public class EffSprintGame extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Bukkit.getServerTickManager().requestGameToSprint(inte.getSingle(e));
+        Bukkit.getServer().getServerTickManager().requestGameToSprint(inte.getSingle(e));
     }
 
     @Override

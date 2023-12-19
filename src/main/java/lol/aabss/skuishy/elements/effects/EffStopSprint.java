@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -10,7 +14,12 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-
+@Name("TickManager - Stop Sprinting")
+@Description("Makes the server stop sprinting.")
+@Examples({
+        "stop sprinting"
+})
+@Since("1.9")
 public class EffStopSprint extends Effect {
     static {
         Skript.registerEffect(EffStopSprint.class,
@@ -20,7 +29,7 @@ public class EffStopSprint extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Bukkit.getServerTickManager().stopSprinting();
+        Bukkit.getServer().getServerTickManager().stopSprinting();
     }
 
     @Override

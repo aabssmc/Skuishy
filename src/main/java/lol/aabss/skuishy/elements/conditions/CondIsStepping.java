@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.conditions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -8,15 +12,18 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
-
 import javax.annotation.Nullable;
-
+@Name("TickManager - Is Stepping")
+@Description("Returns true if the server is stepping.")
+@Examples({
+        "if the server's tickrate is stepping:"
+})
+@Since("1.9")
 public class CondIsStepping extends Condition {
-
     static {
         Skript.registerCondition(CondIsStepping.class,
-                "[the] (server|game) [tick[(s|[( |-)]rate)]] (is|are) stepping",
-                "[the] (server|game) [tick[(s|[( |-)]rate)]] (is|are)( not|n't) stepping"
+                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) stepping",
+                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( not|n't) stepping"
         );
     }
 
@@ -25,9 +32,9 @@ public class CondIsStepping extends Condition {
     @Override
     public boolean check(@NotNull Event e) {
         if (is){
-            return Bukkit.getServerTickManager().isStepping();
+            return Bukkit.getServer().getServerTickManager().isStepping();
         }
-        return !Bukkit.getServerTickManager().isStepping();
+        return !Bukkit.getServer().getServerTickManager().isStepping();
     }
 
     @Override

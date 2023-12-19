@@ -2,6 +2,10 @@ package lol.aabss.skuishy.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,12 +19,18 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@Name("TickManager - Frozen State")
+@Description("Gets/sets the frozen mode of the server or an entity.")
+@Examples({
+        "set frozen state of server to true"
+})
+@Since("1.9")
 public class ExprFrozenState extends SimpleExpression<Boolean> {
 
     static{
         Skript.registerExpression(ExprFrozenState.class, Boolean.class, ExpressionType.COMBINED,
-                "[the] frozen [tick[s]] (state|mode) of ([the] server|%entity%)",
-                "([the] server|%entity%)['s] frozen [tick[(s|[( |-)]rate)]] (state|mode)"
+                "[the] frozen [tick[s]] (state|mode) of ([the] server|%-entity%)",
+                "([the] server|%-entity%)['s] frozen [tick[(s|[( |-)]rate)]] (state|mode)"
         );
     }
 
@@ -31,7 +41,7 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
         if (ent != null){
             return new Boolean[]{ent.getSingle(e).isFrozen()};
         }
-        return new Boolean[]{Bukkit.getServerTickManager().isFrozen()};
+        return new Boolean[]{Bukkit.getServer().getServerTickManager().isFrozen()};
     }
 
     @Override
@@ -45,7 +55,7 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
     @Override
     public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
-            Bukkit.getServerTickManager().setFrozen((Boolean) delta[0]);
+            Bukkit.getServer().getServerTickManager().setFrozen((Boolean) delta[0]);
         }
         else{
             assert false;

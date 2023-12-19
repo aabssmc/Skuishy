@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.conditions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -10,13 +14,18 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-
+@Name("TickManager - Is Running Normally")
+@Description("Returns true if the server is running normally.")
+@Examples({
+        "if the server's tickrate is normal:"
+})
+@Since("1.9")
 public class CondIsRunningNormally extends Condition {
 
     static {
         Skript.registerCondition(CondIsRunningNormally.class,
-                "[the] (server|game) [tick[(s|[( |-)]rate)]] (is|are) [running] normal[ly]",
-                "[the] (server|game) [tick[(s|[( |-)]rate)]] (is|are)( n't|not) [running] normal[ly]"
+                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) [running] normal[ly]",
+                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( n't|not) [running] normal[ly]"
         );
     }
 
@@ -25,9 +34,9 @@ public class CondIsRunningNormally extends Condition {
     @Override
     public boolean check(@NotNull Event e) {
         if (is){
-            return Bukkit.getServerTickManager().isRunningNormally();
+            return Bukkit.getServer().getServerTickManager().isRunningNormally();
         }
-        return !Bukkit.getServerTickManager().isRunningNormally();
+        return !Bukkit.getServer().getServerTickManager().isRunningNormally();
     }
 
     @Override

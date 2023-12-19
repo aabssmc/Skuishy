@@ -2,6 +2,10 @@ package lol.aabss.skuishy.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,19 +18,25 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings("UnstableApiUsage")
+@Name("TickManager - TickRate")
+@Description("Gets/sets the server's tickrate.")
+@Examples({
+        "set the tickrate to 1"
+})
+@Since("1.9")
 public class ExprTickRate extends SimpleExpression<Number> {
 
     static{
         Skript.registerExpression(ExprTickRate.class, Number.class, ExpressionType.SIMPLE,
-                "[the] [tick[(s|[( |-)]rate)]] [of [the] server]",
-                "[the] [server] [tick[(s|[( |-)]rate)]]"
+                "[the] tick(s|[( |-)]rate) [of [the] (server|game)]",
+                "[the] (server|game)['s] tick(s|[( |-)]rate)"
+
         );
     }
 
     @Override
     protected @Nullable Number[] get(@NotNull Event e) {
-        return new Number[]{Bukkit.getServerTickManager().getTickRate()};
+        return new Number[]{Bukkit.getServer().getServerTickManager().getTickRate()};
     }
 
     @Override
@@ -40,10 +50,10 @@ public class ExprTickRate extends SimpleExpression<Number> {
     @Override
     public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
-            Bukkit.getServerTickManager().setTickRate((float) delta[0]);
+            Bukkit.getServer().getServerTickManager().setTickRate((float) delta[0]);
         }
         else if (mode == Changer.ChangeMode.RESET){
-            Bukkit.getServerTickManager().setTickRate(20);
+            Bukkit.getServer().getServerTickManager().setTickRate(20);
         }
         else{
             assert false;

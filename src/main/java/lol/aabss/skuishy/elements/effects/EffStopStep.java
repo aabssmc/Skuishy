@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -10,7 +14,12 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-
+@Name("TickManager - Stop Stepping")
+@Description("Makes the server stop stepping.")
+@Examples({
+        "stop stepping"
+})
+@Since("1.9")
 public class EffStopStep extends Effect {
     static {
         Skript.registerEffect(EffStopStep.class,
@@ -20,7 +29,7 @@ public class EffStopStep extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Bukkit.getServerTickManager().stopStepping();
+        Bukkit.getServer().getServerTickManager().stopStepping();
     }
 
     @Override
@@ -29,7 +38,7 @@ public class EffStopStep extends Effect {
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 }
