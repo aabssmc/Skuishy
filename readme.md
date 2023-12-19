@@ -12,69 +12,69 @@
 
 
 ## Events:
-- [Player - On Main Hand Change](https://skripthub.net/docs/?id=9858)
-- [Player - On Unknown Command](https://skripthub.net/docs/?id=9859)
-- [Player - On Shield Break](https://skripthub.net/docs/?id=9883)
-- [World - On Gamerule Change](https://skripthub.net/docs/?id=9885)
-- [Notes - On Note Player](https://skripthub.net/docs/?id=9886)
-- [DecentHolograms - On Hologram Click](https://skripthub.net/docs/?id=9902)
-- [Other - On Effect Command](https://skripthub.net/docs/?id=9903)
-- [Player - On Head Rotation](https://skripthub.net/docs/?id=9904)
+- Player - On Main Hand Change
+- Player - On Unknown Command
+- Player - On Shield Break
+- World - On Gamerule Change
+- Notes - On Note Player
+- DecentHolograms - On Hologram Click
+- Other - On Effect Command
+- Player - On Head Rotation
 
 
 ## Conditions
-- [Player - Mainhand](https://skripthub.net/docs/?id=9847)
-- [Entity - Is Glowing](https://skripthub.net/docs/?id=9887)
-- [DecentHolograms - Hologram Exists](https://skripthub.net/docs/?id=9905)
+- Player - Mainhand
+- Entity - Is Glowing
+- DecentHolograms - Hologram Exists
 
 
 ## Effects
-- [Player - Glow Color](https://skripthub.net/docs/?id=9877)
-- [Player - Stop Glowing](https://skripthub.net/docs/?id=9878)
-- [Plugin - Disable Plugin](https://skripthub.net/docs/?id=9875)
-- [Plugin - Enable Plugin](https://skripthub.net/docs/?id=9876)
-- [Notes - Play Note](https://skripthub.net/docs/?id=9888)
-- [Player - Crash Player](https://skripthub.net/docs/?id=9889)
-- [DecentHolograms - Update Hologram](https://skripthub.net/docs/?id=9910)
-- [DecentHolograms - Move Hologram](https://skripthub.net/docs/?id=9909)
-- [DecentHolograms - Edit Page](https://skripthub.net/docs/?id=9908)
-- [DecentHolograms - Edit Line](https://skripthub.net/docs/?id=9907)
-- [DecentHolograms - Delete Hologram](https://skripthub.net/docs/?id=9906)
+- Player - Glow Color
+- Player - Stop Glowing
+- Plugin - Disable Plugin
+- Plugin - Enable Plugin
+- Notes - Play Note
+- Player - Crash Player
+- DecentHolograms - Update Hologram
+- DecentHolograms - Move Hologram
+- DecentHolograms - Edit Page
+- DecentHolograms - Edit Line
+- DecentHolograms - Delete Hologram
 
 
 ## Expressions
-- [Player - Mainhand](https://skripthub.net/docs/?id=9846)
-- [Skins - Face of Player](https://skripthub.net/docs/?id=9841)
-- [Skins - Player Skin Signature](https://skripthub.net/docs/?id=9842)
-- [Skins - Player Skin Texture (Image)](https://skripthub.net/docs/?id=9843)
-- [Skins - Player Skin Texture (URL)](https://skripthub.net/docs/?id=9844)
-- [Skins - Player Skin Value](https://skripthub.net/docs/?id=9845)
-- [Skins - Player Skin](https://skripthub.net/docs/?id=9879)
-- [Other - Caesar Cipher](https://skripthub.net/docs/?id=9884)
-- [Notes - Block Instrument](https://skripthub.net/docs/?id=9890)
-- [Notes - Block Note](https://skripthub.net/docs/?id=9891)
-- [Notes - Note](https://skripthub.net/docs/?id=9892)
-- [Player - Someone](https://skripthub.net/docs/?id=9894)
-- [World - Nearest Structure](https://skripthub.net/docs/?id=9916)
-- [World - Nearest Raid](https://skripthub.net/docs/?id=9916)
-- [World - Nearest Biome](https://skripthub.net/docs/?id=9915)
-- [Server - All Datapack](https://skripthub.net/docs/?id=9914)
-- [Other - Item Damage](https://skripthub.net/docs/?id=9913)
-- [Entity - Memory Key](https://skripthub.net/docs/?id=9912)
-- [DecentHolograms - Hologram Name](https://skripthub.net/docs/?id=9911)
-- [Block - Command of Command Block](https://skripthub.net/docs/?id=9952)
-- [Entity - Spawn Limit](https://skripthub.net/docs/?id=9948)
-- [Other - Centerd Text](https://skripthub.net/docs/?id=9951)
-- [Other - Fancy Font](https://skripthub.net/docs/?id=9950)
-- [Entity - Custom Name](https://skripthub.net/docs/?id=9960)
-- [Entity - Custom Name Visibility](https://skripthub.net/docs/?id=9961)
+- Player - Mainhand
+- Skins - Face of Player
+- Skins - Player Skin Signature
+- Skins - Player Skin Texture (Image)
+- Skins - Player Skin Texture (URL)
+- Skins - Player Skin Value
+- Skins - Player Skin
+- Other - Caesar Cipher
+- Notes - Block Instrument
+- Notes - Block Note
+- Notes - Note
+- Player - Someone
+- World - Nearest Structure
+- World - Nearest Raid
+- World - Nearest Biome
+- Server - All Datapack
+- Other - Item Damage
+- Entity - Memory Key
+- DecentHolograms - Hologram Name
+- Block - Command of Command Block
+- Entity - Spawn Limit
+- Other - Centerd Text
+- Other - Fancy Font
+- Entity - Custom Name
+- Entity - Custom Name Visibility
 
 ## Functions:
-- [Mean](https://skripthub.net/docs/?id=9921)
+- Mean
 
 
 ## Sections:
-- [DecentHolograms - Create Hologram](https://skripthub.net/docs/?id=9922)
+- DecentHolograms - Create Hologram
 
 
 
