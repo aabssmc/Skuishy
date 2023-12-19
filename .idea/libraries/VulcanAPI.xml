@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="VulcanAPI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/.gradle/VulcanAPI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
