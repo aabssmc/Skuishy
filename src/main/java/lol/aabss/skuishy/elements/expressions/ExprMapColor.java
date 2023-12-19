@@ -10,7 +10,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.util.Color;
 import ch.njol.skript.util.SkriptColor;
 import ch.njol.util.Kleenean;
-import org.bukkit.block.data.BlockData;
+import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,17 +24,17 @@ import javax.annotation.Nullable;
         "\tsend \"no standing on green!\""
 })
 @Since("1.9")
-public class ExprMapColor extends PropertyExpression<BlockData, Color> {
+public class ExprMapColor extends PropertyExpression<Block, Color> {
 
     static {
         register(ExprMapColor.class, Color.class,
                 "map colo[u]r",
-                "blockdata");
+                "blocks");
     }
 
     @Override
-    protected Color @NotNull [] get(@NotNull Event event, BlockData[] source) {
-        return new SkriptColor[]{SkriptColor.fromBukkitColor(source[0].getMapColor())};
+    protected Color @NotNull [] get(@NotNull Event event, Block[] source) {
+        return new SkriptColor[]{SkriptColor.fromBukkitColor(source[0].getBlockData().getMapColor())};
     }
 
     @Override
@@ -49,6 +49,7 @@ public class ExprMapColor extends PropertyExpression<BlockData, Color> {
 
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+        setExpr((Expression<? extends Block>) exprs[0]);
         return true;
     }
 }
