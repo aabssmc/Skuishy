@@ -23,9 +23,11 @@ import javax.annotation.Nullable;
 public class EffSprintGame extends Effect {
 
     static{
-        Skript.registerEffect(EffStepGame.class,
-                "[request [([the] game|[the] server)] to] sprint (by|for) %integer% [tick[s]]"
-        );
+        if (Skript.classExists("org.bukkit.ServerTickManager")){
+            Skript.registerEffect(EffSprintGame.class,
+                    "[request [([the] game|[the] server)] to] sprint (by|for) %integer% [tick[s]]"
+            );
+        }
     }
 
     private Expression<Integer> inte;

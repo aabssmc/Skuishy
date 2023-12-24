@@ -23,9 +23,11 @@ import javax.annotation.Nullable;
 public class EffStepGame extends Effect {
 
     static {
-        Skript.registerEffect(EffStepGame.class,
-                "step [the] (game|server) (by|for) %integer% [tick[(s|[( |-)]rate)]] [if [(game|server) is] frozen]"
-        );
+        if (Skript.classExists("org.bukkit.ServerTickManager")){
+            Skript.registerEffect(EffStepGame.class,
+                    "step [the] (game|server) (by|for) %integer% [tick[(s|[( |-)]rate)]] [if [(game|server) is] frozen]"
+            );
+        }
     }
 
     private Expression<Integer> inte;

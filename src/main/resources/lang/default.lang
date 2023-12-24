@@ -3,6 +3,10 @@ version: 1.7
 types:
     tone: tone¦s @a
     instrument: instrument¦s @a
+    generatedstructure: generatedstructure¦s @a
+    memorykey: memorykey¦s @a
+    spawncategory: spawncategory¦s @a
+    potside: potside¦s @a
 
 tone:
     g: G
@@ -108,24 +112,3 @@ spawncategory:
     water_ambient: water ambient
     water_animal: water animal
     water_underground_creature: water underground creature
-
-potside:
-    back: back
-    front: front
-    left: left
-    right: right
-
-tempmod:
-    back: back
-    front: front
-    left: left
-    right: right
-
-grasscolor:
-    none: none
-    dark_forest: dark forest
-    swamp: swamp
-
-tempmod:
-    none: none
-    frozen: frozen

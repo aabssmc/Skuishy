@@ -27,11 +27,13 @@ import javax.annotation.Nullable;
 public class ExprTickRate extends SimpleExpression<Number> {
 
     static{
-        Skript.registerExpression(ExprTickRate.class, Number.class, ExpressionType.SIMPLE,
-                "[the] tick(s|[( |-)]rate) [of [the] (server|game)]",
-                "[the] (server|game)['s] tick(s|[( |-)]rate)"
+        if (Skript.classExists("org.bukkit.ServerTickManager")){
+            Skript.registerExpression(ExprTickRate.class, Number.class, ExpressionType.SIMPLE,
+                    "[the] tick(s|[( |-)]rate) [of [the] (server|game)]",
+                    "[the] (server|game)['s] tick(s|[( |-)]rate)"
 
-        );
+            );
+        }
     }
 
     @Override

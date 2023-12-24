@@ -22,9 +22,11 @@ import javax.annotation.Nullable;
 @Since("1.9")
 public class EffStopStep extends Effect {
     static {
-        Skript.registerEffect(EffStopStep.class,
-                "[make [[the] server|[the] game]] stop step[ping]"
-        );
+        if (Skript.classExists("org.bukkit.ServerTickManager")){
+            Skript.registerEffect(EffStopStep.class,
+                    "[make [[the] server|[the] game]] stop step[ping]"
+            );
+        }
     }
 
     @Override

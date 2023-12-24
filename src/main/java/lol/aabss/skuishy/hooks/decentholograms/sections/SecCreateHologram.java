@@ -18,7 +18,6 @@ import org.skriptlang.skript.lang.entry.EntryValidator;
 import org.skriptlang.skript.lang.entry.util.ExpressionEntryData;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,10 +72,14 @@ public class SecCreateHologram extends Section {
 
     @Override
     protected @Nullable TriggerItem walk(@NotNull Event e) {
+        String name = this.name.getSingle(e);
+        List<String> lines = List.of(this.lines.getArray(e));
         DHAPI.createHologram(
-                Objects.requireNonNull(name.getSingle(e)),
+                Objects.requireNonNull(name),
                 Objects.requireNonNull(location.getSingle(e)),
-                persistent, Arrays.asList(lines.getArray(e)));
+                persistent,
+                lines
+        );
         return super.walk(e, false);
     }
 

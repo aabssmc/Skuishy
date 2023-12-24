@@ -21,10 +21,12 @@ import javax.annotation.Nullable;
 @Since("1.9")
 public class CondIsStepping extends Condition {
     static {
-        Skript.registerCondition(CondIsStepping.class,
-                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) stepping",
-                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( not|n't) stepping"
-        );
+        if (Skript.classExists("org.bukkit.ServerTickManager")){
+            Skript.registerCondition(CondIsStepping.class,
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) stepping",
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( not|n't) stepping"
+            );
+        }
     }
 
     private boolean is;

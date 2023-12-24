@@ -13,7 +13,7 @@ import org.skriptlang.skript.lang.converter.Converters;
 
 public class Types {
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("Vivecraft-Spigot-Extenstions") != null) {
+        if (Bukkit.getServer().getPluginManager().getPlugin("Vivecraft-Spigot-Extensions") != null) {
             Classes.registerClass(new ClassInfo<>(VivePlayer.class, "viveplayer")
                     .user("vive ?players?")
                     .name("ViveCraft - Vive Player")

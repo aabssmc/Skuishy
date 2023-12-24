@@ -15,10 +15,10 @@ public class Skuishy extends JavaPlugin implements CommandExecutor {
     public static Skuishy instance;
     private SkriptAddon addon;
 
+
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new CustomEvents(), this);
         Metrics metrics = new Metrics(this, 20162);
-
         instance = this;
         try {
             addon = Skript.registerAddon(this);

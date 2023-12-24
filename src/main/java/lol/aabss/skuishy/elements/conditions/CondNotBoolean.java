@@ -29,7 +29,6 @@ public class CondNotBoolean extends Condition {
     }
 
     private Expression<Boolean> bool;
-
     
 
     @Override

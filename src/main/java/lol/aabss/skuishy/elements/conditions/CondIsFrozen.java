@@ -25,10 +25,12 @@ import javax.annotation.Nullable;
 public class CondIsFrozen extends Condition {
 
     static {
-        Skript.registerCondition(CondIsFrozen.class,
-                "[the] ((server|game)['s] [tick[(s|[( |-)]rate)]]|%-entity%) (is|are) frozen",
-                "[the] ((server|game)['s] [tick[(s|[( |-)]rate)]]|%-entity%) (is|are)( not|n't) frozen"
-        );
+        if (Skript.classExists("org.bukkit.ServerTickManager")){
+            Skript.registerCondition(CondIsFrozen.class,
+                    "[the] ((server|game)['s] [tick[(s|[( |-)]rate)]]|%-entity%) (is|are) frozen",
+                    "[the] ((server|game)['s] [tick[(s|[( |-)]rate)]]|%-entity%) (is|are)( not|n't) frozen"
+            );
+        }
     }
 
     private boolean is;

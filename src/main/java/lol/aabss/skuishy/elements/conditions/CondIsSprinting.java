@@ -22,10 +22,12 @@ import javax.annotation.Nullable;
 @Since("1.9")
 public class CondIsSprinting extends Condition {
     static {
-        Skript.registerCondition(CondIsSprinting.class,
-                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) sprint[ing]",
-                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( not|n't) sprint[ing]"
-        );
+        if (Skript.classExists("org.bukkit.ServerTickManager")) {
+            Skript.registerCondition(CondIsSprinting.class,
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) sprint[ing]",
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( not|n't) sprint[ing]"
+            );
+        }
     }
 
     private boolean is;

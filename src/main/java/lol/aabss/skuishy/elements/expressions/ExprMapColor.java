@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.expressions;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
@@ -11,6 +12,7 @@ import ch.njol.skript.util.Color;
 import ch.njol.skript.util.SkriptColor;
 import ch.njol.util.Kleenean;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,9 +29,11 @@ import javax.annotation.Nullable;
 public class ExprMapColor extends PropertyExpression<Block, Color> {
 
     static {
-        register(ExprMapColor.class, Color.class,
-                "map colo[u]r",
-                "blocks");
+        if (Skript.methodExists(BlockData.class, "getMapColor")){
+            register(ExprMapColor.class, Color.class,
+                    "map colo[u]r",
+                    "blocks");
+        }
     }
 
     @Override

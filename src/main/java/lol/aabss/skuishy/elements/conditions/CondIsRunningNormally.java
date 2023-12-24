@@ -23,10 +23,12 @@ import javax.annotation.Nullable;
 public class CondIsRunningNormally extends Condition {
 
     static {
-        Skript.registerCondition(CondIsRunningNormally.class,
-                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) [running] normal[ly]",
-                "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( n't|not) [running] normal[ly]"
-        );
+        if (Skript.classExists("org.bukkit.ServerTickManager")) {
+            Skript.registerCondition(CondIsRunningNormally.class,
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) [running] normal[ly]",
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( n't|not) [running] normal[ly]"
+            );
+        }
     }
 
     private boolean is;

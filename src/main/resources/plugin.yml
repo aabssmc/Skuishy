@@ -7,6 +7,8 @@ depend:
 softdepend:
   - ProtocolLib
   - DecentHolograms
+  - Vivecraft-Spigot-Extensions
+  - Vulcan
 authors: [aabss]
 website: https://aabss.lol
 commands:
