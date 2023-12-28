@@ -21,7 +21,7 @@ import java.text.NumberFormat;
         "send 10000 formatted by letters # -> 10k",
         "send 10000000 split by commas # -> 10m"
 })
-@Since("1.9")
+@Since("2.0")
 
 public class ExprNumberFormat extends SimpleExpression<String> {
 

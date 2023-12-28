@@ -2,6 +2,10 @@ package lol.aabss.skuishy.elements.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.aliases.ItemType;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -17,12 +21,24 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@Name("Other - Item Dyed")
+@Description("Returns dyed items (leather armor & fireworks).")
+@Examples({
+        "give player leather armor dyed with blue",
+        "give player firework star dyed as (210, 4, 45)",
+        "give player red leather helmet",
+        "give player (255, 36, 0) leather tunic"
+})
+@Since("2.0")
+
 public class ExprDyed extends SimpleExpression<ItemStack> {
 
     static{
         Skript.registerExpression(ExprDyed.class, ItemStack.class, ExpressionType.COMBINED,
                 "%itemtypes% (dy|colo[u]r)ed [(as|with)] %color%",
-                "%itemtypes% (dy|colo[u]r)ed [(as|with)] \\(%integer%, %integer%, %integer%\\)"
+                "%itemtypes% (dy|colo[u]r)ed [(as|with)] \\(%integer%,[ ]%integer%,[ ]%integer%\\)",
+                "%color% %itemtypes%",
+                "\\(%integer%,[ ]%integer%,[ ]%integer%\\) %itemtypes%"
         );
     }
 
@@ -87,9 +103,19 @@ public class ExprDyed extends SimpleExpression<ItemStack> {
             color = (Expression<Color>) exprs[1];
             return true;
         }
-        red = (Expression<Integer>) exprs[1];
-        green = (Expression<Integer>) exprs[2];
-        blue = (Expression<Integer>) exprs[3];
+        else if (matchedPattern == 1) {
+            red = (Expression<Integer>) exprs[1];
+            green = (Expression<Integer>) exprs[2];
+            blue = (Expression<Integer>) exprs[3];
+            return true;
+        }
+        else if (matchedPattern == 2) {
+            color = (Expression<Color>) exprs[0];
+            return true;
+        }
+        red = (Expression<Integer>) exprs[0];
+        green = (Expression<Integer>) exprs[1];
+        blue = (Expression<Integer>) exprs[2];
         return true;
     }
 }
