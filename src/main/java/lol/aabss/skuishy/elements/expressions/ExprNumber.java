@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-@Name("Other - Number Format")
+@Name("Other - Number Convert")
 @Description("Turns a formatted number into a normal number.")
 @Examples({
         "send 10K # -> 10000",
