@@ -34,7 +34,6 @@
 - Plugin - Disable Plugin
 - Plugin - Enable Plugin
 - Notes - Play Note
-- Player - Crash Player
 - DecentHolograms - Update Hologram
 - DecentHolograms - Move Hologram
 - DecentHolograms - Edit Page
