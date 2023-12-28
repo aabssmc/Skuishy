@@ -23,7 +23,7 @@ import java.text.ParseException;
         "send \"10k\" unformatted by letters # -> 10000",
         "send \"10m\" unsplit by commas # -> 10000000"
 })
-@Since("2.0")
+@Since("1.9.5")
 
 public class ExprNumberUnformat extends SimpleExpression<Number> {
 

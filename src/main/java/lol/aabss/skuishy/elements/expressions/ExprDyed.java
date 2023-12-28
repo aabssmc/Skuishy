@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
         "give player red leather helmet",
         "give player (255, 36, 0) leather tunic"
 })
-@Since("2.0")
+@Since("1.9.5")
 
 public class ExprDyed extends SimpleExpression<ItemStack> {
 

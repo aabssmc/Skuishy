@@ -23,7 +23,7 @@ import java.text.ParseException;
         "send 10K # -> 10000",
         "send 20M # -> 20000000"
 })
-@Since("2.0")
+@Since("1.9.5")
 
 public class ExprNumber extends SimpleExpression<Number> {
 
