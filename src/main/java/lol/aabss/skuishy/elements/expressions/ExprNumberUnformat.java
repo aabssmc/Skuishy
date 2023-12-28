@@ -41,9 +41,9 @@ public class ExprNumberUnformat extends SimpleExpression<Number> {
     protected @Nullable Number[] get(@NotNull Event e) {
         try {
             if (letter) {
-                return new Number[]{NumberFormat.getCompactNumberInstance().parse(num.getSingle(e))};
+                return new Number[]{NumberFormat.getCompactNumberInstance().parse(num.getSingle(e).toUpperCase())};
             }
-            return new Number[]{NumberFormat.getNumberInstance().parse(num.getSingle(e))};
+            return new Number[]{NumberFormat.getNumberInstance().parse(num.getSingle(e).toUpperCase())};
         } catch (ParseException ex) {
             throw new RuntimeException(ex);
         }

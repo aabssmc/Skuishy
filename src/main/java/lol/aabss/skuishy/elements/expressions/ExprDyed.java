@@ -98,12 +98,13 @@ public class ExprDyed extends SimpleExpression<ItemStack> {
 
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        items = (Expression<ItemType>) exprs[0];
         if (matchedPattern == 0){
+            items = (Expression<ItemType>) exprs[0];
             color = (Expression<Color>) exprs[1];
             return true;
         }
         else if (matchedPattern == 1) {
+            items = (Expression<ItemType>) exprs[0];
             red = (Expression<Integer>) exprs[1];
             green = (Expression<Integer>) exprs[2];
             blue = (Expression<Integer>) exprs[3];
@@ -111,11 +112,13 @@ public class ExprDyed extends SimpleExpression<ItemStack> {
         }
         else if (matchedPattern == 2) {
             color = (Expression<Color>) exprs[0];
+            items = (Expression<ItemType>) exprs[1];
             return true;
         }
         red = (Expression<Integer>) exprs[0];
         green = (Expression<Integer>) exprs[1];
         blue = (Expression<Integer>) exprs[2];
+        items = (Expression<ItemType>) exprs[3];
         return true;
     }
 }
