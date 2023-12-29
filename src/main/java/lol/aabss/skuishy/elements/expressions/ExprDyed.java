@@ -17,6 +17,7 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -75,6 +76,12 @@ public class ExprDyed extends SimpleExpression<ItemStack> {
                     .build();
             FireworkEffectMeta meta = ((FireworkEffectMeta) item.getItemMeta());
             meta.setEffect(effect);
+            item.setItemMeta(meta);
+            return new ItemStack[]{item};
+        }
+        else if (item.getItemMeta() instanceof PotionMeta){
+            PotionMeta meta = ((PotionMeta) item.getItemMeta());
+            meta.setColor(color);
             item.setItemMeta(meta);
             return new ItemStack[]{item};
         }
