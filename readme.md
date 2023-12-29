@@ -20,6 +20,7 @@
 - DecentHolograms - On Hologram Click
 - Other - On Effect Command
 - Player - On Head Rotation
+- Dyed Item Expression
 
 
 ## Conditions
@@ -67,6 +68,12 @@
 - Other - Fancy Font
 - Entity - Custom Name
 - Entity - Custom Name Visibility
+- Other - Number Convert
+- Other - Number Format
+- Other - Number Unformat
+- Items - Dyed Items
+
+
 
 ## Functions:
 - Mean
