@@ -12,40 +12,47 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-@Name("Decent Holograms - Delete Hologram")
-@Description("Deletes a hologram.")
+@Name("Decent Holograms - Toggle Hologram")
+@Description("Toggles a hologram.")
 @Examples({
-        "..."
+        "disable hologram named \"lol\"",
+        "enable hologram named \"lol\""
 })
-@Since("1.7")
+@Since("2.0")
 @RequiredPlugins("DecentHolograms")
 
-public class EffDeleteHologram extends Effect {
+public class EffToggleHologram extends Effect {
 
     static{
         if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
-            Skript.registerEffect(EffDeleteHologram.class,
-                    "(delete|remove) [(decent [hologram[s]]|dh)] [hologram] %hologram%"
+            Skript.registerEffect(EffToggleHologram.class,
+                    "(en|:dis)able [(decent [hologram[s]]|dh)] [hologram] %hologram%"
             );
         }
     }
 
     private Expression<Hologram> hologram;
+    private boolean dis;
 
     @Override
     protected void execute(@NotNull Event e) {
-        hologram.getSingle(e).delete();
+        if (dis){
+            hologram.getSingle(e).disable();
+        }
+        else{
+            hologram.getSingle(e).enable();
+        }
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "delete hologram";
+        return "toggle hologram";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         hologram = (Expression<Hologram>) exprs[0];
+        dis = parseResult.hasTag("dis");
         return true;
     }
 }
