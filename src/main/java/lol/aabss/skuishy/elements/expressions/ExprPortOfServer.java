@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 @Name("Server - Server Port")
 @Description("Gets the port of the server.")
 @Examples({
-        "if port of server is \"1234\":"
+        "if port of server is 1234:"
 })
 @Since("2.0")
 public class ExprPortOfServer extends SimpleExpression<Integer> {
