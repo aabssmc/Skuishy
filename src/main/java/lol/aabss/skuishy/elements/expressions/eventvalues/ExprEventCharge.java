@@ -13,46 +13,46 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.event.Event;
-import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.event.block.SculkBloomEvent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-@Name("Item - Item Damage")
-@Description("Gets/sets the item damage.")
+@Name("Block - Sculk Charge")
+@Description("Gets/sets the sculk charge.")
 @Examples({
-        "on item damage:",
-        "\tincrease item damage by item damage*4"
+        "on sculk bloom:",
+        "\tset the charge to 100"
 })
-@Since("1.7")
-public class ExprItemDamage extends EventValueExpression<Integer> {
+@Since("2.0")
+public class ExprEventCharge extends EventValueExpression<Integer> {
 
     static{
-        Skript.registerExpression(ExprItemDamage.class, Integer.class, ExpressionType.SIMPLE,
-                "[the] [event-]item[ ]damage"
+        Skript.registerExpression(ExprEventCharge.class, Integer.class, ExpressionType.SIMPLE,
+                "[the] [event-][sculk[( |-)]]charge"
         );
     }
 
-    public ExprItemDamage() {
+    public ExprEventCharge() {
         super(Integer.class);
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "item damage";
+        return "event charge";
     }
 
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        if (getParser().isCurrentEvent(PlayerItemDamageEvent.class)){
+        if (getParser().isCurrentEvent(SculkBloomEvent.class)){
             return true;
         }
-        Skript.error("'item damage' can not be used outside of Item Damage Event");
+        Skript.error("'charge' can not be used outside of Sculk Bloom Event");
         return false;
     }
 
     @Override
     protected @Nullable Integer[] get(@NotNull Event e) {
-        return new Integer[]{((PlayerItemDamageEvent) e).getDamage()};
+        return new Integer[]{((SculkBloomEvent) e).getCharge()};
     }
 
 
@@ -60,19 +60,19 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
     public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             assert delta != null;
-            ((PlayerItemDamageEvent) e).setDamage((Integer) delta[0]);
+            ((SculkBloomEvent) e).setCharge((Integer) delta[0]);
         }
         else if (mode == Changer.ChangeMode.ADD) {
             assert delta != null;
-            ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() + (Integer) delta[0]);
+            ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() + (Integer) delta[0]);
         }
         else if (mode == Changer.ChangeMode.REMOVE) {
             assert delta != null;
-            ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() - (Integer) delta[0]);
+            ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() - (Integer) delta[0]);
         }
         else if (mode == Changer.ChangeMode.REMOVE_ALL) {
             assert delta != null;
-            ((PlayerItemDamageEvent) e).setDamage(0);
+            ((SculkBloomEvent) e).setCharge(0);
         }
     }
 
@@ -83,5 +83,4 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
         }
         return CollectionUtils.array();
     }
-
 }
