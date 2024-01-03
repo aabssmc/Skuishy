@@ -50,42 +50,51 @@ public class ExprDyed extends SimpleExpression<ItemStack> {
     private Expression<Integer> blue;
 
     @Override
-    protected @Nullable ItemStack[] get(@NotNull Event e) {
-        ItemStack item = new ItemStack(items.getSingle(e).getMaterial());
-        org.bukkit.Color color;
-        if (this.color != null){
-            color = this.color.getSingle(e).asBukkitColor();
-        }
-        else{
-            if (red.getSingle(e) <= 255 && green.getSingle(e) <= 255 && blue.getSingle(e) <= 255) {
-                color = org.bukkit.Color.fromRGB(red.getSingle(e), green.getSingle(e), blue.getSingle(e));
+    protected ItemStack @NotNull [] get(@NotNull Event e) {
+        ItemType im = items.getSingle(e);
+        if (im != null ) {
+            ItemStack item = new ItemStack(im.getMaterial());
+            Color c = this.color.getSingle(e);
+            org.bukkit.Color color;
+            if (c != null) {
+                color = c.asBukkitColor();
+            } else {
+                Integer r = red.getSingle(e);
+                Integer g = green.getSingle(e);
+                Integer b = blue.getSingle(e);
+                if (r != null && g != null && b != null) {
+                    if (r <= 255 && g <= 255 && b <= 255) {
+                        color = org.bukkit.Color.fromRGB(r, g, b);
+                    } else {
+                        color = org.bukkit.Color.fromRGB(0, 0, 0);
+                    }
+                }
+                else{
+                    color = org.bukkit.Color.fromRGB(0, 0, 0);
+                }
             }
-            else{
-                color = org.bukkit.Color.fromRGB(0,0,0);
+            if (item.getItemMeta() instanceof LeatherArmorMeta) {
+                LeatherArmorMeta meta = ((LeatherArmorMeta) item.getItemMeta());
+                meta.setColor(color);
+                item.setItemMeta(meta);
+                return new ItemStack[]{item};
+            } else if (item.getItemMeta() instanceof FireworkEffectMeta) {
+                FireworkEffect effect = FireworkEffect.builder()
+                        .withColor(color)
+                        .build();
+                FireworkEffectMeta meta = ((FireworkEffectMeta) item.getItemMeta());
+                meta.setEffect(effect);
+                item.setItemMeta(meta);
+                return new ItemStack[]{item};
+            } else if (item.getItemMeta() instanceof PotionMeta) {
+                PotionMeta meta = ((PotionMeta) item.getItemMeta());
+                meta.setColor(color);
+                item.setItemMeta(meta);
+                return new ItemStack[]{item};
             }
+            return new ItemStack[]{};
         }
-        if (item.getItemMeta() instanceof LeatherArmorMeta){
-            LeatherArmorMeta meta = ((LeatherArmorMeta) item.getItemMeta());
-            meta.setColor(color);
-            item.setItemMeta(meta);
-            return new ItemStack[]{item};
-        }
-        else if (item.getItemMeta() instanceof FireworkEffectMeta){
-            FireworkEffect effect = FireworkEffect.builder()
-                    .withColor(color)
-                    .build();
-            FireworkEffectMeta meta = ((FireworkEffectMeta) item.getItemMeta());
-            meta.setEffect(effect);
-            item.setItemMeta(meta);
-            return new ItemStack[]{item};
-        }
-        else if (item.getItemMeta() instanceof PotionMeta){
-            PotionMeta meta = ((PotionMeta) item.getItemMeta());
-            meta.setColor(color);
-            item.setItemMeta(meta);
-            return new ItemStack[]{item};
-        }
-        return new ItemStack[0];
+        return new ItemStack[]{};
     }
 
     @Override

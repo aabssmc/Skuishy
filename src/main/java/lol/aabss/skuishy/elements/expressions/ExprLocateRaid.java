@@ -38,8 +38,10 @@ public class ExprLocateRaid extends SimpleExpression<Location> {
     protected @Nullable Location[] get(@NotNull Event e) {
         Location loc = location.getSingle(e);
         Integer rad = radius.getSingle(e);
-        assert loc != null; assert rad != null;
-        return new Location[]{loc.getWorld().locateNearestRaid(loc, rad).getLocation()};
+        if (loc != null && rad != null) {
+            return new Location[]{loc.getWorld().locateNearestRaid(loc, rad).getLocation()};
+        }
+        return new Location[]{};
     }
 
     @Override

@@ -38,7 +38,6 @@ public class EffPlayNote extends Effect {
     private Expression<Location> locations;
     private Expression<Player> players;
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         note = (Expression<Note>) exprs[0];
@@ -54,9 +53,9 @@ public class EffPlayNote extends Effect {
             for (final Player p : players.getArray(e)){
                 Instrument inst = instrument.getSingle(e);
                 Note note1 = note.getSingle(e);
-                assert inst != null;
-                assert note1 != null;
-                p.playNote(l, inst, note1);
+                if (inst != null && note1 != null){
+                    p.playNote(l, inst, note1);
+                }
             }
         }
     }

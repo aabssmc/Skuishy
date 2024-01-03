@@ -34,27 +34,23 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
     @Override
     protected @Nullable Integer[] get(@NotNull Event e) {
         Player p = player.getSingle(e);
-        assert p != null; assert VulcanAPI.Factory.getApi() != null;
-        if (Objects.equals(vtype, "all")) {
-            return new Integer[]{VulcanAPI.Factory.getApi().getPlayerData(p).getTotalViolations()};
-        }
-        else if (Objects.equals(vtype, "combat")) {
-            return new Integer[]{VulcanAPI.Factory.getApi().getPlayerData(p).getCombatViolations()};
-        }
-        else if (Objects.equals(vtype, "movement")) {
-            return new Integer[]{VulcanAPI.Factory.getApi().getPlayerData(p).getMovementViolations()};
-        }
-        else if (Objects.equals(vtype, "player")) {
-            return new Integer[]{VulcanAPI.Factory.getApi().getPlayerData(p).getPlayerViolations()};
-        }
-        else if (Objects.equals(vtype, "auto clicker")) {
-            return new Integer[]{VulcanAPI.Factory.getApi().getPlayerData(p).getAutoClickerViolations()};
-        }
-        else if (Objects.equals(vtype, "timer")) {
-            return new Integer[]{VulcanAPI.Factory.getApi().getPlayerData(p).getTimerViolations()};
-        }
-        else if (Objects.equals(vtype, "scaffold")) {
-            return new Integer[]{VulcanAPI.Factory.getApi().getPlayerData(p).getScaffoldViolations()};
+        VulcanAPI api = VulcanAPI.Factory.getApi();
+        if (p != null && api != null) {
+            if (Objects.equals(vtype, "all")) {
+                return new Integer[]{api.getPlayerData(p).getTotalViolations()};
+            } else if (Objects.equals(vtype, "combat")) {
+                return new Integer[]{api.getPlayerData(p).getCombatViolations()};
+            } else if (Objects.equals(vtype, "movement")) {
+                return new Integer[]{api.getPlayerData(p).getMovementViolations()};
+            } else if (Objects.equals(vtype, "player")) {
+                return new Integer[]{api.getPlayerData(p).getPlayerViolations()};
+            } else if (Objects.equals(vtype, "auto clicker")) {
+                return new Integer[]{api.getPlayerData(p).getAutoClickerViolations()};
+            } else if (Objects.equals(vtype, "timer")) {
+                return new Integer[]{api.getPlayerData(p).getTimerViolations()};
+            } else if (Objects.equals(vtype, "scaffold")) {
+                return new Integer[]{api.getPlayerData(p).getScaffoldViolations()};
+            }
         }
         return new Integer[0];
     }

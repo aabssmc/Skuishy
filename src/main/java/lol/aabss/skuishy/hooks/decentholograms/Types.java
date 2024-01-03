@@ -16,7 +16,7 @@ public class Types {
                     .name("hologram")
                     .description("Represents a decent hologram hologram.")
                     .since("1.6")
-                    .parser(new Parser<Hologram>() {
+                    .parser(new Parser<>() {
 
                         @Override
                         public boolean canParse(@NotNull ParseContext context) {

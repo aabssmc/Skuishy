@@ -36,7 +36,10 @@ public class EffUpdateHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        DHAPI.updateHologram(Objects.requireNonNull(holo.getSingle(e)).getName());
+        Hologram holo = this.holo.getSingle(e);
+        if (holo != null) {
+            DHAPI.updateHologram(holo.getName());
+        }
     }
 
     @Override
@@ -44,7 +47,6 @@ public class EffUpdateHologram extends Effect {
         return "update hologram";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         holo = (Expression<Hologram>) exprs[0];

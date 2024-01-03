@@ -33,7 +33,6 @@ public class EffDisablePlugin extends Effect {
 
     private Expression<String> plugin;
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
         plugin = (Expression<String>) expressions[0];
@@ -47,9 +46,12 @@ public class EffDisablePlugin extends Effect {
 
     @Override
     protected void execute(@NotNull Event event) {
-        Plugin plugin2 = Bukkit.getPluginManager().getPlugin(plugin.getSingle(event));
-        if (plugin2 != null){
-            Bukkit.getPluginManager().disablePlugin(plugin2);
+        String pl = this.plugin.getSingle(event);
+        if (pl != null) {
+            Plugin plugin2 = Bukkit.getPluginManager().getPlugin(pl);
+            if (plugin2 != null) {
+                Bukkit.getPluginManager().disablePlugin(plugin2);
+            }
         }
     }
 }

@@ -42,8 +42,10 @@ public class ExprLocateStructure extends SimpleExpression<Location> {
         Location loc = location.getSingle(e);
         Structure struc = structure.getSingle(e);
         Integer rad = radius.getSingle(e);
-        assert loc != null; assert struc != null; assert  rad != null;
-        return new Location[]{loc.getWorld().locateNearestStructure(loc, struc, rad, unexplored).getLocation()};
+        if (loc != null && struc != null && rad != null) {
+            return new Location[]{loc.getWorld().locateNearestStructure(loc, struc, rad, unexplored).getLocation()};
+        }
+        return new Location[]{};
     }
 
     @Override

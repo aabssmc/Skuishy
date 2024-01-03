@@ -37,15 +37,16 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
     private Expression<Entity> ent;
 
     @Override
-    protected @Nullable Boolean[] get(@NotNull Event e) {
-        if (ent != null){
-            return new Boolean[]{ent.getSingle(e).isFrozen()};
+    protected Boolean @NotNull [] get(@NotNull Event e) {
+        Entity entity = ent.getSingle(e);
+        if (entity != null){
+            return new Boolean[]{entity.isFrozen()};
         }
         return new Boolean[]{Bukkit.getServer().getServerTickManager().isFrozen()};
     }
 
     @Override
-    public @Nullable Class<?>[] acceptChange(Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
             return CollectionUtils.array(Boolean.class);
         }
@@ -54,11 +55,12 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
 
     @Override
     public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET){
-            Bukkit.getServer().getServerTickManager().setFrozen((Boolean) delta[0]);
-        }
-        else{
-            assert false;
+        if (delta != null) {
+            if (mode == Changer.ChangeMode.SET) {
+                Bukkit.getServer().getServerTickManager().setFrozen((Boolean) delta[0]);
+            } else {
+                assert false;
+            }
         }
     }
 
@@ -77,9 +79,8 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
         return "frozen state";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         ent = (Expression<Entity>) exprs[0];
         return true;
     }

@@ -71,7 +71,6 @@ public class ExprCommand extends PropertyExpression<Block, String> {
         return "command of command block";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         setExpr((Expression<? extends Block>) exprs[0]);

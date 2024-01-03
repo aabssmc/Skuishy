@@ -22,7 +22,7 @@ public class Types {
                 .name("note")
                 .description("Represents a note block note.")
                 .since("1.6")
-                .parser(new Parser<Note>() {
+                .parser(new Parser<>() {
 
                     @Override
                     public boolean canParse(@NotNull ParseContext context) {
@@ -49,7 +49,7 @@ public class Types {
                 .name("tone")
                 .description("Represents a note block note's tone.")
                 .since("1.6")
-                .parser(new Parser<Note.Tone>() {
+                .parser(new Parser<>() {
 
                     @Override
                     @Nullable
@@ -80,7 +80,7 @@ public class Types {
                 .name("instrument")
                 .description("Represents a note block instrument.")
                 .since("1.6")
-                .parser(new Parser<Instrument>() {
+                .parser(new Parser<>() {
 
                     @Override
                     @Nullable
@@ -232,7 +232,7 @@ public class Types {
                     .name("datapack")
                     .description("Represents a datapack.")
                     .since("1.7")
-                    .parser(new Parser<Datapack>() {
+                    .parser(new Parser<>() {
 
                         @Override
                         public boolean canParse(@NotNull ParseContext context) {
@@ -256,7 +256,7 @@ public class Types {
                 .name("spawn category")
                 .description("Represents a spawn category.")
                 .since("1.7.5")
-                .parser(new Parser<SpawnCategory>() {
+                .parser(new Parser<>() {
 
                     @Override
                     @Nullable

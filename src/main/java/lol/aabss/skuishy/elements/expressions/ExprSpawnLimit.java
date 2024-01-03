@@ -41,8 +41,10 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
     protected @Nullable Integer[] get(@NotNull Event e) {
         World world = this.world.getSingle(e);
         SpawnCategory spawncategory = this.spawncategory.getSingle(e);
-        assert world != null; assert spawncategory != null;
-        return new Integer[]{world.getSpawnLimit(spawncategory)};
+        if (world != null && spawncategory != null) {
+            return new Integer[]{world.getSpawnLimit(spawncategory)};
+        }
+        return new Integer[]{};
     }
 
     @Override
@@ -50,8 +52,9 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
         if (mode == Changer.ChangeMode.SET) {
             World world = this.world.getSingle(e);
             SpawnCategory spawncategory = this.spawncategory.getSingle(e);
-            assert world != null; assert spawncategory != null;
-            world.setSpawnLimit(spawncategory, (Integer) delta[0]);
+            if (world != null && spawncategory != null) {
+                world.setSpawnLimit(spawncategory, (Integer) delta[0]);
+            }
         } else {
             assert false;
         }
@@ -80,7 +83,6 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
         return "spawn category";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         this.spawncategory = (Expression<SpawnCategory>) exprs[0];

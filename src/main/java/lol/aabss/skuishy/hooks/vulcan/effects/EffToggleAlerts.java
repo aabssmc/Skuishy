@@ -34,7 +34,10 @@ public class EffToggleAlerts extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        VulcanAPI.Factory.getApi().toggleAlerts(p.getSingle(e));
+        VulcanAPI api = VulcanAPI.Factory.getApi();
+        if (api != null) {
+            api.toggleAlerts(p.getSingle(e));
+        }
     }
 
     @Override

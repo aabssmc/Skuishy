@@ -34,16 +34,17 @@ public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean
     @Override
     protected Boolean @NotNull [] get(@NotNull Event e, Entity @NotNull [] source) {
         Entity en = getExpr().getSingle(e);
-        assert en != null;
-        return new Boolean[]{en.isCustomNameVisible()};
+        if (en != null) return new Boolean[]{en.isCustomNameVisible()};
+        return new Boolean[]{};
     }
 
     @Override
     public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
             Entity en = getExpr().getSingle(e);
-            assert en != null;
-            en.setCustomNameVisible((Boolean) delta[0]);
+            if (en != null) {
+                en.setCustomNameVisible((Boolean) delta[0]);
+            }
         }
         else {
             assert false;
@@ -68,7 +69,6 @@ public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean
         return "custom name visibility";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         setExpr((Expression<? extends Entity>) exprs[0]);

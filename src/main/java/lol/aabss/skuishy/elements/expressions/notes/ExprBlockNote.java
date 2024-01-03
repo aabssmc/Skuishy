@@ -46,13 +46,13 @@ public class ExprBlockNote extends PropertyExpression<Block, Note> {
 
     @Override
     public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
-        assert delta != null;
         Block block = getExpr().getSingle(e);
-        assert block != null;
-        BlockData data = block.getBlockData();
-        if (mode == Changer.ChangeMode.SET){
-            if (data instanceof NoteBlock){
-                ((NoteBlock) data).setNote((Note) delta[0]);
+        if (delta != null && block != null) {
+            BlockData data = block.getBlockData();
+            if (mode == Changer.ChangeMode.SET) {
+                if (data instanceof NoteBlock) {
+                    ((NoteBlock) data).setNote((Note) delta[0]);
+                }
             }
         }
     }

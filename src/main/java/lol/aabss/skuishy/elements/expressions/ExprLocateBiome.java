@@ -41,8 +41,10 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
         Location loc = location.getSingle(e);
         Biome bio = biome.getSingle(e);
         Integer rad = radius.getSingle(e);
-        assert loc != null; assert bio != null; assert  rad != null;
-        return new Location[]{loc.getWorld().locateNearestBiome(loc, rad, bio).getLocation()};
+        if (loc != null && bio != null && rad != null) {
+            return new Location[]{loc.getWorld().locateNearestBiome(loc, rad, bio).getLocation()};
+        }
+        return new Location[]{};
     }
 
     @Override

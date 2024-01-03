@@ -19,7 +19,7 @@ public class Types {
                     .name("ViveCraft - Vive Player")
                     .description("Represents a ViveCraft player.")
                     .since("1.9")
-                    .parser(new Parser<VivePlayer>() {
+                    .parser(new Parser<>() {
 
                         @Override
                         public boolean canParse(@NotNull ParseContext context) {

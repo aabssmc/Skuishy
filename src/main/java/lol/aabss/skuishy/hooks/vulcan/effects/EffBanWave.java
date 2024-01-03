@@ -31,7 +31,10 @@ public class EffBanWave extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        VulcanAPI.Factory.getApi().executeBanWave();
+        VulcanAPI api = VulcanAPI.Factory.getApi();
+        if (api != null) {
+            api.executeBanWave();
+        }
     }
 
     @Override

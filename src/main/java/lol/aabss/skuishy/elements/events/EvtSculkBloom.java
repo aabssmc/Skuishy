@@ -27,15 +27,17 @@ import javax.annotation.Nullable;
 public class EvtSculkBloom extends SkriptEvent {
 
     static{
-        Skript.registerEvent("on sculk bloom event", SimpleEvent.class, SculkBloomEvent.class,
-                "sculk bloom[ing]"
-        );
-        EventValues.registerEventValue(SculkBloomEvent.class, Block.class, new Getter<>() {
-            @Override
-            public Block get(SculkBloomEvent e) {
-                return e.getBlock();
-            }
-        }, 0);
+        if (Skript.classExists(SculkBloomEvent.class.getName())){
+            Skript.registerEvent("on sculk bloom event", SimpleEvent.class, SculkBloomEvent.class,
+                    "sculk bloom[ing]"
+            );
+            EventValues.registerEventValue(SculkBloomEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(SculkBloomEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+        }
     }
 
     @Override

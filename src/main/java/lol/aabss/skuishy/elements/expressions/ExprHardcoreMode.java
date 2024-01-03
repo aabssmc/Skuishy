@@ -37,18 +37,19 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
     private Expression<World> world;
 
     @Override
-    protected @Nullable Boolean[] get(@NotNull Event e) {
+    protected Boolean @NotNull [] get(@NotNull Event e) {
         World world = this.world.getSingle(e);
-        assert world != null;
-        return new Boolean[]{world.isHardcore()};
+        if (world != null) return new Boolean[]{world.isHardcore()};
+        return new Boolean[]{};
     }
 
     @Override
     public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
             World world = this.world.getSingle(e);
-            assert world != null;
-            world.setHardcore((Boolean) delta[0]);
+            if (world != null) {
+                world.setHardcore((Boolean) delta[0]);
+            }
         } else {
             assert false;
         }
@@ -77,7 +78,6 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
         return "hardcore mode";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         world = (Expression<World>) exprs[0];

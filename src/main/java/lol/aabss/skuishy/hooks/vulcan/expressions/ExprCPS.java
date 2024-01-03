@@ -30,9 +30,11 @@ public class ExprCPS extends PropertyExpression<Player, Number> {
 
     @Override
     protected Number @NotNull [] get(@NotNull Event event, Player[] source) {
-        return new Number[]{VulcanAPI.Factory.getApi().getCps(source[0])};
+        if (VulcanAPI.Factory.getApi() != null) {
+            return new Number[]{VulcanAPI.Factory.getApi().getCps(source[0])};
+        }
+        return new Number[]{};
     }
-
     @Override
     public @NotNull Class<? extends Number> getReturnType() {
         return Number.class;

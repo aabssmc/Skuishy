@@ -34,7 +34,10 @@ public class EffStepGame extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Bukkit.getServer().getServerTickManager().stepGameIfFrozen(inte.getSingle(e));
+        Integer in = inte.getSingle(e);
+        if (in != null) {
+            Bukkit.getServer().getServerTickManager().stepGameIfFrozen(in);
+        }
     }
 
     @Override

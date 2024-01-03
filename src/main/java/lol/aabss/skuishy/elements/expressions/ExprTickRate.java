@@ -51,14 +51,14 @@ public class ExprTickRate extends SimpleExpression<Number> {
 
     @Override
     public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET){
-            Bukkit.getServer().getServerTickManager().setTickRate((float) delta[0]);
-        }
-        else if (mode == Changer.ChangeMode.RESET){
-            Bukkit.getServer().getServerTickManager().setTickRate(20);
-        }
-        else{
-            assert false;
+        if (delta != null) {
+            if (mode == Changer.ChangeMode.SET) {
+                Bukkit.getServer().getServerTickManager().setTickRate((float) delta[0]);
+            } else if (mode == Changer.ChangeMode.RESET) {
+                Bukkit.getServer().getServerTickManager().setTickRate(20);
+            } else {
+                assert false;
+            }
         }
     }
 

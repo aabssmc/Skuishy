@@ -34,7 +34,10 @@ public class EffSprintGame extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Bukkit.getServer().getServerTickManager().requestGameToSprint(inte.getSingle(e));
+        Integer in = inte.getSingle(e);
+        if (in != null) {
+            Bukkit.getServer().getServerTickManager().requestGameToSprint(in);
+        }
     }
 
     @Override

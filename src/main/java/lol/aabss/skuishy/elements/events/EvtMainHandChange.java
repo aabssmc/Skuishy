@@ -30,14 +30,14 @@ public class EvtMainHandChange extends SkriptEvent {
         Skript.registerEvent("on main hand change", SimpleEvent.class, PlayerChangedMainHandEvent.class,
                 "[player] main[(-| )]hand (switch|swap|change)"
         );
-        EventValues.registerEventValue(PlayerChangedMainHandEvent.class, Player.class, new Getter<Player, PlayerChangedMainHandEvent>() {
+        EventValues.registerEventValue(PlayerChangedMainHandEvent.class, Player.class, new Getter<>() {
             @Override
             public Player get(PlayerChangedMainHandEvent e) {
                 return e.getPlayer();
             }
         }, 0);
 
-        EventValues.registerEventValue(PlayerChangedMainHandEvent.class, String.class, new Getter<String, PlayerChangedMainHandEvent>() {
+        EventValues.registerEventValue(PlayerChangedMainHandEvent.class, String.class, new Getter<>() {
             @Override
             public String get(PlayerChangedMainHandEvent e) {
                 return e.getMainHand().toString().toLowerCase();

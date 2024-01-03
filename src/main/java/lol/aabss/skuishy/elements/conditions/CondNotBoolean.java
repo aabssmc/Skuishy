@@ -42,7 +42,6 @@ public class CondNotBoolean extends Condition {
         return "not boolean";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         this.bool = (Expression<Boolean>) exprs[0];

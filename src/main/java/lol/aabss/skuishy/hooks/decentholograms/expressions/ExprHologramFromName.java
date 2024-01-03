@@ -14,7 +14,6 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 @Name("Decent Holograms - Hologram Name")
 @Description("Gets a hologram by its name.")
@@ -37,8 +36,12 @@ public class ExprHologramFromName extends SimpleExpression<Hologram> {
 
     @Override
     protected @Nullable Hologram[] get(@NotNull Event e) {
-        Hologram hologram = DHAPI.getHologram(Objects.requireNonNull(name.getSingle(e)));
-        return new Hologram[]{hologram};
+        String name = this.name.getSingle(e);
+        if (name != null) {
+            Hologram hologram = DHAPI.getHologram(name);
+            return new Hologram[]{hologram};
+        }
+        return null;
     }
 
     @Override
@@ -56,7 +59,6 @@ public class ExprHologramFromName extends SimpleExpression<Hologram> {
         return "hologram from name";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         name = (Expression<String>) exprs[0];

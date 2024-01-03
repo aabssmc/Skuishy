@@ -36,11 +36,13 @@ public class EffToggleHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        if (dis){
-            hologram.getSingle(e).disable();
-        }
-        else{
-            hologram.getSingle(e).enable();
+        Hologram holo = hologram.getSingle(e);
+        if (holo != null) {
+            if (dis) {
+                holo.disable();
+            } else {
+                holo.enable();
+            }
         }
     }
 

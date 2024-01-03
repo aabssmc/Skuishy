@@ -51,33 +51,28 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
     }
 
     @Override
-    protected @Nullable Integer[] get(@NotNull Event e) {
+    protected Integer @NotNull [] get(@NotNull Event e) {
         return new Integer[]{((PlayerItemDamageEvent) e).getDamage()};
     }
 
 
     @Override
     public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            assert delta != null;
-            ((PlayerItemDamageEvent) e).setDamage((Integer) delta[0]);
-        }
-        else if (mode == Changer.ChangeMode.ADD) {
-            assert delta != null;
-            ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() + (Integer) delta[0]);
-        }
-        else if (mode == Changer.ChangeMode.REMOVE) {
-            assert delta != null;
-            ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() - (Integer) delta[0]);
-        }
-        else if (mode == Changer.ChangeMode.REMOVE_ALL) {
-            assert delta != null;
-            ((PlayerItemDamageEvent) e).setDamage(0);
+        if (delta != null) {
+            if (mode == Changer.ChangeMode.SET) {
+                ((PlayerItemDamageEvent) e).setDamage((Integer) delta[0]);
+            } else if (mode == Changer.ChangeMode.ADD) {
+                ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() + (Integer) delta[0]);
+            } else if (mode == Changer.ChangeMode.REMOVE) {
+                ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() - (Integer) delta[0]);
+            } else if (mode == Changer.ChangeMode.REMOVE_ALL) {
+                ((PlayerItemDamageEvent) e).setDamage(0);
+            }
         }
     }
 
     @Override
-    public @Nullable Class<?>[] acceptChange(Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
             return CollectionUtils.array(Integer.class);
         }

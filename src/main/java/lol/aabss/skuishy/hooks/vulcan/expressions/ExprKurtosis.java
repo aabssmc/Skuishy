@@ -26,7 +26,10 @@ public class ExprKurtosis extends PropertyExpression<Player, Number> {
 
     @Override
     protected Number @NotNull [] get(@NotNull Event event, Player[] source) {
-        return new Number[]{VulcanAPI.Factory.getApi().getKurtosis(source[0])};
+        if (VulcanAPI.Factory.getApi() != null) {
+            return new Number[]{VulcanAPI.Factory.getApi().getKurtosis(source[0])};
+        }
+        return new Number[]{};
     }
 
     @Override

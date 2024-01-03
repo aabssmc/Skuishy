@@ -38,11 +38,12 @@ public class CondIsFrozen extends Condition {
 
     @Override
     public boolean check(@NotNull Event e) {
-        if (entity != null){
+        Entity en = entity.getSingle(e);
+        if (en != null){
             if (is){
-                return Bukkit.getServer().getServerTickManager().isFrozen(entity.getSingle(e));
+                return Bukkit.getServer().getServerTickManager().isFrozen(en);
             }
-            return !Bukkit.getServer().getServerTickManager().isFrozen(entity.getSingle(e));
+            return !Bukkit.getServer().getServerTickManager().isFrozen(en);
         }
         if (is){
             return Bukkit.getServer().getServerTickManager().isFrozen();

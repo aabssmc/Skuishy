@@ -38,7 +38,6 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
     private Expression<Integer> shift;
     private Expression<String> value;
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
         value = (Expression<String>) exprs[0];

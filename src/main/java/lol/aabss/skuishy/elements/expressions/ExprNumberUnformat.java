@@ -45,7 +45,7 @@ public class ExprNumberUnformat extends SimpleExpression<Number> {
             }
             return new Number[]{NumberFormat.getNumberInstance().parse(num.getSingle(e).toUpperCase())};
         } catch (ParseException ex) {
-            throw new RuntimeException(ex);
+            return null;
         }
     }
 

@@ -34,7 +34,10 @@ public class EffToggleVerbose extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        VulcanAPI.Factory.getApi().toggleVerbose(p.getSingle(e));
+        VulcanAPI api = VulcanAPI.Factory.getApi();
+        if (api != null) {
+            api.toggleVerbose(p.getSingle(e));
+        }
     }
 
     @Override

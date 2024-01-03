@@ -48,13 +48,13 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
 
     @Override
     public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
-        assert delta != null;
         Block block = getExpr().getSingle(e);
-        assert block != null;
-        BlockData data = block.getBlockData();
-        if (mode == Changer.ChangeMode.SET){
-            if (data instanceof NoteBlock){
-                ((NoteBlock) data).setInstrument((Instrument) delta[0]);
+        if (delta != null && block != null) {
+            BlockData data = block.getBlockData();
+            if (mode == Changer.ChangeMode.SET) {
+                if (data instanceof NoteBlock) {
+                    ((NoteBlock) data).setInstrument((Instrument) delta[0]);
+                }
             }
         }
     }
@@ -77,7 +77,6 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
         return "instrument of " + getExpr();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         setExpr((Expression<Block>) exprs[0]);

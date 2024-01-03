@@ -28,7 +28,7 @@ public class EvtShieldBreak extends SkriptEvent {
         Skript.registerEvent("on shield break", SimpleEvent.class, ShieldBreakEvent.class,
                 "[player] shield (disable|break)"
         );
-        EventValues.registerEventValue(ShieldBreakEvent.class, Player.class, new Getter<Player, ShieldBreakEvent>() {
+        EventValues.registerEventValue(ShieldBreakEvent.class, Player.class, new Getter<>() {
             @Override
             public Player get(ShieldBreakEvent e) {
                 return e.getPlayer();

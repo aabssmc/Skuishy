@@ -51,33 +51,28 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
     }
 
     @Override
-    protected @Nullable Integer[] get(@NotNull Event e) {
+    protected Integer @NotNull [] get(@NotNull Event e) {
         return new Integer[]{((SculkBloomEvent) e).getCharge()};
     }
 
 
     @Override
     public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            assert delta != null;
-            ((SculkBloomEvent) e).setCharge((Integer) delta[0]);
-        }
-        else if (mode == Changer.ChangeMode.ADD) {
-            assert delta != null;
-            ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() + (Integer) delta[0]);
-        }
-        else if (mode == Changer.ChangeMode.REMOVE) {
-            assert delta != null;
-            ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() - (Integer) delta[0]);
-        }
-        else if (mode == Changer.ChangeMode.REMOVE_ALL) {
-            assert delta != null;
-            ((SculkBloomEvent) e).setCharge(0);
+        if (delta != null) {
+            if (mode == Changer.ChangeMode.SET) {
+                ((SculkBloomEvent) e).setCharge((Integer) delta[0]);
+            } else if (mode == Changer.ChangeMode.ADD) {
+                ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() + (Integer) delta[0]);
+            } else if (mode == Changer.ChangeMode.REMOVE) {
+                ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() - (Integer) delta[0]);
+            } else if (mode == Changer.ChangeMode.REMOVE_ALL) {
+                ((SculkBloomEvent) e).setCharge(0);
+            }
         }
     }
 
     @Override
-    public @Nullable Class<?>[] acceptChange(Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
             return CollectionUtils.array(Integer.class);
         }

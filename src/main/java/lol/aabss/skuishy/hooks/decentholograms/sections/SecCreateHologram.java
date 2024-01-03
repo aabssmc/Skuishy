@@ -19,7 +19,6 @@ import org.skriptlang.skript.lang.entry.util.ExpressionEntryData;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Objects;
 
 @Name("DecentHolograms - Create Hologram")
 @Examples({
@@ -71,12 +70,10 @@ public class SecCreateHologram extends Section {
     protected @Nullable TriggerItem walk(@NotNull Event e) {
         String name = this.name.getSingle(e);
         List<String> lines = List.of(this.lines.getArray(e));
-        DHAPI.createHologram(
-                Objects.requireNonNull(name),
-                Objects.requireNonNull(location.getSingle(e)),
-                persistent,
-                lines
-        );
+        Location loc = this.location.getSingle(e);
+        if (name != null && loc != null) {
+            DHAPI.createHologram(name, loc, persistent, lines);
+        }
         return super.walk(e, false);
     }
 

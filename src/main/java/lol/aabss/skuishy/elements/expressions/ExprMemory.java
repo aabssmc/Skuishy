@@ -87,8 +87,6 @@ public class ExprMemory extends SimpleExpression<Object> {
     public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "memory of entity";
     }
-
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (matchedPattern == 0){

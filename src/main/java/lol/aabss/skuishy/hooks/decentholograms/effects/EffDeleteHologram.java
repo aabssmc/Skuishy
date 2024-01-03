@@ -34,7 +34,10 @@ public class EffDeleteHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        hologram.getSingle(e).delete();
+        Hologram holo = hologram.getSingle(e);
+        if (holo != null) {
+            holo.delete();
+        }
     }
 
     @Override
@@ -42,7 +45,6 @@ public class EffDeleteHologram extends Effect {
         return "delete hologram";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         hologram = (Expression<Hologram>) exprs[0];

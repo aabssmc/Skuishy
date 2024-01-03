@@ -66,7 +66,6 @@ public class EvtGameruleChange extends SkriptEvent {
     Literal<World> world;
     Literal<GameRule<?>> gamerule;
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Literal<?> @NotNull [] exprs, int matchedPattern, @NotNull SkriptParser.ParseResult parseResult) {
         if (matchedPattern == 0){

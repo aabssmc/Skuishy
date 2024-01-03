@@ -47,6 +47,6 @@ public class CondAnd extends Condition {
         String cond2 = parseResult.regexes.get(0).group();
         condition1 = Condition.parse(cond1, "Can't understand this condition: " + cond1);
         condition2 = Condition.parse(cond2, "Can't understand this condition: " + cond2);
-        return true;
+        return condition1 != null && condition2 != null;
     }
 }

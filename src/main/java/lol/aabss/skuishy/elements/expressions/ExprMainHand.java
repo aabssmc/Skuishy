@@ -33,7 +33,6 @@ public class ExprMainHand extends PropertyExpression<Player, String> {
         return String.class;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parser) {
         setExpr((Expression<Player>) exprs[0]);
@@ -49,7 +48,9 @@ public class ExprMainHand extends PropertyExpression<Player, String> {
     protected String @NotNull [] get(@NotNull Event event, Player[] source) {
         if (source.length < 1) return new String[0];
         Player p = source[0];
-        assert p != null;
-        return new String[]{p.getMainHand().toString().toLowerCase()};
+        if (p != null) {
+            return new String[]{p.getMainHand().toString().toLowerCase()};
+        }
+        return new String[]{};
     }
 }

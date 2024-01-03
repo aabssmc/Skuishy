@@ -35,7 +35,6 @@ public class ExprSomeone extends SimpleExpression<Player> {
         );
     }
 
-    @SuppressWarnings({"unchecked", "NullableProblems"})
     @Override
     protected @Nullable Player[] get(@NotNull Event e) {
         List<Player> players = (List<Player>) Bukkit.getOnlinePlayers();

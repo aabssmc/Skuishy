@@ -33,7 +33,10 @@ public class EffShowWinScreen extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        p.getSingle(e).showWinScreen();
+        Player p = this.p.getSingle(e);
+        if (p != null) {
+            p.showWinScreen();
+        }
     }
 
     @Override

@@ -35,7 +35,7 @@ public class ExprFancyFont extends SimpleExpression<String> {
     private boolean really;
 
     @Override
-    protected @Nullable String[] get(@NotNull Event e) {
+    protected String @NotNull [] get(@NotNull Event e) {
         if (really){
             return Text.reallySmallCaps(text.getArray(e));
         }
@@ -57,7 +57,6 @@ public class ExprFancyFont extends SimpleExpression<String> {
         return "fancy font";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         text = (Expression<String>) exprs[0];

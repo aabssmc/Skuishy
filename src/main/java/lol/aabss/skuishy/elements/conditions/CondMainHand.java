@@ -39,7 +39,6 @@ public class CondMainHand extends Condition {
 
     private MainHandSide side;
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parser) {
         this.player = (Expression<Player>) expressions[0];
@@ -58,9 +57,8 @@ public class CondMainHand extends Condition {
     @Override
     public boolean check(@NotNull Event event) {
         Player p = player.getSingle(event);
-        assert p != null;
+        if (p == null) return false;
         String mh = p.getMainHand().toString();
-
         if (side == MainHandSide.LEFT && MainHandSide.valueOf(mh) == MainHandSide.LEFT)
             return !isNegated();
         else if (side == MainHandSide.RIGHT && MainHandSide.valueOf(mh) == MainHandSide.RIGHT)

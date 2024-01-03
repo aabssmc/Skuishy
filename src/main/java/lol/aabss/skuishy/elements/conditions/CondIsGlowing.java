@@ -51,7 +51,7 @@ public class CondIsGlowing extends Condition {
         return entities.toString(e,debug) + " is glowing";
     }
 
-    @SuppressWarnings("unchecked")
+
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         entities = (Expression<Entity>) exprs[0];

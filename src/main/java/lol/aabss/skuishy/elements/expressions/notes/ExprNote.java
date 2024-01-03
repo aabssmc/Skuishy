@@ -35,31 +35,31 @@ public class ExprNote extends SimpleExpression<Note> {
     private String accidental;
     private Expression<Integer> octave;
 
-    @SuppressWarnings("DataFlowIssue")
     @Override
-    protected @Nullable Note[] get(@NotNull Event e) {
-        int oct;
+    protected @Nullable Note [] get(@NotNull Event e) {
+        Integer oct;
         if (octave == null){
             oct = 0;
         }
         else{
             oct = octave.getSingle(e);
         }
-        if (Objects.equals(accidental, "sharp")){
-            Note note = Note.sharp(oct, tone.getSingle(e));
-            return new Note[]{note};
+        Note.Tone tone = this.tone.getSingle(e);
+        if (oct != null && tone != null) {
+            if (Objects.equals(accidental, "sharp")) {
+                Note note = Note.sharp(oct, tone);
+                return new Note[]{note};
+            } else if (Objects.equals(accidental, "flat")) {
+                Note note = Note.flat(oct, tone);
+                return new Note[]{note};
+            } else if (Objects.equals(accidental, "natural")) {
+                Note note = Note.natural(oct, tone);
+                return new Note[]{note};
+            } else {
+                return new Note[]{};
+            }
         }
-        else if (Objects.equals(accidental, "flat")){
-            Note note = Note.flat(oct, tone.getSingle(e));
-            return new Note[]{note};
-        }
-        else if (Objects.equals(accidental, "natural")){
-            Note note = Note.natural(oct, tone.getSingle(e));
-            return new Note[]{note};
-        }
-        else{
-            return null;
-        }
+        return new Note[]{};
     }
 
     @Override
@@ -77,7 +77,6 @@ public class ExprNote extends SimpleExpression<Note> {
         return "note";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parse) {
         tone = (Expression<Note.Tone>) exprs[0];

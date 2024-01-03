@@ -35,27 +35,23 @@ public class ExprCustomName extends PropertyExpression<Entity, String> {
     @Override
     protected String @NotNull [] get(@NotNull Event e, Entity @NotNull [] source) {
         Entity en = getExpr().getSingle(e);
-        assert en != null;
-        if (en.customName() != null) {
-            return new String[]{en.customName().toString()};
+        if (en != null) {
+            return new String[]{en.customName() + ""};
         }
         return new String[0];
     }
 
     @Override
     public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
-        if (mode == Changer.ChangeMode.SET) {
-            Entity en = getExpr().getSingle(e);
-            assert en != null;
-            en.customName(Component.text((String) delta[0]));
-        }
-        else if (mode == Changer.ChangeMode.RESET) {
-            Entity en = getExpr().getSingle(e);
-            assert en != null;
-            en.customName(Component.text(en.getName()));
-        }
-        else {
-            assert false;
+        Entity en = getExpr().getSingle(e);
+        if (en != null) {
+            if (mode == Changer.ChangeMode.SET) {
+                en.customName(Component.text((String) delta[0]));
+            } else if (mode == Changer.ChangeMode.RESET) {
+                en.customName(Component.text(en.getName()));
+            } else {
+                assert false;
+            }
         }
     }
 
@@ -77,7 +73,6 @@ public class ExprCustomName extends PropertyExpression<Entity, String> {
         return "custom name";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         setExpr((Expression<? extends Entity>) exprs[0]);

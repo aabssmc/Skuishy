@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.expressions;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
@@ -16,9 +17,11 @@ import javax.annotation.Nullable;
 public class ExprBloom extends PropertyExpression<Block, Boolean> {
 
     static{
-        register(ExprBloom.class, Boolean.class,
-                "bloom (state|mode)",
-                "blocks");
+        if (Skript.classExists(SculkCatalyst.class.getName())){
+            register(ExprBloom.class, Boolean.class,
+                    "bloom (state|mode)",
+                    "blocks");
+        }
     }
 
     @Override

@@ -45,7 +45,6 @@ public class EffLockFreezeTicks extends Effect {
         return "unlock freeze ticks";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         lock = !parseResult.hasTag("un");

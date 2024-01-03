@@ -12,7 +12,6 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 @Name("Decent Holograms - Hologram Exists")
 @Description("Returns true if a hologram exists.")
@@ -38,10 +37,12 @@ public class CondHologramExists extends Condition {
 
     @Override
     public boolean check(@NotNull Event e) {
-        if (is){
-            return DHAPI.getHologram(Objects.requireNonNull(name.getSingle(e))) != null;
+        String name = this.name.getSingle(e);
+        if (name == null) return false;
+        if (is) {
+            return DHAPI.getHologram(name) != null;
         }
-        return DHAPI.getHologram(Objects.requireNonNull(name.getSingle(e))) == null;
+        return DHAPI.getHologram(name) == null;
     }
 
     @Override
@@ -49,7 +50,6 @@ public class CondHologramExists extends Condition {
         return "hologram exists";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         name = (Expression<String>) exprs[0];

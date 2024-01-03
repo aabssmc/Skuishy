@@ -34,12 +34,14 @@ public class ExprCenteredText extends SimpleExpression<String> {
     private Expression<String> text;
 
     @Override
-    protected @Nullable String[] get(@NotNull Event e) {
+    protected String @NotNull [] get(@NotNull Event e) {
         String text = this.text.getSingle(e);
-        assert text != null;
-        int totalWidth = Math.max(80, text.length() + 4);
-        int padSize = (totalWidth - text.length()) / 2;
-        return new String[]{" ".repeat(padSize) + text};
+        if (text != null) {
+            int totalWidth = Math.max(80, text.length() + 4);
+            int padSize = (totalWidth - text.length()) / 2;
+            return new String[]{" ".repeat(padSize) + text};
+        }
+        return new String[]{};
     }
 
     @Override
@@ -57,7 +59,6 @@ public class ExprCenteredText extends SimpleExpression<String> {
         return "centered text";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         text = (Expression<String>) exprs[0];

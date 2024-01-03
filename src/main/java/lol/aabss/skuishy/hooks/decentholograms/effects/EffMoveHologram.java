@@ -14,7 +14,6 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 @Name("Decent Holograms - Move Hologram")
 @Description("Moves a hologram.")
@@ -39,7 +38,11 @@ public class EffMoveHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        DHAPI.moveHologram(Objects.requireNonNull(hologram.getSingle(e)), Objects.requireNonNull(location.getSingle(e)));
+        Hologram holo = hologram.getSingle(e);
+        Location loc = location.getSingle(e);
+        if (holo != null && loc != null){
+            DHAPI.moveHologram(holo, loc);
+        }
     }
 
     @Override
@@ -47,7 +50,6 @@ public class EffMoveHologram extends Effect {
         return "move hologram";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         hologram = (Expression<Hologram>) exprs[0];

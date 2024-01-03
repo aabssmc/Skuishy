@@ -30,13 +30,13 @@ public class EffStopGlow extends Effect {
 
     static {
         Skript.registerEffect(EffStopGlow.class,
-                "make %entities% stop glowing", "[skuishy] remove glowing from %entities%"
+                "make %entities% stop glowing",
+                "[sk[uishy]] remove glowing from %entities%"
         );
     }
 
     private Expression<Entity> entity;
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
         entity = (Expression<Entity>) expressions[0];
@@ -50,7 +50,7 @@ public class EffStopGlow extends Effect {
 
     @Override
     protected void execute(@NotNull Event event) {
-        for(Entity e : entity.getAll(event)){
+        for (Entity e : entity.getArray(event)){
             Scoreboard mainScoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
             mainScoreboard.getTeams().forEach(team -> team.removeEntity(e));
             e.setGlowing(false);

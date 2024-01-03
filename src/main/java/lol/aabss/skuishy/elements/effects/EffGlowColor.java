@@ -37,7 +37,6 @@ public class EffGlowColor extends Effect {
     private Expression<Entity> entity;
     private Expression<Color> color;
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
         entity = (Expression<Entity>) expressions[0];
@@ -52,7 +51,7 @@ public class EffGlowColor extends Effect {
 
     @Override
     protected void execute(@NotNull Event event) {
-        for(Entity e : entity.getAll(event)){
+        for(Entity e : entity.getArray(event)){
             Glow.mainGlow(e, color, event);
         }
     }

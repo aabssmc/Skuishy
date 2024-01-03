@@ -16,9 +16,11 @@ import javax.annotation.Nullable;
 public class EffBloom extends Effect {
 
     static{
-        Skript.registerEffect(EffBloom.class,
-                "[force[fully]] bloom %block% with (charge|power) %integer% [at %location%]"
-        );
+        if (Skript.classExists("org.bukkit.block.SculkCatalyst")){
+            Skript.registerEffect(EffBloom.class,
+                    "[force[fully]] bloom %block% with (charge|power) %integer% [at %-location%]"
+            );
+        }
     }
 
     private Expression<Integer> charge;
@@ -27,12 +29,16 @@ public class EffBloom extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        if (block.getSingle(e) instanceof SculkCatalyst b){
-            if (location != null){
-                b.bloom(location.getSingle(e), charge.getSingle(e));
-            }
-            else{
-                b.bloom(block.getSingle(e), charge.getSingle(e));
+        Location loc = location.getSingle(e);
+        Block block = this.block.getSingle(e);
+        Integer charge = this.charge.getSingle(e);
+        if (charge != null) {
+            if (block instanceof SculkCatalyst b) {
+                if (loc != null) {
+                    b.bloom(loc, charge);
+                } else {
+                    b.bloom(block, charge);
+                }
             }
         }
     }

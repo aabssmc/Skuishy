@@ -50,38 +50,43 @@ public class EffEditLineHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        if (Objects.equals(changetype, "add")){
-            DHAPI.addHologramLine(Objects.requireNonNull(hologram.getSingle(e)),
-                    text.getSingle(e));
-        }
-        else if (Objects.equals(changetype, "remove")){
-            DHAPI.removeHologramLine(Objects.requireNonNull(hologram.getSingle(e)),
-                    Objects.requireNonNull(line.getSingle(e)));
-        }
-        else if (Objects.equals(changetype, "create")){
-            DHAPI.createHologramLine(Objects.requireNonNull(DHAPI.getHologramPage(
-                    Objects.requireNonNull(hologram.getSingle(e)),
-                    Objects.requireNonNull(page.getSingle(e)))),
-                    text.getSingle(e));
-        }
-        else if (Objects.equals(changetype, "insert")){
-            DHAPI.insertHologramLine(Objects.requireNonNull(hologram.getSingle(e)),
-                    Objects.requireNonNull(line.getSingle(e)),
-                    text.getSingle(e));
-        }
-        else if (Objects.equals(changetype, "set")){
-            DHAPI.setHologramLine(Objects.requireNonNull(hologram.getSingle(e)),
-                    Objects.requireNonNull(line.getSingle(e)),
-                    text.getSingle(e));
-        }
-        else if (Objects.equals(changetype, "get")){
-            HologramPage page = DHAPI.getHologramPage(Objects.requireNonNull(hologram.getSingle(e)),
-                    Objects.requireNonNull(this.page.getSingle(e)));
-            assert page != null;
-            HologramLine line = DHAPI.getHologramLine(page,
-                    Objects.requireNonNull(this.line.getSingle(e)));
-            Variables.setVariable(var.getName().toString(),
-                    line, e, var.isLocal());
+        Hologram holo = hologram.getSingle(e);
+        if (holo != null) {
+            if (Objects.equals(changetype, "add")) {
+                DHAPI.addHologramLine(holo, text.getSingle(e));
+            } else if (Objects.equals(changetype, "remove")) {
+                Integer line = this.line.getSingle(e);
+                if (line != null) {
+                    DHAPI.removeHologramLine(holo, line);
+                }
+            } else if (Objects.equals(changetype, "create")) {
+                Integer page = this.page.getSingle(e);
+                if (page != null) {
+                    HologramPage pagee = DHAPI.getHologramPage(holo, page);
+                    if (pagee != null) {
+                        DHAPI.createHologramLine(pagee, text.getSingle(e));
+                    }
+                }
+            } else if (Objects.equals(changetype, "insert")) {
+                Integer line = this.line.getSingle(e);
+                if (line != null) {
+                    DHAPI.insertHologramLine(holo, line, text.getSingle(e));
+                }
+            } else if (Objects.equals(changetype, "set")) {
+                Integer line = this.line.getSingle(e);
+                if (line != null) {
+                    DHAPI.setHologramLine(holo, line, text.getSingle(e));
+                }
+            } else if (Objects.equals(changetype, "get")) {
+                Integer pagen = this.page.getSingle(e);
+                if (pagen != null) {
+                    HologramPage page = DHAPI.getHologramPage(holo, pagen);
+                    if (page != null) {
+                        HologramLine line = DHAPI.getHologramLine(page, Objects.requireNonNull(this.line.getSingle(e)));
+                        Variables.setVariable(var.getName().toString(), line, e, var.isLocal());
+                    }
+                }
+            }
         }
     }
 
@@ -90,7 +95,6 @@ public class EffEditLineHologram extends Effect {
         return "edit hologram";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (matchedPattern == 0){

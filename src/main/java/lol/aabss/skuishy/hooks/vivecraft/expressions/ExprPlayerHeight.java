@@ -30,7 +30,7 @@ public class ExprPlayerHeight extends PropertyExpression<VivePlayer, Integer> {
     }
 
     @Override
-    protected Integer[] get(Event event, VivePlayer[] source) {
+    protected Integer[] get(@NotNull Event event, VivePlayer[] source) {
         VivePlayer p = source[0];
         return new Integer[]{(int) p.heightScale};
     }
