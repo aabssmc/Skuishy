@@ -50,11 +50,14 @@ public class ExprDyed extends SimpleExpression<ItemStack> {
     private Expression<Integer> blue;
 
     @Override
-    protected ItemStack @NotNull [] get(@NotNull Event e) {
+    protected @Nullable ItemStack[] get(@NotNull Event e) {
         ItemType im = items.getSingle(e);
         if (im != null ) {
             ItemStack item = new ItemStack(im.getMaterial());
-            Color c = this.color.getSingle(e);
+            Color c = null;
+            if (this.color != null) {
+                c = this.color.getSingle(e);
+            }
             org.bukkit.Color color;
             if (c != null) {
                 color = c.asBukkitColor();

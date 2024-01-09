@@ -12,6 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
+
 @Name("Player - Main Hand")
 @Description("Gets the player's selected main hand.")
 @Examples({
@@ -45,7 +47,7 @@ public class ExprMainHand extends PropertyExpression<Player, String> {
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event event, Player[] source) {
+    protected @Nullable String[] get(@NotNull Event event, Player[] source) {
         if (source.length < 1) return new String[0];
         Player p = source[0];
         if (p != null) {

@@ -33,6 +33,11 @@ public class ExprEventNote extends EventValueExpression<Note> {
     }
 
     @Override
+    protected Note @org.jetbrains.annotations.Nullable [] get(@NotNull Event e) {
+        return new Note[]{((NotePlayEvent) e).getNote()};
+    }
+
+    @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (getParser().isCurrentEvent(NotePlayEvent.class)){
             return true;

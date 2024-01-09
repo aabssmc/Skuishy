@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 public class EvtSculkBloom extends SkriptEvent {
 
     static{
-        if (Skript.classExists(SculkBloomEvent.class.getName())){
+        if (Skript.classExists("org.bukkit.event.block.SculkBloomEvent")){
             Skript.registerEvent("on sculk bloom event", SimpleEvent.class, SculkBloomEvent.class,
                     "sculk bloom[ing]"
             );

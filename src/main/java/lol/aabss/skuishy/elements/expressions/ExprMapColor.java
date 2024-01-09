@@ -37,7 +37,7 @@ public class ExprMapColor extends PropertyExpression<Block, Color> {
     }
 
     @Override
-    protected Color @NotNull [] get(@NotNull Event event, Block[] source) {
+    protected @Nullable Color[] get(@NotNull Event event, Block[] source) {
         return new SkriptColor[]{SkriptColor.fromBukkitColor(source[0].getBlockData().getMapColor())};
     }
 

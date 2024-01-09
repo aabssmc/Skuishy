@@ -4,7 +4,6 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.util.Color;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Scoreboard;
@@ -78,7 +77,7 @@ public class Glow {
     public static void setGlow(Entity p, NamedTextColor c) {
         Scoreboard mainScoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
         mainScoreboard.getTeams().forEach(team -> {
-            ChatColor teamColor = getTeamColor(team);
+            NamedTextColor teamColor = getTeamColor(team);
             if (teamColor != null) {
                 team.removeEntity(p);
             }
@@ -93,10 +92,10 @@ public class Glow {
     }
 
 
-    private static ChatColor getTeamColor(Team team) {
+    private static NamedTextColor getTeamColor(Team team) {
         String teamName = team.getName();
-        ChatColor color = null;
-        for (ChatColor chatColor : ChatColor.values()) {
+        NamedTextColor color = null;
+        for (NamedTextColor chatColor : NamedTextColor.NAMES.values()) {
             if (teamName.startsWith(chatColor.toString())) {
                 color = chatColor;
                 break;

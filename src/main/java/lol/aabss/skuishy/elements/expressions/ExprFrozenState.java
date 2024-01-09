@@ -37,7 +37,7 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
     private Expression<Entity> ent;
 
     @Override
-    protected Boolean @NotNull [] get(@NotNull Event e) {
+    protected @Nullable Boolean[] get(@NotNull Event e) {
         Entity entity = ent.getSingle(e);
         if (entity != null){
             return new Boolean[]{entity.isFrozen()};

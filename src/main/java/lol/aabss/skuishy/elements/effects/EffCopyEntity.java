@@ -41,12 +41,14 @@ public class EffCopyEntity extends Effect {
     @Override
     protected void execute(@NotNull Event e) {
         Entity en = entity.getSingle(e);
-        Location loc = this.location.getSingle(e);
-        if (en != null) {
-            if (loc != null) {
-                en.copy(loc);
-            } else {
-                Variables.setVariable(var.getName().toString(), en.copy(), e, var.isLocal());
+        if (location != null) {
+            Location loc = this.location.getSingle(e);
+            if (en != null) {
+                if (loc != null) {
+                    en.copy(loc);
+                } else {
+                    Variables.setVariable(var.getName().toString(), en.copy(), e, var.isLocal());
+                }
             }
         }
     }
@@ -60,7 +62,9 @@ public class EffCopyEntity extends Effect {
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         entity = (Expression<Entity>) exprs[0];
         if (matchedPattern == 0){
-            var = (Variable<?>) exprs[1];
+            if (exprs[1] instanceof Variable<?>) {
+                var = (Variable<?>) exprs[1];
+            }
             return true;
         }
         location = (Expression<Location>) exprs[1];

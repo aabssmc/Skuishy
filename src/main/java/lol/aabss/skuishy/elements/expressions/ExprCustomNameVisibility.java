@@ -32,7 +32,7 @@ public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean
     }
 
     @Override
-    protected Boolean @NotNull [] get(@NotNull Event e, Entity @NotNull [] source) {
+    protected @Nullable Boolean[] get(@NotNull Event e, Entity @NotNull [] source) {
         Entity en = getExpr().getSingle(e);
         if (en != null) return new Boolean[]{en.isCustomNameVisible()};
         return new Boolean[]{};

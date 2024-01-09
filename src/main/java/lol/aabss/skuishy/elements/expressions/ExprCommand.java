@@ -34,7 +34,7 @@ public class ExprCommand extends PropertyExpression<Block, String> {
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e, Block @NotNull [] source) {
+    protected @Nullable String[] get(@NotNull Event e, Block @NotNull [] source) {
         if (getExpr().getSingle(e) instanceof CommandBlock c){
             return new String[]{c.getCommand()};
         }

@@ -37,6 +37,11 @@ public class ExprEventInstrument extends EventValueExpression<Instrument> {
     }
 
     @Override
+    protected Instrument @org.jetbrains.annotations.Nullable [] get(@NotNull Event e) {
+        return new Instrument[]{((NotePlayEvent) e).getInstrument()};
+    }
+
+    @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "event instrument";
     }

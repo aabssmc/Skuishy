@@ -25,7 +25,7 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     }
 
     @Override
-    protected Boolean @NotNull [] get(@NotNull Event event, Block @NotNull [] source) {
+    protected @Nullable Boolean[] get(@NotNull Event event, Block @NotNull [] source) {
         if (source[0].getBlockData() instanceof SculkCatalyst b){
             return new Boolean[]{b.isBloom()};
         }

@@ -29,19 +29,22 @@ public class EffBloom extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Location loc = location.getSingle(e);
-        Block block = this.block.getSingle(e);
-        Integer charge = this.charge.getSingle(e);
-        if (charge != null) {
-            if (block instanceof SculkCatalyst b) {
-                if (loc != null) {
-                    b.bloom(loc, charge);
-                } else {
-                    b.bloom(block, charge);
+        if (location != null && block != null && charge != null) {
+            Location loc = location.getSingle(e);
+            Block block = this.block.getSingle(e);
+            Integer charge = this.charge.getSingle(e);
+            if (charge != null) {
+                if (block instanceof SculkCatalyst b) {
+                    if (loc != null) {
+                        b.bloom(loc, charge);
+                    } else {
+                        b.bloom(block, charge);
+                    }
                 }
             }
         }
     }
+
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {

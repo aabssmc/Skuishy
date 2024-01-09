@@ -51,7 +51,7 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
     }
 
     @Override
-    protected Integer @NotNull [] get(@NotNull Event e) {
+    protected Integer @org.jetbrains.annotations.Nullable [] get(@NotNull Event e) {
         return new Integer[]{((PlayerItemDamageEvent) e).getDamage()};
     }
 

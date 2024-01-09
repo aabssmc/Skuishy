@@ -14,6 +14,8 @@ import org.bukkit.event.Event;
 import org.bukkit.event.command.UnknownCommandEvent;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
+
 @Name("Player - Unknown Command Message")
 @Description("Gets or sets the unknown command message.")
 @Examples({
@@ -57,7 +59,7 @@ public class ExprUnkwnCmdMsg extends SimpleExpression<String> {
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String[] get(@NotNull Event e) {
         if (e instanceof UnknownCommandEvent){
             String cmdline = String.valueOf(((UnknownCommandEvent) e).message());
             return new String[]{cmdline};

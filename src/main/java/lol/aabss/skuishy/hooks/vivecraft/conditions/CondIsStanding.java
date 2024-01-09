@@ -5,8 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import com.cjcrafter.vivecraft.VSE;
-import com.cjcrafter.vivecraft.VivePlayer;
+import org.vivecraft.VSE;
+import org.vivecraft.VivePlayer;
 import org.jetbrains.annotations.NotNull;
 
 @Name("ViveCraft - Is Standing")

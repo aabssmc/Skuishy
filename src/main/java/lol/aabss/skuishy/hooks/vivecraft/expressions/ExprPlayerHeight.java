@@ -8,7 +8,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.cjcrafter.vivecraft.VivePlayer;
+import org.vivecraft.VivePlayer;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 

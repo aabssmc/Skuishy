@@ -12,7 +12,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import com.cjcrafter.vivecraft.VSE;
+import org.vivecraft.VSE;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 

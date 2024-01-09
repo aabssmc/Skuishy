@@ -27,7 +27,7 @@ public class ExprFancyFont extends SimpleExpression<String> {
 
     static{
         Skript.registerExpression(ExprFancyFont.class, String.class, ExpressionType.SIMPLE,
-                "%strings% in [:really] (tiny|small) (caps|font)"
+                "%strings% (in|with) [:really] (tiny|small) (caps|font)"
         );
     }
 
@@ -35,7 +35,7 @@ public class ExprFancyFont extends SimpleExpression<String> {
     private boolean really;
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String[] get(@NotNull Event e) {
         if (really){
             return Text.reallySmallCaps(text.getArray(e));
         }

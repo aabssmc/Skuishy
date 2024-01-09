@@ -37,7 +37,7 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
     private Expression<World> world;
 
     @Override
-    protected Boolean @NotNull [] get(@NotNull Event e) {
+    protected @Nullable Boolean[] get(@NotNull Event e) {
         World world = this.world.getSingle(e);
         if (world != null) return new Boolean[]{world.isHardcore()};
         return new Boolean[]{};

@@ -29,7 +29,7 @@ dependencies {
     // decent holograms
     compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.5'
     // vivecraft
-    implementation 'com.cjcrafter:vivecraft:3.0.0'
+    implementation files('gradle/Vivecraft_Spigot_Extensions.jar')
     // vulcan
     implementation files('gradle/VulcanAPI.jar')
     // other things

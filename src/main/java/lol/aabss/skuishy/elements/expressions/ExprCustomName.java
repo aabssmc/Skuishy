@@ -33,7 +33,7 @@ public class ExprCustomName extends PropertyExpression<Entity, String> {
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e, Entity @NotNull [] source) {
+    protected @Nullable String[] get(@NotNull Event e, Entity @NotNull [] source) {
         Entity en = getExpr().getSingle(e);
         if (en != null) {
             return new String[]{en.customName() + ""};

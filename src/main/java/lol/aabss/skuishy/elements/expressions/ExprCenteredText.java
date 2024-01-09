@@ -34,7 +34,7 @@ public class ExprCenteredText extends SimpleExpression<String> {
     private Expression<String> text;
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String[] get(@NotNull Event e) {
         String text = this.text.getSingle(e);
         if (text != null) {
             int totalWidth = Math.max(80, text.length() + 4);

@@ -5,7 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import com.cjcrafter.vivecraft.VSE;
+import org.vivecraft.VSE;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
