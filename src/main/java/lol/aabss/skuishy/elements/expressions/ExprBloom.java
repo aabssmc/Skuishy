@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 public class ExprBloom extends PropertyExpression<Block, Boolean> {
 
     static{
-        if (Skript.classExists("org.bukkit.block.data.type.SculkCatalyst")){
+        if (Skript.methodExists(SculkCatalyst.class, "isBloom") && Skript.methodExists(SculkCatalyst.class, "setBloom", Boolean.class)){
             register(ExprBloom.class, Boolean.class,
                     "bloom (state|mode)",
                     "blocks");
