@@ -24,17 +24,17 @@ public class CondNotBoolean extends Condition {
 
     static {
         Skript.registerCondition(CondNotBoolean.class,
-                "(!|not )%boolean%"
+                "(!|not )<.+>"
         );
     }
 
     private Expression<Boolean> bool;
+    private Condition cond;
     
 
     @Override
     public boolean check(@NotNull Event e) {
-        Boolean bool = this.bool.getSingle(e);
-        return !Boolean.TRUE.equals(bool);
+        return !cond.check(e);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class CondNotBoolean extends Condition {
 
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        this.bool = (Expression<Boolean>) exprs[0];
-        return true;
+        cond = Condition.parse(parseResult.regexes.get(0).group(), "Can't understand this condition: " + parseResult.regexes.get(0).group());
+        return cond != null;
     }
 }
