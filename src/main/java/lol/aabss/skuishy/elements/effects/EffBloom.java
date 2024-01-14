@@ -17,7 +17,8 @@ public class EffBloom extends Effect {
     static{
         if (Skript.methodExists(SculkCatalyst.class, "bloom", Block.class, Integer.class)){
             Skript.registerEffect(EffBloom.class,
-                    "[force[fully]] bloom %block% with (charge|power) %integer%"
+                    "[force[fully]] bloom %blocks% with (charge|power) %integer%",
+                    "make %blocks% bloom with (charge|power) %integer%"
             );
         }
     }
@@ -28,11 +29,13 @@ public class EffBloom extends Effect {
     @Override
     protected void execute(@NotNull Event e) {
         if (block != null && charge != null) {
-            Block block = this.block.getSingle(e);
+            Block[] block = this.block.getArray(e);
             Integer charge = this.charge.getSingle(e);
             if (charge != null) {
-                if (block instanceof SculkCatalyst b) {
-                    b.bloom(block, charge);
+                for (Block b : block) {
+                    if (b instanceof SculkCatalyst bb) {
+                        bb.bloom(b, charge);
+                    }
                 }
             }
         }
