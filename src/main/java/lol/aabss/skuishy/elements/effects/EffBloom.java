@@ -28,14 +28,12 @@ public class EffBloom extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        if (block != null && charge != null) {
-            Block[] block = this.block.getArray(e);
-            Integer charge = this.charge.getSingle(e);
-            if (charge != null) {
-                for (Block b : block) {
-                    if (b instanceof SculkCatalyst bb) {
-                        bb.bloom(b, charge);
-                    }
+        Block[] block = this.block.getArray(e);
+        Integer charge = this.charge.getSingle(e);
+        if (charge != null) {
+            for (Block b : block) {
+                if (b instanceof SculkCatalyst bb) {
+                    bb.bloom(b, charge);
                 }
             }
         }
