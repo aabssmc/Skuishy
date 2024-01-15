@@ -30,40 +30,46 @@ public class BlockEvents extends SkriptEvent {
 
     static{
         // async structure generate
-        Skript.registerEvent("async structure generate", BlockEvents.class, AsyncStructureGenerateEvent.class,
-                        "[async] structure generate[d]"
-                )
-                .description("Called when a structure generates asynchronously.")
-                .examples("on structure generate:")
-                .since("2.0");
+        if (Skript.classExists("org.bukkit.event.world.AsyncStructureGenerateEvent")) {
+            Skript.registerEvent("async structure generate", BlockEvents.class, AsyncStructureGenerateEvent.class,
+                            "[async] structure generate[d]"
+                    )
+                    .description("Called when a structure generates asynchronously.")
+                    .examples("on structure generate:")
+                    .since("2.0");
+        }
 
 // async structure spawn
-        Skript.registerEvent("async structure spawn", BlockEvents.class, AsyncStructureSpawnEvent.class,
-                        "[async] structure spawn[ed]"
-                )
-                .description("Called when a structure spawns asynchronously.")
-                .examples("on structure spawn:")
-                .since("2.0");
+        if (Skript.classExists("org.bukkit.event.world.AsyncStructureSpawnEvent")) {
+            Skript.registerEvent("async structure spawn", BlockEvents.class, AsyncStructureSpawnEvent.class,
+                            "[async] structure spawn[ed]"
+                    )
+                    .description("Called when a structure spawns asynchronously.")
+                    .examples("on structure spawn:")
+                    .since("2.0");
+        }
 
 // bell resonate
-        Skript.registerEvent("bell resonate", BlockEvents.class, BellResonateEvent.class,
-                        "bell resonate[d|s]"
-                )
-                .description("Called when a bell resonates.")
-                .examples("on bell resonate:")
-                .since("2.0");
-        EventValues.registerEventValue(BellResonateEvent.class, Location.class, new Getter<>() {
-            @Override
-            public Location get(BellResonateEvent e) {
-                return e.getBlock().getLocation();
-            }
-        }, 0);
-        EventValues.registerEventValue(BellResonateEvent.class, Block.class, new Getter<>() {
-            @Override
-            public Block get(BellResonateEvent e) {
-                return e.getBlock();
-            }
-        }, 0);
+        if (Skript.classExists("org.bukkit.event.block.BellResonateEvent")) {
+            Skript.registerEvent("bell resonate", BlockEvents.class, BellResonateEvent.class,
+                            "bell resonate[d|s]"
+                    )
+                    .description("Called when a bell resonates.")
+                    .examples("on bell resonate:")
+                    .since("2.0");
+            EventValues.registerEventValue(BellResonateEvent.class, Location.class, new Getter<>() {
+                @Override
+                public Location get(BellResonateEvent e) {
+                    return e.getBlock().getLocation();
+                }
+            }, 0);
+            EventValues.registerEventValue(BellResonateEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(BellResonateEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+        }
 
 // block cook
         Skript.registerEvent("block cook", BlockEvents.class, BlockCookEvent.class,
@@ -114,19 +120,21 @@ public class BlockEvents extends SkriptEvent {
         }, 0);
 
 // block lock check
-        Skript.registerEvent("block lock check", BlockEvents.class, BlockLockCheckEvent.class,
-                        "[block] lock check",
-                "[block] check lock"
-                )
-                .description("Called when a lock check is performed on a block.")
-                .examples("on block lock check:")
-                .since("2.0");
-        EventValues.registerEventValue(BlockLockCheckEvent.class, Block.class, new Getter<>() {
-            @Override
-            public Block get(BlockLockCheckEvent e) {
-                return e.getBlock();
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.block.BlockLockCheckEvent")) {
+            Skript.registerEvent("block lock check", BlockEvents.class, BlockLockCheckEvent.class,
+                            "[block] lock check",
+                            "[block] check lock"
+                    )
+                    .description("Called when a lock check is performed on a block.")
+                    .examples("on block lock check:")
+                    .since("2.0");
+            EventValues.registerEventValue(BlockLockCheckEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(BlockLockCheckEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+        }
 
 // block pre dispense
         Skript.registerEvent("block pre dispense", BlockEvents.class, BlockPreDispenseEvent.class,
@@ -203,25 +211,26 @@ public class BlockEvents extends SkriptEvent {
         }, 0);
 
 // compost item
-        Skript.registerEvent("compost item", BlockEvents.class, CompostItemEvent.class,
-                        "[block] compost[ed] item"
-                )
-                .description("Called when an item is composted.")
-                .examples("on compost item:")
-                .since("2.0");
-        EventValues.registerEventValue(CompostItemEvent.class, Block.class, new Getter<>() {
-            @Override
-            public Block get(CompostItemEvent e) {
-                return e.getBlock();
-            }
-        }, 0);
-        EventValues.registerEventValue(CompostItemEvent.class, ItemStack.class, new Getter<>() {
-            @Override
-            public ItemStack get(CompostItemEvent e) {
-                return e.getItem();
-            }
-        }, 0);
-
+        if (Skript.classExists("io.papermc.paper.event.block.CompostItemEvent")) {
+            Skript.registerEvent("compost item", BlockEvents.class, CompostItemEvent.class,
+                            "[block] compost[ed] item"
+                    )
+                    .description("Called when an item is composted.")
+                    .examples("on compost item:")
+                    .since("2.0");
+            EventValues.registerEventValue(CompostItemEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(CompostItemEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+            EventValues.registerEventValue(CompostItemEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public ItemStack get(CompostItemEvent e) {
+                    return e.getItem();
+                }
+            }, 0);
+        }
     }
 
     @Override

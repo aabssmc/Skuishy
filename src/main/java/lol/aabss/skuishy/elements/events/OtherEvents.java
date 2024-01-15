@@ -38,44 +38,48 @@ public class OtherEvents extends SkriptEvent {
         }, 0);
 
 // hopper inventory search
-        Skript.registerEvent("hopper inventory search", OtherEvents.class, HopperInventorySearchEvent.class,
-                        "hopper inventory search"
-                )
-                .description("Called when a hopper searches for an inventory to pull items from.")
-                .examples("on hopper inventory search:")
-                .since("2.0");
-        EventValues.registerEventValue(HopperInventorySearchEvent.class, Block.class, new Getter<>() {
-            @Override
-            public Block get(HopperInventorySearchEvent e) {
-                return e.getBlock();
-            }
-        }, 0);
-        EventValues.registerEventValue(HopperInventorySearchEvent.class, Inventory.class, new Getter<>() {
-            @Override
-            public Inventory get(HopperInventorySearchEvent e) {
-                return e.getInventory();
-            }
-        }, 0);
+        if (Skript.classExists("org.bukkit.event.inventory.HopperInventorySearchEvent")) {
+            Skript.registerEvent("hopper inventory search", OtherEvents.class, HopperInventorySearchEvent.class,
+                            "hopper inventory search"
+                    )
+                    .description("Called when a hopper searches for an inventory to pull items from.")
+                    .examples("on hopper inventory search:")
+                    .since("2.0");
+            EventValues.registerEventValue(HopperInventorySearchEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(HopperInventorySearchEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+            EventValues.registerEventValue(HopperInventorySearchEvent.class, Inventory.class, new Getter<>() {
+                @Override
+                public Inventory get(HopperInventorySearchEvent e) {
+                    return e.getInventory();
+                }
+            }, 0);
+        }
 
 // inventory block start
-        Skript.registerEvent("inventory block start", OtherEvents.class, InventoryBlockStartEvent.class,
-                        "inventory block start"
-                )
-                .description("Called when an inventory block starts processing.")
-                .examples("on inventory block start:")
-                .since("2.0");
-        EventValues.registerEventValue(InventoryBlockStartEvent.class, Block.class, new Getter<>() {
-            @Override
-            public Block get(InventoryBlockStartEvent e) {
-                return e.getBlock();
-            }
-        }, 0);
-        EventValues.registerEventValue(InventoryBlockStartEvent.class, ItemStack.class, new Getter<>() {
-            @Override
-            public ItemStack get(InventoryBlockStartEvent e) {
-                return e.getSource();
-            }
-        }, 0);
+        if (Skript.classExists("org.bukkit.event.block.InventoryBlockStartEvent")) {
+            Skript.registerEvent("inventory block start", OtherEvents.class, InventoryBlockStartEvent.class,
+                            "inventory block start"
+                    )
+                    .description("Called when an inventory block starts processing.")
+                    .examples("on inventory block start:")
+                    .since("2.0");
+            EventValues.registerEventValue(InventoryBlockStartEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(InventoryBlockStartEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+            EventValues.registerEventValue(InventoryBlockStartEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public ItemStack get(InventoryBlockStartEvent e) {
+                    return e.getSource();
+                }
+            }, 0);
+        }
 
 // lootable inventory replenish
         Skript.registerEvent("loot table inventory replenish", OtherEvents.class, LootableInventoryReplenishEvent.class,
@@ -92,18 +96,26 @@ public class OtherEvents extends SkriptEvent {
         }, 0);
 
 // whitelist state update
-        Skript.registerEvent("whitelist state update", OtherEvents.class, WhitelistStateUpdateEvent.class,
-                        "whitelist (mode|state) update[d]"
-                )
-                .description("Called when the server's whitelist state is updated.")
-                .examples("on whitelist state update:")
-                .since("2.0");
-        EventValues.registerEventValue(WhitelistStateUpdateEvent.class, OfflinePlayer.class, new Getter<>() {
-            @Override
-            public OfflinePlayer get(WhitelistStateUpdateEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.server.WhitelistStateUpdateEvent")) {
+            Skript.registerEvent("whitelist state update", OtherEvents.class, WhitelistStateUpdateEvent.class,
+                            "whitelist (mode|state) update[d]"
+                    )
+                    .description("Called when the server's whitelist state is updated.")
+                    .examples("on whitelist state update:")
+                    .since("2.0");
+            EventValues.registerEventValue(WhitelistStateUpdateEvent.class, OfflinePlayer.class, new Getter<>() {
+                @Override
+                public OfflinePlayer get(WhitelistStateUpdateEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(WhitelistStateUpdateEvent.class, Boolean.class, new Getter<>() {
+                @Override
+                public Boolean get(WhitelistStateUpdateEvent e) {
+                    return e.getStatus() == WhitelistStateUpdateEvent.WhitelistStatus.ADDED;
+                }
+            }, 0);
+        }
 
     }
     @Override

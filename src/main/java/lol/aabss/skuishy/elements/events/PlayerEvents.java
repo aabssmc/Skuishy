@@ -83,38 +83,42 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player exp cooldown change
-        Skript.registerEvent("player exp cooldown change", PlayerEvents.class, PlayerExpCooldownChangeEvent.class,
-                        "[player] exp[erience] cool[ ]down change"
-                )
-                .description("Called when a player's experience cooldown changes.")
-                .examples("on exp cooldown change:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerExpCooldownChangeEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerExpCooldownChangeEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(PlayerExpCooldownChangeEvent.class, Integer.class, new Getter<>() {
-            @Override
-            public Integer get(PlayerExpCooldownChangeEvent e) {
-                return e.getNewCooldown();
-            }
-        }, 1);
+        if (Skript.classExists("org.bukkit.event.player.PlayerExpCooldownChangeEvent")) {
+            Skript.registerEvent("player exp cooldown change", PlayerEvents.class, PlayerExpCooldownChangeEvent.class,
+                            "[player] [e]xp[erience] cool[ ]down change"
+                    )
+                    .description("Called when a player's experience cooldown changes.")
+                    .examples("on exp cooldown change:")
+                    .since("2.0");
+            EventValues.registerEventValue(PlayerExpCooldownChangeEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(PlayerExpCooldownChangeEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerExpCooldownChangeEvent.class, Integer.class, new Getter<>() {
+                @Override
+                public Integer get(PlayerExpCooldownChangeEvent e) {
+                    return e.getNewCooldown();
+                }
+            }, 1);
+        }
 
 // player fail move
-        Skript.registerEvent("player fail move", PlayerEvents.class, PlayerFailMoveEvent.class,
-                        "[player] fail[ed] mov(e|ing)"
-                )
-                .description("Called when a player fails to move.")
-                .examples("on fail move:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerFailMoveEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerFailMoveEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.player.PlayerFailMoveEvent")) {
+            Skript.registerEvent("player fail move", PlayerEvents.class, PlayerFailMoveEvent.class,
+                            "[player] fail[ed] mov(e|ing)"
+                    )
+                    .description("Called when a player fails to move.")
+                    .examples("on fail move:")
+                    .since("2.0");
+            EventValues.registerEventValue(PlayerFailMoveEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(PlayerFailMoveEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+        }
 
 // player flower pot manipulate
         Skript.registerEvent("player flower pot manipulate", PlayerEvents.class, PlayerFlowerPotManipulateEvent.class,
@@ -183,24 +187,26 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player item frame change
-        Skript.registerEvent("player item frame change", PlayerEvents.class, PlayerItemFrameChangeEvent.class,
-                        "[player] item[ ]frame chang(e[d]|ing)"
-                )
-                .description("Called when a player changes an item frame.")
-                .examples("on  item frame change:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerItemFrameChangeEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerItemFrameChangeEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(PlayerItemFrameChangeEvent.class, ItemFrame.class, new Getter<>() {
-            @Override
-            public ItemFrame get(PlayerItemFrameChangeEvent e) {
-                return e.getItemFrame();
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.player.PlayerItemFrameChangeEvent")) {
+            Skript.registerEvent("player item frame change", PlayerEvents.class, PlayerItemFrameChangeEvent.class,
+                            "[player] item[ ]frame chang(e[d]|ing)"
+                    )
+                    .description("Called when a player changes an item frame.")
+                    .examples("on  item frame change:")
+                    .since("2.0");
+            EventValues.registerEventValue(PlayerItemFrameChangeEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(PlayerItemFrameChangeEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerItemFrameChangeEvent.class, ItemFrame.class, new Getter<>() {
+                @Override
+                public ItemFrame get(PlayerItemFrameChangeEvent e) {
+                    return e.getItemFrame();
+                }
+            }, 0);
+        }
 // player lectern page change
         Skript.registerEvent("player lectern page change", PlayerEvents.class, PlayerLecternPageChangeEvent.class,
                         "[player] lectern page change[d]"
@@ -262,24 +268,26 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player open sign
-        Skript.registerEvent("player open sign", PlayerEvents.class, PlayerOpenSignEvent.class,
-                        "[player] open[ed] sign"
-                )
-                .description("Called when a player opens a sign.")
-                .examples("on open sign:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerOpenSignEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerOpenSignEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(PlayerOpenSignEvent.class, Block.class, new Getter<>() {
-            @Override
-            public Block get(PlayerOpenSignEvent e) {
-                return e.getSign().getBlock();
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.player.PlayerOpenSignEvent")) {
+            Skript.registerEvent("player open sign", PlayerEvents.class, PlayerOpenSignEvent.class,
+                            "[player] open[ed] sign"
+                    )
+                    .description("Called when a player opens a sign.")
+                    .examples("on open sign:")
+                    .since("2.0");
+            EventValues.registerEventValue(PlayerOpenSignEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(PlayerOpenSignEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerOpenSignEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(PlayerOpenSignEvent e) {
+                    return e.getSign().getBlock();
+                }
+            }, 0);
+        }
 
 // player post respawn
         Skript.registerEvent("player post respawn", PlayerEvents.class, PlayerPostRespawnEvent.class,
@@ -310,18 +318,20 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player recipe book settings change
-        Skript.registerEvent("recipe book settings change", PlayerEvents.class, PlayerRecipeBookSettingsChangeEvent.class,
-                        "[player] recipe[ ]book settings [change|edit]"
-                )
-                .description("Called when a player's recipe book settings change.")
-                .examples("on recipe book settings change:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerRecipeBookSettingsChangeEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerRecipeBookSettingsChangeEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
+        if (Skript.classExists("org.bukkit.event.player.PlayerRecipeBookSettingsChangeEvent")) {
+            Skript.registerEvent("recipe book settings change", PlayerEvents.class, PlayerRecipeBookSettingsChangeEvent.class,
+                            "[player] recipe[ ]book settings [change|edit]"
+                    )
+                    .description("Called when a player's recipe book settings change.")
+                    .examples("on recipe book settings change:")
+                    .since("2.0");
+            EventValues.registerEventValue(PlayerRecipeBookSettingsChangeEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(PlayerRecipeBookSettingsChangeEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+        }
 
 // player shear block
         Skript.registerEvent("player shear block", PlayerEvents.class, PlayerShearBlockEvent.class,
@@ -344,24 +354,26 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player show entity
-        Skript.registerEvent("player show entity", PlayerEvents.class, PlayerShowEntityEvent.class,
-                        "[player] show[n] entity"
-                )
-                .description("Called when a player shows an entity.")
-                .examples("on show entity:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerShowEntityEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerShowEntityEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(PlayerShowEntityEvent.class, Entity.class, new Getter<>() {
-            @Override
-            public Entity get(PlayerShowEntityEvent e) {
-                return e.getEntity();
-            }
-        }, 0);
+        if (Skript.classExists("org.bukkit.event.player.PlayerShowEntityEvent")) {
+            Skript.registerEvent("player show entity", PlayerEvents.class, PlayerShowEntityEvent.class,
+                            "[player] show[n] entity"
+                    )
+                    .description("Called when a player shows an entity.")
+                    .examples("on show entity:")
+                    .since("2.0");
+            EventValues.registerEventValue(PlayerShowEntityEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(PlayerShowEntityEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerShowEntityEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(PlayerShowEntityEvent e) {
+                    return e.getEntity();
+                }
+            }, 0);
+        }
 
 // player stonecutter recipe select
         Skript.registerEvent("player stonecutter recipe select", PlayerEvents.class, PlayerStonecutterRecipeSelectEvent.class,
@@ -404,64 +416,70 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player track entity
-        Skript.registerEvent("player track entity", PlayerEvents.class, PlayerTrackEntityEvent.class,
-                        "[player] track[ed] entity"
-                )
-                .description("Called when a player tracks an entity.")
-                .examples("on [player] track entity:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerTrackEntityEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerTrackEntityEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(PlayerTrackEntityEvent.class, Entity.class, new Getter<>() {
-            @Override
-            public Entity get(PlayerTrackEntityEvent e) {
-                return e.getEntity();
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.player.PlayerTrackEntityEvent")) {
+            Skript.registerEvent("player track entity", PlayerEvents.class, PlayerTrackEntityEvent.class,
+                            "[player] track[ed] entity"
+                    )
+                    .description("Called when a player tracks an entity.")
+                    .examples("on [player] track entity:")
+                    .since("2.0");
+            EventValues.registerEventValue(PlayerTrackEntityEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(PlayerTrackEntityEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerTrackEntityEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(PlayerTrackEntityEvent e) {
+                    return e.getEntity();
+                }
+            }, 0);
+        }
 
 // player untrack entity
-        Skript.registerEvent("player untrack entity", PlayerEvents.class, PlayerUntrackEntityEvent.class,
-                        "[player] untrack[ed] entity"
-                )
-                .description("Called when a player untracks an entity.")
-                .examples("on untrack entity:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerUntrackEntityEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerUntrackEntityEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(PlayerUntrackEntityEvent.class, Entity.class, new Getter<>() {
-            @Override
-            public Entity get(PlayerUntrackEntityEvent e) {
-                return e.getEntity();
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.player.PlayerUntrackEntityEvent")) {
+            Skript.registerEvent("player untrack entity", PlayerEvents.class, PlayerUntrackEntityEvent.class,
+                            "[player] untrack[ed] entity"
+                    )
+                    .description("Called when a player untracks an entity.")
+                    .examples("on untrack entity:")
+                    .since("2.0");
+            EventValues.registerEventValue(PlayerUntrackEntityEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(PlayerUntrackEntityEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerUntrackEntityEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(PlayerUntrackEntityEvent e) {
+                    return e.getEntity();
+                }
+            }, 0);
+        }
 
 // pre player attack entity
-        Skript.registerEvent("pre player attack entity", PlayerEvents.class, PrePlayerAttackEntityEvent.class,
-                        "pre[ |-]player attack[ed] entity"
-                )
-                .description("Called before a player attacks an entity.")
-                .examples("on pre player attack entity:")
-                .since("2.0");
-        EventValues.registerEventValue(PrePlayerAttackEntityEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PrePlayerAttackEntityEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(PrePlayerAttackEntityEvent.class, Entity.class, new Getter<>() {
-            @Override
-            public Entity get(PrePlayerAttackEntityEvent e) {
-                return e.getAttacked();
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.player.PrePlayerAttackEntityEvent")) {
+            Skript.registerEvent("pre player attack entity", PlayerEvents.class, PrePlayerAttackEntityEvent.class,
+                            "pre[ |-]player attack[ed] entity"
+                    )
+                    .description("Called before a player attacks an entity.")
+                    .examples("on pre player attack entity:")
+                    .since("2.0");
+            EventValues.registerEventValue(PrePlayerAttackEntityEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(PrePlayerAttackEntityEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PrePlayerAttackEntityEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(PrePlayerAttackEntityEvent e) {
+                    return e.getAttacked();
+                }
+            }, 0);
+        }
     }
 
     @Override

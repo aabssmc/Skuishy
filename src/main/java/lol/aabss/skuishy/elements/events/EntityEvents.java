@@ -99,30 +99,32 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // dye
-        Skript.registerEvent("entity dye", EntityEvents.class, EntityDyeEvent.class,
-                "[entity] dye[d]"
-        )
-                .description("Called when an entity is dyed. Currently, this is called for org.bukkit.entity.Sheep being dyed, and org.bukkit.entity.Wolf/org.bukkit.entity.Cat collars being dyed")
-                .examples("on entity dye:")
-                .since("2.0");
-        EventValues.registerEventValue(EntityDyeEvent.class, Entity.class, new Getter<>() {
-            @Override
-            public Entity get(EntityDyeEvent e) {
-                return e.getEntity();
-            }
-        }, 0);
-        EventValues.registerEventValue(EntityDyeEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(EntityDyeEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(EntityDyeEvent.class, Color.class, new Getter<>() {
-            @Override
-            public Color get(EntityDyeEvent e) {
-                return SkriptColor.fromDyeColor(e.getColor());
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.entity.EntityDyeEvent")) {
+            Skript.registerEvent("entity dye", EntityEvents.class, EntityDyeEvent.class,
+                            "[entity] dye[d]"
+                    )
+                    .description("Called when an entity is dyed. Currently, this is called for org.bukkit.entity.Sheep being dyed, and org.bukkit.entity.Wolf/org.bukkit.entity.Cat collars being dyed")
+                    .examples("on entity dye:")
+                    .since("2.0");
+            EventValues.registerEventValue(EntityDyeEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(EntityDyeEvent e) {
+                    return e.getEntity();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityDyeEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(EntityDyeEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityDyeEvent.class, Color.class, new Getter<>() {
+                @Override
+                public Color get(EntityDyeEvent e) {
+                    return SkriptColor.fromDyeColor(e.getColor());
+                }
+            }, 0);
+        }
 
         // elder guardian appearance
         Skript.registerEvent("elder guardian appearance", EntityEvents.class, ElderGuardianAppearanceEvent.class,
@@ -269,36 +271,39 @@ public class EntityEvents extends SkriptEvent {
             }
         }, 0);
         // fertilize egg
-        Skript.registerEvent("fertilize egg", EntityEvents.class, EntityFertilizeEggEvent.class,
-                        "[entity] fertilize[d] egg",
-                "[entity] egg fertilize[d]"
-                )
-                .description("Called when two entities mate and the mating process results in a fertilization. Fertilization differs from normal breeding, as represented by the org.bukkit.event.entity.EntityBreedEvent, as it does not result in the immediate creation of the child entity in the world.\n" +
-                        "An example of this would be:\n" +
-                        "A frog being marked as \"is_pregnant\" and laying org.bukkit.Material.FROGSPAWN later.\n" +
-                        "Sniffers producing the org.bukkit.Material.SNIFFER_EGG item, which needs to be placed before it can begin to hatch.\n" +
-                        "A turtle being marked with \"HasEgg\" and laying a org.bukkit.Material.TURTLE_EGG later.\n" +
-                        "The event hence only exposes the two parent entities in the fertilization process and cannot provide the child entity, as it will only exist at a later point in time.")
-                .examples("on fertilize egg:")
-                .since("2.0");
-        EventValues.registerEventValue(EntityFertilizeEggEvent.class, Entity.class, new Getter<>() {
-            @Override
-            public Entity get(EntityFertilizeEggEvent e) {
-                return e.getEntity();
-            }
-        }, 0);
-        EventValues.registerEventValue(EntityFertilizeEggEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(EntityFertilizeEggEvent e) {
-                return e.getBreeder();
-            }
-        }, 0);
-        EventValues.registerEventValue(EntityFertilizeEggEvent.class, ItemStack.class, new Getter<>() {
-            @Override
-            public ItemStack get(EntityFertilizeEggEvent e) {
-                return e.getBredWith();
-            }
-        }, 0);
+        if (Skript.classExists("io.papermc.paper.event.entity.EntityFertilizeEggEvent")) {
+            Skript.registerEvent("fertilize egg", EntityEvents.class, EntityFertilizeEggEvent.class,
+                            "[entity] fertilize[d] egg",
+                            "[entity] egg fertilize[d]"
+                    )
+                    .description("Called when two entities mate and the mating process results in a fertilization. Fertilization differs from normal breeding, as represented by the org.bukkit.event.entity.EntityBreedEvent, as it does not result in the immediate creation of the child entity in the world.\n" +
+                            "An example of this would be:\n" +
+                            "A frog being marked as \"is_pregnant\" and laying org.bukkit.Material.FROGSPAWN later.\n" +
+                            "Sniffers producing the org.bukkit.Material.SNIFFER_EGG item, which needs to be placed before it can begin to hatch.\n" +
+                            "A turtle being marked with \"HasEgg\" and laying a org.bukkit.Material.TURTLE_EGG later.\n" +
+                            "The event hence only exposes the two parent entities in the fertilization process and cannot provide the child entity, as it will only exist at a later point in time.")
+                    .examples("on fertilize egg:")
+                    .since("2.0");
+
+            EventValues.registerEventValue(EntityFertilizeEggEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(EntityFertilizeEggEvent e) {
+                    return e.getEntity();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityFertilizeEggEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(EntityFertilizeEggEvent e) {
+                    return e.getBreeder();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityFertilizeEggEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public ItemStack get(EntityFertilizeEggEvent e) {
+                    return e.getBredWith();
+                }
+            }, 0);
+        }
         // entity load crossbow
         Skript.registerEvent("load crossbow", EntityEvents.class, EntityLoadCrossbowEvent.class,
                         "[entity] load crossbow",
@@ -333,26 +338,29 @@ public class EntityEvents extends SkriptEvent {
                 return e.getEntity();
             }
         }, 0);
-        // entity pose change
-        Skript.registerEvent("toggle sit", EntityEvents.class, EntityToggleSitEvent.class,
-                        "[entity] toggle[d] sit (state|mode)",
-                        "[entity] sit (state|mode) toggle[d]"
-                )
-                .description("s called when an entity sits down or stands up.")
-                .examples("on toggle sit:")
-                .since("2.0");
-        EventValues.registerEventValue(EntityToggleSitEvent.class, Entity.class, new Getter<>() {
-            @Override
-            public Entity get(EntityToggleSitEvent e) {
-                return e.getEntity();
-            }
-        }, 0);
-        EventValues.registerEventValue(EntityToggleSitEvent.class, Boolean.class, new Getter<>() {
-            @Override
-            public Boolean get(EntityToggleSitEvent e) {
-                return e.getSittingState();
-            }
-        }, 0);
+        // entity toggle sit
+        if (Skript.classExists("io.papermc.paper.event.entity.EntityToggleSitEvent")) {
+            Skript.registerEvent("toggle sit", EntityEvents.class, EntityToggleSitEvent.class,
+                            "[entity] toggle[d] sit (state|mode)",
+                            "[entity] sit (state|mode) toggle[d]"
+                    )
+                    .description("s called when an entity sits down or stands up.")
+                    .examples("on toggle sit:")
+                    .since("2.0");
+
+            EventValues.registerEventValue(EntityToggleSitEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(EntityToggleSitEvent e) {
+                    return e.getEntity();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityToggleSitEvent.class, Boolean.class, new Getter<>() {
+                @Override
+                public Boolean get(EntityToggleSitEvent e) {
+                    return e.getSittingState();
+                }
+            }, 0);
+        }
         // entity unleash
         Skript.registerEvent("entity unleash", EntityEvents.class, EntityUnleashEvent.class,
                         "[entity] unleash[ed]"
@@ -525,30 +533,32 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // warden anger change
-        Skript.registerEvent("warden anger change", EntityEvents.class, WardenAngerChangeEvent.class,
-                        "warden anger change[d]"
-                )
-                .description("Called when a Warden's anger level changes.")
-                .examples("on warden anger change:")
-                .since("2.0");
-        EventValues.registerEventValue(WardenAngerChangeEvent.class, Entity.class, new Getter<>() {
-            @Override
-            public Entity get(WardenAngerChangeEvent e) {
-                return e.getEntity();
-            }
-        }, 0);
-        EventValues.registerEventValue(WardenAngerChangeEvent.class, Integer.class, new Getter<>() {
-            @Override
-            public Integer get(WardenAngerChangeEvent e) {
-                return e.getNewAnger();
-            }
-        }, 1);
-        EventValues.registerEventValue(WardenAngerChangeEvent.class, Integer.class, new Getter<>() {
-            @Override
-            public Integer get(WardenAngerChangeEvent e) {
-                return e.getOldAnger();
-            }
-        }, -1);
+        if (Skript.classExists("io.papermc.paper.event.entity.WardenAngerChangeEvent")) {
+            Skript.registerEvent("warden anger change", EntityEvents.class, WardenAngerChangeEvent.class,
+                            "warden anger change[d]"
+                    )
+                    .description("Called when a Warden's anger level changes.")
+                    .examples("on warden anger change:")
+                    .since("2.0");
+            EventValues.registerEventValue(WardenAngerChangeEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(WardenAngerChangeEvent e) {
+                    return e.getEntity();
+                }
+            }, 0);
+            EventValues.registerEventValue(WardenAngerChangeEvent.class, Integer.class, new Getter<>() {
+                @Override
+                public Integer get(WardenAngerChangeEvent e) {
+                    return e.getNewAnger();
+                }
+            }, 1);
+            EventValues.registerEventValue(WardenAngerChangeEvent.class, Integer.class, new Getter<>() {
+                @Override
+                public Integer get(WardenAngerChangeEvent e) {
+                    return e.getOldAnger();
+                }
+            }, -1);
+        }
 
 
     }
