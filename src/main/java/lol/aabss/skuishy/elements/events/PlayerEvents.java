@@ -477,6 +477,6 @@ public class PlayerEvents extends SkriptEvent {
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
         if (e != null) return e.getEventName();
-        return "payer event";
+        return "player event";
     }
 }
