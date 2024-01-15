@@ -606,7 +606,7 @@ class ExprParents extends EventValueExpression<Entity>{
     }
 
     @Override
-    protected Entity @Nullable [] get(@NotNull Event e) {
+    protected Entity[] get(@NotNull Event e) {
         if (Objects.equals(parent, "mother")) {
             return new Entity[]{((EntityFertilizeEggEvent) e).getMother()};
         }
