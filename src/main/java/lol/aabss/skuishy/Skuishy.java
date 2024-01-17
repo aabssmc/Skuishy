@@ -13,6 +13,7 @@ public class Skuishy extends JavaPlugin{
 
     public static Skuishy instance;
     private SkriptAddon addon;
+    public static long start = System.currentTimeMillis()/50;
 
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new CustomEvents(), this);

@@ -4,6 +4,7 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.profile.PlayerTextures;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -57,7 +58,12 @@ public abstract class SkinWrapper {
 
     public static void setSkin(Player player, String skin){
         if (player.getName().equals(skin)){
-            player.getPlayerProfile().getTextures().clear();
+            PlayerProfile e = player.getPlayerProfile();
+            e.getTextures().clear();
+            PlayerTextures t = e.getTextures();
+            t.clear();
+            e.setTextures(t);
+            player.setPlayerProfile(e);
         }
         PlayerProfile newprofile = Bukkit.createProfile(skin);
         newprofile.complete();
