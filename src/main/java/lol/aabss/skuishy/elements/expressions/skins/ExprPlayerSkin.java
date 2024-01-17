@@ -16,6 +16,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
+import static lol.aabss.skuishy.other.skins.SkinWrapper.skinname;
+
 @Name("Skins - Player Skin")
 @Description("Get/Sets a player's skin")
 @Examples({
@@ -37,8 +39,8 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
-        String skin = source[0].getPlayerProfile().getName();
-        return new String[] {skin};
+        String name = skinname.get(source[0]) == null ? source[0].getName() : skinname.get(source[0]);
+        return new String[]{name};
     }
 
     @Override

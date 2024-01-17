@@ -11,8 +11,11 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.HashMap;
 
 public abstract class SkinWrapper {
+
+    public static HashMap<Player, String> skinname = new HashMap<>();
 
     public static BufferedImage get(Player player, @Nullable Number size, boolean lay) throws Exception {
         BufferedImage textureImage = imgTexture(player);
@@ -64,12 +67,16 @@ public abstract class SkinWrapper {
             t.clear();
             e.setTextures(t);
             player.setPlayerProfile(e);
+            skinname.remove(player, skin);
         }
         PlayerProfile newprofile = Bukkit.createProfile(skin);
         newprofile.complete();
         PlayerProfile profile = player.getPlayerProfile();
         profile.setProperties(newprofile.getProperties());
         player.setPlayerProfile(profile);
+        if (!player.getName().equals(skin)){
+            skinname.put(player, skin);
+        }
     }
 
 }
