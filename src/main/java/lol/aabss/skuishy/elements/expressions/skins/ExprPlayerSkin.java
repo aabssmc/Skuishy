@@ -34,7 +34,6 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
                 "players"
         );
     }
-
     private Expression<Player> player;
 
     @Override
