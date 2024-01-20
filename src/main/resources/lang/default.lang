@@ -51,3 +51,9 @@ spawncategory:
     water_ambient: water ambient
     water_animal: water animal
     water_underground_creature: water underground creature
+
+hologramclicktype:
+    right: right
+    left: left
+    right_shift: right_shift
+    left_shift: left_shift

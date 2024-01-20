@@ -7,12 +7,12 @@ import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
+import eu.decentsoftware.holograms.api.actions.ClickType;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.event.HologramClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.inventory.ClickType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -41,7 +41,7 @@ public class EvtHologramClick extends SkriptEvent {
             EventValues.registerEventValue(HologramClickEvent.class, ClickType.class, new Getter<>() {
                 @Override
                 public ClickType get(HologramClickEvent e) {
-                    return ClickType.valueOf(e.getClick().name());
+                    return e.getClick();
                 }
             }, 0);
             EventValues.registerEventValue(HologramClickEvent.class, Hologram.class, new Getter<>() {

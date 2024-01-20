@@ -13,12 +13,13 @@ public class Skuishy extends JavaPlugin{
 
     public static Skuishy instance;
     private SkriptAddon addon;
-    public static long start = System.currentTimeMillis()/50;
+    public static long start;
 
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new CustomEvents(), this);
         Metrics metrics = new Metrics(this, 20162);
         instance = this;
+        start = System.currentTimeMillis()/50;
         try {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
@@ -41,7 +42,7 @@ public class Skuishy extends JavaPlugin{
                 getLogger().info("Vulcan elements loaded!");
             } else getLogger().info("Vulcan not found, skipping!");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         getLogger().info("Skuishy has been enabled!");
     }

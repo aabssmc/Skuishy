@@ -27,7 +27,7 @@ dependencies {
     // skript
     compileOnly 'com.github.SkriptLang:Skript:2.7.0'
     // decent holograms
-    compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.5'
+    compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.6'
     // vivecraft
     implementation files('gradle/Vivecraft_Spigot_Extensions.jar')
     // vulcan
