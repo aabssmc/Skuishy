@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.conditions;
+package lol.aabss.skuishy.elements.conditions.is;
 
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;

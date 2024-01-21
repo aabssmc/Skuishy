@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.conditions;
+package lol.aabss.skuishy.elements.conditions.is;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
@@ -12,20 +12,19 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
-
 import javax.annotation.Nullable;
-@Name("TickManager - Is Sprinting")
-@Description("Returns true if the server is sprinting.")
+@Name("TickManager - Is Stepping")
+@Description("Returns true if the server is stepping.")
 @Examples({
-        "if the server's tickrate is sprinting:"
+        "if the server's tickrate is stepping:"
 })
 @Since("1.9")
-public class CondIsSprinting extends Condition {
+public class CondIsStepping extends Condition {
     static {
-        if (Skript.classExists("org.bukkit.ServerTickManager")) {
-            Skript.registerCondition(CondIsSprinting.class,
-                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) sprint[ing]",
-                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( not|n't) sprint[ing]"
+        if (Skript.classExists("org.bukkit.ServerTickManager")){
+            Skript.registerCondition(CondIsStepping.class,
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) stepping",
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( not|n't) stepping"
             );
         }
     }
@@ -35,14 +34,14 @@ public class CondIsSprinting extends Condition {
     @Override
     public boolean check(@NotNull Event e) {
         if (is){
-            return Bukkit.getServer().getServerTickManager().isSprinting();
+            return Bukkit.getServer().getServerTickManager().isStepping();
         }
-        return !Bukkit.getServer().getServerTickManager().isSprinting();
+        return !Bukkit.getServer().getServerTickManager().isStepping();
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "ticks are sprinting";
+        return "ticks are stepping";
     }
 
     @Override

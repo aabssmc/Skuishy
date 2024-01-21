@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.conditions;
+package lol.aabss.skuishy.elements.conditions.is;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
@@ -14,19 +14,18 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-@Name("TickManager - Is Running Normally")
-@Description("Returns true if the server is running normally.")
+@Name("TickManager - Is Sprinting")
+@Description("Returns true if the server is sprinting.")
 @Examples({
-        "if the server's tickrate is normal:"
+        "if the server's tickrate is sprinting:"
 })
 @Since("1.9")
-public class CondIsRunningNormally extends Condition {
-
+public class CondIsSprinting extends Condition {
     static {
         if (Skript.classExists("org.bukkit.ServerTickManager")) {
-            Skript.registerCondition(CondIsRunningNormally.class,
-                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) [running] normal[ly]",
-                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( n't|not) [running] normal[ly]"
+            Skript.registerCondition(CondIsSprinting.class,
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are) sprint[ing]",
+                    "[the] (server|game)['s] [tick[(s|[( |-)]rate)]] (is|are)( not|n't) sprint[ing]"
             );
         }
     }
@@ -36,14 +35,14 @@ public class CondIsRunningNormally extends Condition {
     @Override
     public boolean check(@NotNull Event e) {
         if (is){
-            return Bukkit.getServer().getServerTickManager().isRunningNormally();
+            return Bukkit.getServer().getServerTickManager().isSprinting();
         }
-        return !Bukkit.getServer().getServerTickManager().isRunningNormally();
+        return !Bukkit.getServer().getServerTickManager().isSprinting();
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "ticks are running normally";
+        return "ticks are sprinting";
     }
 
     @Override
