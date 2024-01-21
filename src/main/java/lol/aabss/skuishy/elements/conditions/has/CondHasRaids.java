@@ -6,6 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.World;
+import org.jetbrains.annotations.NotNull;
 
 @Name("World - Has Raids")
 @Description("Returns true if the world has raids.")
@@ -25,7 +26,7 @@ public class CondHasRaids extends PropertyCondition<World> {
     }
 
     @Override
-    protected String getPropertyName() {
-        return null;
+    protected @NotNull String getPropertyName() {
+        return "raids";
     }
 }
