@@ -24,7 +24,6 @@ import javax.annotation.Nullable;
         "play note E flat with instrument banjo at player for player"
 })
 @Since("1.6")
-
 public class EffPlayNote extends Effect {
 
     static{
