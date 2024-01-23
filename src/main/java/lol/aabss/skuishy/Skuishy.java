@@ -20,6 +20,9 @@ public class Skuishy extends JavaPlugin{
         Metrics metrics = new Metrics(this, 20162);
         instance = this;
         start = System.currentTimeMillis()/50;
+        boolean dh = false;
+        boolean vc = false;
+        boolean vu = false;
         try {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
@@ -28,19 +31,29 @@ public class Skuishy extends JavaPlugin{
                 getLogger().info("DecentHolograms found! Enabling DecentHolograms elements...");
                 addon.loadClasses("lol.aabss.skuishy.hooks.decentholograms");
                 getLogger().info("DecentHolograms elements loaded!");
+                dh = true;
             } else getLogger().info("DecentHolograms not found, skipping!");
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
                 getLogger().info("Vivecraft-Spigot-Extensions found! Enabling Vivecraft-Spigot-Extensions elements...");
                 addon.loadClasses("lol.aabss.skuishy.hooks.vivecraft");
                 getLogger().info("Vivecraft-Spigot-Extensions elements loaded!");
+                vc = true;
             } else getLogger().info("Vivecraft-Spigot-Extensions not found, skipping!");
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
                 getLogger().info("Vulcan found! Enabling Vulcan elements...");
                 addon.loadClasses("lol.aabss.skuishy.hooks.vulcan");
                 getLogger().info("Vulcan elements loaded!");
+                vu = true;
             } else getLogger().info("Vulcan not found, skipping!");
+
+            boolean finalDh = dh;
+            boolean finalVc = vc;
+            boolean finalVu = vu;
+            metrics.addCustomChart(new Metrics.SimplePie("decentholograms", () -> finalDh ? "true" : "false"));
+            metrics.addCustomChart(new Metrics.SimplePie("vivecraft", () -> finalVc ? "true" : "false"));
+            metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> finalVu ? "true" : "false"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
