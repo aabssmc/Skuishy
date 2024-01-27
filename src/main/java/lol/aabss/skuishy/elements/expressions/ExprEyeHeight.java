@@ -44,6 +44,7 @@ public class ExprEyeHeight extends PropertyExpression<LivingEntity, Number> {
 
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+        setExpr((Expression<? extends LivingEntity>) exprs[0]);
         return true;
     }
 }

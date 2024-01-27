@@ -44,6 +44,7 @@ public class ExprHitSound extends PropertyExpression<Block, String> {
 
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+        setExpr((Expression<? extends Block>) exprs[0]);
         return true;
     }
 }
