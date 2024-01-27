@@ -57,3 +57,48 @@ hologramclicktype:
     left: left
     right_shift: right_shift
     left_shift: left_shift
+
+potionitemtype:
+    awkward: awkward
+    fire_resistance: fire resistance
+    instant_damage: instant damage, damage, harming
+    instant_heal: instant heal, heal, instant healing, healing
+    invisibility: invisibility
+    jump: jump, jump boost, leaping
+    long_fire_resistance: long fire resistance
+    long_invisibility:, long invisibility
+    long_leaping: long jump, long jump boost, long leaping
+    long_night_vision: long night vision
+    long_poison: long posion
+    long_regeneration: long regen, long regeneration
+    long_slow_falling: long slow falling
+    long_slowness: long slowness
+    long_strength: long strength
+    long_swiftness: long speed, long swiftness
+    long_turtle_master: long turtle master
+    long_water_breathing: long water breathing
+    long_weakness: long weakness
+    luck: luck, lucky
+    mundane: mundane
+    night_vision: night vision
+    poison: poison
+    regen: regen, regeneration
+    slow_falling: slow falling
+    slowness: slowness
+    speed: speed, swiftness
+    strength: strength
+    strong_harming: strong harming, strong damage, strong instant damage
+    strong_healing: strong healing, strong heal, strong healing, strong instant heal, strong instant healing
+    strong_leaping: strong leaping, strong jump, strong jump boost
+    strong_poison: strong poison
+    strong_regeneration: strong regen, strong regeneration
+    strong_slowness: strong slowness
+    strong_strength: strong strength
+    strong_swiftness: strong swiftness, strong speed
+    strong_turtle_master: strong turtle master
+    thick: thick
+    turtle_master: turtle master
+    uncraftable: uncraftable
+    water: water
+    water_breathing: water breathing
+    weakness: weakness

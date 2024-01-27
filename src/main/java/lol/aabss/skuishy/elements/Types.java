@@ -9,6 +9,7 @@ import io.papermc.paper.datapack.Datapack;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -152,6 +153,37 @@ public class Types {
                     @Override
                     public @NotNull String toString(SpawnCategory category, int flags) {
                         return toVariableNameString(category);
+                    }
+                })
+        );
+
+        EnumUtils<PotionType> potiontypes = new EnumUtils<>(PotionType.class, "potionitemtype");
+        Classes.registerClass(new ClassInfo<>(PotionType.class, "potionitemtype")
+                .user("potion[ ]item[ ]type")
+                .name("Potion Item Type")
+                .description("Represents a potion item type that matches each potion state that can be obtained from the Creative mode inventory.")
+                .since("2.1")
+                .parser(new Parser<>() {
+
+                    @Override
+                    @Nullable
+                    public PotionType parse(@NotNull String input, @NotNull ParseContext context) {
+                        return potiontypes.parse(input);
+                    }
+
+                    @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return true;
+                    }
+
+                    @Override
+                    public @NotNull String toVariableNameString(PotionType type) {
+                        return type.name().replaceAll("_", " ").toLowerCase();
+                    }
+
+                    @Override
+                    public @NotNull String toString(PotionType type, int flags) {
+                        return toVariableNameString(type);
                     }
                 })
         );
