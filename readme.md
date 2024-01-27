@@ -8,79 +8,15 @@
 
 ## Please suggest syntax ideas in my discord [here](https://discord.gg/66DF7pMdnp)
 
-# SYNTAXES
+You need Skript 2.7.0 and up to use.
 
 
-## Events:
-- Player - On Main Hand Change
-- Player - On Unknown Command
-- Player - On Shield Break
-- World - On Gamerule Change
-- Notes - On Note Player
-- DecentHolograms - On Hologram Click
-- Other - On Effect Command
-- Player - On Head Rotation
-- Dyed Item Expression
+This addon is just a random addon I made to support/add random little things I thought would be nice to have in skript that for whatever reason any other addon doesn't have. I am always taking suggestions for syntaxes! Either message me on skUnity or join my Discord (I am more active on discord)
 
 
-## Conditions
-- Player - Mainhand
-- Entity - Is Glowing
-- DecentHolograms - Hologram Exists
+For any support or suggestions, join my Discord here!
 
-
-## Effects
-- Player - Glow Color
-- Player - Stop Glowing
-- Plugin - Disable Plugin
-- Plugin - Enable Plugin
-- Notes - Play Note
-- DecentHolograms - Update Hologram
-- DecentHolograms - Move Hologram
-- DecentHolograms - Edit Page
-- DecentHolograms - Edit Line
-- DecentHolograms - Delete Hologram
-
-
-## Expressions
-- Player - Mainhand
-- Skins - Face of Player
-- Skins - Player Skin Signature
-- Skins - Player Skin Texture (Image)
-- Skins - Player Skin Texture (URL)
-- Skins - Player Skin Value
-- Skins - Player Skin
-- Other - Caesar Cipher
-- Notes - Block Instrument
-- Notes - Block Note
-- Notes - Note
-- Player - Someone
-- World - Nearest Structure
-- World - Nearest Raid
-- World - Nearest Biome
-- Server - All Datapack
-- Other - Item Damage
-- Entity - Memory Key
-- DecentHolograms - Hologram Name
-- Block - Command of Command Block
-- Entity - Spawn Limit
-- Other - Centerd Text
-- Other - Fancy Font
-- Entity - Custom Name
-- Entity - Custom Name Visibility
-- Other - Number Convert
-- Other - Number Format
-- Other - Number Unformat
-- Items - Dyed Items
-
-
-
-## Functions:
-- Mean
-
-
-## Sections:
-- DecentHolograms - Create Hologram
+If you are instead looking for source code or a list of all syntaxes visit my GitHub page here!
 
 
 
