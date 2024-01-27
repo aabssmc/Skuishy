@@ -28,7 +28,7 @@ import java.util.Objects;
 public class ExprParents extends EventValueExpression<Entity> {
     static {
         Skript.registerExpression(ExprParents.class, Entity.class, ExpressionType.SIMPLE,
-                "[the] [event-](mother|father)"
+                "[the] [event-](:mother|father)"
         );
     }
 

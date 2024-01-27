@@ -67,9 +67,4 @@ public class Skuishy extends JavaPlugin{
     public SkriptAddon getAddonInstance() {
         return addon;
     }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
 }
