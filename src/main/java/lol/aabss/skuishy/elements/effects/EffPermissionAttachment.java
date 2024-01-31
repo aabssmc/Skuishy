@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -10,12 +14,20 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@Name("Permissions - Edit Permission Attachment")
+@Description("Sets/Removes a permission of a permission attachment or deletes a permission attachment.")
+@Examples({
+        "set permission of last permission attachment to \"essentials.fly\" with value true",
+        "remove \"essentials.fly\" from last permission attachment",
+        "delete last permission attachment"
+})
+@Since("1.9")
 public class EffPermissionAttachment extends Effect {
 
     static {
         Skript.registerEffect(EffPermissionAttachment.class,
                 "set permission of [perm[ission] attachment] %permissionattachment% to [perm[ission]] %string% with value %boolean%",
-                "(remove|unset) [perm[ission]] %string% of %permissionattachment%",
+                "(remove|unset) [perm[ission]] %string% (of|from) %permissionattachment%",
                 "(remove|delete) [perm[ission] attachment] %permissionattachment%"
         );
     }
