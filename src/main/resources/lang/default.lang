@@ -1,12 +1,11 @@
-version: 1.7
+version: 2.1
 
 types:
     tone: tone¦s @a
     instrument: instrument¦s @a
-    generatedstructure: generatedstructure¦s @a
-    memorykey: memorykey¦s @a
     spawncategory: spawncategory¦s @a
-    potside: potside¦s @a
+    hologramclicktype: hologramclicktype¦s @a
+    potionitemtype: potionitemtype¦s @a
 
 tone:
     g: G
