@@ -8,6 +8,7 @@ import ch.njol.skript.util.EnumUtils;
 import io.papermc.paper.datapack.Datapack;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.potion.PotionType;
@@ -202,7 +203,7 @@ public class Types {
 
                     @Override
                     public @NotNull String toVariableNameString(PermissionAttachment perm) {
-                        return perm.getPermissions() + " " + perm.getPermissible();
+                        return "Permission: " + perm.getPermissions() + " Player: " + ((Entity) perm.getPermissible()).getName();
                     }
 
                     @Override

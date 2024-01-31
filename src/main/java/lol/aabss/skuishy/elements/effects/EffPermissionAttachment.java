@@ -28,7 +28,8 @@ public class EffPermissionAttachment extends Effect {
         Skript.registerEffect(EffPermissionAttachment.class,
                 "set permission of [perm[ission] attachment] %permissionattachment% to [perm[ission]] %string% with value %boolean%",
                 "(remove|unset) [perm[ission]] %string% (of|from) %permissionattachment%",
-                "(remove|delete) [perm[ission] attachment] %permissionattachment%"
+                "(remove|delete) [perm[ission] attachment] %permissionattachment%",
+                "add [perm[ission]] %string% with value %boolean% to permissions of [perm[ission] attachment] %permissionattachment%"
         );
     }
 
@@ -36,6 +37,7 @@ public class EffPermissionAttachment extends Effect {
 
     private Expression<String> perm;
     private Expression<Boolean> value;
+    private boolean set;
 
 
     @Override
@@ -74,13 +76,19 @@ public class EffPermissionAttachment extends Effect {
             attach = (Expression<PermissionAttachment>) exprs[0];
             perm = (Expression<String>) exprs[1];
             value = (Expression<Boolean>) exprs[2];
+            set = true;
             return true;
         } else if (matchedPattern == 1){
             perm = (Expression<String>) exprs[0];
             attach = (Expression<PermissionAttachment>) exprs[1];
             return true;
+        } else if (matchedPattern == 2) {
+            attach = (Expression<PermissionAttachment>) exprs[0];
+            return true;
         }
-        attach = (Expression<PermissionAttachment>) exprs[0];
+        perm = (Expression<String>) exprs[0];
+        value = (Expression<Boolean>) exprs[1];
+        attach = (Expression<PermissionAttachment>) exprs[2];
         return true;
     }
 }
