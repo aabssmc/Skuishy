@@ -1,11 +1,16 @@
 version: 2.1
 
 types:
+    note: note¦s @a
     tone: tone¦s @a
     instrument: instrument¦s @a
+    datapack: datapack¦s @a
     spawncategory: spawncategory¦s @a
     hologramclicktype: hologramclicktype¦s @a
     potionitemtype: potionitemtype¦s @a
+    permissionattachment: permissionattachment¦s @a
+    viveplayer: viveplayer¦s @a
+    hologram: hologram¦s @a
 
 tone:
     g: G

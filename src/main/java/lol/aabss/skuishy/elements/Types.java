@@ -9,6 +9,7 @@ import io.papermc.paper.datapack.Datapack;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
@@ -184,6 +185,29 @@ public class Types {
                     @Override
                     public @NotNull String toString(PotionType type, int flags) {
                         return toVariableNameString(type);
+                    }
+                })
+        );
+        Classes.registerClass(new ClassInfo<>(PermissionAttachment.class, "permissionattachment")
+                .user("permission ?attachments?")
+                .name("Permissions - Permission Attachment")
+                .description("Represents a permission attachment.")
+                .since("2.1")
+                .parser(new Parser<>() {
+
+                    @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return false;
+                    }
+
+                    @Override
+                    public @NotNull String toVariableNameString(PermissionAttachment perm) {
+                        return perm.getPermissions() + " " + perm.getPermissible();
+                    }
+
+                    @Override
+                    public @NotNull String toString(PermissionAttachment perm, int flags) {
+                        return toVariableNameString(perm);
                     }
                 })
         );
