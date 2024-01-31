@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
         "remove \"essentials.fly\" from last permission attachment",
         "delete last permission attachment"
 })
-@Since("1.9")
+@Since("2.1")
 public class EffPermissionAttachment extends Effect {
 
     static {
@@ -41,18 +41,23 @@ public class EffPermissionAttachment extends Effect {
     @Override
     protected void execute(@NotNull Event e) {
         PermissionAttachment attach = this.attach.getSingle(e);
-        String perm = this.perm.getSingle(e);
-        Boolean value = this.value.getSingle(e);
         if (attach != null) {
-            if (value == null) {
-                if (perm == null) {
+            if (this.value == null) {
+                if (this.perm == null) {
                     attach.remove();
                 } else{
-                    attach.unsetPermission(perm);
+                    String perm = this.perm.getSingle(e);
+                    if (perm != null) {
+                        attach.unsetPermission(perm);
+                    }
                 }
             } else{
-                if (perm != null) {
-                    attach.setPermission(perm, value);
+                if (this.perm != null) {
+                    String perm = this.perm.getSingle(e);
+                    Boolean value = this.value.getSingle(e);
+                    if (perm != null && value != null) {
+                        attach.setPermission(perm, value);
+                    }
                 }
             }
         }

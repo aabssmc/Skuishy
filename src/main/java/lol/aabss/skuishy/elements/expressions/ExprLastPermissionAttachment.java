@@ -20,14 +20,14 @@ import static lol.aabss.skuishy.Skuishy.last_permission_attachment;
 @Name("Permissions - Last Permission Attachment")
 @Description("Gets the last made permission attachment.")
 @Examples({
-        "set {_perm} to last made perm[ission] attachment"
+        "set {_perm} to last made permission attachment"
 })
 @Since("2.1")
 public class ExprLastPermissionAttachment extends SimpleExpression<PermissionAttachment> {
 
     static {
         Skript.registerExpression(ExprLastPermissionAttachment.class, PermissionAttachment.class, ExpressionType.SIMPLE,
-                "[the] last[ly] (created|made) permission attachment"
+                "[the] last[ly] [(created|made)] perm[ission] attachment"
         );
     }
 
