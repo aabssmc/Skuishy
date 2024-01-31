@@ -26,8 +26,8 @@ public class ExprDrinkingSound extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprDrinkingSound.class, String.class, ExpressionType.COMBINED,
-                "[the] [entity] drink[ing] sound of %livingentity% (using|with) %item%",
-                "%livingentity%'s [entity] drink[ing] sound (using|with) %item%"
+                "[the] [entity] drink[ing] sound of %livingentity% (using|with) %itemstack%",
+                "%livingentity%'s [entity] drink[ing] sound (using|with) %itemstack%"
         );
     }
 

@@ -44,7 +44,7 @@ public class EffReload extends Effect {
                 "reload [the] whitelist",
                 "reload [all [of the]] data",
                 "reload [all [of the]] permissions",
-                "reload [all [of the] command aliases"
+                "reload [all [of the]] command aliases"
         );
     }
 
