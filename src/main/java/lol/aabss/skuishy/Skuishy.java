@@ -5,6 +5,7 @@ import ch.njol.skript.SkriptAddon;
 import lol.aabss.skuishy.events.CustomEvents;
 import lol.aabss.skuishy.hooks.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ public class Skuishy extends JavaPlugin{
     public static Skuishy instance;
     private SkriptAddon addon;
     public static long start;
+    public static PermissionAttachment last_permission_attachment;
 
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new CustomEvents(), this);
