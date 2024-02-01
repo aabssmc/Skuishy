@@ -27,7 +27,7 @@ import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter {
 
     public static Skuishy instance;
-    private SkriptAddon addon;
+    public static SkriptAddon addon;
     public static long start;
     public static PermissionAttachment last_permission_attachment;
     public static boolean dh = false;

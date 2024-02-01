@@ -2,6 +2,7 @@ package lol.aabss.skuishy.other;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
+import lol.aabss.skuishy.Skuishy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
@@ -32,8 +33,14 @@ public class SubCommands {
                 "<gray>Addons:\n";
         // addons --
         List<String> msgs = new ArrayList<>();
-        for (SkriptAddon addon : Skript.getAddons()){
-            msgs.add("    <click:open_url:"+addon.plugin.getPluginMeta().getWebsite()+"><hover:show_text:'<gray>"+addon.plugin.getPluginMeta().getWebsite()+"'><gray>"+addon.plugin.getPluginMeta().getName()+": <color:#40ff00>"+ addon.plugin.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + addon.plugin.getPluginMeta().getAuthors() + "</hover></click>");
+        List<SkriptAddon> addonlist = new ArrayList<>(Skript.getAddons().stream().toList());
+        addonlist.remove(Skuishy.addon);
+        if (!addonlist.isEmpty()){
+            for (SkriptAddon addon : Skript.getAddons()) {
+                if (addon.plugin != instance) {
+                    msgs.add("    <click:open_url:" + addon.plugin.getPluginMeta().getWebsite() + "><hover:show_text:'<gray>" + addon.plugin.getPluginMeta().getWebsite() + "'><gray>" + addon.plugin.getPluginMeta().getName() + ": <color:#40ff00>" + addon.plugin.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + addon.plugin.getPluginMeta().getAuthors() + "</hover></click>");
+                }
+            }
         }
         StringBuilder addons = new StringBuilder();
         for (String e : msgs){
@@ -52,15 +59,15 @@ public class SubCommands {
             dependencies.append(e).append("\n");
         }
         // sending the message --
-        if (dependencies.compareTo(new StringBuilder()) == 0) {
-            if (addons.compareTo(new StringBuilder()) == 0){
-                msg = msg + "    none\n<gray>Dependencies:\n    none";
+        if (dependencies.isEmpty()) {
+            if (addons.isEmpty()){
+                msg = msg + "    <color:#ff0000>N/A\n<gray>Dependencies:\n    <color:#ff0000>N/A";
             } else{
-                msg = msg + addons + "<gray>Dependencies:\n    none";
+                msg = msg + addons + "<gray>Dependencies:\n    <color:#ff0000>N/A";
             }
         } else{
             if (addons.compareTo(new StringBuilder()) == 0){
-                msg = msg + "    none\n<gray>Dependencies:\n" + dependencies;
+                msg = msg + "    <color:#ff0000>N/A\n<gray>Dependencies:\n" + dependencies;
             } else{
                 msg = msg + addons + "<gray>Dependencies:\n" + dependencies;
             }
