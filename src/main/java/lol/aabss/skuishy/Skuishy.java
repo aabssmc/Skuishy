@@ -4,13 +4,27 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import lol.aabss.skuishy.events.CustomEvents;
 import lol.aabss.skuishy.hooks.Metrics;
+import lol.aabss.skuishy.other.UpdateChecker;
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Skuishy extends JavaPlugin{
+import static lol.aabss.skuishy.other.SubCommands.*;
+import static lol.aabss.skuishy.other.UpdateChecker.updateCheck;
+import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
+
+public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter {
 
     public static Skuishy instance;
     private SkriptAddon addon;
@@ -18,7 +32,11 @@ public class Skuishy extends JavaPlugin{
     public static PermissionAttachment last_permission_attachment;
 
     public void onEnable() {
+        saveDefaultConfig();
         getServer().getPluginManager().registerEvents(new CustomEvents(), this);
+        getServer().getPluginManager().registerEvents(new UpdateChecker(), this);
+        getServer().getPluginCommand("skuishy").setExecutor(this);
+        getServer().getPluginCommand("skuishy").setTabCompleter(this);
         Metrics metrics = new Metrics(this, 20162);
         instance = this;
         start = System.currentTimeMillis()/50;
@@ -60,6 +78,61 @@ public class Skuishy extends JavaPlugin{
             throw new RuntimeException(e);
         }
         getLogger().info("Skuishy has been enabled!");
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            if (getConfig().getBoolean("update-checker")) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    if (p.hasPermission("skuishy.updatechecker")) {
+                        updateCheck(p);
+                    }
+                }
+            }
+        }, 20L, 20L * 60L * 30L);
+    }
+
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (args.length == 0){
+            sender.sendMessage(miniMessage().deserialize(
+                    "<red>/skuishy <" +
+                            "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>version</hover></click>" +
+                            " | " +
+                            "<click:run_command:'/skuishy reload'><hover:show_text:'<green>/skuishy reload'>reload</hover></click>" +
+                            " | " +
+                            "<click:run_command:'/skuishy update'><hover:show_text:'<green>/skuishy update'>update</hover></click>" +
+                            " | " +
+                            "<click:run_command:'/skuishy version'><hover:show_text:'<green>/skuishy version'>version</hover></click>" +
+                            ">"
+            ));
+        } else{
+            switch (args[0]) {
+                case "info" -> cmdInfo(sender);
+                case "reload" -> cmdReload(sender);
+                case "update" -> cmdUpdate(sender);
+                case "version" -> cmdVersion(sender);
+                default -> sender.sendMessage(miniMessage().deserialize(
+                        "<red>/skuishy <" +
+                                "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>version</hover></click>" +
+                                " | " +
+                                "<click:run_command:'/skuishy reload'><hover:show_text:'<green>/skuishy reload'>reload</hover></click>" +
+                                " | " +
+                                "<click:run_command:'/skuishy update'><hover:show_text:'<green>/skuishy update'>update</hover></click>" +
+                                " | " +
+                                "<click:run_command:'/skuishy version'><hover:show_text:'<green>/skuishy version'>version</hover></click>" +
+                                ">"
+                ));
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+        List<String> completions = new ArrayList<>();
+        completions.add("info");
+        completions.add("reload");
+        completions.add("update");
+        completions.add("version");
+        return completions;
     }
 
     public static Skuishy getInstance() {
