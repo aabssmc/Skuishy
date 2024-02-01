@@ -14,6 +14,8 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 @Name("Permissions - Edit Permission Attachment")
 @Description("Sets/Removes a permission of a permission attachment or deletes a permission attachment.")
 @Examples({
@@ -26,10 +28,10 @@ public class EffPermissionAttachment extends Effect {
 
     static {
         Skript.registerEffect(EffPermissionAttachment.class,
-                "set permission of [perm[ission] attachment] %permissionattachment% to [perm[ission]] %string% with value %boolean%",
+                "set permission of [perm[ission] attachment] %permissionattachment% to [perm[ission]] %string% [with value %-boolean%]",
                 "(remove|unset) [perm[ission]] %string% (of|from) %permissionattachment%",
                 "(remove|delete) [perm[ission] attachment] %permissionattachment%",
-                "add [perm[ission]] %string% with value %boolean% to permissions of [perm[ission] attachment] %permissionattachment%"
+                "add [perm[ission]] %string% [with value %-boolean%] to permissions of [perm[ission] attachment] %permissionattachment%"
         );
     }
 
@@ -37,30 +39,32 @@ public class EffPermissionAttachment extends Effect {
 
     private Expression<String> perm;
     private Expression<Boolean> value;
-    private boolean set;
+    private String part;
 
 
     @Override
     protected void execute(@NotNull Event e) {
         PermissionAttachment attach = this.attach.getSingle(e);
         if (attach != null) {
-            if (this.value == null) {
-                if (this.perm == null) {
-                    attach.remove();
-                } else{
-                    String perm = this.perm.getSingle(e);
-                    if (perm != null) {
-                        attach.unsetPermission(perm);
+            if (Objects.equals(part, "set") || Objects.equals(part, "add")){
+                String perm = this.perm.getSingle(e);
+                if (value == null){
+                    if (perm != null){
+                        attach.setPermission(perm, true);
                     }
-                }
-            } else{
-                if (this.perm != null) {
-                    String perm = this.perm.getSingle(e);
+                } else{
                     Boolean value = this.value.getSingle(e);
-                    if (perm != null && value != null) {
+                    if (perm != null && value != null){
                         attach.setPermission(perm, value);
                     }
                 }
+            } else if (Objects.equals(part, "unset")){
+                String perm = this.perm.getSingle(e);
+                if (perm != null){
+                    attach.unsetPermission(perm);
+                }
+            } else if (Objects.equals(part, "delete")) {
+                attach.remove();
             }
         }
     }
@@ -76,19 +80,22 @@ public class EffPermissionAttachment extends Effect {
             attach = (Expression<PermissionAttachment>) exprs[0];
             perm = (Expression<String>) exprs[1];
             value = (Expression<Boolean>) exprs[2];
-            set = true;
+            part = "set";
             return true;
         } else if (matchedPattern == 1){
             perm = (Expression<String>) exprs[0];
             attach = (Expression<PermissionAttachment>) exprs[1];
+            part = "unset";
             return true;
         } else if (matchedPattern == 2) {
             attach = (Expression<PermissionAttachment>) exprs[0];
+            part = "delete";
             return true;
         }
         perm = (Expression<String>) exprs[0];
         value = (Expression<Boolean>) exprs[1];
         attach = (Expression<PermissionAttachment>) exprs[2];
+        part = "add";
         return true;
     }
 }

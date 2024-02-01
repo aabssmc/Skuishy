@@ -18,6 +18,8 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 import static lol.aabss.skuishy.Skuishy.instance;
 import static lol.aabss.skuishy.Skuishy.last_permission_attachment;
 
@@ -43,7 +45,7 @@ public class EffNewPermissionAttachment extends Effect {
         Skript.registerEffect(EffNewPermissionAttachment.class,
                 "(create|make) [a] [new] empty perm[ission] attachment for %entity% [time:for %-timespan%] [and (store|save) it in %-object%]",
                 "(create|make) [a] [new] perm[ission] attachment (with perm[ission]|with name)|named) %string%" +
-                        " [and] with value %boolean% for %entity% [time:for %-timespan%] [and (store|save) it in %-object%]"
+                        " [[and] with value %-boolean%] for %entity% [time:for %-timespan%] [and (store|save) it in %-object%]"
 
         );
     }
@@ -73,17 +75,26 @@ public class EffNewPermissionAttachment extends Effect {
                 }
             } else {
                 String perm = this.perm.getSingle(e);
-                Boolean value = this.value.getSingle(e);
                 if (this.time != null) {
                     Timespan time = this.time.getSingle(e);
-                    if (perm != null && value != null && time != null) {
-                        attach = entity.addAttachment(instance, perm, value, (int) time.getTicks_i());
+                    if (perm != null && time != null) {
+                        if (value == null) {
+                            attach = entity.addAttachment(instance, perm, true, (int) time.getTicks_i());
+                        } else{
+                            Boolean value = this.value.getSingle(e);
+                            attach = entity.addAttachment(instance, perm, Objects.requireNonNullElse(value, true), (int) time.getTicks_i());
+                        }
                     } else{
                         attach = entity.addAttachment(instance);
                     }
                 } else {
-                    if (perm != null && value != null) {
-                        attach = entity.addAttachment(instance, perm, value);
+                    if (perm != null) {
+                        if (value == null) {
+                            attach = entity.addAttachment(instance, perm, true);
+                        } else{
+                            Boolean value = this.value.getSingle(e);
+                            attach = entity.addAttachment(instance, perm, Objects.requireNonNullElse(value, true));
+                        }
                     } else{
                         attach = entity.addAttachment(instance);
                     }
