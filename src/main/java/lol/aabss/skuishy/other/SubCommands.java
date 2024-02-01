@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static lol.aabss.skuishy.Skuishy.*;
+import static lol.aabss.skuishy.Skuishy.instance;
 import static lol.aabss.skuishy.other.UpdateChecker.*;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
@@ -48,6 +48,17 @@ public class SubCommands {
         }
         // dependencies --
         List<String> deps = new ArrayList<>();
+        for (SkriptAddon addon : Skript.getAddons()){
+            for (String dep : addon.plugin.getPluginMeta().getPluginSoftDependencies()){
+                Plugin pl = Bukkit.getPluginManager().getPlugin(dep);
+                if (pl != null) {
+                    String msgg = "    <click:open_url:" + pl.getPluginMeta().getWebsite() + "><hover:show_text:'<gray>" + pl.getPluginMeta().getWebsite() + "'><gray>" + pl.getPluginMeta().getName() + ": <color:#40ff00>" + pl.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + pl.getPluginMeta().getAuthors() + "</hover></click>";
+                    if (!deps.contains(msgg)) {
+                        deps.add(msgg);
+                    }
+                }
+            }
+        }
         for (String dep : Skript.getInstance().getPluginMeta().getPluginSoftDependencies()){
             Plugin pl = Bukkit.getPluginManager().getPlugin(dep);
             if (pl != null){
@@ -73,10 +84,7 @@ public class SubCommands {
             }
         }
         sender.sendMessage(miniMessage().deserialize(msg+
-                "\n<gray>Decent Holograms: "+(dh ? "<color:#40ff00>true" : "<color:#ff0000>false")+"<reset>\n"+
-                "<gray>Vivecraft: "+(vc ? "<color:#40ff00>true" : "<color:#ff0000>false")+"<reset>\n"+
-                "<gray>Vulcan: "+(vu ? "<color:#40ff00>true" : "<color:#ff0000>false")+"<reset>\n"+
-                "<dark_gray>----------------"
+                "\n<dark_gray>----------------"
                 ));
     }
 
