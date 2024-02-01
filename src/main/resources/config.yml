@@ -1,0 +1,6 @@
+# the permission message for /skuishy's sub commands
+permission-message: "<red>You can not execute this sub-command!"
+
+# whether players with the permission 'skuishy.updatechecker' should be notified if there is an update.
+update-checker: true
+
