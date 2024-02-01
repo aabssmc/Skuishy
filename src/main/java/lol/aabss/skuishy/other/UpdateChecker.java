@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -26,6 +27,19 @@ public class UpdateChecker implements Listener {
         try {
             String body = httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body();
             return new JSONArray(body).getJSONObject(0).getString("version_number");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String latestSkriptVersion() {
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.github.com/repos/SkriptLang/Skript/releases/latest"))
+                .build();
+        try {
+            String body = httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body();
+            return new JSONObject(body).getString("tag_name");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

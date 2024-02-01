@@ -30,6 +30,9 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
     private SkriptAddon addon;
     public static long start;
     public static PermissionAttachment last_permission_attachment;
+    public static boolean dh = false;
+    public static boolean vc = false;
+    public static boolean vu = false;
 
     public void onEnable() {
         saveDefaultConfig();
@@ -40,9 +43,6 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
         Metrics metrics = new Metrics(this, 20162);
         instance = this;
         start = System.currentTimeMillis()/50;
-        boolean dh = false;
-        boolean vc = false;
-        boolean vu = false;
         try {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
