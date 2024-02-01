@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.HashMap;
 
-public abstract class SkinWrapper {
+public class SkinWrapper {
 
     public static final HashMap<Player, String> skinname = new HashMap<>();
 
