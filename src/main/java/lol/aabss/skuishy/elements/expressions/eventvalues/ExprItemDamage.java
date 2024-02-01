@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+@SuppressWarnings("NullableProblems")
 @Name("Item - Item Damage")
 @Description("Gets/sets the item damage.")
 @Examples({

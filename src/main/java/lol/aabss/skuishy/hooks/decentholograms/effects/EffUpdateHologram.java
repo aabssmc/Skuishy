@@ -13,7 +13,7 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
+
 @Name("Decent Holograms - Update Hologram")
 @Description("Updates a hologram.")
 @Examples({

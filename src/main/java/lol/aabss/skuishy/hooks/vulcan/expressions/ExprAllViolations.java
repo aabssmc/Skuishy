@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+@SuppressWarnings("NullableProblems")
 public class ExprAllViolations extends SimpleExpression<Integer> {
 
     static{

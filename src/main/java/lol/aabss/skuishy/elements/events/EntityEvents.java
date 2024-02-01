@@ -1,17 +1,11 @@
 package lol.aabss.skuishy.elements.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.*;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Color;
 import ch.njol.skript.util.Getter;
 import ch.njol.skript.util.SkriptColor;
-import ch.njol.util.Kleenean;
 import com.destroystokyo.paper.event.entity.*;
 import io.papermc.paper.event.entity.*;
 import org.bukkit.block.Block;
@@ -23,7 +17,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 public class EntityEvents extends SkriptEvent {
 

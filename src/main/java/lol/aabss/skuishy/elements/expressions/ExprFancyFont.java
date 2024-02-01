@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("Other - Fancy Font")
 @Description("Makes texts fancy.")
 @Examples({

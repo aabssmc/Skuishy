@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("TickManager - Frozen State")
 @Description("Gets/sets the frozen mode of the server or an entity.")
 @Examples({

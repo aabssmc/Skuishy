@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("World - Spawn Limit")
 @Description("Gets/Sets a spawn limit of a spawn category in a world.")
 @Examples({

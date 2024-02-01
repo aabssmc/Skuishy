@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
+@SuppressWarnings("NullableProblems")
 @Name("Other - Number Unformat")
 @Description("Unformats a number.")
 @Examples({

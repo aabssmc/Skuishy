@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.text.NumberFormat;
+@SuppressWarnings("NullableProblems")
 @Name("Other - Number Format")
 @Description("Formats a number.")
 @Examples({

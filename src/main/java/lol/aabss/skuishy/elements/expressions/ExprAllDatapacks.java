@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("Server - All Datapacks")
 @Description("Gets all the datapacks.")
 @Examples({

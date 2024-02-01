@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("ViveCraft - Vive Only Mode")
 @Description("Gets/Sets the vive craft only mode for the server.")
 @Examples({

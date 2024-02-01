@@ -48,7 +48,7 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
     }
 
     @Override
-    protected @Nullable String[] get(@NotNull Event e) {
+    protected String @NotNull [] get(@NotNull Event e) {
         String Value = value.getSingle(e);
         if (Value == null) return null;
         if (shift == null){

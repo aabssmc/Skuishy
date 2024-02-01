@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("Player - Unknown Command Message")
 @Description("Gets or sets the unknown command message.")
 @Examples({

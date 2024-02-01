@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("Decent Holograms - Hologram Name")
 @Description("Gets a hologram by its name.")
 @Examples({

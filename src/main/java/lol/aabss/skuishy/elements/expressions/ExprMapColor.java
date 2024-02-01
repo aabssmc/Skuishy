@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("Block - Map Color")
 @Description("Gets the map color from a block.")
 @Examples({

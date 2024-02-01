@@ -15,6 +15,7 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+@SuppressWarnings("NullableProblems")
 @Name("Server - Server Port")
 @Description("Gets the port of the server.")
 @Examples({

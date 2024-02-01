@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("Player - Main Hand")
 @Description("Gets the player's selected main hand.")
 @Examples({

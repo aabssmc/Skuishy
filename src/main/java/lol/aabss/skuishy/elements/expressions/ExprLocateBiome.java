@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("World - Nearest Biome")
 @Description("Locates the nearest biome in a specified radius and location.")
 @Examples({

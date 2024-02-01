@@ -17,6 +17,7 @@ import org.bukkit.event.block.SculkBloomEvent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+@SuppressWarnings("NullableProblems")
 @Name("Block - Sculk Charge")
 @Description("Gets/sets the sculk charge.")
 @Examples({

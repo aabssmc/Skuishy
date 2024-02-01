@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("Block - Command of Command Block")
 @Description("Sends the command in a command block.")
 @Examples({

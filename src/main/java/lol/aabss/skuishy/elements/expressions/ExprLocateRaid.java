@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("NullableProblems")
 @Name("World - Nearest Raid")
 @Description("Locates the nearest raid in a specified radius and location.")
 @Examples({

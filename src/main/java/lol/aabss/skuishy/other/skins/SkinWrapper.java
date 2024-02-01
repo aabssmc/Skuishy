@@ -15,9 +15,9 @@ import java.util.HashMap;
 
 public abstract class SkinWrapper {
 
-    public static HashMap<Player, String> skinname = new HashMap<>();
+    public static final HashMap<Player, String> skinname = new HashMap<>();
 
-    public static BufferedImage get(Player player, @Nullable Number size, boolean lay) throws Exception {
+    public static BufferedImage get(Player player, @Nullable Number size, boolean lay) {
         BufferedImage textureImage = imgTexture(player);
         BufferedImage subImage = textureImage.getSubimage(8,8,8,8);
         assert size != null;

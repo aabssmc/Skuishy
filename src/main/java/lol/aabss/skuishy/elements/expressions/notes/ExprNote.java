@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+@SuppressWarnings("NullableProblems")
 @Name("Notes - Note")
 @Description("Represents a note.")
 @Examples({

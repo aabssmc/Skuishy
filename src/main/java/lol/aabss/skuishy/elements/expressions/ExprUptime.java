@@ -18,6 +18,7 @@ import javax.annotation.Nullable;
 
 import static lol.aabss.skuishy.Skuishy.start;
 
+@SuppressWarnings("NullableProblems")
 @Name("Server - Uptime")
 @Description("Gets the server's uptime.")
 @Examples({

@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("NullableProblems")
 @Name("Player - Someone")
 @Description("Gets a random player")
 @Examples({
