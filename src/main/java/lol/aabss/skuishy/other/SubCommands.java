@@ -6,6 +6,7 @@ import lol.aabss.skuishy.Skuishy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,22 +24,17 @@ public class SubCommands {
         }
         String sk = latestSkriptVersion();
         String sku = latestVersion();
-        String skuishyv = instance.getPluginMeta().getVersion();
-        String skriptv = Skript.getInstance().getPluginMeta().getVersion();
-        String msg = "\n<dark_gray>-- <color:#40ff00>Skuishy <gray>Info: <dark_gray>--<reset>\n\n" +
-                "<gray>Skuishy Version: <color:#40ff00>"+ skuishyv + (!Objects.equals(sku, skuishyv) ? " [Latest: "+ sku + "]" : "") +"<reset>\n" +
-                "<gray>Server Version: <color:#40ff00>"+instance.getServer().getMinecraftVersion()+"<reset>\n" +
-                "<gray>Server Implementation: <color:#40ff00>"+instance.getServer().getVersion()+"<reset>\n" +
-                "<gray>Skript Version: <color:#40ff00>"+skriptv+(!Objects.equals(sk, skriptv) ? " [Latest: "+ sk + "]" : "") +"<reset>\n" +
-                "<gray>Addons:\n";
+        String msg = getString(sku, sk);
         // addons --
         List<String> msgs = new ArrayList<>();
         List<SkriptAddon> addonlist = new ArrayList<>(Skript.getAddons().stream().toList());
+        // removes skuishy from addon list
         addonlist.remove(Skuishy.addon);
         if (!addonlist.isEmpty()){
             for (SkriptAddon addon : Skript.getAddons()) {
-                if (addon.plugin != instance) {
-                    msgs.add("    <click:open_url:" + addon.plugin.getPluginMeta().getWebsite() + "><hover:show_text:'<gray>" + addon.plugin.getPluginMeta().getWebsite() + "'><gray>" + addon.plugin.getPluginMeta().getName() + ": <color:#40ff00>" + addon.plugin.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + addon.plugin.getPluginMeta().getAuthors() + "</hover></click>");
+                // if the loop plugin is not skuishy add a message
+                if (addon != instance.getAddonInstance()) {
+                    msgs.add("    <click:open_url:" + addon.plugin.getPluginMeta().getWebsite() + "><hover:show_text:'<gray>" + addon.plugin.getPluginMeta().getWebsite() + "'><gray>" + addon.plugin.getPluginMeta().getName()+": " + (addon.plugin.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + " " + addon.plugin.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + addon.plugin.getPluginMeta().getAuthors() + "</hover></click>");
                 }
             }
         }
@@ -52,7 +48,7 @@ public class SubCommands {
             for (String dep : addon.plugin.getPluginMeta().getPluginSoftDependencies()){
                 Plugin pl = Bukkit.getPluginManager().getPlugin(dep);
                 if (pl != null) {
-                    String msgg = "    <click:open_url:" + pl.getPluginMeta().getWebsite() + "><hover:show_text:'<gray>" + pl.getPluginMeta().getWebsite() + "'><gray>" + pl.getPluginMeta().getName() + ": <color:#40ff00>" + pl.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + pl.getPluginMeta().getAuthors() + "</hover></click>";
+                    String msgg = "    <click:open_url:" + pl.getPluginMeta().getWebsite() + "><hover:show_text:'<gray>" + pl.getPluginMeta().getWebsite() + "'><gray>" + pl.getPluginMeta().getName()+": " + (pl.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + " " + pl.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + pl.getPluginMeta().getAuthors() + "</hover></click>";
                     if (!deps.contains(msgg)) {
                         deps.add(msgg);
                     }
@@ -62,7 +58,7 @@ public class SubCommands {
         for (String dep : Skript.getInstance().getPluginMeta().getPluginSoftDependencies()){
             Plugin pl = Bukkit.getPluginManager().getPlugin(dep);
             if (pl != null){
-                deps.add("    <click:open_url:"+pl.getPluginMeta().getWebsite()+"><hover:show_text:'<gray>"+pl.getPluginMeta().getWebsite()+"'><gray>"+pl.getPluginMeta().getName()+": <color:#40ff00>"+ pl.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + pl.getPluginMeta().getAuthors() + "</hover></click>");
+                deps.add("    <click:open_url:"+pl.getPluginMeta().getWebsite()+"><hover:show_text:'<gray>"+pl.getPluginMeta().getWebsite()+"'><gray>"+pl.getPluginMeta().getName()+": " + (pl.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + " " + pl.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + pl.getPluginMeta().getAuthors() + "</hover></click>");
             }
         }
         StringBuilder dependencies = new StringBuilder();
@@ -86,6 +82,19 @@ public class SubCommands {
         sender.sendMessage(miniMessage().deserialize(msg+
                 "\n<dark_gray>----------------"
                 ));
+    }
+
+    @NotNull
+    private static String getString(String sku, String sk) {
+        String skuishyv = instance.getPluginMeta().getVersion();
+        String skriptv = Skript.getInstance().getPluginMeta().getVersion();
+        String msg = "\n<dark_gray>-- <color:#40ff00>Skuishy <gray>Info: <dark_gray>--<reset>\n\n" +
+                "<gray>Skuishy Version: <color:#40ff00>"+ skuishyv + (!Objects.equals(sku, skuishyv) ? " [Latest: "+ sku + "]" : "") +"<reset>\n" +
+                "<gray>Server Version: <color:#40ff00>"+instance.getServer().getMinecraftVersion()+"<reset>\n" +
+                "<gray>Server Implementation: <color:#40ff00>"+instance.getServer().getVersion()+"<reset>\n" +
+                "<gray>Skript Version: <color:#40ff00>"+skriptv+(!Objects.equals(sk, skriptv) ? " [Latest: "+ sk + "]" : "") +"<reset>\n" +
+                "<gray>Addons:\n";
+        return msg;
     }
 
     public static void cmdReload(CommandSender sender){
