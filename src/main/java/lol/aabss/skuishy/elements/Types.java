@@ -10,6 +10,7 @@ import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
@@ -186,6 +187,29 @@ public class Types {
                     @Override
                     public @NotNull String toString(PotionType type, int flags) {
                         return toVariableNameString(type);
+                    }
+                })
+        );
+        Classes.registerClass(new ClassInfo<>(Permission.class, "permission")
+                .user("permissions?")
+                .name("Permissions - Permission")
+                .description("Represents a permission.")
+                .since("2.1")
+                .parser(new Parser<>() {
+
+                    @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return false;
+                    }
+
+                    @Override
+                    public @NotNull String toVariableNameString(Permission perm) {
+                        return perm.getName();
+                    }
+
+                    @Override
+                    public @NotNull String toString(Permission perm, int flags) {
+                        return toVariableNameString(perm);
                     }
                 })
         );

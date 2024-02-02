@@ -8,6 +8,7 @@ types:
     spawncategory: spawncategory¦s @a
     hologramclicktype: hologramclicktype¦s @a
     potionitemtype: potionitemtype¦s @a
+    permission: permission¦s @a
     permissionattachment: permissionattachment¦s @a
     viveplayer: viveplayer¦s @a
     hologram: hologram¦s @a
