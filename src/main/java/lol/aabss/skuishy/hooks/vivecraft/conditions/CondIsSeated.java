@@ -1,13 +1,14 @@
 package lol.aabss.skuishy.hooks.vivecraft.conditions;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import org.vivecraft.VSE;
-import org.vivecraft.VivePlayer;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.vivecraft.VSE;
 
 @Name("ViveCraft - Is Seated")
 @Description("Returns true if the player is sitting.")
@@ -15,18 +16,22 @@ import org.jetbrains.annotations.NotNull;
         "if player is sitting:"
 })
 @Since("1.9")
-public class CondIsSeated extends PropertyCondition<VivePlayer> {
+public class CondIsSeated extends PropertyCondition<Player> {
 
     static {
         register(CondIsSeated.class,
                 "(seated|sitting)",
-                "viveplayers"
+                "viveplayers/players"
         );
     }
 
     @Override
-    public boolean check(VivePlayer vivePlayer) {
-        return VSE.isSeated(vivePlayer.player);
+    public boolean check(Player vivePlayer) {
+        if (VSE.vivePlayers.containsKey(vivePlayer.getUniqueId())) {
+            return VSE.isSeated(vivePlayer);
+        }
+        Skript.error("Player is not a ViveCraft player!");
+        return false;
     }
 
     @Override

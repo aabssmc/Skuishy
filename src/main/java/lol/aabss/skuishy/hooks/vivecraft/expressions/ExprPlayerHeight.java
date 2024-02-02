@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.hooks.vivecraft.expressions;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
@@ -8,6 +9,8 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import org.bukkit.entity.Player;
+import org.vivecraft.VSE;
 import org.vivecraft.VivePlayer;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -21,18 +24,22 @@ import javax.annotation.Nullable;
         "send \"dwarf!\" to player"
 })
 @Since("1.9")
-public class ExprPlayerHeight extends PropertyExpression<VivePlayer, Integer> {
+public class ExprPlayerHeight extends PropertyExpression<Player, Number> {
 
     static{
-        register(ExprPlayerHeight.class, Integer.class,
+        register(ExprPlayerHeight.class, Number.class,
                 "height",
-                "viveplayers");
+                "viveplayers/players");
     }
 
     @Override
-    protected Integer @NotNull [] get(@NotNull Event event, VivePlayer[] source) {
-        VivePlayer p = source[0];
-        return new Integer[]{(int) p.heightScale};
+    protected Number @NotNull [] get(@NotNull Event event, Player[] source) {
+        Player vivePlayer = source[0];
+        if (VSE.vivePlayers.containsKey(vivePlayer.getUniqueId())) {
+            return new Number[]{new VivePlayer(vivePlayer).heightScale};
+        }
+        Skript.error("Player is not a ViveCraft player!");
+        return new Number[]{0};
     }
 
     @Override
@@ -41,8 +48,8 @@ public class ExprPlayerHeight extends PropertyExpression<VivePlayer, Integer> {
     }
 
     @Override
-    public @NotNull Class<? extends Integer> getReturnType() {
-        return Integer.class;
+    public @NotNull Class<? extends Number> getReturnType() {
+        return Number.class;
     }
 
     @Override

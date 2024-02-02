@@ -25,7 +25,7 @@ public class CondIsVivePlayer extends PropertyCondition<Player> {
 
     @Override
     public boolean check(Player player) {
-        return VSE.vivePlayers.get(player.getUniqueId()) != null;
+        return VSE.vivePlayers.containsKey(player.getUniqueId());
     }
 
     @Override

@@ -40,6 +40,8 @@ dependencies {
 
 shadowJar {
     dependencies {
+        include(dependency(files('gradle/Vivecraft_Spigot_Extensions.jar')))
+        include(dependency(files('gradle/VulcanAPI.jar')))
         include(dependency('org.json:json:20231013'))
     }
 }
