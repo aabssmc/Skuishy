@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.permissions.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,12 +19,18 @@ import org.jetbrains.annotations.Nullable;
 
 import static lol.aabss.skuishy.Skuishy.last_permission;
 
+@Name("Permissions - New Permission")
+@Description("Creates/Deletes a permission.")
+@Examples({
+        "delete permission named \"ok\""
+})
+@Since("2.1")
 public class EffNewPermission extends Effect {
 
     static {
         Skript.registerEffect(EffNewPermission.class,
                 "(create|make) [a] [new] permission (named|(by|with) name) %string% [and (store|save) it in %-object%]",
-                "(delete|remove) %permission% [from [the] (plugin|permission) manager"
+                "(delete|remove) %permission% [from [the] (plugin|permission) manager]"
         );
     }
 
