@@ -11,6 +11,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,7 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
     public static SkriptAddon addon;
     public static long start;
     public static PermissionAttachment last_permission_attachment;
+    public static Permission last_permission;
     public static boolean dh = false;
     public static boolean vc = false;
     public static boolean vu = false;

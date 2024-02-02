@@ -12,6 +12,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
@@ -220,6 +221,7 @@ public class Types {
                 .since("2.1")
                 .parser(new Parser<>() {
 
+
                     @Override
                     public boolean canParse(@NotNull ParseContext context) {
                         return false;
@@ -232,6 +234,36 @@ public class Types {
 
                     @Override
                     public @NotNull String toString(PermissionAttachment perm, int flags) {
+                        return toVariableNameString(perm);
+                    }
+                })
+        );
+        EnumUtils<PermissionDefault> permdefault = new EnumUtils<>(PermissionDefault.class, "permissiondefault");
+        Classes.registerClass(new ClassInfo<>(PermissionDefault.class, "permissiondefault")
+                .user("permission ?defaults?")
+                .name("Permissions - Permission Default")
+                .description("Represents the possible default values for permissions.")
+                .since("2.1")
+                .parser(new Parser<>() {
+
+                    @Override
+                    @Nullable
+                    public PermissionDefault parse(@NotNull String input, @NotNull ParseContext context) {
+                        return permdefault.parse(input);
+                    }
+
+                    @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return true;
+                    }
+
+                    @Override
+                    public @NotNull String toVariableNameString(PermissionDefault perm) {
+                        return perm.name();
+                    }
+
+                    @Override
+                    public @NotNull String toString(PermissionDefault perm, int flags) {
                         return toVariableNameString(perm);
                     }
                 })

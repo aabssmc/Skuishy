@@ -69,8 +69,6 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
         } else if (mode == Changer.ChangeMode.REMOVE_ALL){
             Bukkit.getPluginManager().clearPermissions();
         }
-
-        super.change(e, delta, mode);
     }
 
     @Override

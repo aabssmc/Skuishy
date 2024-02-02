@@ -6,12 +6,14 @@ types:
     instrument: instrument¦s @a
     datapack: datapack¦s @a
     spawncategory: spawncategory¦s @a
-    hologramclicktype: hologramclicktype¦s @a
     potionitemtype: potionitemtype¦s @a
     permission: permission¦s @a
     permissionattachment: permissionattachment¦s @a
-    viveplayer: viveplayer¦s @a
+    permissiondefault: permissiondefault¦s @a
+
+    hologramclicktype: hologramclicktype¦s @a
     hologram: hologram¦s @a
+    viveplayer: viveplayer¦s @a
 
 tone:
     g: G
@@ -107,3 +109,9 @@ potionitemtype:
     water: water
     water_breathing: water breathing
     weakness: weakness
+
+permissiondefault:
+    true: true, yes, on
+    false: false, no, off
+    op: op, operator, admin
+    not_op: not op, not operator, not admin
