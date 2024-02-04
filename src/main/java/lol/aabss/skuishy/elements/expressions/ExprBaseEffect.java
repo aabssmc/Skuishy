@@ -14,7 +14,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.potion.PotionType;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Arrow - Base Potion Type")
@@ -32,7 +32,7 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
     }
 
     @Override
-    protected PotionType @NonNull [] get(@NonNull Event event, Entity @NonNull [] source) {
+    protected PotionType @NotNull [] get(@NotNull Event event, Entity @NotNull [] source) {
         if (source[0] instanceof Arrow arrow){
             return new PotionType[]{arrow.getBasePotionType()};
         }
@@ -40,23 +40,23 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
     }
 
     @Override
-    public @NonNull Class<? extends PotionType> getReturnType() {
+    public @NotNull Class<? extends PotionType> getReturnType() {
         return PotionType.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "base potion type";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         setExpr((Expression<? extends Entity>) exprs[0]);
         return true;
     }
 
     @Override
-    public Class<?> @NonNull [] acceptChange(Changer.@NonNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(PotionType.class);
         }
@@ -64,7 +64,7 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
     }
 
     @Override
-    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode) {
+    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         Entity en = getExpr().getSingle(e);
         if (en instanceof Arrow) {
             if (mode == Changer.ChangeMode.SET) {

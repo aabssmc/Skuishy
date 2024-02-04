@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Vex;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Vex - Has Limited Lifetime")
 @Description("Returns true if the vex has limited lifetime.")
@@ -30,7 +30,7 @@ public class CondHasLimitedLifetime extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "limited lifetime";
     }
 }

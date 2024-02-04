@@ -11,7 +11,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 
@@ -39,7 +39,7 @@ public class CondMainHand extends Condition {
     private MainHandSide side;
 
     @Override
-    public boolean init(Expression<?>[] expressions, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.ParseResult parser) {
+    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parser) {
         this.player = (Expression<Player>) expressions[0];
         boolean negated = parser.mark == 1;
         if (parser.hasTag("right")) side = MainHandSide.RIGHT;
@@ -49,12 +49,12 @@ public class CondMainHand extends Condition {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event event, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "main hand of " + player.toString(event, debug) + " is " + side.toString();
     }
 
     @Override
-    public boolean check(@NonNull Event event) {
+    public boolean check(@NotNull Event event) {
         Player p = player.getSingle(event);
         if (p == null) return false;
         String mh = p.getMainHand().toString();

@@ -11,7 +11,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 import java.text.NumberFormat;
@@ -39,7 +39,7 @@ public class ExprNumberUnformat extends SimpleExpression<Number> {
     Expression<String> num;
 
     @Override
-    protected @Nullable Number[] get(@NonNull Event e) {
+    protected @Nullable Number[] get(@NotNull Event e) {
         try {
             if (letter) {
                 return new Number[]{NumberFormat.getCompactNumberInstance().parse(num.getSingle(e).toUpperCase())};
@@ -56,17 +56,17 @@ public class ExprNumberUnformat extends SimpleExpression<Number> {
     }
 
     @Override
-    public @NonNull Class<? extends Number> getReturnType() {
+    public @NotNull Class<? extends Number> getReturnType() {
         return Number.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "number unformat";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         letter = matchedPattern == 0;
         num = (Expression<String>) exprs[0];
         return true;

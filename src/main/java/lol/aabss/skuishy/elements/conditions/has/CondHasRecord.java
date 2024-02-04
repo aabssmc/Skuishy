@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Jukebox - Has Record")
 @Description("Returns true if the jukebox has a record.")
@@ -30,7 +30,7 @@ public class CondHasRecord extends PropertyCondition<Block> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "record";
     }
 }

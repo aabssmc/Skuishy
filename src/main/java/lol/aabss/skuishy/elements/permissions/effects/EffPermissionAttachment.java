@@ -12,7 +12,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.Objects;
@@ -44,7 +44,7 @@ public class EffPermissionAttachment extends Effect {
 
 
     @Override
-    protected void execute(@NonNull Event e) {
+    protected void execute(@NotNull Event e) {
         PermissionAttachment attach = this.attach.getSingle(e);
         if (attach != null) {
             if (Objects.equals(part, "set") || Objects.equals(part, "add")){
@@ -71,12 +71,12 @@ public class EffPermissionAttachment extends Effect {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "permission attachment";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (matchedPattern == 0){
             attach = (Expression<PermissionAttachment>) exprs[0];
             perm = (Expression<Permission>) exprs[1];

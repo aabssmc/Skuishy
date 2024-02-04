@@ -8,7 +8,7 @@ import ch.njol.skript.doc.Since;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.EndPortalFrame;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Block - Has Eye")
 @Description("Returns true if the end portal frame has a eye of ender.")
@@ -32,7 +32,7 @@ public class CondHasEye extends PropertyCondition<Block> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "eye of ender";
     }
 }

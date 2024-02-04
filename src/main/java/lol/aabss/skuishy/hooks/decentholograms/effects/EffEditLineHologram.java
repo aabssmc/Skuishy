@@ -14,7 +14,7 @@ import eu.decentsoftware.holograms.api.holograms.HologramLine;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 import java.util.Objects;
@@ -49,7 +49,7 @@ public class EffEditLineHologram extends Effect {
     private Variable<?> var;
 
     @Override
-    protected void execute(@NonNull Event e) {
+    protected void execute(@NotNull Event e) {
         Hologram holo = hologram.getSingle(e);
         if (holo != null) {
             if (Objects.equals(changetype, "add")) {
@@ -91,12 +91,12 @@ public class EffEditLineHologram extends Effect {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "edit hologram";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (matchedPattern == 0){
             changetype = "add";
             hologram = (Expression<Hologram>) exprs[0];

@@ -12,7 +12,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.io.IOException;
@@ -75,7 +75,7 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
     }
 
     @Override
-    public boolean onCommand(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label, @NonNull String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length == 0){
             sender.sendMessage(miniMessage().deserialize(
                     "<red>/skuishy <" +
@@ -111,7 +111,7 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NonNull CommandSender sender, @NonNull Command command, @NonNull String alias, @NonNull String[] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         List<String> completions = new ArrayList<>();
         completions.add("info");
         completions.add("reload");

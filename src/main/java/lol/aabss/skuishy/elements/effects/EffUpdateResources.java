@@ -11,7 +11,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Server - Update")
@@ -37,7 +37,7 @@ public class EffUpdateResources extends Effect {
     private boolean recipes;
 
     @Override
-    protected void execute(@NonNull Event e) {
+    protected void execute(@NotNull Event e) {
         if (recipes) {
             Bukkit.updateRecipes();
         } else {
@@ -46,12 +46,12 @@ public class EffUpdateResources extends Effect {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "update recipes/resources";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         recipes = parseResult.hasTag("recipes");
         return true;
     }

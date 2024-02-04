@@ -11,7 +11,7 @@ import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -36,7 +36,7 @@ public class ExprHologramFromName extends SimpleExpression<Hologram> {
     private Expression<String> name;
 
     @Override
-    protected @Nullable Hologram[] get(@NonNull Event e) {
+    protected @Nullable Hologram[] get(@NotNull Event e) {
         String name = this.name.getSingle(e);
         if (name != null) {
             Hologram hologram = DHAPI.getHologram(name);
@@ -51,17 +51,17 @@ public class ExprHologramFromName extends SimpleExpression<Hologram> {
     }
 
     @Override
-    public @NonNull Class<? extends Hologram> getReturnType() {
+    public @NotNull Class<? extends Hologram> getReturnType() {
         return Hologram.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "hologram from name";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         name = (Expression<String>) exprs[0];
         return true;
     }

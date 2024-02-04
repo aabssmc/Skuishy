@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Armor Stand - Can Move")
 @Description("Returns true if the armor stand can move.")
@@ -33,7 +33,7 @@ public class CondCanMove extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "move";
     }
 }

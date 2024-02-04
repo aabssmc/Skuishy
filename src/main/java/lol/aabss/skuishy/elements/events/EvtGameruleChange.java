@@ -15,7 +15,7 @@ import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("World - On Gamerule Change")
 @Description("Called when a gamerule is changed.")
@@ -67,7 +67,7 @@ public class EvtGameruleChange extends SkriptEvent {
     Literal<GameRule<?>> gamerule;
 
     @Override
-    public boolean init(Literal<?> @NonNull [] exprs, int matchedPattern, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Literal<?> @NotNull [] exprs, int matchedPattern, SkriptParser.@NotNull ParseResult parseResult) {
         if (matchedPattern == 0){
             gamerule = (Literal<GameRule<?>>) exprs[0];
             world = (Literal<World>) exprs[1];
@@ -80,7 +80,7 @@ public class EvtGameruleChange extends SkriptEvent {
     }
 
     @Override
-    public boolean check(@NonNull Event e) {
+    public boolean check(@NotNull Event e) {
         if (e instanceof WorldGameRuleChangeEvent) {
             if (world == null) {
                 if (gamerule == null) {
@@ -101,7 +101,7 @@ public class EvtGameruleChange extends SkriptEvent {
     }
 
     @Override
-    public @NonNull String toString(Event e, boolean debug) {
+    public @NotNull String toString(Event e, boolean debug) {
         return "gamerule change event";
     }
 }

@@ -13,7 +13,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.PermissionAttachment;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Permissions - Permissible of Permission Attachment")
@@ -34,7 +34,7 @@ public class ExprPermissible extends SimpleExpression<Entity> {
     private Expression<PermissionAttachment> attach;
 
     @Override
-    protected Entity @NonNull [] get(@NonNull Event e) {
+    protected Entity @NotNull [] get(@NotNull Event e) {
         PermissionAttachment attach = this.attach.getSingle(e);
         if (attach != null){
             return new Entity[]{(Entity) attach.getPermissible()};
@@ -48,17 +48,17 @@ public class ExprPermissible extends SimpleExpression<Entity> {
     }
 
     @Override
-    public @NonNull Class<? extends Entity> getReturnType() {
+    public @NotNull Class<? extends Entity> getReturnType() {
         return Entity.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "permissible of permission attachment";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         attach = (Expression<PermissionAttachment>) exprs[0];
         return true;
     }

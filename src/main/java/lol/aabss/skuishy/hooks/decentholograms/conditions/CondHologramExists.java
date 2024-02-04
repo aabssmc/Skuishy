@@ -9,7 +9,7 @@ import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -36,7 +36,7 @@ public class CondHologramExists extends Condition {
     private boolean is;
 
     @Override
-    public boolean check(@NonNull Event e) {
+    public boolean check(@NotNull Event e) {
         String name = this.name.getSingle(e);
         if (name == null) return false;
         if (is) {
@@ -46,12 +46,12 @@ public class CondHologramExists extends Condition {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "hologram exists";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         name = (Expression<String>) exprs[0];
         is = matchedPattern == 0;
         return true;

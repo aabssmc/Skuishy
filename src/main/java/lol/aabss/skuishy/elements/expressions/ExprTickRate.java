@@ -14,7 +14,7 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -38,12 +38,12 @@ public class ExprTickRate extends SimpleExpression<Number> {
     }
 
     @Override
-    protected @Nullable Number[] get(@NonNull Event e) {
+    protected @Nullable Number[] get(@NotNull Event e) {
         return new Number[]{Bukkit.getServer().getServerTickManager().getTickRate()};
     }
 
     @Override
-    public @Nullable Class<?>[] acceptChange(Changer.@NonNull ChangeMode mode) {
+    public @Nullable Class<?>[] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.RESET){
             return CollectionUtils.array(Number.class);
         }
@@ -51,7 +51,7 @@ public class ExprTickRate extends SimpleExpression<Number> {
     }
 
     @Override
-    public void change(@NonNull Event e, @Nullable Object[] delta, Changer.@NonNull ChangeMode mode) {
+    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
                 Bukkit.getServer().getServerTickManager().setTickRate((float) delta[0]);
@@ -69,17 +69,17 @@ public class ExprTickRate extends SimpleExpression<Number> {
     }
 
     @Override
-    public @NonNull Class<? extends Number> getReturnType() {
+    public @NotNull Class<? extends Number> getReturnType() {
         return Number.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "tick rate";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 }

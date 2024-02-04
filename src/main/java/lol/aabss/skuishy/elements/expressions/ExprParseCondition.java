@@ -12,7 +12,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Other - Parse Condition")
@@ -34,7 +34,7 @@ public class ExprParseCondition extends SimpleExpression<Boolean> {
     private Expression<String> condition;
 
     @Override
-    protected Boolean @NonNull [] get(@NonNull Event e) {
+    protected Boolean @NotNull [] get(@NotNull Event e) {
         String cond = condition.getSingle(e);
         if (cond != null) {
             Condition condition = Condition.parse(cond, "Can't understand this condition: " + cond);
@@ -50,17 +50,17 @@ public class ExprParseCondition extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public @NonNull Class<? extends Boolean> getReturnType() {
+    public @NotNull Class<? extends Boolean> getReturnType() {
         return Boolean.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "parse condition";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         condition = (Expression<String>) exprs[0];
         return true;
     }

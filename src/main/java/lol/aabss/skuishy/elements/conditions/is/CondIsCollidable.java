@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.LivingEntity;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Living Entity - Is Collidable")
 @Description("Returns true if the entity is collidable.")
@@ -26,7 +26,7 @@ public class CondIsCollidable extends PropertyCondition<LivingEntity> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "collidable";
     }
 }

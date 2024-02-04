@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Piglin;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Piglin - Is Able To Be Hunted")
 @Description("Returns true if the piglin is able to hunt.")
@@ -33,7 +33,7 @@ public class CondIsAbleToHunt extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "hunt";
     }
 }

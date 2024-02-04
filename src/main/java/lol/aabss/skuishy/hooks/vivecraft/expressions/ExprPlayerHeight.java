@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.vivecraft.VSE;
 import org.vivecraft.VivePlayer;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -33,7 +33,7 @@ public class ExprPlayerHeight extends PropertyExpression<Player, Number> {
     }
 
     @Override
-    protected Number @NonNull [] get(@NonNull Event event, Player[] source) {
+    protected Number @NotNull [] get(@NotNull Event event, Player[] source) {
         Player vivePlayer = source[0];
         if (VSE.vivePlayers.containsKey(vivePlayer.getUniqueId())) {
             return new Number[]{new VivePlayer(vivePlayer).heightScale};
@@ -48,17 +48,17 @@ public class ExprPlayerHeight extends PropertyExpression<Player, Number> {
     }
 
     @Override
-    public @NonNull Class<? extends Number> getReturnType() {
+    public @NotNull Class<? extends Number> getReturnType() {
         return Number.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "height of viveplayer";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 }

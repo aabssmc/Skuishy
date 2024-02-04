@@ -13,7 +13,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -38,7 +38,7 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
     private Expression<Location> location;
 
     @Override
-    protected @Nullable Location[] get(@NonNull Event e) {
+    protected @Nullable Location[] get(@NotNull Event e) {
         Location loc = location.getSingle(e);
         Biome bio = biome.getSingle(e);
         Integer rad = radius.getSingle(e);
@@ -54,18 +54,18 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
     }
 
     @Override
-    public @NonNull Class<? extends Location> getReturnType() {
+    public @NotNull Class<? extends Location> getReturnType() {
         return Location.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "nearest biome";
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         biome = (Expression<Biome>) exprs[0];
         radius = (Expression<Integer>) exprs[1];
         location = (Expression<Location>) exprs[2];

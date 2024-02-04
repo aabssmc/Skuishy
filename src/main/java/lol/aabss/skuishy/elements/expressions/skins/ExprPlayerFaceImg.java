@@ -13,7 +13,7 @@ import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.image.BufferedImage;
 
@@ -40,7 +40,7 @@ public class ExprPlayerFaceImg extends PropertyExpression<Player, BufferedImage>
     private boolean without;
 
     @Override
-    protected BufferedImage @NonNull [] get(@NonNull Event event, Player @NonNull [] source) {
+    protected BufferedImage @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         if (source.length < 1) return new BufferedImage[0];
         Player player = source[0] != null ? source[0] : null;
         Number size = null;
@@ -55,12 +55,12 @@ public class ExprPlayerFaceImg extends PropertyExpression<Player, BufferedImage>
     }
 
     @Override
-    public @NonNull Class<? extends BufferedImage> getReturnType() {
+    public @NotNull Class<? extends BufferedImage> getReturnType() {
         return BufferedImage.class;
     }
 
     @Override
-    public @NonNull String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         if (this.size != null) {
             return Classes.getDebugMessage(getExpr()) + "'face with size " + this.size.toString(event, debug) +
                     (without ? " without" : " with") + " an layer as image";
@@ -71,7 +71,7 @@ public class ExprPlayerFaceImg extends PropertyExpression<Player, BufferedImage>
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, @NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
         if (matchedPattern == 1) {
             setExpr((Expression<? extends Player>) exprs[0]);
             this.size = (Expression<Number>) exprs[1];

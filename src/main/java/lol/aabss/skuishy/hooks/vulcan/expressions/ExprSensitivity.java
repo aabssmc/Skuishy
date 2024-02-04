@@ -11,7 +11,7 @@ import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 @Name("Vulcan - Sensitivity of Player")
@@ -29,7 +29,7 @@ public class ExprSensitivity extends PropertyExpression<Player, Integer> {
     }
 
     @Override
-    protected Integer @NonNull [] get(@NonNull Event event, Player @NonNull [] source) {
+    protected Integer @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         if (VulcanAPI.Factory.getApi() != null) {
             return new Integer[]{VulcanAPI.Factory.getApi().getSensitivity(source[0])};
         }
@@ -37,17 +37,17 @@ public class ExprSensitivity extends PropertyExpression<Player, Integer> {
     }
 
     @Override
-    public @NonNull Class<? extends Integer> getReturnType() {
+    public @NotNull Class<? extends Integer> getReturnType() {
         return Integer.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "sensitivity of player";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }

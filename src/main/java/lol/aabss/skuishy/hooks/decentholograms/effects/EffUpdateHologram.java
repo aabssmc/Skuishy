@@ -10,7 +10,7 @@ import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -35,7 +35,7 @@ public class EffUpdateHologram extends Effect {
     private Expression<Hologram> holo;
 
     @Override
-    protected void execute(@NonNull Event e) {
+    protected void execute(@NotNull Event e) {
         Hologram holo = this.holo.getSingle(e);
         if (holo != null) {
             DHAPI.updateHologram(holo.getName());
@@ -43,12 +43,12 @@ public class EffUpdateHologram extends Effect {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "update hologram";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         holo = (Expression<Hologram>) exprs[0];
         return true;
     }

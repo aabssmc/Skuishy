@@ -9,10 +9,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class Glow {
-    public static void mainGlow(Entity p, Expression<Color> tc, @NonNull Event e) {
+    public static void mainGlow(Entity p, Expression<Color> tc, @NotNull Event e) {
         Color color = tc.getSingle(e);
         if (color != null) {
             org.bukkit.Color c = color.asBukkitColor();

@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.Entity;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Bee - Has Strung")
 @Description("Returns true if the bee has stung.")
@@ -30,7 +30,7 @@ public class CondHasStung extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "stung";
     }
 }

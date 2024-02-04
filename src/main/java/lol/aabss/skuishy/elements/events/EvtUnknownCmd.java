@@ -11,7 +11,7 @@ import ch.njol.skript.util.Getter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
 import org.bukkit.event.command.UnknownCommandEvent;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 @Name("Other - On Unknown Command")
@@ -45,17 +45,17 @@ public class EvtUnknownCmd extends SkriptEvent {
     }
 
     @Override
-    public boolean init(Literal<?> @NonNull [] args, int matchedPattern, @NonNull ParseResult parseResult) {
+    public boolean init(Literal<?> @NotNull [] args, int matchedPattern, @NotNull ParseResult parseResult) {
         return true;
     }
 
     @Override
-    public boolean check(@NonNull Event e) {
+    public boolean check(@NotNull Event e) {
         return true;
     }
 
     @Override
-    public @NonNull String toString(Event e, boolean debug) {
+    public @NotNull String toString(Event e, boolean debug) {
         return "player unknown command event";
     }
 

@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Armor Stand - Has Base Plate")
 @Description("Returns true if the armor stand has a base plate.")
@@ -30,7 +30,7 @@ public class CondHasBasePlate extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "base plate";
     }
 }

@@ -14,7 +14,7 @@ import ch.njol.skript.util.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerChangedMainHandEvent;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 @Name("Player - On Main Hand Change")
@@ -48,17 +48,17 @@ public class EvtMainHandChange extends SkriptEvent {
     }
 
     @Override
-    public boolean init(Literal<?> @NonNull [] args, int matchedPattern, @NonNull ParseResult parseResult) {
+    public boolean init(Literal<?> @NotNull [] args, int matchedPattern, @NotNull ParseResult parseResult) {
         return true;
     }
 
     @Override
-    public boolean check(@NonNull Event e) {
+    public boolean check(@NotNull Event e) {
         return true;
     }
 
     @Override
-    public @NonNull String toString(Event e, boolean debug) {
+    public @NotNull String toString(Event e, boolean debug) {
         return "player main hand change";
     }
 

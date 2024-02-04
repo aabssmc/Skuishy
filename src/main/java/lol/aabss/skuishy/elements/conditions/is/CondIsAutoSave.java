@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.World;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("World - Is Auto Save")
 @Description("Returns true if the world auto saves.")
@@ -29,7 +29,7 @@ public class CondIsAutoSave extends PropertyCondition<World> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "autosave";
     }
 }

@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Object - Has Gravity")
 @Description("Returns true if the object has gravity.")
@@ -33,7 +33,7 @@ public class CondHasGravity extends PropertyCondition<Object> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "gravity";
     }
 }

@@ -9,7 +9,7 @@ import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 import java.util.Objects;
@@ -33,7 +33,7 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
     private Expression<Player> player;
 
     @Override
-    protected @Nullable Integer[] get(@NonNull Event e) {
+    protected @Nullable Integer[] get(@NotNull Event e) {
         Player p = player.getSingle(e);
         VulcanAPI api = VulcanAPI.Factory.getApi();
         if (p != null && api != null) {
@@ -62,17 +62,17 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
     }
 
     @Override
-    public @NonNull Class<? extends Integer> getReturnType() {
+    public @NotNull Class<? extends Integer> getReturnType() {
         return Integer.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "player violations";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         player = (Expression<Player>) exprs[0];
         if (matchedPattern == 0){vtype = "all";}
         else if (matchedPattern == 1){vtype = "combat";}

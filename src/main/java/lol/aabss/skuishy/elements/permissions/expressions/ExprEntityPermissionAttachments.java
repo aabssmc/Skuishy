@@ -14,7 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class ExprEntityPermissionAttachments extends SimpleExpression<Permission
     private Expression<Entity> entity;
 
     @Override
-    protected PermissionAttachment @NonNull [] get(@NonNull Event e) {
+    protected PermissionAttachment @NotNull [] get(@NotNull Event e) {
         for (Entity en : entity.getArray(e)){
             List<PermissionAttachment> perms = new ArrayList<>();
             for (PermissionAttachmentInfo perm : en.getEffectivePermissions()){
@@ -54,12 +54,12 @@ public class ExprEntityPermissionAttachments extends SimpleExpression<Permission
     }
 
     @Override
-    public @NonNull Class<? extends PermissionAttachment> getReturnType() {
+    public @NotNull Class<? extends PermissionAttachment> getReturnType() {
         return PermissionAttachment.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "permission attachments of entity";
     }
 

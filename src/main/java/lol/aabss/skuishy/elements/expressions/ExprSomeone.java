@@ -13,7 +13,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 import java.util.List;
@@ -37,7 +37,7 @@ public class ExprSomeone extends SimpleExpression<Player> {
     }
 
     @Override
-    protected @Nullable Player[] get(@NonNull Event e) {
+    protected @Nullable Player[] get(@NotNull Event e) {
         List<Player> players = (List<Player>) Bukkit.getOnlinePlayers();
         Random rand = new Random();
         return new Player[]{players.get(rand.nextInt(players.size()))};
@@ -49,17 +49,17 @@ public class ExprSomeone extends SimpleExpression<Player> {
     }
 
     @Override
-    public @NonNull Class<? extends Player> getReturnType() {
+    public @NotNull Class<? extends Player> getReturnType() {
         return Player.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "someone";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 }

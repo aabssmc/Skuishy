@@ -12,7 +12,7 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 @SuppressWarnings("NullableProblems")
@@ -33,7 +33,7 @@ public class ExprPortOfServer extends SimpleExpression<Integer> {
 
 
     @Override
-    protected @Nullable Integer[] get(@NonNull Event e) {
+    protected @Nullable Integer[] get(@NotNull Event e) {
         return new Integer[]{Bukkit.getPort()};
     }
 
@@ -43,17 +43,17 @@ public class ExprPortOfServer extends SimpleExpression<Integer> {
     }
 
     @Override
-    public @NonNull Class<? extends Integer> getReturnType() {
+    public @NotNull Class<? extends Integer> getReturnType() {
         return Integer.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "port of server";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 }

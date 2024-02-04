@@ -14,7 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Permissions - All Permissibles")
@@ -34,7 +34,7 @@ public class ExprPermissibles extends SimpleExpression<Entity> {
     private Expression<Permission> perm;
 
     @Override
-    protected Entity @NonNull [] get(@NonNull Event e) {
+    protected Entity @NotNull [] get(@NotNull Event e) {
         Permission perm = this.perm.getSingle(e);
         if (perm != null){
             return (Entity[]) perm.getPermissibles().toArray(Permissible[]::new);
@@ -48,17 +48,17 @@ public class ExprPermissibles extends SimpleExpression<Entity> {
     }
 
     @Override
-    public @NonNull Class<? extends Entity> getReturnType() {
+    public @NotNull Class<? extends Entity> getReturnType() {
         return Entity.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "all permissibles with permission";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         perm = (Expression<Permission>) exprs[0];
         return true;
     }

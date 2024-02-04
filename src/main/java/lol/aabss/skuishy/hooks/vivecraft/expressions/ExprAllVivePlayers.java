@@ -13,7 +13,7 @@ import ch.njol.util.Kleenean;
 import org.vivecraft.VSE;
 import org.vivecraft.VivePlayer;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -33,7 +33,7 @@ public class ExprAllVivePlayers extends SimpleExpression<VivePlayer> {
     }
 
     @Override
-    protected @Nullable VivePlayer[] get(@NonNull Event e) {
+    protected @Nullable VivePlayer[] get(@NotNull Event e) {
         return VSE.vivePlayers.values().toArray(VivePlayer[]::new);
     }
 
@@ -43,17 +43,17 @@ public class ExprAllVivePlayers extends SimpleExpression<VivePlayer> {
     }
 
     @Override
-    public @NonNull Class<? extends VivePlayer> getReturnType() {
+    public @NotNull Class<? extends VivePlayer> getReturnType() {
         return VivePlayer.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "all vive players";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 }

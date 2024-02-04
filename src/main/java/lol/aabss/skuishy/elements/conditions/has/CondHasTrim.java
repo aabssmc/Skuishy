@@ -8,7 +8,7 @@ import ch.njol.skript.doc.Since;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Item - Has Trim")
 @Description("Returns true if the item has a trim.")
@@ -32,7 +32,7 @@ public class CondHasTrim extends PropertyCondition<ItemStack> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "trim";
     }
 }

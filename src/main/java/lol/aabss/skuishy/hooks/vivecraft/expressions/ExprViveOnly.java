@@ -14,7 +14,7 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.vivecraft.VSE;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -34,12 +34,12 @@ public class ExprViveOnly extends SimpleExpression<Boolean> {
     }
 
     @Override
-    protected @Nullable Boolean[] get(@NonNull Event e) {
+    protected @Nullable Boolean[] get(@NotNull Event e) {
         return new Boolean[]{VSE.me.getConfig().getBoolean("general.vive-only")};
     }
 
     @Override
-    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode){
+    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
             VSE.me.getConfig().set("general.vive-only", delta[0]);
         }
@@ -49,7 +49,7 @@ public class ExprViveOnly extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public Class<?> @NonNull [] acceptChange(final Changer.@NonNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Boolean.class);
         }
@@ -62,17 +62,17 @@ public class ExprViveOnly extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public @NonNull Class<? extends Boolean> getReturnType() {
+    public @NotNull Class<? extends Boolean> getReturnType() {
         return Boolean.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "vivecraft only mode";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 }

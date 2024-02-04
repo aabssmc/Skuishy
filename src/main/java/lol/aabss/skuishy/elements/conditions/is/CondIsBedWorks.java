@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.World;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("World - Is Bed Works")
 @Description("Returns true if beds works in the world.")
@@ -29,7 +29,7 @@ public class CondIsBedWorks extends PropertyCondition<World> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "bedworks";
     }
 }

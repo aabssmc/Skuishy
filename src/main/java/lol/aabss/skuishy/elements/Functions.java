@@ -3,7 +3,7 @@ package lol.aabss.skuishy.elements;
 import ch.njol.skript.lang.function.Parameter;
 import ch.njol.skript.lang.function.SimpleJavaFunction;
 import ch.njol.skript.registrations.DefaultClasses;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import static ch.njol.skript.lang.function.Functions.registerFunction;
 
@@ -14,7 +14,7 @@ public class Functions {
         Parameter<?>[] numbersParam = new Parameter[]{new Parameter<>("ns", DefaultClasses.NUMBER, false, null)};
         registerFunction(new SimpleJavaFunction<Number>("mean", numbersParam, DefaultClasses.NUMBER, true) {
             @Override
-            public Number @NonNull [] executeSimple(Object[] [] params) {
+            public Number @NotNull [] executeSimple(Object[] [] params) {
                 Object[] ns = params[0];
                 double sum = 0.0;
                 for (Object num : ns) {

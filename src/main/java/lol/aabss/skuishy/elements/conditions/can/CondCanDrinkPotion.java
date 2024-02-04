@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.WanderingTrader;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Entity - Can Drink Potion")
 @Description("Returns true if the wandering trader can drink a potion.")
@@ -34,7 +34,7 @@ public class CondCanDrinkPotion extends PropertyCondition<LivingEntity> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "can drink potion";
     }
 }

@@ -15,7 +15,7 @@ import io.papermc.paper.event.player.PlayerItemCooldownEvent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -41,12 +41,12 @@ public class EvtShieldBreak extends SkriptEvent {
     }
 
     @Override
-    public boolean init(Literal<?> @NonNull [] args, int matchedPattern, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Literal<?> @NotNull [] args, int matchedPattern, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 
     @Override
-    public boolean check(@NonNull Event e) {
+    public boolean check(@NotNull Event e) {
         if (e instanceof PlayerItemCooldownEvent) {
             if (((PlayerItemCooldownEvent) e).getType() == Material.SHIELD) {
                 return ((PlayerItemCooldownEvent) e).getCooldown() > 0;
@@ -56,7 +56,7 @@ public class EvtShieldBreak extends SkriptEvent {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "shield disable event";
     }
 

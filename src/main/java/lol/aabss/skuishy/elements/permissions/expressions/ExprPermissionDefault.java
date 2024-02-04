@@ -15,7 +15,7 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Permissions - Permission Default")
@@ -36,7 +36,7 @@ public class ExprPermissionDefault extends SimpleExpression<PermissionDefault> {
     private Expression<Permission> perm;
 
     @Override
-    protected PermissionDefault @NonNull [] get(@NonNull Event e) {
+    protected PermissionDefault @NotNull [] get(@NotNull Event e) {
         Permission perm = this.perm.getSingle(e);
         if (perm != null) {
             return new PermissionDefault[]{perm.getDefault()};
@@ -45,7 +45,7 @@ public class ExprPermissionDefault extends SimpleExpression<PermissionDefault> {
     }
 
     @Override
-    public Class<?> @NonNull [] acceptChange(Changer.@NonNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(PermissionDefault.class);
         }
@@ -53,7 +53,7 @@ public class ExprPermissionDefault extends SimpleExpression<PermissionDefault> {
     }
 
     @Override
-    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode) {
+    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
             Permission perm = this.perm.getSingle(e);
             if (perm != null) {
@@ -68,17 +68,17 @@ public class ExprPermissionDefault extends SimpleExpression<PermissionDefault> {
     }
 
     @Override
-    public @NonNull Class<? extends PermissionDefault> getReturnType() {
+    public @NotNull Class<? extends PermissionDefault> getReturnType() {
         return PermissionDefault.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "permission default of permission";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         perm = (Expression<Permission>) exprs[0];
         return true;
     }

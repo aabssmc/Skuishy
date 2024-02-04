@@ -14,7 +14,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -38,22 +38,22 @@ public class ExprMapColor extends PropertyExpression<Block, Color> {
     }
 
     @Override
-    protected @Nullable Color[] get(@NonNull Event event, Block[] source) {
+    protected @Nullable Color[] get(@NotNull Event event, Block[] source) {
         return new SkriptColor[]{SkriptColor.fromBukkitColor(source[0].getBlockData().getMapColor())};
     }
 
     @Override
-    public @NonNull Class<? extends Color> getReturnType() {
+    public @NotNull Class<? extends Color> getReturnType() {
         return Color.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "block color from map";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         setExpr((Expression<? extends Block>) exprs[0]);
         return true;
     }

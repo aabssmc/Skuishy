@@ -6,7 +6,7 @@ import lol.aabss.skuishy.Skuishy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +84,7 @@ public class SubCommands {
                 ));
     }
 
-    @NonNull
+    @NotNull
     private static String getString(String sku, String sk) {
         String skuishyv = instance.getPluginMeta().getVersion();
         String skriptv = Skript.getInstance().getPluginMeta().getVersion();

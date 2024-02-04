@@ -12,7 +12,7 @@ import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -33,7 +33,7 @@ public class EffToggleAlerts extends Effect {
     private Expression<Player> p;
 
     @Override
-    protected void execute(@NonNull Event e) {
+    protected void execute(@NotNull Event e) {
         VulcanAPI api = VulcanAPI.Factory.getApi();
         if (api != null) {
             api.toggleAlerts(p.getSingle(e));
@@ -41,12 +41,12 @@ public class EffToggleAlerts extends Effect {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "toggle alerts";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         p = (Expression<Player>) exprs[0];
         return true;
     }

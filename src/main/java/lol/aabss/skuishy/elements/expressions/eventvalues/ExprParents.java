@@ -13,7 +13,7 @@ import ch.njol.util.Kleenean;
 import io.papermc.paper.event.entity.EntityFertilizeEggEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 import java.util.Objects;
@@ -39,12 +39,12 @@ public class ExprParents extends EventValueExpression<Entity> {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "event parent";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (getParser().isCurrentEvent(EntityFertilizeEggEvent.class)){
             parent = parseResult.hasTag("mother") ? "mother" : "father";
             return true;
@@ -54,7 +54,7 @@ public class ExprParents extends EventValueExpression<Entity> {
     }
 
     @Override
-    protected Entity @NonNull [] get(@NonNull Event e) {
+    protected Entity @NotNull [] get(@NotNull Event e) {
         if (Objects.equals(parent, "mother")) {
             return new Entity[]{((EntityFertilizeEggEvent) e).getMother()};
         }

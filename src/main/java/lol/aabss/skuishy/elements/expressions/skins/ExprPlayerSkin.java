@@ -14,7 +14,7 @@ import ch.njol.util.coll.CollectionUtils;
 import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import static lol.aabss.skuishy.other.skins.SkinWrapper.skinname;
 
@@ -37,13 +37,13 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
     private Expression<Player> player;
 
     @Override
-    protected String @NonNull [] get(@NonNull Event event, Player @NonNull [] source) {
+    protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         String name = skinname.get(source[0]) == null ? source[0].getName() : skinname.get(source[0]);
         return new String[]{name};
     }
 
     @Override
-    public void change(@NonNull Event event, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode){
+    public void change(@NotNull Event event, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
         Player p = player.getSingle(event);
         if (mode == Changer.ChangeMode.SET) {
             assert p != null;
@@ -58,7 +58,7 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
     }
 
     @Override
-    public Class<?> @NonNull [] acceptChange(final Changer.@NonNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.RESET) {
             return CollectionUtils.array(String.class);
         }
@@ -66,18 +66,18 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
     }
 
     @Override
-    public @NonNull Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NonNull String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return Classes.getDebugMessage(getExpr()) + " skin";
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, @NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
         player = (Expression<Player>) exprs[0];
         setExpr((Expression<? extends Player>) exprs[0]);
         return true;

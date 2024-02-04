@@ -8,7 +8,7 @@ import ch.njol.skript.doc.Since;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("ItemStack - Has Repair Cost")
 @Description("Returns true if the item has repair cost.")
@@ -32,7 +32,7 @@ public class CondHasRepairCost extends PropertyCondition<ItemStack> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "repair cost";
     }
 }

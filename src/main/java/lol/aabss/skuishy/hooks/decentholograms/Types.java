@@ -8,7 +8,7 @@ import ch.njol.skript.util.EnumUtils;
 import eu.decentsoftware.holograms.api.actions.ClickType;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Bukkit;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -23,17 +23,17 @@ public class Types {
                     .parser(new Parser<>() {
 
                         @Override
-                        public boolean canParse(@NonNull ParseContext context) {
+                        public boolean canParse(@NotNull ParseContext context) {
                             return false;
                         }
 
                         @Override
-                        public @NonNull String toVariableNameString(Hologram holo) {
+                        public @NotNull String toVariableNameString(Hologram holo) {
                             return holo.getName().toLowerCase().replaceAll("_", " ");
                         }
 
                         @Override
-                        public @NonNull String toString(Hologram holo, int flags) {
+                        public @NotNull String toString(Hologram holo, int flags) {
                             return toVariableNameString(holo);
                         }
                     })
@@ -48,22 +48,22 @@ public class Types {
 
                         @Override
                         @Nullable
-                        public ClickType parse(@NonNull String input, @NonNull ParseContext context) {
+                        public ClickType parse(@NotNull String input, @NotNull ParseContext context) {
                             return clicktypes.parse(input);
                         }
 
                         @Override
-                        public boolean canParse(@NonNull ParseContext context) {
+                        public boolean canParse(@NotNull ParseContext context) {
                             return true;
                         }
 
                         @Override
-                        public @NonNull String toVariableNameString(ClickType holo) {
+                        public @NotNull String toVariableNameString(ClickType holo) {
                             return holo.name().toLowerCase().replaceAll("_", " ");
                         }
 
                         @Override
-                        public @NonNull String toString(ClickType holo, int flags) {
+                        public @NotNull String toString(ClickType holo, int flags) {
                             return toVariableNameString(holo);
                         }
                     })

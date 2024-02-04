@@ -13,7 +13,7 @@ import ch.njol.skript.util.Getter;
 import me.frep.vulcan.api.event.VulcanPunishEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 @Name("Vulcan - On Vulcan Punish")
@@ -37,17 +37,17 @@ public class EvtVulcanPunish extends SkriptEvent {
     }
 
     @Override
-    public boolean init(Literal<?> @NonNull [] args, int matchedPattern, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Literal<?> @NotNull [] args, int matchedPattern, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 
     @Override
-    public boolean check(@NonNull Event event) {
+    public boolean check(@NotNull Event event) {
         return true;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         assert e != null;
         return e.getEventName();
     }

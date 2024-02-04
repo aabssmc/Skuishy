@@ -15,7 +15,7 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -38,7 +38,7 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
     private Expression<Entity> ent;
 
     @Override
-    protected @Nullable Boolean[] get(@NonNull Event e) {
+    protected @Nullable Boolean[] get(@NotNull Event e) {
         Entity entity = ent.getSingle(e);
         if (entity != null){
             return new Boolean[]{entity.isFrozen()};
@@ -47,7 +47,7 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public Class<?> @NonNull [] acceptChange(Changer.@NonNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
             return CollectionUtils.array(Boolean.class);
         }
@@ -55,7 +55,7 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public void change(@NonNull Event e, @Nullable Object[] delta, Changer.@NonNull ChangeMode mode) {
+    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
                 Bukkit.getServer().getServerTickManager().setFrozen((Boolean) delta[0]);
@@ -71,17 +71,17 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public @NonNull Class<? extends Boolean> getReturnType() {
+    public @NotNull Class<? extends Boolean> getReturnType() {
         return Boolean.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "frozen state";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         ent = (Expression<Entity>) exprs[0];
         return true;
     }

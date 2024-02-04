@@ -12,7 +12,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 @Name("ItemStack - Can Be Enchanted")
@@ -35,7 +35,7 @@ public class CondCanEnchantItem extends Condition {
 
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         item = (Expression<ItemStack>) exprs[0];
         enchant = (Expression<Enchantment>) exprs[1];
         can = matchedPattern == 0;
@@ -43,7 +43,7 @@ public class CondCanEnchantItem extends Condition {
     }
 
     @Override
-    public boolean check(@NonNull Event e) {
+    public boolean check(@NotNull Event e) {
         ItemStack i = item.getSingle(e);
         Enchantment en = enchant.getSingle(e);
         if (i != null && en != null){
@@ -53,7 +53,7 @@ public class CondCanEnchantItem extends Condition {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "can be enchanted";
     }
 }

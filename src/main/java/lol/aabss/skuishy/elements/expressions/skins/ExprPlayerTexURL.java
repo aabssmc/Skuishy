@@ -10,7 +10,7 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Skins - Player Skin Texture (URL)")
 @Description("Gets the player's skin as a url.")
@@ -31,24 +31,24 @@ public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
     }
 
     @Override
-    public @NonNull Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, @NonNull ParseResult parser) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
         setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }
 
     @Override
-    public @NonNull String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return getExpr().toString(event, debug) + " Skin Texture URL";
     }
 
     @Override
-    protected String @NonNull [] get(@NonNull Event event, Player @NonNull [] source) {
+    protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         try {
             if (source.length < 1) return new String[0];
             var player = source[0];

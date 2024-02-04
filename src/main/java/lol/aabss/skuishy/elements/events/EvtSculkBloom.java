@@ -14,7 +14,7 @@ import ch.njol.skript.util.Getter;
 import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.SculkBloomEvent;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 @Name("Block - Sculk Bloom")
@@ -41,17 +41,17 @@ public class EvtSculkBloom extends SkriptEvent {
     }
 
     @Override
-    public boolean init(Literal<?> @NonNull [] args, int matchedPattern, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Literal<?> @NotNull [] args, int matchedPattern, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 
     @Override
-    public boolean check(@NonNull Event event) {
+    public boolean check(@NotNull Event event) {
         return true;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "sculk bloom event";
     }
 }

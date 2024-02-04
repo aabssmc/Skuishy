@@ -12,7 +12,7 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.Note;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 import java.util.Objects;
@@ -37,7 +37,7 @@ public class ExprNote extends SimpleExpression<Note> {
     private Expression<Integer> octave;
 
     @Override
-    protected @Nullable Note [] get(@NonNull Event e) {
+    protected @Nullable Note [] get(@NotNull Event e) {
         Integer oct;
         if (octave == null){
             oct = 0;
@@ -69,17 +69,17 @@ public class ExprNote extends SimpleExpression<Note> {
     }
 
     @Override
-    public @NonNull Class<? extends Note> getReturnType() {
+    public @NotNull Class<? extends Note> getReturnType() {
         return Note.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "note";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parse) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parse) {
         tone = (Expression<Note.Tone>) exprs[0];
         accidental = parse.hasTag("sharp") ? "sharp" : parse.hasTag("flat") ? "flat" : parse.hasTag("natural") ? "natural" : null;
         octave = (Expression<Integer>) exprs[1];

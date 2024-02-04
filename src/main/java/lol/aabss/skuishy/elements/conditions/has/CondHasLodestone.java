@@ -8,7 +8,7 @@ import ch.njol.skript.doc.Since;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("ItemStack - Has Lodestone")
 @Description("Returns true if the item has lodestone.")
@@ -32,7 +32,7 @@ public class CondHasLodestone extends PropertyCondition<ItemStack> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "lodestone";
     }
 }

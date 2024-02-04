@@ -10,7 +10,7 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.type.SculkCatalyst;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -26,7 +26,7 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     }
 
     @Override
-    protected @Nullable Boolean[] get(@NonNull Event event, Block @NonNull [] source) {
+    protected @Nullable Boolean[] get(@NotNull Event event, Block @NotNull [] source) {
         if (source[0].getBlockData() instanceof SculkCatalyst b){
             return new Boolean[]{b.isBloom()};
         }
@@ -34,23 +34,23 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     }
 
     @Override
-    public @NonNull Class<? extends Boolean> getReturnType() {
+    public @NotNull Class<? extends Boolean> getReturnType() {
         return Boolean.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "bloom state";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         setExpr((Expression<? extends Block>) exprs[0]);
         return true;
     }
 
     @Override
-    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode){
+    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
             if (getExpr().getSingle(e).getBlockData() instanceof SculkCatalyst b){
                 b.setBloom((Boolean) delta[0]);
@@ -62,7 +62,7 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     }
 
     @Override
-    public Class<?> @NonNull [] acceptChange(final Changer.@NonNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Boolean.class);
         }

@@ -12,7 +12,7 @@ import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Skins - Player Skin Signature")
 @Description("Sends the signature of the player's skin .")
@@ -34,25 +34,25 @@ public class ExprPlayerSig extends PropertyExpression<Player, String> {
 
 
     @Override
-    protected String @NonNull [] get(@NonNull Event event, Player @NonNull [] source) {
+    protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         Player p = source[0] != null ? source[0] : null;
         assert p != null;
         return new String[]{SkinWrapper.getProfileProperties(p).getSignature()};
     }
 
     @Override
-    public @NonNull Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NonNull String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return Classes.getDebugMessage(getExpr()) + " Skin Signature ";
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, @NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
         setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }

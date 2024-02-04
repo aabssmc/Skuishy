@@ -15,7 +15,7 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.World;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -39,7 +39,7 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
     private Expression<World> world;
 
     @Override
-    protected @Nullable Integer[] get(@NonNull Event e) {
+    protected @Nullable Integer[] get(@NotNull Event e) {
         World world = this.world.getSingle(e);
         SpawnCategory spawncategory = this.spawncategory.getSingle(e);
         if (world != null && spawncategory != null) {
@@ -49,7 +49,7 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
     }
 
     @Override
-    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode){
+    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
             World world = this.world.getSingle(e);
             SpawnCategory spawncategory = this.spawncategory.getSingle(e);
@@ -62,7 +62,7 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
     }
 
     @Override
-    public Class<?> @NonNull [] acceptChange(final Changer.@NonNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Integer.class);
         }
@@ -75,17 +75,17 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
     }
 
     @Override
-    public @NonNull Class<? extends Integer> getReturnType() {
+    public @NotNull Class<? extends Integer> getReturnType() {
         return Integer.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "spawn category";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         this.spawncategory = (Expression<SpawnCategory>) exprs[0];
         this.world = (Expression<World>) exprs[1];
         return true;

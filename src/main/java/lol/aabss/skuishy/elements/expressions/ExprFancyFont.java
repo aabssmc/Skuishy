@@ -12,7 +12,7 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.Text;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -36,7 +36,7 @@ public class ExprFancyFont extends SimpleExpression<String> {
     private boolean really;
 
     @Override
-    protected @Nullable String[] get(@NonNull Event e) {
+    protected @Nullable String[] get(@NotNull Event e) {
         if (really){
             return Text.reallySmallCaps(text.getArray(e));
         }
@@ -49,17 +49,17 @@ public class ExprFancyFont extends SimpleExpression<String> {
     }
 
     @Override
-    public @NonNull Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "fancy font";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         text = (Expression<String>) exprs[0];
         really = parseResult.hasTag("really");
         return true;

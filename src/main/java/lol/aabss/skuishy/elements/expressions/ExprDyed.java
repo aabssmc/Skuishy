@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -51,7 +51,7 @@ public class ExprDyed extends SimpleExpression<ItemStack> {
     private Expression<Integer> blue;
 
     @Override
-    protected @Nullable ItemStack[] get(@NonNull Event e) {
+    protected @Nullable ItemStack[] get(@NotNull Event e) {
         ItemType im = items.getSingle(e);
         if (im != null ) {
             ItemStack item = new ItemStack(im.getMaterial());
@@ -107,17 +107,17 @@ public class ExprDyed extends SimpleExpression<ItemStack> {
     }
 
     @Override
-    public @NonNull Class<? extends ItemStack> getReturnType() {
+    public @NotNull Class<? extends ItemStack> getReturnType() {
         return ItemStack.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "dyed item";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (matchedPattern == 0){
             items = (Expression<ItemType>) exprs[0];
             color = (Expression<Color>) exprs[1];

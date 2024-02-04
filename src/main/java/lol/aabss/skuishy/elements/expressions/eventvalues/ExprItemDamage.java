@@ -14,7 +14,7 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerItemDamageEvent;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 @SuppressWarnings("NullableProblems")
@@ -38,12 +38,12 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "item damage";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (getParser().isCurrentEvent(PlayerItemDamageEvent.class)){
             return true;
         }
@@ -52,13 +52,13 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
     }
 
     @Override
-    protected Integer @org.eclipse.jdt.annotation.Nullable [] get(@NonNull Event e) {
+    protected Integer @org.eclipse.jdt.annotation.Nullable [] get(@NotNull Event e) {
         return new Integer[]{((PlayerItemDamageEvent) e).getDamage()};
     }
 
 
     @Override
-    public void change(@NonNull Event e, @Nullable Object[] delta, Changer.@NonNull ChangeMode mode) {
+    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
                 ((PlayerItemDamageEvent) e).setDamage((Integer) delta[0]);
@@ -73,7 +73,7 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
     }
 
     @Override
-    public Class<?> @NonNull [] acceptChange(Changer.@NonNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
             return CollectionUtils.array(Integer.class);
         }

@@ -12,7 +12,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -36,7 +36,7 @@ public class EffSleep extends Effect {
     Expression<Location> loc;
 
     @Override
-    protected void execute(@NonNull Event e) {
+    protected void execute(@NotNull Event e) {
         Player p = player.getSingle(e);
         Location l = loc.getSingle(e);
         if (p != null && l != null){
@@ -45,12 +45,12 @@ public class EffSleep extends Effect {
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "make player sleep";
     }
 
     @Override
-    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         force = matchedPattern == 1;
         player = (Expression<Player>) exprs[0];
         loc = (Expression<Location>) exprs[1];

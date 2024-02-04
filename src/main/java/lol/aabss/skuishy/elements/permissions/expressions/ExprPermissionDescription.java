@@ -14,7 +14,7 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Permissions - Permission Description")
@@ -35,7 +35,7 @@ public class ExprPermissionDescription extends SimpleExpression<String> {
     private Expression<Permission> perm;
 
     @Override
-    protected String @NonNull [] get(@NonNull Event e) {
+    protected String @NotNull [] get(@NotNull Event e) {
         Permission perm = this.perm.getSingle(e);
         if (perm != null) {
             return new String[]{perm.getDescription()};
@@ -44,7 +44,7 @@ public class ExprPermissionDescription extends SimpleExpression<String> {
     }
 
     @Override
-    public Class<?> [] acceptChange(Changer.@NonNull ChangeMode mode) {
+    public Class<?> [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(String.class);
         }
@@ -52,7 +52,7 @@ public class ExprPermissionDescription extends SimpleExpression<String> {
     }
 
     @Override
-    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode) {
+    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
             if (delta != null) {
                 Permission perm = this.perm.getSingle(e);
@@ -69,17 +69,17 @@ public class ExprPermissionDescription extends SimpleExpression<String> {
     }
 
     @Override
-    public @NonNull Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NonNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
         return "permission description of permission";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         perm = (Expression<Permission>) exprs[0];
         return true;
     }

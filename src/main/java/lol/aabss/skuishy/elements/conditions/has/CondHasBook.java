@@ -8,7 +8,7 @@ import ch.njol.skript.doc.Since;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.Lectern;
-import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Lectern - Has Book")
 @Description("Returns true if the lectern has a book.")
@@ -32,7 +32,7 @@ public class CondHasBook extends PropertyCondition<Block> {
     }
 
     @Override
-    protected @NonNull String getPropertyName() {
+    protected @NotNull String getPropertyName() {
         return "book";
     }
 }
