@@ -1,6 +1,7 @@
 package lol.aabss.skuishy.elements.permissions.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.classes.Changer;
 import ch.njol.skript.config.SectionNode;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -8,14 +9,13 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.*;
 import ch.njol.skript.util.Timespan;
-import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -101,10 +101,7 @@ public class EffNewPermissionAttachment extends EffectSection {
                 }
             }
             if (this.variable != null) {
-                Variables.setVariable(
-                        variable.getName().toString(),
-                        attach, e, variable.isLocal()
-                );
+                variable.change(e, new Object[]{attach}, Changer.ChangeMode.SET);
             }
             last_permission_attachment = attach;
         }

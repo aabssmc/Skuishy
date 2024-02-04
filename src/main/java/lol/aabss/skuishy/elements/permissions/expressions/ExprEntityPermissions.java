@@ -57,7 +57,7 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
         if (mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
             return CollectionUtils.array(Permission.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override

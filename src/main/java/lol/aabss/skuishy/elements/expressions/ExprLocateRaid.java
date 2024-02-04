@@ -11,10 +11,10 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.Location;
+import org.bukkit.Raid;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("NullableProblems")
 @Name("World - Nearest Raid")
@@ -40,9 +40,12 @@ public class ExprLocateRaid extends SimpleExpression<Location> {
         Location loc = location.getSingle(e);
         Integer rad = radius.getSingle(e);
         if (loc != null && rad != null) {
-            return new Location[]{loc.getWorld().locateNearestRaid(loc, rad).getLocation()};
+            Raid r = loc.getWorld().locateNearestRaid(loc, rad);
+            if (r != null) {
+                return new Location[]{loc.getWorld().locateNearestRaid(loc, rad).getLocation()};
+            }
         }
-        return new Location[]{};
+        return new Location[]{null};
     }
 
     @Override
@@ -60,7 +63,6 @@ public class ExprLocateRaid extends SimpleExpression<Location> {
         return "nearest biome";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         radius = (Expression<Integer>) exprs[0];

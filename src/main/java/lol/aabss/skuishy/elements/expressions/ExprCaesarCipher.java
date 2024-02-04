@@ -36,36 +36,31 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
 
     private boolean isDe;
     private Expression<Integer> shift;
-    private Expression<String> value;
+    private Expression<String> string;
 
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
-        value = (Expression<String>) exprs[0];
+        string = (Expression<String>) exprs[0];
         isDe = parseResult.hasTag("de");
         if (exprs[1] != null){
             shift = (Expression<Integer>) exprs[1];
         } return true;
     }
 
+    // coded by aabss 2024
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
-        String Value = value.getSingle(e);
-        if (Value == null) return null;
-        if (shift == null){
-            if (isDe){
-                return new String[]{CaesarCipher.decrypt(Value, 7)};
-            }
-            return new String[]{CaesarCipher.encrypt(Value, 7)};
+    protected String[] get(@NotNull Event e) {
+        String string = this.string.getSingle(e);
+        if (string == null) return null;
+        Integer shift = this.shift == null ? null : this.shift.getSingle(e);
+        if (isDe) {
+            return new String[]{CaesarCipher.decrypt(string, shift)};
         }
-        if (isDe){
-            return new String[]{CaesarCipher.decrypt(Value, shift.getSingle(e))};
-        }
-        return new String[]{CaesarCipher.encrypt(Value, shift.getSingle(e))};
+        return new String[]{CaesarCipher.encrypt(string, shift)};
     }
-
     @Override
     public boolean isSingle() {
-        return false;
+        return true;
     }
 
     @Override
@@ -75,6 +70,6 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "caesar cipher " + (isDe ? "de" : "en") + "crypted from string \"" + value.toString(e, debug) + "\"";
+        return "caesar cipher " + (isDe ? "de" : "en") + "crypted string \"" + string.toString(e, debug) + "\"";
     }
 }

@@ -37,30 +37,29 @@ public class ExprNote extends SimpleExpression<Note> {
     private Expression<Integer> octave;
 
     @Override
-    protected @Nullable Note [] get(@NotNull Event e) {
+    protected Note @Nullable [] get(@NotNull Event e) {
         Integer oct;
-        if (octave == null){
+        if (octave.getSingle(e) == null){
             oct = 0;
-        }
-        else{
+        } else{
             oct = octave.getSingle(e);
         }
         Note.Tone tone = this.tone.getSingle(e);
-        if (oct != null && tone != null) {
-            if (Objects.equals(accidental, "sharp")) {
-                Note note = Note.sharp(oct, tone);
-                return new Note[]{note};
-            } else if (Objects.equals(accidental, "flat")) {
-                Note note = Note.flat(oct, tone);
-                return new Note[]{note};
-            } else if (Objects.equals(accidental, "natural")) {
-                Note note = Note.natural(oct, tone);
-                return new Note[]{note};
-            } else {
-                return new Note[]{};
+        if (tone != null && oct != null) {
+            if (oct == 0 || oct == 1) {
+                if (Objects.equals(accidental, "sharp")) {
+                    Note note = Note.sharp(oct, tone);
+                    return new Note[]{note};
+                } else if (Objects.equals(accidental, "flat")) {
+                    Note note = Note.flat(oct, tone);
+                    return new Note[]{note};
+                } else if (Objects.equals(accidental, "natural")) {
+                    Note note = Note.natural(oct, tone);
+                    return new Note[]{note};
+                }
             }
         }
-        return new Note[]{};
+        return new Note[]{null};
     }
 
     @Override
@@ -83,21 +82,6 @@ public class ExprNote extends SimpleExpression<Note> {
         tone = (Expression<Note.Tone>) exprs[0];
         accidental = parse.hasTag("sharp") ? "sharp" : parse.hasTag("flat") ? "flat" : parse.hasTag("natural") ? "natural" : null;
         octave = (Expression<Integer>) exprs[1];
-        if (octave != null){
-            int oct = Integer.parseInt(octave.toString());
-            if (oct == 0 || oct == 1) {
-                return true;
-            } else if (oct > 1){
-                Skript.error("Octaves can not be greater than 1");
-                return false;
-            }
-            else {
-                Skript.error("Octaves can not be less than 0");
-                return false;
-            }
-        }
-        else{
-            return true;
-        }
+        return true;
     }
 }

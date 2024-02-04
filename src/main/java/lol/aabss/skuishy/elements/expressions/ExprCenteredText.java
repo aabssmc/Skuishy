@@ -15,6 +15,8 @@ import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
+import static java.lang.Math.max;
+
 @SuppressWarnings("NullableProblems")
 @Name("Other - Centered Text")
 @Description("Makes texts centered.")
@@ -38,11 +40,11 @@ public class ExprCenteredText extends SimpleExpression<String> {
     protected @Nullable String[] get(@NotNull Event e) {
         String text = this.text.getSingle(e);
         if (text != null) {
-            int totalWidth = Math.max(80, text.length() + 4);
+            int totalWidth = max(80, text.length() + 4);
             int padSize = (totalWidth - text.length()) / 2;
             return new String[]{" ".repeat(padSize) + text};
         }
-        return new String[]{};
+        return new String[]{null};
     }
 
     @Override

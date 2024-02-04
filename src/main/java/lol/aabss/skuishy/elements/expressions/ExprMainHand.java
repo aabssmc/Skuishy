@@ -49,9 +49,7 @@ public class ExprMainHand extends PropertyExpression<Player, String> {
 
     @Override
     protected @Nullable String[] get(@NotNull Event event, Player[] source) {
-        if (source.length < 1) return new String[0];
-        Player p = source[0];
-        if (p != null) {
+        for (Player p : source) {
             return new String[]{p.getMainHand().toString().toLowerCase()};
         }
         return new String[]{};

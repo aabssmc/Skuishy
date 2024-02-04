@@ -7,7 +7,6 @@ import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
-import ch.njol.skript.registrations.Classes;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
@@ -35,9 +34,10 @@ public class ExprPlayerSig extends PropertyExpression<Player, String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
-        Player p = source[0] != null ? source[0] : null;
-        assert p != null;
-        return new String[]{SkinWrapper.getProfileProperties(p).getSignature()};
+        for (Player p : source){
+            return new String[]{SkinWrapper.getProfileProperties(p).getSignature()};
+        }
+        return new String[]{null};
     }
 
     @Override
@@ -47,11 +47,10 @@ public class ExprPlayerSig extends PropertyExpression<Player, String> {
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return Classes.getDebugMessage(getExpr()) + " Skin Signature ";
+        return "skin signature of a player";
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
         setExpr((Expression<? extends Player>) exprs[0]);
         return true;

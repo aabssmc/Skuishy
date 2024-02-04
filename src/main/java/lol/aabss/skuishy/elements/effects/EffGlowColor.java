@@ -10,12 +10,15 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.util.Color;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.Glow;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Entity - Glow Color")
 @Description("Makes a entity glow a color")
@@ -52,7 +55,19 @@ public class EffGlowColor extends Effect {
     @Override
     protected void execute(@NotNull Event event) {
         for(Entity e : entity.getArray(event)){
-            Glow.mainGlow(e, color, event);
+            Color color = this.color.getSingle(event);
+            if (color != null) {
+                org.bukkit.Color c = color.asBukkitColor();
+                NamedTextColor ntc = NamedTextColor.nearestTo(TextColor.color(c.getRed(), c.getGreen(), c.getBlue()));
+                Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+                Team glow = scoreboard.getTeam(c + "color");
+                if (glow == null) {
+                    glow = scoreboard.registerNewTeam(c + "color");
+                    glow.color(ntc);
+                }
+                glow.addEntity(e);
+                e.setGlowing(true);
+            }
         }
     }
 }

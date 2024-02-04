@@ -29,11 +29,13 @@ public class ExprSensitivity extends PropertyExpression<Player, Integer> {
     }
 
     @Override
-    protected Integer @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
-        if (VulcanAPI.Factory.getApi() != null) {
-            return new Integer[]{VulcanAPI.Factory.getApi().getSensitivity(source[0])};
+    protected Integer @NotNull [] get(@NotNull Event event, Player @Nullable [] source) {
+        if (source != null && VulcanAPI.Factory.getApi() != null) {
+            for (Player p : source) {
+                return new Integer[]{VulcanAPI.Factory.getApi().getSensitivity(p)};
+            }
         }
-        return new Integer[]{};
+        return new Integer[]{null};
     }
 
     @Override

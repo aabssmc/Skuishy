@@ -10,6 +10,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -50,13 +51,14 @@ public class SkinWrapper {
     }
 
     public static BufferedImage imgTexture(Player player) {
-        try {
-            URL url = player.getPlayerProfile().getTextures().getSkin();
-            assert url != null;
-            return ImageIO.read(url);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        URL url = player.getPlayerProfile().getTextures().getSkin();
+        if (url != null){
+            try {
+                return ImageIO.read(url);
+            } catch (IOException e){
+                throw new RuntimeException(e);
+            }
+        } return null;
     }
 
     public static void setSkin(Player player, String skin){

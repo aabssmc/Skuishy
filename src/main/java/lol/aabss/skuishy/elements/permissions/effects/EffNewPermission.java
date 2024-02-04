@@ -1,6 +1,7 @@
 package lol.aabss.skuishy.elements.permissions.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
@@ -9,13 +10,12 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.Variable;
-import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import static lol.aabss.skuishy.Skuishy.last_permission;
 
@@ -47,7 +47,7 @@ public class EffNewPermission extends Effect {
                 last_permission = new Permission(perm);
                 Bukkit.getPluginManager().addPermission(last_permission);
                 if (var != null){
-                    Variables.setVariable(var.getName().toString(), perm, e, var.isLocal());
+                    var.change(e, new Object[]{perm}, Changer.ChangeMode.SET);
                 }
             }
         } else {

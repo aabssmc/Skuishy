@@ -31,7 +31,7 @@ public class EffLockFreezeTicks extends Effect {
     }
 
     private Expression<Entity> entity;
-    private Boolean lock;
+    private boolean lock;
 
     @Override
     protected void execute(@NotNull Event e) {

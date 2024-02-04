@@ -13,6 +13,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.event.Event;
+import org.bukkit.util.BiomeSearchResult;
 import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
@@ -43,9 +44,12 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
         Biome bio = biome.getSingle(e);
         Integer rad = radius.getSingle(e);
         if (loc != null && bio != null && rad != null) {
-            return new Location[]{loc.getWorld().locateNearestBiome(loc, rad, bio).getLocation()};
+            BiomeSearchResult r = loc.getWorld().locateNearestBiome(loc, rad, bio);
+            if (r != null) {
+                return new Location[]{loc.getWorld().locateNearestBiome(loc, rad, bio).getLocation()};
+            }
         }
-        return new Location[]{};
+        return new Location[]{null};
     }
 
     @Override
@@ -63,7 +67,6 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
         return "nearest biome";
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         biome = (Expression<Biome>) exprs[0];

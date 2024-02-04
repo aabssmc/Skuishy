@@ -27,7 +27,7 @@ public class EffDisablePlugin extends Effect {
 
     static {
         Skript.registerEffect(EffDisablePlugin.class,
-                "disable plugin %string%"
+                "disable plugin %strings%"
         );
     }
 
@@ -46,11 +46,11 @@ public class EffDisablePlugin extends Effect {
 
     @Override
     protected void execute(@NotNull Event event) {
-        String pl = this.plugin.getSingle(event);
-        if (pl != null) {
-            Plugin plugin2 = Bukkit.getPluginManager().getPlugin(pl);
-            if (plugin2 != null) {
-                Bukkit.getPluginManager().disablePlugin(plugin2);
+        String[] pl = this.plugin.getArray(event);
+        for (String s : pl) {
+            Plugin plugin = Bukkit.getPluginManager().getPlugin(s);
+            if (plugin != null) {
+                Bukkit.getPluginManager().disablePlugin(plugin);
             }
         }
     }

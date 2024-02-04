@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
@@ -51,9 +52,18 @@ public class EffStopGlow extends Effect {
     @Override
     protected void execute(@NotNull Event event) {
         for (Entity e : entity.getArray(event)){
-            Scoreboard mainScoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
-            mainScoreboard.getTeams().forEach(team -> team.removeEntity(e));
+            removeTeam(e);
+        }
+    }
+
+    private static void removeTeam(Entity e){
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        for (Team t : scoreboard.getTeams()){
+            if (t.getName().contains("team")){
+                t.removeEntity(e);
+            }
             e.setGlowing(false);
         }
     }
+
 }

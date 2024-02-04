@@ -12,12 +12,10 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.Instrument;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 @Name("Notes - Block Instrument")
 @Description("The instrument of a note block.")
@@ -32,28 +30,27 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
     static{
         register(ExprBlockInstrument.class, Instrument.class,
                 "instrument",
-                "block"
+                "blocks"
         );
     }
 
     @Override
     protected Instrument @NotNull [] get(@NotNull Event e, Block @NotNull [] source) {
-        Block block = source[0];
-        BlockData data = block.getBlockData();
-        if (data instanceof NoteBlock){
-            return new Instrument[]{((NoteBlock) data).getInstrument()};
+        Block[] blocks = getExpr().getArray(e);
+        for (Block block : blocks) {
+            if (block.getBlockData() instanceof NoteBlock data)
+                return new Instrument[]{data.getInstrument()};
         }
-        return new Instrument[0];
+        return new Instrument[]{null};
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
-        Block block = getExpr().getSingle(e);
-        if (delta != null && block != null) {
-            BlockData data = block.getBlockData();
-            if (mode == Changer.ChangeMode.SET) {
-                if (data instanceof NoteBlock) {
-                    ((NoteBlock) data).setInstrument((Instrument) delta[0]);
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+        if (mode == Changer.ChangeMode.SET && delta != null) {
+            Block[] blocks = getExpr().getArray(e);
+            for (Block block : blocks) {
+                if (block.getBlockData() instanceof NoteBlock data) {
+                    data.setInstrument((Instrument) delta[0]);
                 }
             }
         }
@@ -64,7 +61,7 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Instrument.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override

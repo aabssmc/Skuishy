@@ -24,8 +24,8 @@ public class EffShowWinScreen extends Effect {
 
     static{
         Skript.registerEffect(EffShowWinScreen.class,
-                "show [the] win screen to %player%",
-                "make %player% see the win screen"
+                "show [the] win screen to %players%",
+                "make %players% see the win screen"
         );
     }
 
@@ -33,9 +33,9 @@ public class EffShowWinScreen extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Player p = this.p.getSingle(e);
-        if (p != null) {
-            p.showWinScreen();
+        Player[] p = this.p.getArray(e);
+        for (Player player : p) {
+            player.showWinScreen();
         }
     }
 

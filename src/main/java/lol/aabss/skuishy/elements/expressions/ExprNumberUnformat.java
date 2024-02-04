@@ -40,14 +40,17 @@ public class ExprNumberUnformat extends SimpleExpression<Number> {
 
     @Override
     protected @Nullable Number[] get(@NotNull Event e) {
-        try {
-            if (letter) {
-                return new Number[]{NumberFormat.getCompactNumberInstance().parse(num.getSingle(e).toUpperCase())};
+        String num = this.num.getSingle(e);
+        if (num != null) {
+            try {
+                if (letter) {
+                    return new Number[]{NumberFormat.getCompactNumberInstance().parse(num)};
+                }
+                return new Number[]{NumberFormat.getNumberInstance().parse(num)};
+            } catch (ParseException ee){
+                return new Number[]{0};
             }
-            return new Number[]{NumberFormat.getNumberInstance().parse(num.getSingle(e).toUpperCase())};
-        } catch (ParseException ex) {
-            return null;
-        }
+        } return new Number[]{null};
     }
 
     @Override

@@ -58,7 +58,7 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
 
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
                 ((SculkBloomEvent) e).setCharge((Integer) delta[0]);
@@ -77,6 +77,6 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
             return CollectionUtils.array(Integer.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 }

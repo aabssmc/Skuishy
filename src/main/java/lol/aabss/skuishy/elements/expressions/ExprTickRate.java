@@ -47,18 +47,16 @@ public class ExprTickRate extends SimpleExpression<Number> {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.RESET){
             return CollectionUtils.array(Number.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
                 Bukkit.getServer().getServerTickManager().setTickRate((float) delta[0]);
             } else if (mode == Changer.ChangeMode.RESET) {
                 Bukkit.getServer().getServerTickManager().setTickRate(20);
-            } else {
-                assert false;
             }
         }
     }

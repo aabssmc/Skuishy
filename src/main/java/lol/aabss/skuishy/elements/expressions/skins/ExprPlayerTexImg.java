@@ -38,7 +38,6 @@ public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> 
         return BufferedImage.class;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
         setExpr((Expression<? extends Player>) exprs[0]);
@@ -47,17 +46,13 @@ public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> 
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return getExpr().toString(event, debug ) + " Skin Texture Image";
+        return "skin texture of player as image";
     }
 
     @Override
     protected BufferedImage @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
-        try {
-            if (source.length < 1) return new BufferedImage[0];
-            var player = source[0];
-            return new BufferedImage[] {SkinWrapper.imgTexture(player)};
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        for (Player p : source){
+            return new BufferedImage[]{SkinWrapper.imgTexture(p)};
+        } return new BufferedImage[]{null};
     }
 }

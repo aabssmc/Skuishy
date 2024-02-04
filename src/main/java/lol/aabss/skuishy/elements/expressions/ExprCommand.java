@@ -30,27 +30,29 @@ public class ExprCommand extends PropertyExpression<Block, String> {
     static{
         register(ExprCommand.class, String.class,
                 "command",
-                "block"
+                "blocks"
         );
     }
 
     @Override
     protected @Nullable String[] get(@NotNull Event e, Block @NotNull [] source) {
-        if (getExpr().getSingle(e) instanceof CommandBlock c){
-            return new String[]{c.getCommand()};
+        if (getExpr().getArray(e) instanceof CommandBlock[] c){
+            for (CommandBlock b : c) {
+                return new String[]{b.getCommand()};
+            }
         }
-        return new String[0];
+        return new String[]{null};
     }
 
     @Override
     public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
-            Block block = getExpr().getSingle(e);
-            if (block instanceof CommandBlock){
-                ((CommandBlock) block).setCommand((String) delta[0]);
+            Block[] block = getExpr().getArray(e);
+            if (block instanceof CommandBlock[] cc){
+                for (CommandBlock c : cc) {
+                    c.setCommand((String) delta[0]);
+                }
             }
-        } else {
-            assert false;
         }
     }
 
@@ -59,7 +61,7 @@ public class ExprCommand extends PropertyExpression<Block, String> {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(String.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override

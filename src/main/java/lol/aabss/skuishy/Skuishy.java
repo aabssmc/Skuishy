@@ -40,7 +40,6 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
         getServer().getPluginCommand("skuishy").setTabCompleter(this);
         Metrics metrics = new Metrics(this, 20162);
         instance = this;
-        start = System.currentTimeMillis()/50;
         try {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
@@ -71,6 +70,7 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
         metrics.addCustomChart(new Metrics.SimplePie("decentholograms", () -> dh ? "true" : "false"));
         metrics.addCustomChart(new Metrics.SimplePie("vivecraft", () -> vc ? "true" : "false"));
         metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> vu ? "true" : "false"));
+        start = System.currentTimeMillis()/50;
         getLogger().info("Skuishy has been enabled!");
     }
 

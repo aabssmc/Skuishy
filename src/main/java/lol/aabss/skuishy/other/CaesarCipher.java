@@ -1,9 +1,14 @@
 package lol.aabss.skuishy.other;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 public class CaesarCipher {
     public static final String alpha = "abcdefghijklmnopqrstuvwxyz";
 
-    public static String encrypt(String msg, int shiftKey) {
+    public static String encrypt(String msg, @Nullable Integer shiftKey) {
+        if (shiftKey == null){
+            shiftKey = 7;
+        }
         String message = msg;
         message = message.toLowerCase();
         StringBuilder cipherText = new StringBuilder();
@@ -16,7 +21,10 @@ public class CaesarCipher {
         return cipherText.toString();
     }
 
-    public static String decrypt(String msg, int shiftKey) {
+    public static String decrypt(String msg, @Nullable Integer shiftKey) {
+        if (shiftKey == null){
+            shiftKey = 7;
+        }
         String message = msg;
         message = message.toLowerCase();
         StringBuilder cipherText = new StringBuilder();

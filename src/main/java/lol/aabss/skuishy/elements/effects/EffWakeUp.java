@@ -25,7 +25,7 @@ public class EffWakeUp extends Effect {
 
     static {
         Skript.registerEffect(EffWakeUp.class,
-                "make %player% wake up [spawn:and set the[ir] spawn [location]]"
+                "make %players% wake up [spawn:and set the[ir] spawn [location]]"
         );
     }
 
@@ -34,9 +34,9 @@ public class EffWakeUp extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Player p = player.getSingle(e);
-        if (p != null){
-            p.wakeup(spawn);
+        Player[] p = player.getArray(e);
+        for (Player player : p){
+            player.wakeup(spawn);
         }
     }
 

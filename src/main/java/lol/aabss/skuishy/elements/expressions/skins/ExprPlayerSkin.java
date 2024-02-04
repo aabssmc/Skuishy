@@ -62,7 +62,7 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.RESET) {
             return CollectionUtils.array(String.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override

@@ -39,10 +39,14 @@ public class ExprHologramFromName extends SimpleExpression<Hologram> {
     protected @Nullable Hologram[] get(@NotNull Event e) {
         String name = this.name.getSingle(e);
         if (name != null) {
-            Hologram hologram = DHAPI.getHologram(name);
-            return new Hologram[]{hologram};
+            try {
+                Hologram hologram = DHAPI.getHologram(name);
+                return new Hologram[]{hologram};
+            } catch (IllegalArgumentException ae){
+                return new Hologram[]{null};
+            }
         }
-        return null;
+        return new Hologram[]{null};
     }
 
     @Override

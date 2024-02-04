@@ -48,7 +48,7 @@ public class ExprEventInstrument extends EventValueExpression<Instrument> {
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
                 ((NotePlayEvent) e).setInstrument((Instrument) delta[0]);
@@ -61,6 +61,6 @@ public class ExprEventInstrument extends EventValueExpression<Instrument> {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Instrument.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 }

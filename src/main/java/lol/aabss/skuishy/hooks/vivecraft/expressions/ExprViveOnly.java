@@ -53,7 +53,7 @@ public class ExprViveOnly extends SimpleExpression<Boolean> {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Boolean.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override

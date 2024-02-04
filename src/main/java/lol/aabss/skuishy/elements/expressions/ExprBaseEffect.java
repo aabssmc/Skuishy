@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 @Examples({
         "set base potion type to strong harming"
 })
-@Since("1.5")
+@Since("2.1")
 public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
 
     static {
@@ -38,7 +38,7 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
                 return new PotionType[]{e.getBasePotionType()};
             }
         }
-        return new PotionType[0];
+        return new PotionType[]{null};
     }
 
     @Override
@@ -66,11 +66,11 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        Entity[] arrow = getExpr().getArray(e);
-        for (Entity en : arrow) {
-            if (en instanceof Arrow) {
-                if (mode == Changer.ChangeMode.SET) {
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+        if (mode == Changer.ChangeMode.SET && delta != null) {
+            Entity[] arrow = getExpr().getArray(e);
+            for (Entity en : arrow) {
+                if (en instanceof Arrow) {
                     ((Arrow) en).setBasePotionType((PotionType) delta[0]);
                 }
             }

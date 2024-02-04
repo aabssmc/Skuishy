@@ -49,7 +49,7 @@ public class ExprPermissionDefault extends SimpleExpression<PermissionDefault> {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(PermissionDefault.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override

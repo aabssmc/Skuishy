@@ -11,9 +11,9 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
 import java.text.NumberFormat;
 @SuppressWarnings("NullableProblems")
 @Name("Other - Number Format")
@@ -38,10 +38,13 @@ public class ExprNumberFormat extends SimpleExpression<String> {
 
     @Override
     protected @Nullable String[] get(@NotNull Event e) {
-        if (letter){
-            return new String[]{NumberFormat.getCompactNumberInstance().format(num.getSingle(e))};
-        }
-        return new String[]{NumberFormat.getNumberInstance().format(num.getSingle(e))};
+        Number num = this.num.getSingle(e);
+        if (num != null) {
+            if (letter) {
+                return new String[]{NumberFormat.getCompactNumberInstance().format(num)};
+            }
+            return new String[]{NumberFormat.getNumberInstance().format(num)};
+        } return new String[]{null};
     }
 
     @Override

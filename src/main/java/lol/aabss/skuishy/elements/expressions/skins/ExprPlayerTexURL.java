@@ -35,7 +35,6 @@ public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
         return String.class;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
         setExpr((Expression<? extends Player>) exprs[0]);
@@ -44,17 +43,13 @@ public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return getExpr().toString(event, debug) + " Skin Texture URL";
+        return "skin texture url of player";
     }
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
-        try {
-            if (source.length < 1) return new String[0];
-            var player = source[0];
-            return new String[] {player.getPlayerProfile().getTextures().getSkin().toString()};
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        for (Player p : source){
+            return new String[]{p.getPlayerProfile().getTextures().getSkin().toString()};
+        } return new String[]{null};
     }
 }

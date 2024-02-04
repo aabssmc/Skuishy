@@ -38,9 +38,8 @@ public class ExprSomeone extends SimpleExpression<Player> {
 
     @Override
     protected @Nullable Player[] get(@NotNull Event e) {
-        List<Player> players = (List<Player>) Bukkit.getOnlinePlayers();
-        Random rand = new Random();
-        return new Player[]{players.get(rand.nextInt(players.size()))};
+        List<Player> players = (List<Player>) Bukkit.getOnlinePlayers().stream().toList();
+        return new Player[]{players.get(new Random().nextInt(players.size()))};
     }
 
     @Override

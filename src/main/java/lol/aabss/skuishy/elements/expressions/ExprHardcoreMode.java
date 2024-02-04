@@ -41,18 +41,16 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
     protected @Nullable Boolean[] get(@NotNull Event e) {
         World world = this.world.getSingle(e);
         if (world != null) return new Boolean[]{world.isHardcore()};
-        return new Boolean[]{};
+        return new Boolean[]{null};
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
-        if (mode == Changer.ChangeMode.SET) {
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
+        if (mode == Changer.ChangeMode.SET && delta != null) {
             World world = this.world.getSingle(e);
             if (world != null) {
                 world.setHardcore((Boolean) delta[0]);
             }
-        } else {
-            assert false;
         }
     }
 
@@ -61,7 +59,7 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Boolean.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override

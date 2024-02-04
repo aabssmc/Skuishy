@@ -32,7 +32,7 @@ public class ExprCollidable extends PropertyExpression<LivingEntity, Boolean> {
         for (LivingEntity en : source){
             return new Boolean[]{en.isCollidable()};
         }
-        return new Boolean[]{false};
+        return new Boolean[]{null};
     }
 
     @Override
@@ -56,12 +56,12 @@ public class ExprCollidable extends PropertyExpression<LivingEntity, Boolean> {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Boolean.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+        if (mode == Changer.ChangeMode.SET && delta != null) {
             for (LivingEntity en : getExpr().getArray(e)) {
                 en.setCollidable((Boolean) delta[0]);
             }

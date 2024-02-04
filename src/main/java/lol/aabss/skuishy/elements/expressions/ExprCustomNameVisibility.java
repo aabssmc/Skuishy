@@ -36,7 +36,7 @@ public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean
     protected @Nullable Boolean[] get(@NotNull Event e, Entity @NotNull [] source) {
         Entity en = getExpr().getSingle(e);
         if (en != null) return new Boolean[]{en.isCustomNameVisible()};
-        return new Boolean[]{};
+        return new Boolean[]{null};
     }
 
     @Override
@@ -47,9 +47,6 @@ public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean
                 en.setCustomNameVisible((Boolean) delta[0]);
             }
         }
-        else {
-            assert false;
-        }
     }
 
     @Override
@@ -57,7 +54,7 @@ public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Boolean.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override

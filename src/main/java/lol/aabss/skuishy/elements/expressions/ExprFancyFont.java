@@ -45,7 +45,7 @@ public class ExprFancyFont extends SimpleExpression<String> {
 
     @Override
     public boolean isSingle() {
-        return false;
+        return text.isSingle();
     }
 
     @Override

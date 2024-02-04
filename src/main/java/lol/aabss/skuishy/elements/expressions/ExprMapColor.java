@@ -32,14 +32,16 @@ public class ExprMapColor extends PropertyExpression<Block, Color> {
     static {
         if (Skript.methodExists(BlockData.class, "getMapColor")){
             register(ExprMapColor.class, Color.class,
-                    "map colo[u]r",
+                    "(map|exact) colo[u]r",
                     "blocks");
         }
     }
 
     @Override
     protected @Nullable Color[] get(@NotNull Event event, Block[] source) {
-        return new SkriptColor[]{SkriptColor.fromBukkitColor(source[0].getBlockData().getMapColor())};
+        for (Block block : source) {
+            return new SkriptColor[]{SkriptColor.fromBukkitColor(block.getBlockData().getMapColor())};
+        } return null;
     }
 
     @Override

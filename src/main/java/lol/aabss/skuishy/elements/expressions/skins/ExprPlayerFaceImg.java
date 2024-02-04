@@ -7,7 +7,6 @@ import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
-import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.skins.SkinWrapper;
@@ -25,8 +24,6 @@ import java.awt.image.BufferedImage;
         "\t\tset {_texture} to arg-1's face at size 8 with an outer layer as image"
 })
 @Since("1.0")
-
-
 public class ExprPlayerFaceImg extends PropertyExpression<Player, BufferedImage> {
 
     static {
@@ -41,17 +38,13 @@ public class ExprPlayerFaceImg extends PropertyExpression<Player, BufferedImage>
 
     @Override
     protected BufferedImage @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
-        if (source.length < 1) return new BufferedImage[0];
-        Player player = source[0] != null ? source[0] : null;
-        Number size = null;
-        if (this.size != null) size = this.size.getSingle(event);
-        if (player == null) return new BufferedImage[0];
-        try {
-            var buffer = SkinWrapper.get(player, size == null ? 16 : size, !without);
-            return new BufferedImage[]{buffer};
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        Number size = this.size != null ? this.size.getSingle(event) : 16;
+        if (size != null) {
+            for (Player p : source) {
+                var buffer = SkinWrapper.get(p, size, !without);
+                return new BufferedImage[]{buffer};
+            }
+        } return new BufferedImage[]{null};
     }
 
     @Override
@@ -61,16 +54,10 @@ public class ExprPlayerFaceImg extends PropertyExpression<Player, BufferedImage>
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        if (this.size != null) {
-            return Classes.getDebugMessage(getExpr()) + "'face with size " + this.size.toString(event, debug) +
-                    (without ? " without" : " with") + " an layer as image";
-        }
-        return Classes.getDebugMessage(getExpr()) + "'face " +
-                (without ? "without" : "with") + " an layer as image";
+        return "face of player as image";
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
         if (matchedPattern == 1) {
             setExpr((Expression<? extends Player>) exprs[0]);

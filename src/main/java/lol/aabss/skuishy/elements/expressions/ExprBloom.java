@@ -26,11 +26,15 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     }
 
     @Override
-    protected @Nullable Boolean[] get(@NotNull Event event, Block @NotNull [] source) {
-        if (source[0].getBlockData() instanceof SculkCatalyst b){
-            return new Boolean[]{b.isBloom()};
+    protected @Nullable Boolean[] get(@NotNull Event event, Block @Nullable [] source) {
+        if (source != null) {
+            for (Block b : source) {
+                if (b.getBlockData() instanceof SculkCatalyst block) {
+                    return new Boolean[]{block.isBloom()};
+                }
+            }
         }
-        return new Boolean[0];
+        return new Boolean[]{null};
     }
 
     @Override
@@ -50,22 +54,21 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
-        if (mode == Changer.ChangeMode.SET) {
-            if (getExpr().getSingle(e).getBlockData() instanceof SculkCatalyst b){
-                b.setBloom((Boolean) delta[0]);
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
+        if (mode == Changer.ChangeMode.SET && delta != null) {
+            for (Block b : getExpr().getArray(e)){
+                if (b instanceof org.bukkit.block.SculkCatalyst block){
+                    block.bloom(b, (Integer) delta[0]);
+                }
             }
-        }
-        else {
-            assert false;
         }
     }
 
     @Override
     public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
+            return CollectionUtils.array(Integer.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 }

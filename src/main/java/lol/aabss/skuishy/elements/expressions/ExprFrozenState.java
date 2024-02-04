@@ -39,9 +39,10 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
 
     @Override
     protected @Nullable Boolean[] get(@NotNull Event e) {
-        Entity entity = ent.getSingle(e);
-        if (entity != null){
-            return new Boolean[]{entity.isFrozen()};
+        if (ent != null){
+            Entity entity = ent.getSingle(e);
+            if (entity != null)
+                return new Boolean[]{entity.isFrozen()};
         }
         return new Boolean[]{Bukkit.getServer().getServerTickManager().isFrozen()};
     }
@@ -51,11 +52,11 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
         if (mode == Changer.ChangeMode.SET){
             return CollectionUtils.array(Boolean.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
                 Bukkit.getServer().getServerTickManager().setFrozen((Boolean) delta[0]);

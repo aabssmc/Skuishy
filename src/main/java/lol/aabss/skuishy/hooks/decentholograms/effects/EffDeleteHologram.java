@@ -15,7 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 @Name("Decent Holograms - Delete Hologram")
 @Description("Deletes a hologram.")
 @Examples({
-        "..."
+        "delete hologram named \"my_hologram\""
 })
 @Since("1.7")
 @RequiredPlugins("DecentHolograms")
@@ -25,7 +25,7 @@ public class EffDeleteHologram extends Effect {
     static{
         if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
             Skript.registerEffect(EffDeleteHologram.class,
-                    "(delete|remove) [(decent [hologram[s]]|dh)] [hologram] %hologram%"
+                    "(delete|remove) [(decent [hologram[s]]|dh)] [hologram] %holograms%"
             );
         }
     }
@@ -34,9 +34,9 @@ public class EffDeleteHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Hologram holo = hologram.getSingle(e);
-        if (holo != null) {
-            holo.delete();
+        Hologram[] holo = hologram.getArray(e);
+        for (Hologram h : holo) {
+            h.delete();
         }
     }
 

@@ -26,8 +26,8 @@ public class EffSleep extends Effect {
 
     static {
         Skript.registerEffect(EffSleep.class,
-                "(try|attempt) to make %player% sleep at %location%",
-                "(force|forcefully make) %player% [to] sleep at %location%"
+                "(try|attempt) to make %players% sleep at %location%",
+                "(force|forcefully make) %players% [to] sleep at %location%"
         );
     }
 
@@ -37,10 +37,12 @@ public class EffSleep extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Player p = player.getSingle(e);
+        Player[] p = player.getArray(e);
         Location l = loc.getSingle(e);
-        if (p != null && l != null){
-            p.sleep(l, force);
+        if (l != null) {
+            for (Player player : p){
+                player.sleep(l, force);
+            }
         }
     }
 

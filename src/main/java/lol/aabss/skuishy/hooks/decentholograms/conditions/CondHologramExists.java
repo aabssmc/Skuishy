@@ -26,8 +26,8 @@ public class CondHologramExists extends Condition {
     static{
         if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
             Skript.registerCondition(CondHologramExists.class,
-                    "[hologram] %hologram% (does) exists",
-                    "[hologram] %hologram% does(n't| not) exist"
+                    "[hologram] [named|with name] %string% (does) exists",
+                    "[hologram] %string% [named|with name] does(n't| not) exist"
             );
         }
     }

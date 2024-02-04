@@ -32,7 +32,7 @@ public class ExprParents extends EventValueExpression<Entity> {
         );
     }
 
-    String parent;
+    private String parent;
 
     public ExprParents() {
         super(Entity.class);
@@ -61,6 +61,6 @@ public class ExprParents extends EventValueExpression<Entity> {
         else if (Objects.equals(parent, "father")) {
             return new Entity[]{((EntityFertilizeEggEvent) e).getFather()};
         }
-        return null;
+        return new Entity[]{null};
     }
 }

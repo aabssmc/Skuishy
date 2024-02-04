@@ -37,12 +37,7 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
         if (source[0] instanceof Arrow){
             return ((Arrow) source[0]).getCustomEffects().toArray(PotionEffect[]::new);
         }
-        return new PotionEffect[0];
-    }
-
-    @Override
-    public boolean isSingle() {
-        return false;
+        return new PotionEffect[]{null};
     }
 
     @Override
@@ -66,13 +61,13 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
         if (mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
             return CollectionUtils.array(PotionEffect.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         Entity en = getExpr().getSingle(e);
-        if (en instanceof Arrow) {
+        if (en instanceof Arrow && delta != null) {
             if (mode == Changer.ChangeMode.ADD) {
                 ((Arrow) en).addCustomEffect((PotionEffect) delta[0], true);
             }

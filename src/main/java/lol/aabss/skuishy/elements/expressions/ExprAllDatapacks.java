@@ -38,9 +38,9 @@ public class ExprAllDatapacks extends SimpleExpression<Datapack> {
     @Override
     protected @Nullable Datapack[] get(@NotNull Event e) {
         if (enabled){
-            return Bukkit.getDatapackManager().getEnabledPacks().toArray(new Datapack[0]);
+            return Bukkit.getDatapackManager().getEnabledPacks().toArray(Datapack[]::new);
         }
-        return Bukkit.getDatapackManager().getPacks().toArray(new Datapack[0]);
+        return Bukkit.getDatapackManager().getPacks().toArray(Datapack[]::new);
     }
 
     @Override

@@ -36,24 +36,22 @@ public class ExprPlayerVal extends PropertyExpression<Player, String> {
         return String.class;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
-        setExpr ((Expression<Player>) exprs[0]);
+        setExpr((Expression<Player>) exprs[0]);
         return true;
     }
 
     @Override
     public @NotNull String toString(Event event, boolean debug) {
-        return getExpr().toString(event, debug) + " Skin Value ";
+        return "skin value of player";
     }
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Player[] source) {
-        if (source.length < 1) return new String[0];
-        Player p = source[0];
-        assert p != null;
-        return new String[]{SkinWrapper.getProfileProperties(p).getValue()};
+        for (Player p : source){
+            return new String[]{SkinWrapper.getProfileProperties(p).getValue()};
+        } return new String[]{null};
     }
 
 }

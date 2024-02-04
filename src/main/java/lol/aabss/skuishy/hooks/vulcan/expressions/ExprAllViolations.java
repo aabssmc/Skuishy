@@ -9,10 +9,8 @@ import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
-import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("NullableProblems")
 public class ExprAllViolations extends SimpleExpression<Integer> {
@@ -37,23 +35,18 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
         Player p = player.getSingle(e);
         VulcanAPI api = VulcanAPI.Factory.getApi();
         if (p != null && api != null) {
-            if (Objects.equals(vtype, "all")) {
-                return new Integer[]{api.getPlayerData(p).getTotalViolations()};
-            } else if (Objects.equals(vtype, "combat")) {
-                return new Integer[]{api.getPlayerData(p).getCombatViolations()};
-            } else if (Objects.equals(vtype, "movement")) {
-                return new Integer[]{api.getPlayerData(p).getMovementViolations()};
-            } else if (Objects.equals(vtype, "player")) {
-                return new Integer[]{api.getPlayerData(p).getPlayerViolations()};
-            } else if (Objects.equals(vtype, "auto clicker")) {
-                return new Integer[]{api.getPlayerData(p).getAutoClickerViolations()};
-            } else if (Objects.equals(vtype, "timer")) {
-                return new Integer[]{api.getPlayerData(p).getTimerViolations()};
-            } else if (Objects.equals(vtype, "scaffold")) {
-                return new Integer[]{api.getPlayerData(p).getScaffoldViolations()};
-            }
+            return switch (vtype){
+                case "all" -> new Integer[]{api.getPlayerData(p).getTotalViolations()};
+                case "combat" -> new Integer[]{api.getPlayerData(p).getCombatViolations()};
+                case "movement" -> new Integer[]{api.getPlayerData(p).getMovementViolations()};
+                case "player" -> new Integer[]{api.getPlayerData(p).getPlayerViolations()};
+                case "auto clicker" -> new Integer[]{api.getPlayerData(p).getAutoClickerViolations()};
+                case "timer" -> new Integer[]{api.getPlayerData(p).getTimerViolations()};
+                case "scaffold" -> new Integer[]{api.getPlayerData(p).getScaffoldViolations()};
+                default -> new Integer[]{null};
+            };
         }
-        return new Integer[0];
+        return new Integer[]{null};
     }
 
     @Override
