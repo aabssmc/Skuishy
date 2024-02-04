@@ -13,9 +13,9 @@ import ch.njol.util.coll.CollectionUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Name("Entity - Custom Name")
@@ -34,7 +34,7 @@ public class ExprCustomName extends PropertyExpression<Entity, String> {
     }
 
     @Override
-    protected @Nullable String[] get(@NotNull Event e, Entity @NotNull [] source) {
+    protected @Nullable String[] get(@NonNull Event e, Entity @NonNull [] source) {
         Entity en = getExpr().getSingle(e);
         if (en != null) {
             return new String[]{en.customName() + ""};
@@ -43,7 +43,7 @@ public class ExprCustomName extends PropertyExpression<Entity, String> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
+    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode){
         Entity en = getExpr().getSingle(e);
         if (en != null) {
             if (mode == Changer.ChangeMode.SET) {
@@ -57,7 +57,7 @@ public class ExprCustomName extends PropertyExpression<Entity, String> {
     }
 
     @Override
-    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NonNull [] acceptChange(final Changer.@NonNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.RESET) {
             return CollectionUtils.array(String.class);
         }
@@ -65,17 +65,17 @@ public class ExprCustomName extends PropertyExpression<Entity, String> {
     }
 
     @Override
-    public @NotNull Class<? extends String> getReturnType() {
+    public @NonNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "custom name";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         setExpr((Expression<? extends Entity>) exprs[0]);
         return true;
     }

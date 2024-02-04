@@ -11,9 +11,9 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 @Name("TickManager - Step Server")
 @Description("Makes the server step.")
 @Examples({
@@ -33,7 +33,7 @@ public class EffStepGame extends Effect {
     private Expression<Integer> inte;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         Integer in = inte.getSingle(e);
         if (in != null) {
             Bukkit.getServer().getServerTickManager().stepGameIfFrozen(in);
@@ -41,12 +41,12 @@ public class EffStepGame extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "step game";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         inte = (Expression<Integer>) exprs[0];
         return true;
     }

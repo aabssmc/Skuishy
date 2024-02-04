@@ -14,8 +14,8 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.potion.PotionEffect;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Arrow - Custom Effects")
 @Description("Gets/Sets/Removes the custom potion effects of an arrow.")
@@ -33,7 +33,7 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
     }
 
     @Override
-    protected PotionEffect @NotNull [] get(@NotNull Event event, Entity @NotNull [] source) {
+    protected PotionEffect @NonNull [] get(@NonNull Event event, Entity @NonNull [] source) {
         if (source[0] instanceof Arrow){
             return ((Arrow) source[0]).getCustomEffects().toArray(PotionEffect[]::new);
         }
@@ -46,23 +46,23 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
     }
 
     @Override
-    public @NotNull Class<? extends PotionEffect> getReturnType() {
+    public @NonNull Class<? extends PotionEffect> getReturnType() {
         return PotionEffect.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "custom effects";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         setExpr((Expression<? extends Entity>) exprs[0]);
         return true;
     }
 
     @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NonNull [] acceptChange(Changer.@NonNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
             return CollectionUtils.array(PotionEffect.class);
         }
@@ -70,7 +70,7 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode) {
         Entity en = getExpr().getSingle(e);
         if (en instanceof Arrow) {
             if (mode == Changer.ChangeMode.ADD) {

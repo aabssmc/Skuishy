@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Allay;
 import org.bukkit.entity.LivingEntity;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Entity - Can Duplicate")
 @Description("Returns true if the allay can duplicate.")
@@ -33,7 +33,7 @@ public class CondCanDuplicate extends PropertyCondition<LivingEntity> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "can duplicate";
     }
 }

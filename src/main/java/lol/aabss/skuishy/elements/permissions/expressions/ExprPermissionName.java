@@ -12,8 +12,8 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Permissions - Permission Name")
 @Description("Gets the permission name of a permission.")
@@ -33,7 +33,7 @@ public class ExprPermissionName extends SimpleExpression<String> {
     private Expression<Permission> perm;
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
+    protected String @NonNull [] get(@NonNull Event e) {
         Permission perm = this.perm.getSingle(e);
         if (perm != null) {
             return new String[]{perm.getName()};
@@ -47,17 +47,17 @@ public class ExprPermissionName extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull Class<? extends String> getReturnType() {
+    public @NonNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "permission name of permission";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         perm = (Expression<Permission>) exprs[0];
         return true;
     }

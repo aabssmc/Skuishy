@@ -11,9 +11,9 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 @Name("Player - Show Win Screen")
 @Description("Shows the win screen to a player.")
 @Examples({
@@ -32,7 +32,7 @@ public class EffShowWinScreen extends Effect {
     private Expression<Player> p;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         Player p = this.p.getSingle(e);
         if (p != null) {
             p.showWinScreen();
@@ -40,12 +40,12 @@ public class EffShowWinScreen extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "show win screen";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         p = (Expression<Player>) exprs[0];
         return true;
     }

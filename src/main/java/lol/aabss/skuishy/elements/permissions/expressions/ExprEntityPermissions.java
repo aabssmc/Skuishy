@@ -16,8 +16,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
     private Expression<PermissionAttachment> attach;
 
     @Override
-    protected Permission @NotNull [] get(@NotNull Event e) {
+    protected Permission @NonNull [] get(@NonNull Event e) {
         PermissionAttachment attach = this.attach.getSingle(e);
         if (attach != null){
             List<Permission> perms = new ArrayList<>();
@@ -53,7 +53,7 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
     }
 
     @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NonNull [] acceptChange(Changer.@NonNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
             return CollectionUtils.array(Permission.class);
         }
@@ -61,7 +61,7 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.ADD){
             Bukkit.getPluginManager().addPermission((Permission) delta[0]);
         } else if (mode == Changer.ChangeMode.REMOVE){
@@ -77,17 +77,17 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
     }
 
     @Override
-    public @NotNull Class<? extends Permission> getReturnType() {
+    public @NonNull Class<? extends Permission> getReturnType() {
         return Permission.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "permissions";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         attach = (Expression<PermissionAttachment>) exprs[0];
         return true;
     }

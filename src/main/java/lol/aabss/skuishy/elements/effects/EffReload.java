@@ -11,8 +11,8 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Server - Reload")
 @Description({
@@ -51,7 +51,7 @@ public class EffReload extends Effect {
     private int pat;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         if (pat == 0){
             Bukkit.reload();
         } else if (pat == 1){
@@ -66,12 +66,12 @@ public class EffReload extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "reload";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         pat = matchedPattern;
         return true;
     }

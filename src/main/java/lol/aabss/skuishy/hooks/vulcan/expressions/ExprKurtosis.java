@@ -10,9 +10,9 @@ import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 @Name("Vulcan - Kurtosis of Player")
 @Description("Represents the kurtosis of a player.")
 @Since("2.0")
@@ -25,7 +25,7 @@ public class ExprKurtosis extends PropertyExpression<Player, Number> {
     }
 
     @Override
-    protected Number @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
+    protected Number @NonNull [] get(@NonNull Event event, Player @NonNull [] source) {
         if (VulcanAPI.Factory.getApi() != null) {
             return new Number[]{VulcanAPI.Factory.getApi().getKurtosis(source[0])};
         }
@@ -33,17 +33,17 @@ public class ExprKurtosis extends PropertyExpression<Player, Number> {
     }
 
     @Override
-    public @NotNull Class<? extends Number> getReturnType() {
+    public @NonNull Class<? extends Number> getReturnType() {
         return Number.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "kurtosis of player";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }

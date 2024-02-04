@@ -15,9 +15,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Notes - Block Instrument")
 @Description("The instrument of a note block.")
@@ -37,7 +37,7 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
     }
 
     @Override
-    protected Instrument @NotNull [] get(@NotNull Event e, Block @NotNull [] source) {
+    protected Instrument @NonNull [] get(@NonNull Event e, Block @NonNull [] source) {
         Block block = source[0];
         BlockData data = block.getBlockData();
         if (data instanceof NoteBlock){
@@ -47,7 +47,7 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NonNull Event e, @Nullable Object[] delta, Changer.@NonNull ChangeMode mode) {
         Block block = getExpr().getSingle(e);
         if (delta != null && block != null) {
             BlockData data = block.getBlockData();
@@ -60,7 +60,7 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
     }
 
     @Override
-    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NonNull [] acceptChange(final Changer.@NonNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Instrument.class);
         }
@@ -68,17 +68,17 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
     }
 
     @Override
-    public @NotNull Class<Instrument> getReturnType() {
+    public @NonNull Class<Instrument> getReturnType() {
         return Instrument.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "instrument of " + getExpr();
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         setExpr((Expression<Block>) exprs[0]);
         return true;
     }

@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.vivecraft.VSE;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("ViveCraft - Is Vive Player")
 @Description("Returns true if the player is a vivecraft player.")
@@ -25,11 +25,11 @@ public class CondIsVivePlayer extends PropertyCondition<Player> {
 
     @Override
     public boolean check(Player player) {
-        return VSE.vivePlayers.containsKey(player.getUniqueId());
+        return VSE.isVive(player);
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "vive player";
     }
 }

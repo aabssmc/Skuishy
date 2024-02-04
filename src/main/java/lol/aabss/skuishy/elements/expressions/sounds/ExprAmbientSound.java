@@ -11,8 +11,8 @@ import ch.njol.util.Kleenean;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Entity - Ambient Sound")
 @Description("Gets the ambient sound of the entity.")
@@ -29,7 +29,7 @@ public class ExprAmbientSound extends PropertyExpression<Entity, String> {
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event event, Entity[] source) {
+    protected String @NonNull [] get(@NonNull Event event, Entity[] source) {
         if (source[0] instanceof Mob m){
             if (m.getAmbientSound() != null) {
                 return new String[]{m.getAmbientSound().name().replaceAll("_", ".").toLowerCase()};
@@ -40,17 +40,17 @@ public class ExprAmbientSound extends PropertyExpression<Entity, String> {
     }
 
     @Override
-    public @NotNull Class<? extends String> getReturnType() {
+    public @NonNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "ambient sound";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         setExpr((Expression<? extends Entity>) exprs[0]);
         return true;
     }

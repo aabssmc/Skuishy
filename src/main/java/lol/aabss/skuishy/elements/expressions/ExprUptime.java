@@ -12,9 +12,9 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.util.Timespan;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 import static lol.aabss.skuishy.Skuishy.start;
 
@@ -35,7 +35,7 @@ public class ExprUptime extends SimpleExpression<Timespan> {
     }
 
     @Override
-    protected @Nullable Timespan[] get(@NotNull Event e) {
+    protected @Nullable Timespan[] get(@NonNull Event e) {
         long uptime = (System.currentTimeMillis()/50) - start;
         return new Timespan[]{Timespan.fromTicks_i(uptime)};
     }
@@ -46,17 +46,17 @@ public class ExprUptime extends SimpleExpression<Timespan> {
     }
 
     @Override
-    public @NotNull Class<? extends Timespan> getReturnType() {
+    public @NonNull Class<? extends Timespan> getReturnType() {
         return Timespan.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "uptime";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         return true;
     }
 }

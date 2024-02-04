@@ -13,9 +13,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Scoreboard;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Entity - Stop Glowing")
 @Description("Makes a entity stop glowing")
@@ -38,18 +38,18 @@ public class EffStopGlow extends Effect {
     private Expression<Entity> entity;
 
     @Override
-    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
+    public boolean init(Expression<?>[] expressions, int matchedPattern, @NonNull Kleenean isDelayed, @NonNull ParseResult parser) {
         entity = (Expression<Entity>) expressions[0];
         return true;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event event, boolean debug)  {
+    public @NonNull String toString(@Nullable Event event, boolean debug)  {
         return "make " + entity.toString(event, debug) + " stop glowing";
     }
 
     @Override
-    protected void execute(@NotNull Event event) {
+    protected void execute(@NonNull Event event) {
         for (Entity e : entity.getArray(event)){
             Scoreboard mainScoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
             mainScoreboard.getTeams().forEach(team -> team.removeEntity(e));

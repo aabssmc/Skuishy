@@ -9,9 +9,9 @@ import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 @Name("Decent Holograms - Delete Hologram")
 @Description("Deletes a hologram.")
 @Examples({
@@ -33,7 +33,7 @@ public class EffDeleteHologram extends Effect {
     private Expression<Hologram> hologram;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         Hologram holo = hologram.getSingle(e);
         if (holo != null) {
             holo.delete();
@@ -41,12 +41,12 @@ public class EffDeleteHologram extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "delete hologram";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         hologram = (Expression<Hologram>) exprs[0];
         return true;
     }

@@ -11,9 +11,9 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Vulcan - Toggle Verbose")
 @Description("Toggles verbose for a player.")
@@ -30,7 +30,7 @@ public class EffBanWave extends Effect {
     }
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         VulcanAPI api = VulcanAPI.Factory.getApi();
         if (api != null) {
             api.executeBanWave();
@@ -38,12 +38,12 @@ public class EffBanWave extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "execute ban wave";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         return true;
     }
 }

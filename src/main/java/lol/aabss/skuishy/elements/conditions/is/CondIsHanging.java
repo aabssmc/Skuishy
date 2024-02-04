@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.block.data.Hangable;
 import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Entity - Is Hanging")
 @Description("Entity is hanging.")
@@ -34,7 +34,7 @@ public class CondIsHanging extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "hanging";
     }
 }

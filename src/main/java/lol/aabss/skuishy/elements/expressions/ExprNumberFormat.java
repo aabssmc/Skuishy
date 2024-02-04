@@ -11,9 +11,9 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 import java.text.NumberFormat;
 @SuppressWarnings("NullableProblems")
 @Name("Other - Number Format")
@@ -37,7 +37,7 @@ public class ExprNumberFormat extends SimpleExpression<String> {
     Expression<Number> num;
 
     @Override
-    protected @Nullable String[] get(@NotNull Event e) {
+    protected @Nullable String[] get(@NonNull Event e) {
         if (letter){
             return new String[]{NumberFormat.getCompactNumberInstance().format(num.getSingle(e))};
         }
@@ -50,17 +50,17 @@ public class ExprNumberFormat extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull Class<? extends String> getReturnType() {
+    public @NonNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "number format";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         letter = matchedPattern == 0;
         num = (Expression<Number>) exprs[0];
         return true;

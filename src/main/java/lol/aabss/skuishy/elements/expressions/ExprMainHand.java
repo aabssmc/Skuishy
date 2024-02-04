@@ -10,9 +10,9 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Name("Player - Main Hand")
@@ -32,23 +32,23 @@ public class ExprMainHand extends PropertyExpression<Player, String> {
 
 
     @Override
-    public @NotNull Class<? extends String> getReturnType() {
+    public @NonNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parser) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parser) {
         setExpr((Expression<Player>) exprs[0]);
         return true;
     }
 
     @Override
-    public @NotNull String toString(Event event, boolean debug) {
+    public @NonNull String toString(Event event, boolean debug) {
         return "main hand";
     }
 
     @Override
-    protected @Nullable String[] get(@NotNull Event event, Player[] source) {
+    protected @Nullable String[] get(@NonNull Event event, Player[] source) {
         if (source.length < 1) return new String[0];
         Player p = source[0];
         if (p != null) {

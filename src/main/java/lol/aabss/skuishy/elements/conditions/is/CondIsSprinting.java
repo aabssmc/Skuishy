@@ -11,9 +11,8 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 @Name("TickManager - Is Sprinting")
 @Description("Returns true if the server is sprinting.")
 @Examples({
@@ -33,7 +32,7 @@ public class CondIsSprinting extends Condition {
     private boolean is;
 
     @Override
-    public boolean check(@NotNull Event e) {
+    public boolean check(@NonNull Event e) {
         if (is){
             return Bukkit.getServer().getServerTickManager().isSprinting();
         }
@@ -41,12 +40,12 @@ public class CondIsSprinting extends Condition {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "ticks are sprinting";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         is = matchedPattern == 0;
         return true;
     }

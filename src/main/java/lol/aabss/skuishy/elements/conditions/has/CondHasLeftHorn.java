@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Goat;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Goat - Has Left Horn")
 @Description("Returns true if the goat has the left horn.")
@@ -30,7 +30,7 @@ public class CondHasLeftHorn extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "left horn";
     }
 }

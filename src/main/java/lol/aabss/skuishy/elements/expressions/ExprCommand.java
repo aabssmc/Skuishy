@@ -13,9 +13,9 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Name("Block - Command of Command Block")
@@ -35,7 +35,7 @@ public class ExprCommand extends PropertyExpression<Block, String> {
     }
 
     @Override
-    protected @Nullable String[] get(@NotNull Event e, Block @NotNull [] source) {
+    protected @Nullable String[] get(@NonNull Event e, Block @NonNull [] source) {
         if (getExpr().getSingle(e) instanceof CommandBlock c){
             return new String[]{c.getCommand()};
         }
@@ -43,7 +43,7 @@ public class ExprCommand extends PropertyExpression<Block, String> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
+    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
             Block block = getExpr().getSingle(e);
             if (block instanceof CommandBlock){
@@ -55,7 +55,7 @@ public class ExprCommand extends PropertyExpression<Block, String> {
     }
 
     @Override
-    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NonNull [] acceptChange(final Changer.@NonNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(String.class);
         }
@@ -63,17 +63,17 @@ public class ExprCommand extends PropertyExpression<Block, String> {
     }
 
     @Override
-    public @NotNull Class<? extends String> getReturnType() {
+    public @NonNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "command of command block";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         setExpr((Expression<? extends Block>) exprs[0]);
         return true;
     }

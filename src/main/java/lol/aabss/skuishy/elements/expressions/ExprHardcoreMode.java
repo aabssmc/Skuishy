@@ -14,9 +14,9 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.World;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Name("World - Hardcore mode")
@@ -38,14 +38,14 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
     private Expression<World> world;
 
     @Override
-    protected @Nullable Boolean[] get(@NotNull Event e) {
+    protected @Nullable Boolean[] get(@NonNull Event e) {
         World world = this.world.getSingle(e);
         if (world != null) return new Boolean[]{world.isHardcore()};
         return new Boolean[]{};
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
+    public void change(@NonNull Event e, Object @NonNull [] delta, Changer.@NonNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
             World world = this.world.getSingle(e);
             if (world != null) {
@@ -57,7 +57,7 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NonNull [] acceptChange(final Changer.@NonNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Boolean.class);
         }
@@ -70,17 +70,17 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public @NotNull Class<? extends Boolean> getReturnType() {
+    public @NonNull Class<? extends Boolean> getReturnType() {
         return Boolean.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "hardcore mode";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         world = (Expression<World>) exprs[0];
         return true;
     }

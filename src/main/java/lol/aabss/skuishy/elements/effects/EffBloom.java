@@ -8,9 +8,9 @@ import ch.njol.util.Kleenean;
 import org.bukkit.block.Block;
 import org.bukkit.block.SculkCatalyst;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 public class EffBloom extends Effect {
 
@@ -27,7 +27,7 @@ public class EffBloom extends Effect {
     private Expression<Block> block;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         Block[] block = this.block.getArray(e);
         Integer charge = this.charge.getSingle(e);
         if (charge != null) {
@@ -41,12 +41,12 @@ public class EffBloom extends Effect {
 
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "bloom location";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         block = (Expression<Block>) exprs[0];
         charge = (Expression<Integer>) exprs[1];
         return true;

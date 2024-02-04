@@ -13,9 +13,9 @@ import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.Glow;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Entity - Glow Color")
 @Description("Makes a entity glow a color")
@@ -38,19 +38,19 @@ public class EffGlowColor extends Effect {
     private Expression<Color> color;
 
     @Override
-    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
+    public boolean init(Expression<?>[] expressions, int matchedPattern, @NonNull Kleenean isDelayed, @NonNull ParseResult parser) {
         entity = (Expression<Entity>) expressions[0];
         color = (Expression<Color>) expressions[1];
         return true;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event event, boolean debug)  {
+    public @NonNull String toString(@Nullable Event event, boolean debug)  {
         return "make " + entity.toString(event, debug) + " glowing " + color.toString(event, debug);
     }
 
     @Override
-    protected void execute(@NotNull Event event) {
+    protected void execute(@NonNull Event event) {
         for(Entity e : entity.getArray(event)){
             Glow.mainGlow(e, color, event);
         }

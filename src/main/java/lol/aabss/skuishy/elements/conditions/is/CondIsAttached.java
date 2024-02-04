@@ -8,7 +8,7 @@ import ch.njol.skript.doc.Since;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Attachable;
 import org.bukkit.block.data.BlockData;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Block - Is Attached")
 @Description("Returns true if the block is attached.")
@@ -35,7 +35,7 @@ public class CondIsAttached extends PropertyCondition<Block> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "attached";
     }
 }

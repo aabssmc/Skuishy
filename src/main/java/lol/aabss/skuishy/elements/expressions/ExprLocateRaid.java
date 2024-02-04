@@ -12,9 +12,9 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Name("World - Nearest Raid")
@@ -36,7 +36,7 @@ public class ExprLocateRaid extends SimpleExpression<Location> {
     private Expression<Location> location;
 
     @Override
-    protected @Nullable Location[] get(@NotNull Event e) {
+    protected @Nullable Location[] get(@NonNull Event e) {
         Location loc = location.getSingle(e);
         Integer rad = radius.getSingle(e);
         if (loc != null && rad != null) {
@@ -51,18 +51,18 @@ public class ExprLocateRaid extends SimpleExpression<Location> {
     }
 
     @Override
-    public @NotNull Class<? extends Location> getReturnType() {
+    public @NonNull Class<? extends Location> getReturnType() {
         return Location.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "nearest biome";
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         radius = (Expression<Integer>) exprs[0];
         location = (Expression<Location>) exprs[1];
         return true;

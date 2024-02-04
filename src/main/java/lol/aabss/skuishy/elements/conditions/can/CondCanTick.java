@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Armor Stand - Can Tick")
 @Description("Returns true if the armor stand can tick.")
@@ -33,7 +33,7 @@ public class CondCanTick extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "tick";
     }
 }

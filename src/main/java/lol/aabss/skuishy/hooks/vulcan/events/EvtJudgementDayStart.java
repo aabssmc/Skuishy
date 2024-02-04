@@ -10,9 +10,9 @@ import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import me.frep.vulcan.api.event.VulcanJudgementDayStartEvent;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Vulcan - On Judgement Day Start")
 @Description("Called when the judgement day starts.")
@@ -29,17 +29,17 @@ public class EvtJudgementDayStart extends SkriptEvent {
     }
 
     @Override
-    public boolean init(Literal<?> @NotNull [] args, int matchedPattern, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Literal<?> @NonNull [] args, int matchedPattern, SkriptParser.@NonNull ParseResult parseResult) {
         return true;
     }
 
     @Override
-    public boolean check(@NotNull Event event) {
+    public boolean check(@NonNull Event event) {
         return true;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         assert e != null;
         return e.getEventName();
     }

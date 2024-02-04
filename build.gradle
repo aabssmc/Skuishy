@@ -24,9 +24,11 @@ repositories {
 
 dependencies {
     // paper
-    compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
-    // skript
-    compileOnly 'com.github.SkriptLang:Skript:2.7.0'
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    // Skript
+    compileOnly(group: 'com.github.SkriptLang', name: 'Skript', version: '2.7.0') {
+        transitive = false
+    }
     // decent holograms
     compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.6'
     // vivecraft
@@ -35,6 +37,7 @@ dependencies {
     implementation files('gradle/VulcanAPI.jar')
     // other things
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.800')
     implementation 'org.json:json:20231013'
 }
 

@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Entity - Is Adult")
 @Description("Returns true if the entity is an adult.")
@@ -33,7 +33,7 @@ public class CondIsAdult extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "adult";
     }
 }

@@ -12,12 +12,12 @@ import eu.decentsoftware.holograms.api.DHAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 import org.skriptlang.skript.lang.entry.EntryContainer;
 import org.skriptlang.skript.lang.entry.EntryValidator;
 import org.skriptlang.skript.lang.entry.util.ExpressionEntryData;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 import java.util.List;
 
 @Name("DecentHolograms - Create Hologram")
@@ -51,12 +51,12 @@ public class SecCreateHologram extends Section {
     private boolean persistent;
 
     @Override
-    public boolean init(@NotNull Expression<?> @NotNull [] exprs,
+    public boolean init(@NonNull Expression<?> @NonNull [] exprs,
                         int matchedPattern,
-                        @NotNull Kleenean isDelayed,
-                        @NotNull SkriptParser.ParseResult parseResult,
-                        @NotNull SectionNode sectionNode,
-                        @NotNull List<TriggerItem> triggerItems) {
+                        @NonNull Kleenean isDelayed,
+                        SkriptParser.@NonNull ParseResult parseResult,
+                        @NonNull SectionNode sectionNode,
+                        @NonNull List<TriggerItem> triggerItems) {
         EntryContainer container = ENTRY_VALIDATOR.build().validate(sectionNode);
         if (container == null) return false;
         persistent = parseResult.hasTag("persistent");
@@ -67,7 +67,7 @@ public class SecCreateHologram extends Section {
     }
 
     @Override
-    protected @Nullable TriggerItem walk(@NotNull Event e) {
+    protected @Nullable TriggerItem walk(@NonNull Event e) {
         String name = this.name.getSingle(e);
         List<String> lines = List.of(this.lines.getArray(e));
         Location loc = this.location.getSingle(e);
@@ -77,7 +77,7 @@ public class SecCreateHologram extends Section {
         return super.walk(e, false);
     }
 
-    @NotNull
+    @NonNull
     @Override
     public String toString(@Nullable Event e, boolean debug) {
         return "make a new hologram";

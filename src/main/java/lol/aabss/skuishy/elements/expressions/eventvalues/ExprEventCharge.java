@@ -14,9 +14,9 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.SculkBloomEvent;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 @SuppressWarnings("NullableProblems")
 @Name("Block - Sculk Charge")
 @Description("Gets/sets the sculk charge.")
@@ -38,12 +38,12 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "event charge";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         if (getParser().isCurrentEvent(SculkBloomEvent.class)){
             return true;
         }
@@ -52,13 +52,13 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
     }
 
     @Override
-    protected Integer @org.jetbrains.annotations.Nullable [] get(@NotNull Event e) {
+    protected Integer @org.eclipse.jdt.annotation.Nullable [] get(@NonNull Event e) {
         return new Integer[]{((SculkBloomEvent) e).getCharge()};
     }
 
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NonNull Event e, @Nullable Object[] delta, Changer.@NonNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
                 ((SculkBloomEvent) e).setCharge((Integer) delta[0]);
@@ -73,7 +73,7 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
     }
 
     @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NonNull [] acceptChange(Changer.@NonNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
             return CollectionUtils.array(Integer.class);
         }

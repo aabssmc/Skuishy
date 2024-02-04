@@ -14,9 +14,8 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.potion.PotionType;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public class Types {
     static{
@@ -28,19 +27,19 @@ public class Types {
                 .parser(new Parser<>() {
 
                     @Override
-                    public boolean canParse(@NotNull ParseContext context) {
+                    public boolean canParse(@NonNull ParseContext context) {
                         return false;
                     }
 
                     @Override
-                    public @NotNull String toVariableNameString(Note note) {
+                    public @NonNull String toVariableNameString(Note note) {
                         int octave = note.getOctave();
                         String accidental = (note.isSharped() ? "#" : "");
                         return note.getTone() + accidental + " at octave " + octave;
                     }
 
                     @Override
-                    public @NotNull String toString(Note note, int flags) {
+                    public @NonNull String toString(Note note, int flags) {
                         return toVariableNameString(note);
                     }
                 })
@@ -55,23 +54,22 @@ public class Types {
                 .parser(new Parser<>() {
 
                     @Override
-                    @Nullable
-                    public Note.Tone parse(@NotNull String input, @NotNull ParseContext context) {
+                    public Note.@Nullable Tone parse(@NonNull String input, @NonNull ParseContext context) {
                         return tones.parse(input);
                     }
 
                     @Override
-                    public boolean canParse(@NotNull ParseContext context) {
+                    public boolean canParse(@NonNull ParseContext context) {
                         return true;
                     }
 
                     @Override
-                    public @NotNull String toVariableNameString(Note.Tone tone) {
+                    public @NonNull String toVariableNameString(Note.Tone tone) {
                         return tone.name();
                     }
 
                     @Override
-                    public @NotNull String toString(Note.Tone tone, int flags) {
+                    public @NonNull String toString(Note.Tone tone, int flags) {
                         return toVariableNameString(tone);
                     }
                 })
@@ -87,22 +85,22 @@ public class Types {
 
                     @Override
                     @Nullable
-                    public Instrument parse(@NotNull String input, @NotNull ParseContext context) {
+                    public Instrument parse(@NonNull String input, @NonNull ParseContext context) {
                         return instruments.parse(input);
                     }
 
                     @Override
-                    public boolean canParse(@NotNull ParseContext context) {
+                    public boolean canParse(@NonNull ParseContext context) {
                         return true;
                     }
 
                     @Override
-                    public @NotNull String toVariableNameString(Instrument instrument) {
+                    public @NonNull String toVariableNameString(Instrument instrument) {
                         return instrument.name().toLowerCase().replaceAll("_", " ");
                     }
 
                     @Override
-                    public @NotNull String toString(Instrument instrument, int flags) {
+                    public @NonNull String toString(Instrument instrument, int flags) {
                         return toVariableNameString(instrument);
                     }
                 })
@@ -115,17 +113,17 @@ public class Types {
                     .parser(new Parser<>() {
 
                         @Override
-                        public boolean canParse(@NotNull ParseContext context) {
+                        public boolean canParse(@NonNull ParseContext context) {
                             return false;
                         }
 
                         @Override
-                        public @NotNull String toVariableNameString(Datapack data) {
+                        public @NonNull String toVariableNameString(Datapack data) {
                             return data.getName().toLowerCase().replaceAll("_", " ");
                         }
 
                         @Override
-                        public @NotNull String toString(Datapack data, int flags) {
+                        public @NonNull String toString(Datapack data, int flags) {
                             return toVariableNameString(data);
                         }
                     })
@@ -140,22 +138,22 @@ public class Types {
 
                     @Override
                     @Nullable
-                    public SpawnCategory parse(@NotNull String input, @NotNull ParseContext context) {
+                    public SpawnCategory parse(@NonNull String input, @NonNull ParseContext context) {
                         return categorys.parse(input);
                     }
 
                     @Override
-                    public boolean canParse(@NotNull ParseContext context) {
+                    public boolean canParse(@NonNull ParseContext context) {
                         return true;
                     }
 
                     @Override
-                    public @NotNull String toVariableNameString(SpawnCategory category) {
+                    public @NonNull String toVariableNameString(SpawnCategory category) {
                         return category.name().replaceAll("_", " ").toLowerCase();
                     }
 
                     @Override
-                    public @NotNull String toString(SpawnCategory category, int flags) {
+                    public @NonNull String toString(SpawnCategory category, int flags) {
                         return toVariableNameString(category);
                     }
                 })
@@ -171,22 +169,22 @@ public class Types {
 
                     @Override
                     @Nullable
-                    public PotionType parse(@NotNull String input, @NotNull ParseContext context) {
+                    public PotionType parse(@NonNull String input, @NonNull ParseContext context) {
                         return potiontypes.parse(input);
                     }
 
                     @Override
-                    public boolean canParse(@NotNull ParseContext context) {
+                    public boolean canParse(@NonNull ParseContext context) {
                         return true;
                     }
 
                     @Override
-                    public @NotNull String toVariableNameString(PotionType type) {
+                    public @NonNull String toVariableNameString(PotionType type) {
                         return type.name().replaceAll("_", " ").toLowerCase();
                     }
 
                     @Override
-                    public @NotNull String toString(PotionType type, int flags) {
+                    public @NonNull String toString(PotionType type, int flags) {
                         return toVariableNameString(type);
                     }
                 })
@@ -199,17 +197,17 @@ public class Types {
                 .parser(new Parser<>() {
 
                     @Override
-                    public boolean canParse(@NotNull ParseContext context) {
+                    public boolean canParse(@NonNull ParseContext context) {
                         return false;
                     }
 
                     @Override
-                    public @NotNull String toVariableNameString(Permission perm) {
+                    public @NonNull String toVariableNameString(Permission perm) {
                         return perm.getName();
                     }
 
                     @Override
-                    public @NotNull String toString(Permission perm, int flags) {
+                    public @NonNull String toString(Permission perm, int flags) {
                         return toVariableNameString(perm);
                     }
                 })
@@ -223,17 +221,17 @@ public class Types {
 
 
                     @Override
-                    public boolean canParse(@NotNull ParseContext context) {
+                    public boolean canParse(@NonNull ParseContext context) {
                         return false;
                     }
 
                     @Override
-                    public @NotNull String toVariableNameString(PermissionAttachment perm) {
+                    public @NonNull String toVariableNameString(PermissionAttachment perm) {
                         return "Permission: " + perm.getPermissions() + " Player: " + ((Entity) perm.getPermissible()).getName();
                     }
 
                     @Override
-                    public @NotNull String toString(PermissionAttachment perm, int flags) {
+                    public @NonNull String toString(PermissionAttachment perm, int flags) {
                         return toVariableNameString(perm);
                     }
                 })
@@ -248,22 +246,22 @@ public class Types {
 
                     @Override
                     @Nullable
-                    public PermissionDefault parse(@NotNull String input, @NotNull ParseContext context) {
+                    public PermissionDefault parse(@NonNull String input, @NonNull ParseContext context) {
                         return permdefault.parse(input);
                     }
 
                     @Override
-                    public boolean canParse(@NotNull ParseContext context) {
+                    public boolean canParse(@NonNull ParseContext context) {
                         return true;
                     }
 
                     @Override
-                    public @NotNull String toVariableNameString(PermissionDefault perm) {
+                    public @NonNull String toVariableNameString(PermissionDefault perm) {
                         return perm.name();
                     }
 
                     @Override
-                    public @NotNull String toString(PermissionDefault perm, int flags) {
+                    public @NonNull String toString(PermissionDefault perm, int flags) {
                         return toVariableNameString(perm);
                     }
                 })

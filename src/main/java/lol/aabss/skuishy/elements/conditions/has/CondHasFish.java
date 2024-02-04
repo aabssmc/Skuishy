@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Dolphin - Has Fish")
 @Description("Returns true if the dolphin has a fish.")
@@ -30,7 +30,7 @@ public class CondHasFish extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "fish";
     }
 }

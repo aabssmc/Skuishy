@@ -11,7 +11,7 @@ import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.skins.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.awt.image.BufferedImage;
 
@@ -34,24 +34,24 @@ public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> 
     }
 
     @Override
-    public @NotNull Class<? extends BufferedImage> getReturnType() {
+    public @NonNull Class<? extends BufferedImage> getReturnType() {
         return BufferedImage.class;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, @NonNull ParseResult parser) {
         setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }
 
     @Override
-    public @NotNull String toString(Event event, boolean debug) {
+    public @NonNull String toString(Event event, boolean debug) {
         return getExpr().toString(event, debug ) + " Skin Texture Image";
     }
 
     @Override
-    protected BufferedImage @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
+    protected BufferedImage @NonNull [] get(@NonNull Event event, Player @NonNull [] source) {
         try {
             if (source.length < 1) return new BufferedImage[0];
             var player = source[0];

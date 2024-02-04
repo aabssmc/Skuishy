@@ -11,9 +11,9 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.Instrument;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.NotePlayEvent;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 public class ExprEventInstrument extends EventValueExpression<Instrument> {
@@ -29,7 +29,7 @@ public class ExprEventInstrument extends EventValueExpression<Instrument> {
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         if (getParser().isCurrentEvent(NotePlayEvent.class)){
             return true;
         }
@@ -38,17 +38,17 @@ public class ExprEventInstrument extends EventValueExpression<Instrument> {
     }
 
     @Override
-    protected Instrument @org.jetbrains.annotations.Nullable [] get(@NotNull Event e) {
+    protected Instrument @org.eclipse.jdt.annotation.Nullable [] get(@NonNull Event e) {
         return new Instrument[]{((NotePlayEvent) e).getInstrument()};
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "event instrument";
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object[] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NonNull Event e, @Nullable Object[] delta, Changer.@NonNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
                 ((NotePlayEvent) e).setInstrument((Instrument) delta[0]);
@@ -57,7 +57,7 @@ public class ExprEventInstrument extends EventValueExpression<Instrument> {
     }
 
     @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NonNull [] acceptChange(Changer.@NonNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Instrument.class);
         }

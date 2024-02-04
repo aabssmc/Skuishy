@@ -13,8 +13,8 @@ import ch.njol.util.Kleenean;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Entity - Drinking Sound")
 @Description("Gets the drinking sound of the entity.")
@@ -35,7 +35,7 @@ public class ExprDrinkingSound extends SimpleExpression<String> {
     private Expression<LivingEntity> entity;
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
+    protected String @NonNull [] get(@NonNull Event e) {
         LivingEntity entity = this.entity.getSingle(e);
         ItemStack item = this.item.getSingle(e);
         if (entity != null && item != null){
@@ -50,17 +50,17 @@ public class ExprDrinkingSound extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull Class<? extends String> getReturnType() {
+    public @NonNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "drinking sound";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         entity = (Expression<LivingEntity>) exprs[0];
         item = (Expression<ItemStack>) exprs[1];
         return true;

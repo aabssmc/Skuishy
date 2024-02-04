@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.LivingEntity;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Entity - Can Breathe Underwater")
 @Description("Returns true if the entity can breathe underwater.")
@@ -30,7 +30,7 @@ public class CondCanBreatheUnderwater extends PropertyCondition<LivingEntity> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "can breathe underwater";
     }
 }

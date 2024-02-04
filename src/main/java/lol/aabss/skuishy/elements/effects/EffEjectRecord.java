@@ -12,8 +12,8 @@ import ch.njol.util.Kleenean;
 import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Jukebox - Eject Record")
 @Description("Ejects the current record from the music disc.")
@@ -31,7 +31,7 @@ public class EffEjectRecord extends Effect {
     private Expression<Block> block;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         for (Block b : block.getArray(e)){
             if (b instanceof Jukebox){
                 ((Jukebox) b).eject();
@@ -40,12 +40,12 @@ public class EffEjectRecord extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "eject record";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         block = (Expression<Block>) exprs[0];
         return true;
     }

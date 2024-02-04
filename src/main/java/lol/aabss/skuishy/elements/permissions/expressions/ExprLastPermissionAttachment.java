@@ -12,8 +12,8 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.PermissionAttachment;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import static lol.aabss.skuishy.Skuishy.last_permission_attachment;
 
@@ -32,7 +32,7 @@ public class ExprLastPermissionAttachment extends SimpleExpression<PermissionAtt
     }
 
     @Override
-    protected PermissionAttachment @NotNull [] get(@NotNull Event e) {
+    protected PermissionAttachment @NonNull [] get(@NonNull Event e) {
         return new PermissionAttachment[]{last_permission_attachment};
     }
 
@@ -42,17 +42,17 @@ public class ExprLastPermissionAttachment extends SimpleExpression<PermissionAtt
     }
 
     @Override
-    public @NotNull Class<? extends PermissionAttachment> getReturnType() {
+    public @NonNull Class<? extends PermissionAttachment> getReturnType() {
         return PermissionAttachment.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "last permission attachment";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         return true;
     }
 }

@@ -2,7 +2,6 @@ package lol.aabss.skuishy;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import lol.aabss.skuishy.events.CustomEvents;
 import lol.aabss.skuishy.hooks.Metrics;
 import lol.aabss.skuishy.other.UpdateChecker;
 import org.bukkit.Bukkit;
@@ -10,19 +9,17 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static lol.aabss.skuishy.other.SubCommands.*;
-import static lol.aabss.skuishy.other.UpdateChecker.updateCheck;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter {
@@ -38,7 +35,6 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
 
     public void onEnable() {
         saveDefaultConfig();
-        getServer().getPluginManager().registerEvents(new CustomEvents(), this);
         getServer().getPluginManager().registerEvents(new UpdateChecker(), this);
         getServer().getPluginCommand("skuishy").setExecutor(this);
         getServer().getPluginCommand("skuishy").setTabCompleter(this);
@@ -69,30 +65,17 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
                 getLogger().info("Vulcan elements loaded!");
                 vu = true;
             } else getLogger().info("Vulcan not found, skipping!");
-
-            boolean finalDh = dh;
-            boolean finalVc = vc;
-            boolean finalVu = vu;
-            metrics.addCustomChart(new Metrics.SimplePie("decentholograms", () -> finalDh ? "true" : "false"));
-            metrics.addCustomChart(new Metrics.SimplePie("vivecraft", () -> finalVc ? "true" : "false"));
-            metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> finalVu ? "true" : "false"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        metrics.addCustomChart(new Metrics.SimplePie("decentholograms", () -> dh ? "true" : "false"));
+        metrics.addCustomChart(new Metrics.SimplePie("vivecraft", () -> vc ? "true" : "false"));
+        metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> vu ? "true" : "false"));
         getLogger().info("Skuishy has been enabled!");
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            if (getConfig().getBoolean("update-checker")) {
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (p.hasPermission("skuishy.updatechecker")) {
-                        updateCheck(p);
-                    }
-                }
-            }
-        }, 20L, 20L * 60L * 30L);
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label, @NonNull String[] args) {
         if (args.length == 0){
             sender.sendMessage(miniMessage().deserialize(
                     "<red>/skuishy <" +
@@ -128,7 +111,7 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+    public @Nullable List<String> onTabComplete(@NonNull CommandSender sender, @NonNull Command command, @NonNull String alias, @NonNull String[] args) {
         List<String> completions = new ArrayList<>();
         completions.add("info");
         completions.add("reload");

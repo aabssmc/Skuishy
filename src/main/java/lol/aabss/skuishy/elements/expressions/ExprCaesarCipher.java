@@ -12,8 +12,8 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.CaesarCipher;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Other - Caesar Cipher")
 @Description("Decrypts/Encrypts caesar ciphers with shifts")
@@ -39,7 +39,7 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
     private Expression<String> value;
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, @NonNull ParseResult parseResult) {
         value = (Expression<String>) exprs[0];
         isDe = parseResult.hasTag("de");
         if (exprs[1] != null){
@@ -48,7 +48,7 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
+    protected String @NonNull [] get(@NonNull Event e) {
         String Value = value.getSingle(e);
         if (Value == null) return null;
         if (shift == null){
@@ -69,12 +69,12 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull Class<? extends String> getReturnType() {
+    public @NonNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "caesar cipher " + (isDe ? "de" : "en") + "crypted from string \"" + value.toString(e, debug) + "\"";
     }
 }

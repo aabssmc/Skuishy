@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Bee - Has Nectar")
 @Description("Returns true if the bee has nectar.")
@@ -30,7 +30,7 @@ public class CondHasNectar extends PropertyCondition<Entity> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "nectar";
     }
 }

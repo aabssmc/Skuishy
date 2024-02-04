@@ -2,7 +2,7 @@ package lol.aabss.skuishy.other.skins;
 
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

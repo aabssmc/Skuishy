@@ -6,7 +6,7 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 import org.skriptlang.skript.lang.converter.Converters;
 import org.vivecraft.VivePlayer;
 
@@ -21,17 +21,17 @@ public class Types {
                     .parser(new Parser<>() {
 
                         @Override
-                        public boolean canParse(@NotNull ParseContext context) {
+                        public boolean canParse(@NonNull ParseContext context) {
                             return false;
                         }
 
                         @Override
-                        public @NotNull String toVariableNameString(VivePlayer player) {
+                        public @NonNull String toVariableNameString(VivePlayer player) {
                             return player.player.getName();
                         }
 
                         @Override
-                        public @NotNull String toString(VivePlayer player, int flags) {
+                        public @NonNull String toString(VivePlayer player, int flags) {
                             return toVariableNameString(player);
                         }
                     })

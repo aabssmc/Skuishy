@@ -14,9 +14,9 @@ import org.bukkit.Location;
 import org.bukkit.Note;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Notes - Play Note")
 @Description("Plays a note block note.")
@@ -38,7 +38,7 @@ public class EffPlayNote extends Effect {
     private Expression<Player> players;
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         note = (Expression<Note>) exprs[0];
         instrument = (Expression<Instrument>) exprs[1];
         locations = (Expression<Location>) exprs[2];
@@ -47,7 +47,7 @@ public class EffPlayNote extends Effect {
     }
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         for (final Location l : locations.getArray(e)){
             for (final Player p : players.getArray(e)){
                 Instrument inst = instrument.getSingle(e);
@@ -60,7 +60,7 @@ public class EffPlayNote extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "play note";
     }
 }

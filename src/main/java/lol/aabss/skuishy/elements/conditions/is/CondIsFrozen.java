@@ -12,9 +12,8 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 @Name("TickManager - Is Frozen")
 @Description("Returns true if the server is frozen.")
 @Examples({
@@ -37,7 +36,7 @@ public class CondIsFrozen extends Condition {
     private Expression<Entity> entity;
 
     @Override
-    public boolean check(@NotNull Event e) {
+    public boolean check(@NonNull Event e) {
         Entity en = entity.getSingle(e);
         if (en != null){
             if (is){
@@ -52,12 +51,12 @@ public class CondIsFrozen extends Condition {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return ((entity != null) ? "entity" : "ticks") + "ticks are frozen";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         is = matchedPattern == 0;
         entity = (Expression<Entity>) exprs[0];
         return true;

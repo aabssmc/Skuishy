@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.World;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("World - Has SkyLight")
 @Description("Returns true if the world has skylight.")
@@ -26,7 +26,7 @@ public class CondHasSkyLight extends PropertyCondition<World> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "skylight";
     }
 }

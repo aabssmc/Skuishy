@@ -13,9 +13,9 @@ import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 import java.util.Objects;
 @Name("Decent Holograms - Edit Page")
 @Description("Edits a page of a hologram.")
@@ -44,7 +44,7 @@ public class EffEditPageHologram extends Effect {
     private Variable<?> var;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         if (Objects.equals(changetype, "add")){
             DHAPI.addHologramPage(Objects.requireNonNull(hologram.getSingle(e)));
         }
@@ -64,12 +64,12 @@ public class EffEditPageHologram extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "edit hologram";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         if (matchedPattern == 0){
             changetype = "add";
             hologram = (Expression<Hologram>) exprs[0];

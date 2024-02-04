@@ -10,9 +10,9 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 @Name("Not Boolean")
 @Description("Returns the opposite of specified boolean.")
 @Examples({
@@ -33,17 +33,17 @@ public class CondNotBoolean extends Condition {
     
 
     @Override
-    public boolean check(@NotNull Event e) {
+    public boolean check(@NonNull Event e) {
         return !cond.check(e);
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "not boolean";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         cond = Condition.parse(parseResult.regexes.get(0).group(), "Can't understand this condition: " + parseResult.regexes.get(0).group());
         return cond != null;
     }

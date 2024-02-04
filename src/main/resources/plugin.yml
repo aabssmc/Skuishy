@@ -8,6 +8,8 @@ softdepend:
   - DecentHolograms
   - Vivecraft-Spigot-Extensions
   - Vulcan
+loadbefore:
+  - RediSkript
 authors: [aabss]
 website: https://aabss.lol
 commands:

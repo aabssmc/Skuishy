@@ -11,9 +11,9 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 @Name("TickManager - Is Running Normally")
 @Description("Returns true if the server is running normally.")
 @Examples({
@@ -34,7 +34,7 @@ public class CondIsRunningNormally extends Condition {
     private boolean is;
 
     @Override
-    public boolean check(@NotNull Event e) {
+    public boolean check(@NonNull Event e) {
         if (is){
             return Bukkit.getServer().getServerTickManager().isRunningNormally();
         }
@@ -42,12 +42,12 @@ public class CondIsRunningNormally extends Condition {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "ticks are running normally";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         is = matchedPattern == 0;
         return true;
     }

@@ -12,8 +12,8 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import org.bukkit.permissions.Permission;
 
@@ -37,7 +37,7 @@ public class ExprPermission extends SimpleExpression<Permission> {
     private boolean neww;
 
     @Override
-    protected Permission @NotNull [] get(@NotNull Event e) {
+    protected Permission @NonNull [] get(@NonNull Event e) {
         String name = this.name.getSingle(e);
         if (name != null) {
             Permission perm = new Permission(name);
@@ -56,12 +56,12 @@ public class ExprPermission extends SimpleExpression<Permission> {
     }
 
     @Override
-    public @NotNull Class<? extends Permission> getReturnType() {
+    public @NonNull Class<? extends Permission> getReturnType() {
         return Permission.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "permission";
     }
 

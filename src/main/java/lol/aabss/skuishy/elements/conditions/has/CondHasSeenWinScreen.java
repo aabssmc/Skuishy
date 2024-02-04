@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
 @Name("Player - Has Seen Win Screen")
 @Description("Returns true if the player has seen the win screen.")
@@ -26,7 +26,7 @@ public class CondHasSeenWinScreen extends PropertyCondition<Player> {
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
+    protected @NonNull String getPropertyName() {
         return "seen win screen";
     }
 }

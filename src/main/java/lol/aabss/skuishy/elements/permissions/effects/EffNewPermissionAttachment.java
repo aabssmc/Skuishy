@@ -14,8 +14,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.List;
 import java.util.Objects;
@@ -112,7 +112,7 @@ public class EffNewPermissionAttachment extends EffectSection {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "new permission attachment";
     }
 
@@ -121,14 +121,20 @@ public class EffNewPermissionAttachment extends EffectSection {
         if (matchedPattern == 0) {
             entity = (Expression<Entity>) exprs[0];
             time = (Expression<Timespan>) exprs[1];
-            variable = (Variable<?>) exprs[2];
-            return true;
+            if (exprs[2] instanceof Variable<?>) {
+                variable = (Variable<?>) exprs[2];
+                return true;
+            }
+            return false;
         }
         perm = (Expression<Permission>) exprs[0];
         value = (Expression<Boolean>) exprs[1];
         entity = (Expression<Entity>) exprs[2];
         time = (Expression<Timespan>) exprs[3];
-        variable = (Variable<?>) exprs[4];
-        return true;
+        if (exprs[2] instanceof Variable<?>) {
+            variable = (Variable<?>) exprs[4];
+            return true;
+        }
+        return false;
     }
 }

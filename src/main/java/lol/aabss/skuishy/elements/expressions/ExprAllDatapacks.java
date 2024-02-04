@@ -13,9 +13,9 @@ import ch.njol.util.Kleenean;
 import io.papermc.paper.datapack.Datapack;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Name("Server - All Datapacks")
@@ -36,7 +36,7 @@ public class ExprAllDatapacks extends SimpleExpression<Datapack> {
     private boolean enabled;
 
     @Override
-    protected @Nullable Datapack[] get(@NotNull Event e) {
+    protected @Nullable Datapack[] get(@NonNull Event e) {
         if (enabled){
             return Bukkit.getDatapackManager().getEnabledPacks().toArray(new Datapack[0]);
         }
@@ -49,17 +49,17 @@ public class ExprAllDatapacks extends SimpleExpression<Datapack> {
     }
 
     @Override
-    public @NotNull Class<? extends Datapack> getReturnType() {
+    public @NonNull Class<? extends Datapack> getReturnType() {
         return Datapack.class;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "all datapacks";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         enabled = parseResult.hasTag("enabled");
         return true;
     }

@@ -14,9 +14,9 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Entity - Copy Entity")
 @Description("Makes a copy of an entity.")
@@ -39,7 +39,7 @@ public class EffCopyEntity extends Effect {
     private Expression<Location> location;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NonNull Event e) {
         Entity en = entity.getSingle(e);
         if (location != null) {
             Location loc = this.location.getSingle(e);
@@ -54,12 +54,12 @@ public class EffCopyEntity extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "copy entity";
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NonNull [] exprs, int matchedPattern, @NonNull Kleenean isDelayed, SkriptParser.@NonNull ParseResult parseResult) {
         entity = (Expression<Entity>) exprs[0];
         if (matchedPattern == 0){
             if (exprs[1] instanceof Variable<?>) {

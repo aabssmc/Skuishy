@@ -15,9 +15,9 @@ import org.bukkit.Note;
 import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.NotePlayEvent;
-import org.jetbrains.annotations.NotNull;
+import org.eclipse.jdt.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
 
 @Name("Notes - On Note Play")
 @Description("Called when a note block is played.")
@@ -60,17 +60,17 @@ public class EvtNotePlay extends SkriptEvent {
     }
 
     @Override
-    public boolean init(Literal<?> @NotNull [] args, int matchedPattern, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Literal<?> @NonNull [] args, int matchedPattern, SkriptParser.@NonNull ParseResult parseResult) {
         return true;
     }
 
     @Override
-    public boolean check(@NotNull Event e) {
+    public boolean check(@NonNull Event e) {
         return true;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NonNull String toString(@Nullable Event e, boolean debug) {
         return "note play event";
     }
 }
