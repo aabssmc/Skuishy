@@ -1,6 +1,6 @@
 # Skuishy
 
-![Downloads](https://img.shields.io/github/downloads/aabssmc/Skuishy/total) ![Versions](https://img.shields.io/github/v/release/aabssmc/Skuishy) ![Size](https://img.shields.io/github/repo-size/aabssmc/Skuishy) [![Java CI with Gradle](https://github.com/aabssmc/Skuishy/actions/workflows/gradle.yml/badge.svg)](https://github.com/aabssmc/Skuishy/actions/workflows/gradle.yml)
+![Versions](https://img.shields.io/github/v/release/aabssmc/Skuishy) ![Size](https://img.shields.io/github/repo-size/aabssmc/Skuishy) [![Java CI with Gradle](https://github.com/aabssmc/Skuishy/actions/workflows/gradle.yml/badge.svg)](https://github.com/aabssmc/Skuishy/actions/workflows/gradle.yml)
 
 
 [![SkriptHubViewTheDocs](http://skripthub.net/static/addon/ViewTheDocsButton.png)](http://skripthub.net/docs/?addon=Skuishy)
