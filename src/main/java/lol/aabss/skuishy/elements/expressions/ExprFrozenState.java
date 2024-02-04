@@ -15,9 +15,11 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("NullableProblems")
 @Name("TickManager - Frozen State")
@@ -30,8 +32,8 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
 
     static{
         Skript.registerExpression(ExprFrozenState.class, Boolean.class, ExpressionType.COMBINED,
-                "[the] frozen [tick[s]] (state|mode) of ([the] server|%-entity%)",
-                "([the] server|%-entity%)['s] frozen [tick[(s|[( |-)]rate)]] (state|mode)"
+                "[the] frozen [tick[s]] (state|mode) of ([the] server|%-entities%)",
+                "([the] server|%-entities%)['s] frozen [tick[(s|[( |-)]rate)]] (state|mode)"
         );
     }
 
@@ -40,9 +42,11 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
     @Override
     protected @Nullable Boolean[] get(@NotNull Event e) {
         if (ent != null){
-            Entity entity = ent.getSingle(e);
-            if (entity != null)
-                return new Boolean[]{entity.isFrozen()};
+            List<Boolean> frozen = new ArrayList<>();
+            for (Entity en : ent.getArray(e)){
+                frozen.add(en.isFrozen());
+            }
+            return frozen.toArray(Boolean[]::new);
         }
         return new Boolean[]{Bukkit.getServer().getServerTickManager().isFrozen()};
     }
@@ -57,18 +61,17 @@ public class ExprFrozenState extends SimpleExpression<Boolean> {
 
     @Override
     public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
-        if (delta != null) {
-            if (mode == Changer.ChangeMode.SET) {
-                Bukkit.getServer().getServerTickManager().setFrozen((Boolean) delta[0]);
-            } else {
-                assert false;
-            }
+        if (delta != null && mode == Changer.ChangeMode.SET) {
+            Bukkit.getServer().getServerTickManager().setFrozen((Boolean) delta[0]);
         }
+
     }
 
     @Override
     public boolean isSingle() {
-        return true;
+        if (ent != null) {
+            return ent.isSingle();
+        } return true;
     }
 
     @Override

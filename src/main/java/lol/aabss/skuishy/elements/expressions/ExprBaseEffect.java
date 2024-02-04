@@ -14,8 +14,11 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.potion.PotionType;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Arrow - Base Potion Type")
 @Description("Gets/Sets the base potion type of an arrow.")
@@ -34,11 +37,17 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
     @Override
     protected PotionType @NotNull [] get(@NotNull Event event, Entity @NotNull [] source) {
         if (source instanceof Arrow[] arrow){
+            List<PotionType> potions = new ArrayList<>();
             for (Arrow e : arrow) {
-                return new PotionType[]{e.getBasePotionType()};
-            }
+                potions.add(e.getBasePotionType());
+            } return potions.toArray(PotionType[]::new);
         }
         return new PotionType[]{null};
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

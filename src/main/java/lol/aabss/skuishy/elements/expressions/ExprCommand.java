@@ -13,9 +13,11 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("NullableProblems")
 @Name("Block - Command of Command Block")
@@ -37,11 +39,18 @@ public class ExprCommand extends PropertyExpression<Block, String> {
     @Override
     protected @Nullable String[] get(@NotNull Event e, Block @NotNull [] source) {
         if (getExpr().getArray(e) instanceof CommandBlock[] c){
+            List<String> commands = new ArrayList<>();
             for (CommandBlock b : c) {
-                return new String[]{b.getCommand()};
+                commands.add(b.getCommand());
             }
+            return commands.toArray(String[]::new);
         }
         return new String[]{null};
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

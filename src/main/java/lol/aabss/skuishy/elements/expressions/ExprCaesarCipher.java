@@ -12,8 +12,11 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.CaesarCipher;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Other - Caesar Cipher")
 @Description("Decrypts/Encrypts caesar ciphers with shifts")
@@ -30,7 +33,7 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprCaesarCipher.class, String.class, ExpressionType.COMBINED,
-                "(:de|:en)(crypted|coded) caesar [cipher] from %string% [with shift %-integer%]"
+                "(:de|:en)(crypted|coded) caesar [cipher] from %strings% [with shift %-integer%]"
         );
     }
 
@@ -47,20 +50,18 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
         } return true;
     }
 
-    // coded by aabss 2024
     @Override
-    protected String[] get(@NotNull Event e) {
-        String string = this.string.getSingle(e);
-        if (string == null) return null;
+    protected String @NotNull [] get(@NotNull Event e) {
         Integer shift = this.shift == null ? null : this.shift.getSingle(e);
-        if (isDe) {
-            return new String[]{CaesarCipher.decrypt(string, shift)};
+        List<String> strings = new ArrayList<>();
+        for (String string : this.string.getArray(e)) {
+            strings.add(isDe ? CaesarCipher.decrypt(string, shift) : CaesarCipher.encrypt(string, shift));
         }
-        return new String[]{CaesarCipher.encrypt(string, shift)};
+        return strings.toArray(String[]::new);
     }
     @Override
     public boolean isSingle() {
-        return true;
+        return string.isSingle();
     }
 
     @Override

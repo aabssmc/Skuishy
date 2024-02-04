@@ -53,6 +53,11 @@ public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean
     }
 
     @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
+    }
+
+    @Override
     public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(Boolean.class);

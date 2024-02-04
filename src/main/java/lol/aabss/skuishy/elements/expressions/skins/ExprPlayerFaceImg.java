@@ -15,6 +15,8 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Skins - Face of Player as image")
 @Description("Gets the player's face as image.")
@@ -39,12 +41,15 @@ public class ExprPlayerFaceImg extends PropertyExpression<Player, BufferedImage>
     @Override
     protected BufferedImage @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         Number size = this.size != null ? this.size.getSingle(event) : 16;
-        if (size != null) {
-            for (Player p : source) {
-                var buffer = SkinWrapper.get(p, size, !without);
-                return new BufferedImage[]{buffer};
-            }
-        } return new BufferedImage[]{null};
+        List<BufferedImage> faces = new ArrayList<>();
+        for (Player p : source) {
+            faces.add(SkinWrapper.get(p, size, !without));
+        } return faces.toArray(BufferedImage[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

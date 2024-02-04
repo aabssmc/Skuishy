@@ -46,7 +46,7 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
         if (loc != null && bio != null && rad != null) {
             BiomeSearchResult r = loc.getWorld().locateNearestBiome(loc, rad, bio);
             if (r != null) {
-                return new Location[]{loc.getWorld().locateNearestBiome(loc, rad, bio).getLocation()};
+                return new Location[]{r.getLocation()};
             }
         }
         return new Location[]{null};

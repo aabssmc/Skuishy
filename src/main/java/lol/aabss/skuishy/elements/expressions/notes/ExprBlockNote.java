@@ -17,6 +17,9 @@ import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Name("Notes - Block Note")
 @Description("The note of a note block.")
 @Examples({
@@ -34,12 +37,17 @@ public class ExprBlockNote extends PropertyExpression<Block, Note> {
 
     @Override
     protected Note @NotNull [] get(@NotNull Event e, Block @NotNull [] source) {
-        Block[] blocks = getExpr().getArray(e);
-        for (Block block : blocks) {
+        List<Note> notes = new ArrayList<>();
+        for (Block block : getExpr().getArray(e)) {
             if (block.getBlockData() instanceof NoteBlock data)
-                return new Note[]{data.getNote()};
+                notes.add(data.getNote());
         }
-        return new Note[]{null};
+        return notes.toArray(Note[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

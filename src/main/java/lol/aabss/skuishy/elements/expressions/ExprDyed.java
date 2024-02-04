@@ -39,14 +39,16 @@ public class ExprDyed extends SimpleExpression<Object> {
 
     static{
         Skript.registerExpression(ExprDyed.class, Object.class, ExpressionType.COMBINED,
-                "%itemtypes/itemstack/slots% (dy|colo[u]r)ed %color%",
-                "%*color% %itemtypes/itemstack%"
+                "%itemtypes/itemstacks/slots% (dy|colo[u]r)ed %color%",
+                "%*color% %itemtypes/itemstacks%"
         );
     }
 
     private Expression<?> items;
     private Expression<Color> color;
 
+
+    //improved by fusezion
     @Override
     protected @Nullable Object[] get(@NotNull Event event) {
         Color color = this.color.getSingle(event);

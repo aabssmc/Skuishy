@@ -10,9 +10,11 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("NullableProblems")
 @Name("Player - Main Hand")
@@ -49,9 +51,15 @@ public class ExprMainHand extends PropertyExpression<Player, String> {
 
     @Override
     protected @Nullable String[] get(@NotNull Event event, Player[] source) {
+        List<String> hands = new ArrayList<>();
         for (Player p : source) {
-            return new String[]{p.getMainHand().toString().toLowerCase()};
+            hands.add(p.getMainHand().toString().toLowerCase());
         }
-        return new String[]{};
+        return hands.toArray(String[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 }

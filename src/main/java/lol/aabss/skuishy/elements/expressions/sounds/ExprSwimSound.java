@@ -10,8 +10,11 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Entity - Swim Sound")
 @Description("Gets the swim sound of the entity.")
@@ -24,12 +27,21 @@ public class ExprSwimSound extends PropertyExpression<Entity, String> {
     static {
         register(ExprSwimSound.class, String.class,
                 "[entity] swim sound",
-                "entity");
+                "entities");
     }
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Entity[] source) {
-        return new String[]{source[0].getSwimSound().getKey().getKey()};
+        List<String> sounds = new ArrayList<>();
+        for (Entity block : source) {
+            sounds.add(block.getSwimSound().getKey().getKey());
+        }
+        return sounds.toArray(String[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

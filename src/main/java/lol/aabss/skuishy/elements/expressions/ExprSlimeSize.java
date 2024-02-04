@@ -16,6 +16,9 @@ import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Name("Slime - Size")
 @Description("Gets/Sets the size of a slime.")
 @Examples({
@@ -32,12 +35,21 @@ public class ExprSlimeSize extends PropertyExpression<Entity, Integer> {
 
     @Override
     protected Integer @NotNull [] get(@NotNull Event event, Entity @Nullable [] source) {
-        if (source instanceof Slime[]){
-            for (Slime slime : (Slime[]) source){
-                return new Integer[]{slime.getSize()};
+        if (source != null){
+            List<Integer> size = new ArrayList<>();
+            for (Entity slime : source){
+                if (slime instanceof Slime) {
+                    size.add(((Slime) slime).getSize());
+                }
             }
+            return size.toArray(Integer[]::new);
         }
         return new Integer[]{null};
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override
@@ -58,9 +70,9 @@ public class ExprSlimeSize extends PropertyExpression<Entity, Integer> {
 
     @Override
     public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET){
+        if (mode == Changer.ChangeMode.SET && delta != null){
             for (Entity slime : getExpr().getArray(e)){
-                if (delta != null && slime instanceof Slime){
+                if (slime instanceof Slime){
                     ((Slime) slime).setSize((Integer) delta[0]);
                 }
             }

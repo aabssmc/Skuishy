@@ -16,6 +16,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Name("Entity - Eat Sound")
 @Description("Gets the eating sound of the entity.")
 @Examples({
@@ -26,8 +29,8 @@ public class ExprEatSound extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprEatSound.class, String.class, ExpressionType.COMBINED,
-                "[the] [entity] eat[ing] sound of %livingentity% (using|with) %itemstack%",
-                "%livingentity%'s [entity] eat[ing] sound (using|with) %itemstack%"
+                "[the] [entity] eat[ing] sound of %livingentities% (using|with) %itemstack%",
+                "%livingentities%'s [entity] eat[ing] sound (using|with) %itemstack%"
         );
     }
 
@@ -36,17 +39,19 @@ public class ExprEatSound extends SimpleExpression<String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event e) {
-        LivingEntity entity = this.entity.getSingle(e);
         ItemStack item = this.item.getSingle(e);
-        if (entity != null && item != null){
-            return new String[]{entity.getEatingSound(item).getKey().getKey()};
+        if (item != null) {
+            List<String> sounds = new ArrayList<>();
+            for (LivingEntity en : entity.getArray(e)) {
+                sounds.add(en.getEatingSound(item).getKey().getKey());
+            } return sounds.toArray(String[]::new);
         }
-        return new String[0];
+        return new String[]{null};
     }
 
     @Override
     public boolean isSingle() {
-        return true;
+        return entity.isSingle();
     }
 
     @Override

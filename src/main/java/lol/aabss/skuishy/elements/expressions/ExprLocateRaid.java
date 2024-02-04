@@ -42,7 +42,7 @@ public class ExprLocateRaid extends SimpleExpression<Location> {
         if (loc != null && rad != null) {
             Raid r = loc.getWorld().locateNearestRaid(loc, rad);
             if (r != null) {
-                return new Location[]{loc.getWorld().locateNearestRaid(loc, rad).getLocation()};
+                return new Location[]{r.getLocation()};
             }
         }
         return new Location[]{null};

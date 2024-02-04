@@ -10,9 +10,11 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.type.SculkCatalyst;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("NullableProblems")
 public class ExprBloom extends PropertyExpression<Block, Boolean> {
@@ -28,13 +30,20 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     @Override
     protected @Nullable Boolean[] get(@NotNull Event event, Block @Nullable [] source) {
         if (source != null) {
+            List<Boolean> bloom = new ArrayList<>();
             for (Block b : source) {
                 if (b.getBlockData() instanceof SculkCatalyst block) {
-                    return new Boolean[]{block.isBloom()};
+                    bloom.add(block.isBloom());
                 }
             }
+            return bloom.toArray(Boolean[]::new);
         }
         return new Boolean[]{null};
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

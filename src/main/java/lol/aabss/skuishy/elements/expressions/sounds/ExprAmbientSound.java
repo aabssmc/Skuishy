@@ -11,8 +11,11 @@ import ch.njol.util.Kleenean;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Entity - Ambient Sound")
 @Description("Gets the ambient sound of the entity.")
@@ -25,18 +28,27 @@ public class ExprAmbientSound extends PropertyExpression<Entity, String> {
     static {
         register(ExprAmbientSound.class, String.class,
                 "[entity] ambient sound",
-                "entity");
+                "entities");
     }
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Entity[] source) {
-        if (source[0] instanceof Mob m){
-            if (m.getAmbientSound() != null) {
-                return new String[]{m.getAmbientSound().getKey().getKey()};
+        List<String> sounds = new ArrayList<>();
+        for (Entity mob : source) {
+            if (mob instanceof Mob m) {
+                if (m.getAmbientSound() != null) {
+                    sounds.add(m.getAmbientSound().getKey().getKey());
+                } else {
+                    sounds.add("none");
+                }
             }
-            return new String[]{"none"};
         }
-        return new String[0];
+        return sounds.toArray(String[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

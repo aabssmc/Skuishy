@@ -12,6 +12,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 @Name("Skins - Player Skin Texture (URL)")
 @Description("Gets the player's skin as a url.")
 @Examples({
@@ -48,8 +52,18 @@ public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
+        List<String> skins = new ArrayList<>();
         for (Player p : source){
-            return new String[]{p.getPlayerProfile().getTextures().getSkin().toString()};
-        } return new String[]{null};
+            URL skin = p.getPlayerProfile().getTextures().getSkin();
+            if (skin != null) {
+                skins.add(skin.toString());
+            }
+        }
+        return skins.toArray(String[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 }

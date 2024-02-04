@@ -12,8 +12,11 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Living Entity - Collidable")
 @Description("Sets/Gets the collidable state of a living entity.")
@@ -24,15 +27,22 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprCollidable extends PropertyExpression<LivingEntity, Boolean> {
 
     static {
-        register(ExprCollidable.class, Boolean.class, "collidab(le|ility) [state|mode]", "livingentities");
+        register(ExprCollidable.class, Boolean.class, "collidab(le|ility) [state|mode]",
+                "livingentities");
     }
 
     @Override
     protected Boolean @NotNull [] get(@NotNull Event event, LivingEntity[] source) {
+        List<Boolean> booleans = new ArrayList<>();
         for (LivingEntity en : source){
-            return new Boolean[]{en.isCollidable()};
+            booleans.add(en.isCollidable());
         }
-        return new Boolean[]{null};
+        return booleans.toArray(Boolean[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

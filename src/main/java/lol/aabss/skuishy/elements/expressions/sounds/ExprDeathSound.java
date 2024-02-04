@@ -10,8 +10,11 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Entity - Death Sound")
 @Description("Gets the death sound of the entity.")
@@ -29,10 +32,20 @@ public class ExprDeathSound extends PropertyExpression<LivingEntity, String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, LivingEntity[] source) {
-        if (source[0].getDeathSound() != null) {
-            return new String[]{source[0].getDeathSound().getKey().getKey()};
+        List<String> sounds = new ArrayList<>();
+        for (LivingEntity mob : source) {
+            if (mob.getDeathSound() != null) {
+                sounds.add(mob.getDeathSound().getKey().getKey());
+            } else {
+                sounds.add("none");
+            }
         }
-        return new String[]{"none"};
+        return sounds.toArray(String[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

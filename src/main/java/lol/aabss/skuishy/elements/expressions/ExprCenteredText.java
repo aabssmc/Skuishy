@@ -11,9 +11,11 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Math.max;
 
@@ -29,8 +31,8 @@ public class ExprCenteredText extends SimpleExpression<String> {
 
     static{
         Skript.registerExpression(ExprCenteredText.class, String.class, ExpressionType.SIMPLE,
-                "center[ed] %string%",
-                "%string% center[ed]"
+                "center[ed] %strings%",
+                "%strings% center[ed]"
         );
     }
 
@@ -38,18 +40,18 @@ public class ExprCenteredText extends SimpleExpression<String> {
 
     @Override
     protected @Nullable String[] get(@NotNull Event e) {
-        String text = this.text.getSingle(e);
-        if (text != null) {
+        List<String> texts = new ArrayList<>();
+        for (String text : this.text.getArray(e)) {
             int totalWidth = max(80, text.length() + 4);
             int padSize = (totalWidth - text.length()) / 2;
-            return new String[]{" ".repeat(padSize) + text};
+            texts.add(" ".repeat(padSize) + text);
         }
-        return new String[]{null};
+        return texts.toArray(String[]::new);
     }
 
     @Override
     public boolean isSingle() {
-        return true;
+        return text.isSingle();
     }
 
     @Override

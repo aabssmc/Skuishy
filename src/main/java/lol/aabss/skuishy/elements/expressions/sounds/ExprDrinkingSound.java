@@ -13,8 +13,11 @@ import ch.njol.util.Kleenean;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Entity - Drinking Sound")
 @Description("Gets the drinking sound of the entity.")
@@ -26,8 +29,8 @@ public class ExprDrinkingSound extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprDrinkingSound.class, String.class, ExpressionType.COMBINED,
-                "[the] [entity] drink[ing] sound of %livingentity% (using|with) %itemstack%",
-                "%livingentity%'s [entity] drink[ing] sound (using|with) %itemstack%"
+                "[the] [entity] drink[ing] sound of %livingentities% (using|with) %itemstack%",
+                "%livingentities%'s [entity] drink[ing] sound (using|with) %itemstack%"
         );
     }
 
@@ -36,17 +39,19 @@ public class ExprDrinkingSound extends SimpleExpression<String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event e) {
-        LivingEntity entity = this.entity.getSingle(e);
         ItemStack item = this.item.getSingle(e);
-        if (entity != null && item != null){
-            return new String[]{entity.getDrinkingSound(item).getKey().getKey()};
+        if (item != null) {
+            List<String> sounds = new ArrayList<>();
+            for (LivingEntity en : entity.getArray(e)) {
+                sounds.add(en.getDrinkingSound(item).getKey().getKey());
+            } return sounds.toArray(String[]::new);
         }
-        return new String[0];
+        return new String[]{null};
     }
 
     @Override
     public boolean isSingle() {
-        return true;
+        return entity.isSingle();
     }
 
     @Override

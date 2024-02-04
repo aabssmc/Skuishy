@@ -13,6 +13,9 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Name("Block - Hit Sound")
 @Description("Gets the hit sound of the block.")
 @Examples({
@@ -24,12 +27,21 @@ public class ExprHitSound extends PropertyExpression<Block, String> {
     static {
         register(ExprHitSound.class, String.class,
                 "[block] hit sound",
-                "block");
+                "blocks");
     }
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Block[] source) {
-        return new String[]{source[0].getBlockSoundGroup().getHitSound().getKey().getKey()};
+        List<String> sounds = new ArrayList<>();
+        for (Block block : source) {
+            sounds.add(block.getBlockSoundGroup().getHitSound().getKey().getKey());
+        }
+        return sounds.toArray(String[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

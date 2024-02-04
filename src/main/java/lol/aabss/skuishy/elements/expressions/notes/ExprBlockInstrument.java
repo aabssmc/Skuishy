@@ -17,6 +17,9 @@ import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Name("Notes - Block Instrument")
 @Description("The instrument of a note block.")
 @Examples({
@@ -36,12 +39,17 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
 
     @Override
     protected Instrument @NotNull [] get(@NotNull Event e, Block @NotNull [] source) {
-        Block[] blocks = getExpr().getArray(e);
-        for (Block block : blocks) {
+        List<Instrument> instruments = new ArrayList<>();
+        for (Block block : getExpr().getArray(e)) {
             if (block.getBlockData() instanceof NoteBlock data)
-                return new Instrument[]{data.getInstrument()};
+                instruments.add(data.getInstrument());
         }
-        return new Instrument[]{null};
+        return instruments.toArray(Instrument[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override

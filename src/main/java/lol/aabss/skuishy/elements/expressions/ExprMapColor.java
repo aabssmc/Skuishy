@@ -18,6 +18,9 @@ import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressWarnings("NullableProblems")
 @Name("Block - Map Color")
 @Description("Gets the map color from a block.")
@@ -39,9 +42,10 @@ public class ExprMapColor extends PropertyExpression<Block, Color> {
 
     @Override
     protected @Nullable Color[] get(@NotNull Event event, Block[] source) {
+        List<SkriptColor> colors = new ArrayList<>();
         for (Block block : source) {
-            return new SkriptColor[]{SkriptColor.fromBukkitColor(block.getBlockData().getMapColor())};
-        } return null;
+            colors.add(SkriptColor.fromBukkitColor(block.getBlockData().getMapColor()));
+        } return colors.toArray(Color[]::new);
     }
 
     @Override

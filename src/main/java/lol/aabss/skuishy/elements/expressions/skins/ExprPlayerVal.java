@@ -13,6 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Name("Skins - Player Skin Value")
 @Description("Sends the value of the player's skin .")
 @Examples({
@@ -49,9 +52,16 @@ public class ExprPlayerVal extends PropertyExpression<Player, String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Player[] source) {
+        List<String> values = new ArrayList<>();
         for (Player p : source){
-            return new String[]{SkinWrapper.getProfileProperties(p).getValue()};
-        } return new String[]{null};
+            values.add(SkinWrapper.getProfileProperties(p).getValue());
+        }
+        return values.toArray(String[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
 }

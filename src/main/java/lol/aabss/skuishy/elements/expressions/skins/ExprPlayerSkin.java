@@ -16,6 +16,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static lol.aabss.skuishy.other.skins.SkinWrapper.skinname;
 
 @Name("Skins - Player Skin")
@@ -34,26 +37,29 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
                 "players"
         );
     }
-    private Expression<Player> player;
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
-        String name = skinname.get(source[0]) == null ? source[0].getName() : skinname.get(source[0]);
-        return new String[]{name};
+        List<String> skins = new ArrayList<>();
+        for (Player p : source) {
+            skins.add(skinname.get(p) == null ? p.getName() : skinname.get(p));
+        }
+        return skins.toArray(String[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override
     public void change(@NotNull Event event, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
-        Player p = player.getSingle(event);
-        if (mode == Changer.ChangeMode.SET) {
-            assert p != null;
-            SkinWrapper.setSkin(p, (String) delta[0]);
-        }
-        else if (mode == Changer.ChangeMode.RESET) {
-            assert p != null;
-            SkinWrapper.setSkin(p, p.getName());
-        } else {
-            assert false;
+        for (Player p : getExpr().getArray(event)) {
+            if (mode == Changer.ChangeMode.SET) {
+                SkinWrapper.setSkin(p, (String) delta[0]);
+            } else if (mode == Changer.ChangeMode.RESET) {
+                SkinWrapper.setSkin(p, p.getName());
+            }
         }
     }
 
@@ -76,9 +82,7 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
-        player = (Expression<Player>) exprs[0];
         setExpr((Expression<? extends Player>) exprs[0]);
         return true;
     }

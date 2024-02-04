@@ -14,9 +14,11 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.World;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("NullableProblems")
 @Name("World - Hardcore mode")
@@ -30,8 +32,8 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
 
     static{
         Skript.registerExpression(ExprHardcoreMode.class, Boolean.class, ExpressionType.SIMPLE,
-                "hardcore [state|mode] (in|of) %world%",
-                "%world%'s hardcore [state|mode]"
+                "hardcore [state|mode] (in|of) %worlds%",
+                "%worlds%'s hardcore [state|mode]"
         );
     }
 
@@ -39,9 +41,11 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
 
     @Override
     protected @Nullable Boolean[] get(@NotNull Event e) {
-        World world = this.world.getSingle(e);
-        if (world != null) return new Boolean[]{world.isHardcore()};
-        return new Boolean[]{null};
+        List<Boolean> modes = new ArrayList<>();
+        for (World world : this.world.getArray(e)){
+            modes.add(world.isHardcore());
+        }
+        return modes.toArray(Boolean[]::new);
     }
 
     @Override
@@ -64,7 +68,7 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
 
     @Override
     public boolean isSingle() {
-        return true;
+        return world.isSingle();
     }
 
     @Override

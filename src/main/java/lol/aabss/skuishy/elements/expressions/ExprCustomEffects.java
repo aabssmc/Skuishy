@@ -34,10 +34,15 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
 
     @Override
     protected PotionEffect @NotNull [] get(@NotNull Event event, Entity @NotNull [] source) {
-        if (source[0] instanceof Arrow){
+        if (source[0] instanceof Arrow) {
             return ((Arrow) source[0]).getCustomEffects().toArray(PotionEffect[]::new);
         }
         return new PotionEffect[]{null};
+    }
+
+    @Override
+    public boolean isSingle() {
+        return true;
     }
 
     @Override

@@ -14,6 +14,8 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Skins - Player Skin Texture (Image)")
 @Description("Gets the player's skin as a image.")
@@ -51,8 +53,15 @@ public class ExprPlayerTexImg extends PropertyExpression<Player, BufferedImage> 
 
     @Override
     protected BufferedImage @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
+        List<BufferedImage> skins = new ArrayList<>();
         for (Player p : source){
-            return new BufferedImage[]{SkinWrapper.imgTexture(p)};
-        } return new BufferedImage[]{null};
+            skins.add(SkinWrapper.imgTexture(p));
+        }
+        return skins.toArray(BufferedImage[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 }

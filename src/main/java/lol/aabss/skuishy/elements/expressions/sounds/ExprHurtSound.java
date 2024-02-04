@@ -13,6 +13,9 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Name("Entity - Hurt Sound")
 @Description("Gets the hurt sound of the entity.")
 @Examples({
@@ -24,15 +27,25 @@ public class ExprHurtSound extends PropertyExpression<LivingEntity, String> {
     static {
         register(ExprHurtSound.class, String.class,
                 "[entity] hurt sound",
-                "livingentity");
+                "livingentities");
     }
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, LivingEntity[] source) {
-        if (source[0].getHurtSound() != null) {
-            return new String[]{source[0].getHurtSound().getKey().getKey()};
+        List<String> sounds = new ArrayList<>();
+        for (LivingEntity mob : source) {
+            if (mob.getHurtSound() != null) {
+                sounds.add(mob.getHurtSound().getKey().getKey());
+            } else {
+                sounds.add("none");
+            }
         }
-        return new String[]{"none"};
+        return sounds.toArray(String[]::new);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
     }
 
     @Override
