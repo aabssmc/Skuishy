@@ -32,7 +32,7 @@ public class ExprUnkwnCmdMsg extends EventValueExpression<String> {
         );
     }
 
-    public ExprUnkwnCmdMsg(Class<? extends String> c) {
+    public ExprUnkwnCmdMsg() {
         super(String.class);
     }
 

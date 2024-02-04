@@ -40,7 +40,7 @@ public class ExprDyed extends SimpleExpression<Object> {
     static{
         Skript.registerExpression(ExprDyed.class, Object.class, ExpressionType.COMBINED,
                 "%itemtypes/itemstacks/slots% (dy|colo[u]r)ed %color%",
-                "%*color% %itemtypes/itemstacks%"
+                "%*color% %itemtypes/itemstacks/slots%"
         );
     }
 
@@ -93,7 +93,7 @@ public class ExprDyed extends SimpleExpression<Object> {
     }
 
     @Override
-    public @NotNull Class<? extends Object> getReturnType() {
+    public @NotNull Class<?> getReturnType() {
         return Slot.class.isAssignableFrom(items.getReturnType()) ? Slot.class : ItemType.class;
     }
 
@@ -105,11 +105,11 @@ public class ExprDyed extends SimpleExpression<Object> {
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         this.items = exprs[matchedPattern];
-        if (matchedPattern == 1) {
+        if (matchedPattern == 0) {
             this.color = (Expression<Color>) exprs[1];
-        } else {
-            this.color = (Expression<Color>) exprs[0];
+            return true;
         }
+        this.color = (Expression<Color>) exprs[0];
         return true;
     }
 }
