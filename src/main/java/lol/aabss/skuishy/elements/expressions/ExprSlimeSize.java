@@ -29,7 +29,7 @@ public class ExprSlimeSize extends PropertyExpression<Entity, Integer> {
 
     static {
         register(ExprSlimeSize.class, Integer.class,
-                "[slime] size",
+                "slime size",
                 "entities");
     }
 
