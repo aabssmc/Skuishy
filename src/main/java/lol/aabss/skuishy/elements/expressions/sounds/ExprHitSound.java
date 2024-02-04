@@ -29,7 +29,7 @@ public class ExprHitSound extends PropertyExpression<Block, String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Block[] source) {
-        return new String[]{source[0].getBlockSoundGroup().getHitSound().name().replaceAll("_", ".").toLowerCase()};
+        return new String[]{source[0].getBlockSoundGroup().getHitSound().getKey().getKey()};
     }
 
     @Override

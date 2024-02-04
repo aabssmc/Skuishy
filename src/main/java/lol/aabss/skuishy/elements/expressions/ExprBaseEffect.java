@@ -28,13 +28,15 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
     static {
         register(ExprBaseEffect.class, PotionType.class,
                 "base (potion|effect) type",
-                "potionitemtype");
+                "entities");
     }
 
     @Override
     protected PotionType @NotNull [] get(@NotNull Event event, Entity @NotNull [] source) {
-        if (source[0] instanceof Arrow arrow){
-            return new PotionType[]{arrow.getBasePotionType()};
+        if (source instanceof Arrow[] arrow){
+            for (Arrow e : arrow) {
+                return new PotionType[]{e.getBasePotionType()};
+            }
         }
         return new PotionType[0];
     }
@@ -60,15 +62,17 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(PotionType.class);
         }
-        return CollectionUtils.array();
+        return null;
     }
 
     @Override
     public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        Entity en = getExpr().getSingle(e);
-        if (en instanceof Arrow) {
-            if (mode == Changer.ChangeMode.SET) {
-                ((Arrow) en).setBasePotionType((PotionType) delta[0]);
+        Entity[] arrow = getExpr().getArray(e);
+        for (Entity en : arrow) {
+            if (en instanceof Arrow) {
+                if (mode == Changer.ChangeMode.SET) {
+                    ((Arrow) en).setBasePotionType((PotionType) delta[0]);
+                }
             }
         }
     }

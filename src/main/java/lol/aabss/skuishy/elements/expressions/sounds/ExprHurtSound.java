@@ -30,7 +30,7 @@ public class ExprHurtSound extends PropertyExpression<LivingEntity, String> {
     @Override
     protected String @NotNull [] get(@NotNull Event event, LivingEntity[] source) {
         if (source[0].getHurtSound() != null) {
-            return new String[]{source[0].getHurtSound().name().replaceAll("_", ".").toLowerCase()};
+            return new String[]{source[0].getHurtSound().getKey().getKey()};
         }
         return new String[]{"none"};
     }

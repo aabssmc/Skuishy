@@ -39,7 +39,7 @@ public class ExprEatSound extends SimpleExpression<String> {
         LivingEntity entity = this.entity.getSingle(e);
         ItemStack item = this.item.getSingle(e);
         if (entity != null && item != null){
-            return new String[]{entity.getEatingSound(item).name().replaceAll("_", ".").toUpperCase()};
+            return new String[]{entity.getEatingSound(item).getKey().getKey()};
         }
         return new String[0];
     }

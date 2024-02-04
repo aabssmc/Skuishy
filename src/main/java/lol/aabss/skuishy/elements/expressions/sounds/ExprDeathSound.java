@@ -30,7 +30,7 @@ public class ExprDeathSound extends PropertyExpression<LivingEntity, String> {
     @Override
     protected String @NotNull [] get(@NotNull Event event, LivingEntity[] source) {
         if (source[0].getDeathSound() != null) {
-            return new String[]{source[0].getDeathSound().name().replaceAll("_", ".").toLowerCase()};
+            return new String[]{source[0].getDeathSound().getKey().getKey()};
         }
         return new String[]{"none"};
     }

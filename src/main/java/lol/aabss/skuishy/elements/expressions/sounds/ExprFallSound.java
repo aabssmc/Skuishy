@@ -29,7 +29,7 @@ public class ExprFallSound extends PropertyExpression<Block, String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Block[] source) {
-        return new String[]{source[0].getBlockSoundGroup().getFallSound().name().replaceAll("_", ".").toLowerCase()};
+        return new String[]{source[0].getBlockSoundGroup().getFallSound().getKey().getKey()};
     }
 
     @Override

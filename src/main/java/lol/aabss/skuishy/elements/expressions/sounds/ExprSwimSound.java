@@ -29,7 +29,7 @@ public class ExprSwimSound extends PropertyExpression<Entity, String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event event, Entity[] source) {
-        return new String[]{source[0].getSwimSound().name().replaceAll("_", ".").toLowerCase()};
+        return new String[]{source[0].getSwimSound().getKey().getKey()};
     }
 
     @Override

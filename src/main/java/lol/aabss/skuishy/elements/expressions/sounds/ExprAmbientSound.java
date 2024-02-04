@@ -32,7 +32,7 @@ public class ExprAmbientSound extends PropertyExpression<Entity, String> {
     protected String @NotNull [] get(@NotNull Event event, Entity[] source) {
         if (source[0] instanceof Mob m){
             if (m.getAmbientSound() != null) {
-                return new String[]{m.getAmbientSound().name().replaceAll("_", ".").toLowerCase()};
+                return new String[]{m.getAmbientSound().getKey().getKey()};
             }
             return new String[]{"none"};
         }
