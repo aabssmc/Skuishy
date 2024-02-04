@@ -32,11 +32,9 @@ public class ExprSlimeSize extends PropertyExpression<Entity, Integer> {
 
     @Override
     protected Integer @NotNull [] get(@NotNull Event event, Entity @Nullable [] source) {
-        if (source != null){
-            for (Entity slime : source){
-                if (slime instanceof Slime){
-                    return new Integer[]{((Slime) slime).getSize()};
-                }
+        if (source instanceof Slime[]){
+            for (Slime slime : (Slime[]) source){
+                return new Integer[]{slime.getSize()};
             }
         }
         return new Integer[]{null};
