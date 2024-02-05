@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Bee;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Bee - Has Nectar")
@@ -15,14 +15,14 @@ import org.jetbrains.annotations.NotNull;
         "if target entity has nectar:"
 })
 @Since("2.0")
-public class CondHasNectar extends PropertyCondition<Entity> {
+public class CondHasNectar extends PropertyCondition<LivingEntity> {
 
     static {
-        register(CondHasNectar.class, PropertyType.HAVE, "nectar", "entities");
+        register(CondHasNectar.class, PropertyType.HAVE, "nectar", "livingentities");
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Bee){
             return ((Bee) entity).hasNectar();
         }

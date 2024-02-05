@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Ageable;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Entity - Is Adult")
@@ -15,17 +15,17 @@ import org.jetbrains.annotations.NotNull;
         "if event-entity is an adult:"
 })
 @Since("2.0")
-public class CondIsAdult extends PropertyCondition<Entity> {
+public class CondIsAdult extends PropertyCondition<LivingEntity> {
 
     static {
         register(CondIsAdult.class,
                 PropertyType.BE,
                 "[a[n]] adult",
-                "entities");
+                "livingentities");
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Ageable){
             return ((Ageable) entity).isAdult();
         }

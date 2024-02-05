@@ -5,7 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Slime;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,17 +15,17 @@ import org.jetbrains.annotations.NotNull;
         "if last spawned slime can wander:"
 })
 @Since("2.0")
-public class CondCanWander extends PropertyCondition<Entity> {
+public class CondCanWander extends PropertyCondition<LivingEntity> {
 
     static{
         register(CondCanWander.class,
                 PropertyType.CAN,
                 "wander",
-                "entities");
+                "livingentities");
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Slime){
             return ((Slime) entity).canWander();
         }

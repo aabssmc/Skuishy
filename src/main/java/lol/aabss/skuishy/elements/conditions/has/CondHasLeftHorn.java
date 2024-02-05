@@ -6,8 +6,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Goat;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Goat - Has Left Horn")
@@ -16,16 +16,16 @@ import org.jetbrains.annotations.NotNull;
         "if last spawned goat has left horn:"
 })
 @Since("2.0")
-public class CondHasLeftHorn extends PropertyCondition<Entity> {
+public class CondHasLeftHorn extends PropertyCondition<LivingEntity> {
 
     static {
         if (Skript.methodExists(Goat.class, "hasLeftHorn")) {
-            register(CondHasLeftHorn.class, PropertyType.HAVE, "[the] left horn", "entities");
+            register(CondHasLeftHorn.class, PropertyType.HAVE, "[the] left horn", "livingentities");
         }
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Goat){
             return ((Goat) entity).hasLeftHorn();
         }

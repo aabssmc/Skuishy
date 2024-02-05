@@ -5,7 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Turtle;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,14 +15,14 @@ import org.jetbrains.annotations.NotNull;
         "if target entity has a egg:"
 })
 @Since("2.0")
-public class CondHasEgg extends PropertyCondition<Entity> {
+public class CondHasEgg extends PropertyCondition<LivingEntity> {
 
     static{
-        register(CondHasEgg.class, PropertyType.HAVE, "[a] egg", "entities");
+        register(CondHasEgg.class, PropertyType.HAVE, "[a] egg", "livingentities");
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Turtle){
             return ((Turtle) entity).hasEgg();
         }

@@ -5,7 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Steerable;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,14 +15,14 @@ import org.jetbrains.annotations.NotNull;
         "if {_b} has a record:"
 })
 @Since("2.0")
-public class CondHasSaddle extends PropertyCondition<Entity> {
+public class CondHasSaddle extends PropertyCondition<LivingEntity> {
 
     static{
-        register(CondHasSaddle.class, PropertyType.HAVE, "[a] saddle", "entities");
+        register(CondHasSaddle.class, PropertyType.HAVE, "[a] saddle", "livingentities");
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Steerable){
             return ((Steerable) entity).hasSaddle();
         }

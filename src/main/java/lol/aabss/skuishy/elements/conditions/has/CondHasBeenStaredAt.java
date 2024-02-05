@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Enderman - Has Been Stared At")
@@ -16,16 +16,16 @@ import org.jetbrains.annotations.NotNull;
         "if target entity has been stared at:"
 })
 @Since("2.0")
-public class CondHasBeenStaredAt extends PropertyCondition<Entity> {
+public class CondHasBeenStaredAt extends PropertyCondition<LivingEntity> {
 
     static{
         if (Skript.methodExists(Enderman.class, "hasBeenStaredAt")) {
-            register(CondHasBeenStaredAt.class, PropertyType.HAVE, "been stared at", "entities");
+            register(CondHasBeenStaredAt.class, PropertyType.HAVE, "been stared at", "livingentities");
         }
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Enderman){
             return ((Enderman) entity).hasBeenStaredAt();
         }

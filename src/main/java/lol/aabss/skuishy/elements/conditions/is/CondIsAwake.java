@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Bat;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Bat - Is Awake")
@@ -15,14 +15,14 @@ import org.jetbrains.annotations.NotNull;
         "if last spawned bat is awake:"
 })
 @Since("2.0")
-public class CondIsAwake extends PropertyCondition<Entity> {
+public class CondIsAwake extends PropertyCondition<LivingEntity> {
 
     static{
-        register(CondIsAwake.class, PropertyType.BE, "awake", "entities");
+        register(CondIsAwake.class, PropertyType.BE, "awake", "livingentities");
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Bat){
             return ((Bat) entity).isAwake();
         }

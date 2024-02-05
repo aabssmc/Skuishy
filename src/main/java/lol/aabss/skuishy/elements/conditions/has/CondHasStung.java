@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Bee;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Bee - Has Strung")
@@ -15,14 +15,14 @@ import org.jetbrains.annotations.NotNull;
         "if target entity has stung:"
 })
 @Since("2.0")
-public class CondHasStung extends PropertyCondition<Entity> {
+public class CondHasStung extends PropertyCondition<LivingEntity> {
 
     static{
-        register(CondHasStung.class, PropertyType.HAVE, "stung", "entities");
+        register(CondHasStung.class, PropertyType.HAVE, "stung", "livingentities");
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Bee){
             return ((Bee) entity).hasStung();
         }

@@ -5,7 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Piglin;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,17 +15,17 @@ import org.jetbrains.annotations.NotNull;
         "if last spawned piglin is able to hunt:"
 })
 @Since("2.0")
-public class CondIsAbleToHunt extends PropertyCondition<Entity> {
+public class CondIsAbleToHunt extends PropertyCondition<LivingEntity> {
 
     static {
         register(CondIsAbleToHunt.class,
                 PropertyType.BE,
                 "able to hunt",
-                "entities");
+                "livingentities");
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Piglin){
             return ((Piglin) entity).isAbleToHunt();
         }

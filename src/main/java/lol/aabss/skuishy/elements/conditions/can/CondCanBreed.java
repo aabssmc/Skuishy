@@ -6,7 +6,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Breedable;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Entity - Can Breed")
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
         "if event-entity can breed:"
 })
 @Since("2.0")
-public class CondCanBreed extends PropertyCondition<Entity> {
+public class CondCanBreed extends PropertyCondition<LivingEntity> {
 
     static{
         register(CondCanBreed.class,
@@ -26,7 +26,7 @@ public class CondCanBreed extends PropertyCondition<Entity> {
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Breedable b){
             return b.canBreed();
         }

@@ -22,7 +22,7 @@ public class CondIsAttached extends PropertyCondition<Block> {
         register(CondIsAttached.class,
                 PropertyType.BE,
                 "attached",
-                "block");
+                "blocks");
     }
 
     @Override

@@ -7,7 +7,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import org.bukkit.entity.Dolphin;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Dolphin - Has Fish")
@@ -16,16 +16,16 @@ import org.jetbrains.annotations.NotNull;
         "if target entity has a fish:"
 })
 @Since("2.0")
-public class CondHasFish extends PropertyCondition<Entity> {
+public class CondHasFish extends PropertyCondition<LivingEntity> {
 
     static {
         if (Skript.methodExists(Dolphin.class, "hasFish")) {
-            register(CondHasFish.class, PropertyType.HAVE, "[a] fish", "entities");
+            register(CondHasFish.class, PropertyType.HAVE, "[a] fish", "livingentities");
         }
     }
 
     @Override
-    public boolean check(Entity entity) {
+    public boolean check(LivingEntity entity) {
         if (entity instanceof Dolphin){
             return ((Dolphin) entity).hasFish();
         }
