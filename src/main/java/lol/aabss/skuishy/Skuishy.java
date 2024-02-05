@@ -46,9 +46,14 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
             addon.loadClasses("lol.aabss.skuishy.elements");
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
                 getLogger().info("DecentHolograms found! Enabling DecentHolograms elements...");
-                addon.loadClasses("lol.aabss.skuishy.hooks.decentholograms");
-                getLogger().info("DecentHolograms elements loaded!");
-                dh = true;
+                if (Bukkit.getPluginManager().getPlugin("DecentHolograms").getPluginMeta().getVersion().equals("2.8.6")) {
+                    addon.loadClasses("lol.aabss.skuishy.hooks.decentholograms");
+                    getLogger().info("DecentHolograms elements loaded!");
+                    dh = true;
+                } else{
+                    getLogger().warning("DecentHolograms needs to be at least version 2.8.6!");
+                    getLogger().info("Skipping DecentHolograms!");
+                }
             } else getLogger().info("DecentHolograms not found, skipping!");
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
