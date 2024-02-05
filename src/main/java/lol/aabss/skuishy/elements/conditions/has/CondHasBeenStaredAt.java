@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.has;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -18,7 +19,9 @@ import org.jetbrains.annotations.NotNull;
 public class CondHasBeenStaredAt extends PropertyCondition<Entity> {
 
     static{
-        register(CondHasBeenStaredAt.class, PropertyType.HAVE, "been stared at", "entities");
+        if (Skript.methodExists(Enderman.class, "hasBeenStaredAt")) {
+            register(CondHasBeenStaredAt.class, PropertyType.HAVE, "been stared at", "entities");
+        }
     }
 
     @Override

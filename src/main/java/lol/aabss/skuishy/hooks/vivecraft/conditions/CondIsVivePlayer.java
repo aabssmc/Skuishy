@@ -5,6 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import org.bukkit.Bukkit;
 import org.vivecraft.VSE;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -18,9 +19,11 @@ import org.jetbrains.annotations.NotNull;
 public class CondIsVivePlayer extends PropertyCondition<Player> {
 
     static {
-        register(CondIsVivePlayer.class,
-                "[a] vive[craft] player",
-                "players");
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
+            register(CondIsVivePlayer.class,
+                    "[a] vive[craft] player",
+                    "players");
+        }
     }
 
     @Override

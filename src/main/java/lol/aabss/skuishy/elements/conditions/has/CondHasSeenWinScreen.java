@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.has;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -17,7 +18,9 @@ import org.jetbrains.annotations.NotNull;
 public class CondHasSeenWinScreen extends PropertyCondition<Player> {
 
     static{
-        register(CondHasSeenWinScreen.class, PropertyType.HAVE, "seen [the] win[ ]screen", "players");
+        if (Skript.methodExists(Player.class, "hasSeenWinScreen")) {
+            register(CondHasSeenWinScreen.class, PropertyType.HAVE, "seen [the] win[ ]screen", "players");
+        }
     }
 
     @Override

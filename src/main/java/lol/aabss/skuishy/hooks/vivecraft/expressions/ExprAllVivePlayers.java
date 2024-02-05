@@ -10,6 +10,7 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
+import org.bukkit.Bukkit;
 import org.vivecraft.VSE;
 import org.vivecraft.VivePlayer;
 import org.bukkit.event.Event;
@@ -27,9 +28,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprAllVivePlayers extends SimpleExpression<VivePlayer> {
 
     static{
-        Skript.registerExpression(ExprAllVivePlayers.class, VivePlayer.class, ExpressionType.SIMPLE,
-                "[all [[of] the]] vive[craft] players"
-        );
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
+            Skript.registerExpression(ExprAllVivePlayers.class, VivePlayer.class, ExpressionType.SIMPLE,
+                    "[all [[of] the]] vive[craft] players"
+            );
+        }
     }
 
     @Override

@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprHologramFromName extends SimpleExpression<Hologram> {
 
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerExpression(ExprHologramFromName.class, Hologram.class, ExpressionType.SIMPLE,
                     "[(decent [hologram[s]]|dh)] hologram (from name|named) %string%"
             );

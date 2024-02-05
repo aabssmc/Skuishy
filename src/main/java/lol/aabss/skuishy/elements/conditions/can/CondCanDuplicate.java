@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.can;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -17,11 +18,13 @@ import org.jetbrains.annotations.NotNull;
 @Since("2.0")
 public class CondCanDuplicate extends PropertyCondition<LivingEntity> {
     static{
-        register(CondCanDuplicate.class,
-                PropertyType.CAN,
-                "dup(e|licate)",
-                "livingentities"
-        );
+        if (Skript.classExists("org.bukkit.entity.Allay")) {
+            register(CondCanDuplicate.class,
+                    PropertyType.CAN,
+                    "dup(e|licate)",
+                    "livingentities"
+            );
+        }
     }
 
     @Override

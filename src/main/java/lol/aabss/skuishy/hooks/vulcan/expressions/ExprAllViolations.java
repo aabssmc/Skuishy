@@ -7,6 +7,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
@@ -16,15 +17,17 @@ import org.jetbrains.annotations.NotNull;
 public class ExprAllViolations extends SimpleExpression<Integer> {
 
     static{
-        Skript.registerExpression(ExprAllViolations.class, Integer.class, ExpressionType.COMBINED,
-                "[all [[of] the]] violations of %player%",
-                "[all [[of] the]] combat violations of %player%",
-                "[all [[of] the]] movement violations of %player%",
-                "[all [[of] the]] player violations of %player%",
-                "[all [[of] the]] auto[( |-)]clicker violations of %player%",
-                "[all [[of] the]] timer violations of %player%",
-                "[all [[of] the]] scaffold violations of %player%"
-        );
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            Skript.registerExpression(ExprAllViolations.class, Integer.class, ExpressionType.COMBINED,
+                    "[all [[of] the]] violations of %player%",
+                    "[all [[of] the]] combat violations of %player%",
+                    "[all [[of] the]] movement violations of %player%",
+                    "[all [[of] the]] player violations of %player%",
+                    "[all [[of] the]] auto[( |-)]clicker violations of %player%",
+                    "[all [[of] the]] timer violations of %player%",
+                    "[all [[of] the]] scaffold violations of %player%"
+            );
+        }
     }
 
     private String vtype;

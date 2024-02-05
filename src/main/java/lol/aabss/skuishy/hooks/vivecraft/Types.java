@@ -12,7 +12,7 @@ import org.vivecraft.VivePlayer;
 
 public class Types {
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("Vivecraft-Spigot-Extensions") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
             Classes.registerClass(new ClassInfo<>(VivePlayer.class, "viveplayer")
                     .user("vive ?players?")
                     .name("ViveCraft - Vive Player")

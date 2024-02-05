@@ -10,6 +10,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -25,9 +26,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffToggleAlerts extends Effect {
 
     static{
-        Skript.registerEffect(EffToggleAlerts.class,
-                "toggle [the] [vulcan] [hack[ing]] alerts for %player%"
-        );
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            Skript.registerEffect(EffToggleAlerts.class,
+                    "toggle [the] [vulcan] [hack[ing]] alerts for %player%"
+            );
+        }
     }
 
     private Expression<Player> p;

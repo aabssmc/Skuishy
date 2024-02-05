@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.has;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -18,7 +19,9 @@ import org.jetbrains.annotations.NotNull;
 public class CondHasCaravanTrail extends PropertyCondition<Entity> {
 
     static{
-        register(CondHasCaravanTrail.class, PropertyType.HAVE, "[a] caravan trail", "entities");
+        if (Skript.methodExists(Llama.class, "hasCaravanTail")) {
+            register(CondHasCaravanTrail.class, PropertyType.HAVE, "[a] caravan trail", "entities");
+        }
     }
 
     @Override

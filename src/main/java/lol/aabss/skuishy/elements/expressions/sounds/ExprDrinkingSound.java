@@ -11,6 +11,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.eclipse.jdt.annotation.Nullable;
@@ -28,10 +29,12 @@ import java.util.List;
 public class ExprDrinkingSound extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprDrinkingSound.class, String.class, ExpressionType.COMBINED,
-                "[the] [entity] drink[ing] sound of %livingentities% (using|with) %itemstack%",
-                "%livingentities%'s [entity] drink[ing] sound (using|with) %itemstack%"
-        );
+        if (Skript.methodExists(LivingEntity.class, "getDrinkingSound")) {
+            Skript.registerExpression(ExprDrinkingSound.class, String.class, ExpressionType.COMBINED,
+                    "[the] [entity] drink[ing] sound of %livingentities% (using|with) %itemstack%",
+                    "%livingentities%'s [entity] drink[ing] sound (using|with) %itemstack%"
+            );
+        }
     }
 
     private Expression<ItemStack> item;

@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.is;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -20,9 +21,11 @@ import org.jetbrains.annotations.NotNull;
 public class CondIsHanging extends PropertyCondition<Entity> {
 
     static{
-        register(CondIsHanging.class,
-                "(hanging|hung)",
-                "entities");
+        if (Skript.classExists("org.bukkit.block.data.Hangable")) {
+            register(CondIsHanging.class,
+                    "(hanging|hung)",
+                    "entities");
+        }
     }
 
     @Override

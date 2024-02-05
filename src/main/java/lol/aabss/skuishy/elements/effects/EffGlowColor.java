@@ -14,6 +14,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
@@ -65,7 +66,11 @@ public class EffGlowColor extends Effect {
                     glow = scoreboard.registerNewTeam(c + "color");
                     glow.color(ntc);
                 }
-                glow.addEntity(e);
+                if (e instanceof Player) {
+                    glow.addEntry(e.getName());
+                } else{
+                    glow.addEntry(String.valueOf(e.getUniqueId()));
+                }
                 e.setGlowing(true);
             }
         }

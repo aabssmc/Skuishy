@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.expressions.sounds;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
@@ -26,9 +27,11 @@ import java.util.List;
 public class ExprAmbientSound extends PropertyExpression<Entity, String> {
 
     static {
-        register(ExprAmbientSound.class, String.class,
-                "[entity] ambient sound",
-                "entities");
+        if (Skript.methodExists(Mob.class, "getAmbientSound")) {
+            register(ExprAmbientSound.class, String.class,
+                    "[entity] ambient sound",
+                    "entities");
+        }
     }
 
     @Override

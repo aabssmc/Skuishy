@@ -36,15 +36,12 @@ dependencies {
     // vulcan
     implementation files('gradle/VulcanAPI.jar')
     // other things
-    implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.800')
     implementation 'org.json:json:20231013'
 }
 
 shadowJar {
     dependencies {
-        include(dependency(files('gradle/Vivecraft_Spigot_Extensions.jar')))
-        include(dependency(files('gradle/VulcanAPI.jar')))
         include(dependency('org.json:json:20231013'))
     }
 }

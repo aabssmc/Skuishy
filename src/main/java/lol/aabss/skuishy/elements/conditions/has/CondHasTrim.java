@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.has;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -19,7 +20,9 @@ import org.jetbrains.annotations.NotNull;
 public class CondHasTrim extends PropertyCondition<ItemStack> {
 
     static {
-        register(CondHasTrim.class, PropertyType.HAVE, "[a] trim", "itemstacks");
+        if (Skript.classExists("org.bukkit.inventory.meta.ArmorMeta")) {
+            register(CondHasTrim.class, PropertyType.HAVE, "[a] trim", "itemstacks");
+        }
     }
 
     @Override

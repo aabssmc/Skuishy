@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.expressions.sounds;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
@@ -8,6 +9,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
@@ -25,9 +27,11 @@ import java.util.List;
 public class ExprSwimSound extends PropertyExpression<Entity, String> {
 
     static {
-        register(ExprSwimSound.class, String.class,
-                "[entity] swim sound",
-                "entities");
+        if (Skript.methodExists(Entity.class, "getSwimSound")) {
+            register(ExprSwimSound.class, String.class,
+                    "[entity] swim sound",
+                    "entities");
+        }
     }
 
     @Override

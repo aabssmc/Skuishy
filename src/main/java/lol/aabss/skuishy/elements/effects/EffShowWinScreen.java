@@ -23,10 +23,12 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffShowWinScreen extends Effect {
 
     static{
-        Skript.registerEffect(EffShowWinScreen.class,
-                "show [the] win screen to %players%",
-                "make %players% see the win screen"
-        );
+        if (Skript.methodExists(Player.class, "showWinScreen")) {
+            Skript.registerEffect(EffShowWinScreen.class,
+                    "show [the] win screen to %players%",
+                    "make %players% see the win screen"
+            );
+        }
     }
 
     private Expression<Player> p;

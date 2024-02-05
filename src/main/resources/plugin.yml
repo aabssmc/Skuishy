@@ -14,3 +14,4 @@ authors: [aabss]
 website: https://aabss.lol
 commands:
   skuishy:
+    description: The main command for Skuishy.

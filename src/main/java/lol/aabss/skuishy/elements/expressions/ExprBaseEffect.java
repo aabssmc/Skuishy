@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.expressions;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -10,6 +11,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
@@ -29,9 +31,11 @@ import java.util.List;
 public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
 
     static {
-        register(ExprBaseEffect.class, PotionType.class,
-                "base (potion|effect) type",
-                "entities");
+        if (Skript.methodExists(Arrow.class, "getBasePotionType")) {
+            register(ExprBaseEffect.class, PotionType.class,
+                    "base (potion|effect) type",
+                    "entities");
+        }
     }
 
     @Override

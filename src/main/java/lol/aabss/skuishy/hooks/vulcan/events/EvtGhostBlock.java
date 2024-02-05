@@ -12,6 +12,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import ch.njol.skript.util.Timespan;
 import me.frep.vulcan.api.event.VulcanGhostBlockEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -26,21 +27,23 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EvtGhostBlock extends SkriptEvent {
 
     static {
-        Skript.registerEvent("on vulcan ghost block event", EvtGhostBlock.class, VulcanGhostBlockEvent.class,
-                "[vulcan] ghost block"
-        );
-        EventValues.registerEventValue(VulcanGhostBlockEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(VulcanGhostBlockEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(VulcanGhostBlockEvent.class, Timespan.class, new Getter<>() {
-            @Override
-            public Timespan get(VulcanGhostBlockEvent e) {
-                return Timespan.fromTicks_i(e.getTimestamp());
-            }
-        }, 0);
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            Skript.registerEvent("on vulcan ghost block event", EvtGhostBlock.class, VulcanGhostBlockEvent.class,
+                    "[vulcan] ghost block"
+            );
+            EventValues.registerEventValue(VulcanGhostBlockEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(VulcanGhostBlockEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(VulcanGhostBlockEvent.class, Timespan.class, new Getter<>() {
+                @Override
+                public Timespan get(VulcanGhostBlockEvent e) {
+                    return Timespan.fromTicks_i(e.getTimestamp());
+                }
+            }, 0);
+        }
     }
 
     @Override

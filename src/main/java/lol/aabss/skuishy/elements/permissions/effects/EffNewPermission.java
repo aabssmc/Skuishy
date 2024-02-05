@@ -40,7 +40,7 @@ public class EffNewPermission extends Effect {
     private Variable<?> var;
 
     @Override
-    protected void execute(Event e) {
+    protected void execute(@NotNull Event e) {
         if (pat == 0){
             String perm = this.name.getSingle(e);
             if (perm != null){
@@ -66,7 +66,7 @@ public class EffNewPermission extends Effect {
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         pat = matchedPattern;
         if (matchedPattern == 0){
             name = (Expression<String>) exprs[0];

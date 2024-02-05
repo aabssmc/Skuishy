@@ -12,6 +12,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
+import org.bukkit.Bukkit;
 import org.vivecraft.VSE;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -28,9 +29,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprViveOnly extends SimpleExpression<Boolean> {
 
     static {
-        Skript.registerExpression(ExprViveOnly.class, Boolean.class, ExpressionType.SIMPLE,
-                "[the] vive[craft] only (mode|state)"
-        );
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
+            Skript.registerExpression(ExprViveOnly.class, Boolean.class, ExpressionType.SIMPLE,
+                    "[the] vive[craft] only (mode|state)"
+            );
+        }
     }
 
     @Override

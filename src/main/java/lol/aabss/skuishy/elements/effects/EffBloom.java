@@ -15,7 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffBloom extends Effect {
 
     static{
-        if (Skript.methodExists(SculkCatalyst.class, "bloom", Block.class, Integer.class)){
+        if (Skript.classExists("org.bukkit.block.SculkCatalyst")){
             Skript.registerEffect(EffBloom.class,
                     "[force[fully]] bloom %blocks% with (charge|power) %integer%",
                     "make %blocks% bloom with (charge|power) %integer%"

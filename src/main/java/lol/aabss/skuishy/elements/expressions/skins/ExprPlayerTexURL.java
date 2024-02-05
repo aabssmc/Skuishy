@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.expressions.skins;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
@@ -8,6 +9,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -28,6 +30,7 @@ import java.util.List;
 public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
 
     static {
+        if (Skript.methodExists(PlayerProfile.class, "getTextures"))
         register(ExprPlayerTexURL.class, String.class,
                 "[skin] texture url",
                 "players"

@@ -9,6 +9,7 @@ import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import me.frep.vulcan.api.event.VulcanViolationResetEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,9 +23,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EvtViolationReset extends SkriptEvent {
 
     static {
-        Skript.registerEvent("on violation reset event", EvtViolationReset.class, VulcanViolationResetEvent.class,
-                "[vulcan] violation[s] reset"
-        );
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            Skript.registerEvent("on violation reset event", EvtViolationReset.class, VulcanViolationResetEvent.class,
+                    "[vulcan] violation[s] reset"
+            );
+        }
     }
 
     @Override

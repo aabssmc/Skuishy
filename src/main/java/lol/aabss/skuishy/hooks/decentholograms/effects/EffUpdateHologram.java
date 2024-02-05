@@ -25,7 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffUpdateHologram extends Effect {
 
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffUpdateHologram.class,
                     "update [(decent [hologram[s]]|dh)] [hologram] %hologram%"
             );

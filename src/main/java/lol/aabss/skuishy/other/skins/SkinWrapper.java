@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.other.skins;
 
+import ch.njol.skript.Skript;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import org.bukkit.Bukkit;
@@ -51,33 +52,37 @@ public class SkinWrapper {
     }
 
     public static BufferedImage imgTexture(Player player) {
-        URL url = player.getPlayerProfile().getTextures().getSkin();
-        if (url != null){
-            try {
-                return ImageIO.read(url);
-            } catch (IOException e){
-                throw new RuntimeException(e);
+        if (Skript.methodExists(com.destroystokyo.paper.profile.PlayerProfile.class, "getTextures")) {
+            URL url = player.getPlayerProfile().getTextures().getSkin();
+            if (url != null) {
+                try {
+                    return ImageIO.read(url);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         } return null;
     }
 
     public static void setSkin(Player player, String skin){
-        if (player.getName().equals(skin)){
-            PlayerProfile e = player.getPlayerProfile();
-            e.getTextures().clear();
-            PlayerTextures t = e.getTextures();
-            t.clear();
-            e.setTextures(t);
-            player.setPlayerProfile(e);
-            skinname.remove(player, skin);
-        }
-        PlayerProfile newprofile = Bukkit.createProfile(skin);
-        newprofile.complete();
-        PlayerProfile profile = player.getPlayerProfile();
-        profile.setProperties(newprofile.getProperties());
-        player.setPlayerProfile(profile);
-        if (!player.getName().equals(skin)){
-            skinname.put(player, skin);
+        if (Skript.methodExists(com.destroystokyo.paper.profile.PlayerProfile.class, "getTextures") && Skript.classExists("org.bukkit.profile.PlayerTextures")) {
+            if (player.getName().equals(skin)) {
+                PlayerProfile e = player.getPlayerProfile();
+                e.getTextures().clear();
+                PlayerTextures t = e.getTextures();
+                t.clear();
+                e.setTextures(t);
+                player.setPlayerProfile(e);
+                skinname.remove(player, skin);
+            }
+            PlayerProfile newprofile = Bukkit.createProfile(skin);
+            newprofile.complete();
+            PlayerProfile profile = player.getPlayerProfile();
+            profile.setProperties(newprofile.getProperties());
+            player.setPlayerProfile(profile);
+            if (!player.getName().equals(skin)) {
+                skinname.put(player, skin);
+            }
         }
     }
 

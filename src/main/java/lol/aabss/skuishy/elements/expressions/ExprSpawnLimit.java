@@ -30,9 +30,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprSpawnLimit extends SimpleExpression<Integer> {
 
     static{
-        Skript.registerExpression(ExprSpawnLimit.class, Integer.class, ExpressionType.COMBINED,
-                "spawn[( |-)]limit of %spawncategory% in world %world%"
-        );
+        if (Skript.methodExists(World.class, "getSpawnLimit") && Skript.classExists("org.bukkit.entity.SpawnCategory")) {
+            Skript.registerExpression(ExprSpawnLimit.class, Integer.class, ExpressionType.COMBINED,
+                    "spawn[( |-)]limit of %spawncategory% in world %world%"
+            );
+        }
     }
 
     private Expression<SpawnCategory> spawncategory;

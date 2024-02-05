@@ -28,7 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EvtHologramClick extends SkriptEvent {
 
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null){
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEvent("hologram click", EvtHologramClick.class, HologramClickEvent.class,
                     "[(decent [hologram[s]]|dh)] holo[gram] click"
             );

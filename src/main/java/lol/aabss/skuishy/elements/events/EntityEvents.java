@@ -269,12 +269,13 @@ public class EntityEvents extends SkriptEvent {
                             "[entity] fertilize[d] egg",
                             "[entity] egg fertilize[d]"
                     )
-                    .description("Called when two entities mate and the mating process results in a fertilization. Fertilization differs from normal breeding, as represented by the org.bukkit.event.entity.EntityBreedEvent, as it does not result in the immediate creation of the child entity in the world.\n" +
-                            "An example of this would be:\n" +
-                            "A frog being marked as \"is_pregnant\" and laying org.bukkit.Material.FROGSPAWN later.\n" +
-                            "Sniffers producing the org.bukkit.Material.SNIFFER_EGG item, which needs to be placed before it can begin to hatch.\n" +
-                            "A turtle being marked with \"HasEgg\" and laying a org.bukkit.Material.TURTLE_EGG later.\n" +
-                            "The event hence only exposes the two parent entities in the fertilization process and cannot provide the child entity, as it will only exist at a later point in time.")
+                    .description("""
+                            Called when two entities mate and the mating process results in a fertilization. Fertilization differs from normal breeding, as represented by the org.bukkit.event.entity.EntityBreedEvent, as it does not result in the immediate creation of the child entity in the world.
+                            An example of this would be:
+                            A frog being marked as "is_pregnant" and laying org.bukkit.Material.FROGSPAWN later.
+                            Sniffers producing the org.bukkit.Material.SNIFFER_EGG item, which needs to be placed before it can begin to hatch.
+                            A turtle being marked with "HasEgg" and laying a org.bukkit.Material.TURTLE_EGG later.
+                            The event hence only exposes the two parent entities in the fertilization process and cannot provide the child entity, as it will only exist at a later point in time.""")
                     .examples("on fertilize egg:")
                     .since("2.0");
 

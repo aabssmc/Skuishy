@@ -88,13 +88,12 @@ public class SubCommands {
     private static String getString(String sku, String sk) {
         String skuishyv = instance.getPluginMeta().getVersion();
         String skriptv = Skript.getInstance().getPluginMeta().getVersion();
-        String msg = "\n<dark_gray>-- <color:#40ff00>Skuishy <gray>Info: <dark_gray>--<reset>\n\n" +
+        return "\n<dark_gray>-- <color:#40ff00>Skuishy <gray>Info: <dark_gray>--<reset>\n\n" +
                 "<gray>Skuishy Version: <color:#40ff00>"+ skuishyv + (!Objects.equals(sku, skuishyv) ? " [Latest: "+ sku + "]" : "") +"<reset>\n" +
                 "<gray>Server Version: <color:#40ff00>"+instance.getServer().getMinecraftVersion()+"<reset>\n" +
                 "<gray>Server Implementation: <color:#40ff00>"+instance.getServer().getVersion()+"<reset>\n" +
                 "<gray>Skript Version: <color:#40ff00>"+skriptv+(!Objects.equals(sk, skriptv) ? " [Latest: "+ sk + "]" : "") +"<reset>\n" +
                 "<gray>Addons:\n";
-        return msg;
     }
 
     public static void cmdReload(CommandSender sender){

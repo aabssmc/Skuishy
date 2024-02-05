@@ -8,6 +8,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -19,9 +20,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprKurtosis extends PropertyExpression<Player, Number> {
 
     static{
-        register(ExprKurtosis.class, Number.class,
-                "kurtosis",
-                "players");
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            register(ExprKurtosis.class, Number.class,
+                    "kurtosis",
+                    "players");
+        }
     }
 
     @Override

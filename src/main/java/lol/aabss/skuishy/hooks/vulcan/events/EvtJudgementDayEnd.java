@@ -9,6 +9,7 @@ import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import me.frep.vulcan.api.event.VulcanJudgementDayEndEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,9 +24,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EvtJudgementDayEnd extends SkriptEvent {
 
     static {
-        Skript.registerEvent("on vulcan judgement day end event", EvtJudgementDayEnd.class, VulcanJudgementDayEndEvent.class,
-                "[vulcan] judge[ment] [day] end[ed]"
-        );
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            Skript.registerEvent("on vulcan judgement day end event", EvtJudgementDayEnd.class, VulcanJudgementDayEndEvent.class,
+                    "[vulcan] judge[ment] [day] end[ed]"
+            );
+        }
     }
 
     @Override

@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class CondHologramExists extends Condition {
 
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerCondition(CondHologramExists.class,
                     "[hologram] [named|with name] %string% (does) exists",
                     "[hologram] %string% [named|with name] does(n't| not) exist"

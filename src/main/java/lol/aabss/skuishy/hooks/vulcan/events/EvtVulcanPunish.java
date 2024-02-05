@@ -11,6 +11,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import me.frep.vulcan.api.event.VulcanPunishEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -25,15 +26,17 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EvtVulcanPunish extends SkriptEvent {
 
     static {
-        Skript.registerEvent("on vulcan punish event", EvtVulcanPunish.class, VulcanPunishEvent.class,
-                "[vulcan] punish[ed]"
-        );
-        EventValues.registerEventValue(VulcanPunishEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(VulcanPunishEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            Skript.registerEvent("on vulcan punish event", EvtVulcanPunish.class, VulcanPunishEvent.class,
+                    "[vulcan] punish[ed]"
+            );
+            EventValues.registerEventValue(VulcanPunishEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(VulcanPunishEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+        }
     }
 
     @Override

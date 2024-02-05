@@ -44,7 +44,7 @@ public class ExprPermissionDescription extends SimpleExpression<String> {
     }
 
     @Override
-    public Class<?> [] acceptChange(Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(String.class);
         }
@@ -54,11 +54,9 @@ public class ExprPermissionDescription extends SimpleExpression<String> {
     @Override
     public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
-            if (delta != null) {
-                Permission perm = this.perm.getSingle(e);
-                if (perm != null) {
-                    perm.setDescription((String) delta[0]);
-                }
+            Permission perm = this.perm.getSingle(e);
+            if (perm != null) {
+                perm.setDescription((String) delta[0]);
             }
         }
     }

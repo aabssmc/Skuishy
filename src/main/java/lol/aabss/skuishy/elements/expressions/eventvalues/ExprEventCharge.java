@@ -28,9 +28,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprEventCharge extends EventValueExpression<Integer> {
 
     static{
-        Skript.registerExpression(ExprEventCharge.class, Integer.class, ExpressionType.SIMPLE,
-                "[the] [event-][sculk[( |-)]]charge"
-        );
+        if (Skript.classExists("org.bukkit.event.block.SculkBloomEvent")) {
+            Skript.registerExpression(ExprEventCharge.class, Integer.class, ExpressionType.SIMPLE,
+                    "[the] [event-][sculk[( |-)]]charge"
+            );
+        }
     }
 
     public ExprEventCharge() {

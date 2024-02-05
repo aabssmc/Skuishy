@@ -28,10 +28,12 @@ import java.util.List;
 public class ExprEatSound extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprEatSound.class, String.class, ExpressionType.COMBINED,
-                "[the] [entity] eat[ing] sound of %livingentities% (using|with) %itemstack%",
-                "%livingentities%'s [entity] eat[ing] sound (using|with) %itemstack%"
-        );
+        if (Skript.methodExists(LivingEntity.class, "getEatingSound")) {
+            Skript.registerExpression(ExprEatSound.class, String.class, ExpressionType.COMBINED,
+                    "[the] [entity] eat[ing] sound of %livingentities% (using|with) %itemstack%",
+                    "%livingentities%'s [entity] eat[ing] sound (using|with) %itemstack%"
+            );
+        }
     }
 
     private Expression<ItemStack> item;

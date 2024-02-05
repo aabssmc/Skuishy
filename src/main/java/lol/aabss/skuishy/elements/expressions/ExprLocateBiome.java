@@ -44,9 +44,16 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
         Biome bio = biome.getSingle(e);
         Integer rad = radius.getSingle(e);
         if (loc != null && bio != null && rad != null) {
-            BiomeSearchResult r = loc.getWorld().locateNearestBiome(loc, rad, bio);
-            if (r != null) {
-                return new Location[]{r.getLocation()};
+            if (Skript.classExists("org.bukkit.util.BiomeSearchResult")) {
+                BiomeSearchResult r = loc.getWorld().locateNearestBiome(loc, rad, bio);
+                if (r != null) {
+                    return new Location[]{r.getLocation()};
+                }
+            } else{
+                Location r = loc.getWorld().locateNearestBiome(loc, bio, rad);
+                if (r != null){
+                    return new Location[]{r};
+                }
             }
         }
         return new Location[]{null};

@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffDeleteHologram extends Effect {
 
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffDeleteHologram.class,
                     "(delete|remove) [(decent [hologram[s]]|dh)] [hologram] %holograms%"
             );

@@ -192,20 +192,20 @@ public class Metrics {
          * @param platform The platform of the service.
          * @param serviceId The id of the service.
          * @param serverUuid The server uuid.
-         * @param enabled Whether or not data sending is enabled.
+         * @param enabled Whether data sending is enabled.
          * @param appendPlatformDataConsumer A consumer that receives a {@code JsonObjectBuilder} and
          *     appends all platform-specific data.
          * @param appendServiceDataConsumer A consumer that receives a {@code JsonObjectBuilder} and
          *     appends all service-specific data.
          * @param submitTaskConsumer A consumer that takes a runnable with the submit task. This can be
-         *     used to delegate the data collection to a another thread to prevent errors caused by
+         *     used to delegate the data collection to a thread to prevent errors caused by
          *     concurrency. Can be {@code null}.
          * @param checkServiceEnabledSupplier A supplier to check if the service is still enabled.
          * @param errorLogger A consumer that accepts log message and an error.
          * @param infoLogger A consumer that accepts info log messages.
-         * @param logErrors Whether or not errors should be logged.
-         * @param logSentData Whether or not the sent data should be logged.
-         * @param logResponseStatusText Whether or not the response status text should be logged.
+         * @param logErrors Whether errors should be logged.
+         * @param logSentData Whether the scent data should be logged.
+         * @param logResponseStatusText Whether the response status text should be logged.
          */
         public MetricsBase(
                 String platform,
@@ -670,7 +670,7 @@ public class Metrics {
     /**
      * An extremely simple JSON builder.
      *
-     * <p>While this class is neither feature-rich nor the most performant one, it's sufficient enough
+     * <p>While this class is neither feature-rich nor the most performant one, it's sufficient
      * for its use-case.
      */
     public static class JsonObjectBuilder {

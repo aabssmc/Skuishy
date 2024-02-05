@@ -25,7 +25,7 @@ import java.util.Objects;
 public class EffEditPageHologram extends Effect {
 
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffEditPageHologram.class,
                     "add [page] of [hologram] %hologram%",
                     "remove [page] %integer% of [hologram] %hologram%",

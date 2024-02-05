@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.has;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -18,7 +19,9 @@ import org.jetbrains.annotations.NotNull;
 public class CondHasRecord extends PropertyCondition<Block> {
 
     static{
-        register(CondHasRecord.class, PropertyType.HAVE, "[a] (record|[music] dis(s|k))", "blocks");
+        if (Skript.methodExists(Jukebox.class, "hasRecord")) {
+            register(CondHasRecord.class, PropertyType.HAVE, "[a] (record|[music] dis(s|k))", "blocks");
+        }
     }
 
     @Override

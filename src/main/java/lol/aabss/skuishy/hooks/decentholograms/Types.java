@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 public class Types {
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Classes.registerClass(new ClassInfo<>(Hologram.class, "hologram")
                     .user("holograms?")
                     .name("hologram")

@@ -6,6 +6,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.vivecraft.VSE;
@@ -19,10 +20,12 @@ import org.vivecraft.VSE;
 public class CondIsSeated extends PropertyCondition<Player> {
 
     static {
-        register(CondIsSeated.class,
-                "(seated|sitting)",
-                "viveplayers/players"
-        );
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
+            register(CondIsSeated.class,
+                    "(seated|sitting)",
+                    "viveplayers/players"
+            );
+        }
     }
 
     @Override

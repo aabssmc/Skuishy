@@ -10,6 +10,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,9 +25,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffBanWave extends Effect {
 
     static{
-        Skript.registerEffect(EffBanWave.class,
-                "[execute [the]] [vulcan] ban wave"
-        );
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            Skript.registerEffect(EffBanWave.class,
+                    "[execute [the]] [vulcan] ban wave"
+            );
+        }
     }
 
     @Override

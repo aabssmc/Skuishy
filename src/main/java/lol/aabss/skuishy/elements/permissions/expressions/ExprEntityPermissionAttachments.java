@@ -64,7 +64,7 @@ public class ExprEntityPermissionAttachments extends SimpleExpression<Permission
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         entity = (Expression<Entity>) exprs[0];
         return true;
     }

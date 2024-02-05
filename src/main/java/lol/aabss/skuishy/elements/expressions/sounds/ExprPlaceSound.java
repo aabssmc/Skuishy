@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.expressions.sounds;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
@@ -25,9 +26,11 @@ import java.util.List;
 public class ExprPlaceSound extends PropertyExpression<Block, String> {
 
     static {
-        register(ExprPlaceSound.class, String.class,
-                "[block] place sound",
-                "blocks");
+        if (Skript.methodExists(Block.class, "getBlockSoundGroup")) {
+            register(ExprPlaceSound.class, String.class,
+                    "[block] place sound",
+                    "blocks");
+        }
     }
 
     @Override

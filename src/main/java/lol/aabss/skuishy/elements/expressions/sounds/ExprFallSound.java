@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.expressions.sounds;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
@@ -9,6 +10,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.block.Block;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -25,9 +27,11 @@ import java.util.List;
 public class ExprFallSound extends PropertyExpression<Block, String> {
 
     static {
-        register(ExprFallSound.class, String.class,
-                "[block] fall sound",
-                "blocks");
+        if (Skript.methodExists(Block.class, "getBlockSoundGroup")) {
+            register(ExprFallSound.class, String.class,
+                    "[block] fall sound",
+                    "blocks");
+        }
     }
 
     @Override

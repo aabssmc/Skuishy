@@ -25,9 +25,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffLockFreezeTicks extends Effect {
 
     static{
-        Skript.registerEffect(EffLockFreezeTicks.class,
-                "[:un]lock (freeze|frozen) ticks of %entities%"
-        );
+        if (Skript.methodExists(Entity.class, "locFreezeTicks", Boolean.class)) {
+            Skript.registerEffect(EffLockFreezeTicks.class,
+                    "[:un]lock (freeze|frozen) ticks of %entities%"
+            );
+        }
     }
 
     private Expression<Entity> entity;

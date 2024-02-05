@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.can;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -17,11 +18,13 @@ import org.jetbrains.annotations.NotNull;
 public class CondCanBreatheUnderwater extends PropertyCondition<LivingEntity> {
 
     static{
-        register(CondCanBreatheUnderwater.class,
-                PropertyType.CAN,
-                "breathe under[ ]water",
-                "livingentities"
-        );
+        if (Skript.methodExists(LivingEntity.class, "canBreatheUnderwater")) {
+            register(CondCanBreatheUnderwater.class,
+                    PropertyType.CAN,
+                    "breathe under[ ]water",
+                    "livingentities"
+            );
+        }
     }
 
     @Override

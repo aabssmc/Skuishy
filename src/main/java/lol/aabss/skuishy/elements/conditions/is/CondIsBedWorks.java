@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.is;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -17,10 +18,12 @@ import org.jetbrains.annotations.NotNull;
 public class CondIsBedWorks extends PropertyCondition<World> {
 
     static{
-        register(CondIsAutoSave.class,
-                PropertyType.BE,
-                "bed[ ]work[s]",
-                "worlds");
+        if (Skript.methodExists(World.class, "isBedWorks")) {
+            register(CondIsAutoSave.class,
+                    PropertyType.BE,
+                    "bed[ ]work[s]",
+                    "worlds");
+        }
     }
 
     @Override

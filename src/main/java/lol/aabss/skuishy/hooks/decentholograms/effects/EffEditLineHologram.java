@@ -29,7 +29,7 @@ import java.util.Objects;
 public class EffEditLineHologram extends Effect {
 
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffEditLineHologram.class,
                     "add [line] of [hologram] %hologram% to show [text] %string%",
                     "remove [line] %integer% of [hologram] %hologram%",

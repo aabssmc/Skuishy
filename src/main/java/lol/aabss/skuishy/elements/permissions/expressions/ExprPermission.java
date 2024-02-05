@@ -66,7 +66,7 @@ public class ExprPermission extends SimpleExpression<Permission> {
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         name = (Expression<String>) exprs[0];
         neww = parseResult.hasTag("new");
         return true;

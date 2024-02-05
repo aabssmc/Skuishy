@@ -9,6 +9,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.vivecraft.VSE;
 import org.vivecraft.VivePlayer;
@@ -27,9 +28,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprPlayerHeight extends PropertyExpression<Player, Number> {
 
     static{
-        register(ExprPlayerHeight.class, Number.class,
-                "height",
-                "viveplayers/players");
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
+            register(ExprPlayerHeight.class, Number.class,
+                    "height",
+                    "viveplayers/players");
+        }
     }
 
     @Override

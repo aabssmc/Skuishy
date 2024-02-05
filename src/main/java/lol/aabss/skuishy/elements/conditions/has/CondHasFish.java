@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.has;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -18,7 +19,9 @@ import org.jetbrains.annotations.NotNull;
 public class CondHasFish extends PropertyCondition<Entity> {
 
     static {
-        register(CondHasFish.class, PropertyType.HAVE, "[a] fish", "entities");
+        if (Skript.methodExists(Dolphin.class, "hasFish")) {
+            register(CondHasFish.class, PropertyType.HAVE, "[a] fish", "entities");
+        }
     }
 
     @Override

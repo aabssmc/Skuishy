@@ -35,7 +35,7 @@ public class SecCreateHologram extends Section {
     private static final EntryValidator.EntryValidatorBuilder ENTRY_VALIDATOR = EntryValidator.builder();
 
     static {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerSection(SecCreateHologram.class,
                     "(create|make) [a] [new] [:persistent] [(decent [hologram[s]]|dh)] hologram"
             );

@@ -11,6 +11,7 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
@@ -60,7 +61,11 @@ public class EffStopGlow extends Effect {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
         for (Team t : scoreboard.getTeams()){
             if (t.getName().contains("team")){
-                t.removeEntity(e);
+                if (e instanceof Player) {
+                    t.removeEntry(e.getName());
+                } else{
+                    t.removeEntry(String.valueOf(e.getUniqueId()));
+                }
             }
             e.setGlowing(false);
         }

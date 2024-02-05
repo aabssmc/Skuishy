@@ -9,6 +9,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import me.frep.vulcan.api.VulcanAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -23,9 +24,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class ExprCPS extends PropertyExpression<Player, Number> {
 
     static{
-        register(ExprCPS.class, Number.class,
-                "(cps|clicks[( |-)]per[( |-)]sec[ond])",
-                "players");
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            register(ExprCPS.class, Number.class,
+                    "(cps|clicks[( |-)]per[( |-)]sec[ond])",
+                    "players");
+        }
     }
 
     @Override

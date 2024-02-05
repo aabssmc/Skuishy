@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.has;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -18,7 +19,9 @@ import org.jetbrains.annotations.NotNull;
 public class CondHasLeftHorn extends PropertyCondition<Entity> {
 
     static {
-        register(CondHasLeftHorn.class, PropertyType.HAVE, "[the] left horn", "entities");
+        if (Skript.methodExists(Goat.class, "hasLeftHorn")) {
+            register(CondHasLeftHorn.class, PropertyType.HAVE, "[the] left horn", "entities");
+        }
     }
 
     @Override

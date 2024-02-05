@@ -34,7 +34,7 @@ public class SecCloneHologram extends Section {
     private static final EntryValidator.EntryValidatorBuilder ENTRY_VALIDATOR = EntryValidator.builder();
 
     static {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerSection(SecCloneHologram.class,
                     "[temp:temp[orar[il]y]] clone [(decent [hologram[s]]|dh)] %hologram%"
             );

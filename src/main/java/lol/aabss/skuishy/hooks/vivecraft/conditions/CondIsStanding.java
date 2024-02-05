@@ -6,6 +6,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.vivecraft.VSE;
@@ -19,10 +20,12 @@ import org.vivecraft.VSE;
 public class CondIsStanding extends PropertyCondition<Player> {
 
     static {
-        register(CondIsStanding.class,
-                "(standing [up]|stood up)",
-                "viveplayers/players"
-        );
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
+            register(CondIsStanding.class,
+                    "(standing [up]|stood up)",
+                    "viveplayers/players"
+            );
+        }
     }
 
     @Override

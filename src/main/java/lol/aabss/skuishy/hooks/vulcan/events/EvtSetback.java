@@ -12,6 +12,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import ch.njol.skript.util.Timespan;
 import me.frep.vulcan.api.event.VulcanSetbackEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -26,21 +27,23 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EvtSetback extends SkriptEvent {
 
     static {
-        Skript.registerEvent("on vulcan setback event", EvtSetback.class, VulcanSetbackEvent.class,
-                "[vulcan] [player] setback"
-        );
-        EventValues.registerEventValue(VulcanSetbackEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(VulcanSetbackEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-        EventValues.registerEventValue(VulcanSetbackEvent.class, Timespan.class, new Getter<>() {
-            @Override
-            public Timespan get(VulcanSetbackEvent e) {
-                return Timespan.fromTicks_i(e.getTimestamp());
-            }
-        }, 0);
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+            Skript.registerEvent("on vulcan setback event", EvtSetback.class, VulcanSetbackEvent.class,
+                    "[vulcan] [player] setback"
+            );
+            EventValues.registerEventValue(VulcanSetbackEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(VulcanSetbackEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(VulcanSetbackEvent.class, Timespan.class, new Getter<>() {
+                @Override
+                public Timespan get(VulcanSetbackEvent e) {
+                    return Timespan.fromTicks_i(e.getTimestamp());
+                }
+            }, 0);
+        }
     }
 
     @Override

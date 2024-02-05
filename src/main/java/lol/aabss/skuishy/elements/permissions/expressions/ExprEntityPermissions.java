@@ -16,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.plugin.PluginManager;
 import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -66,7 +67,7 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
             Bukkit.getPluginManager().addPermission((Permission) delta[0]);
         } else if (mode == Changer.ChangeMode.REMOVE){
             Bukkit.getPluginManager().removePermission((Permission) delta[0]);
-        } else if (mode == Changer.ChangeMode.REMOVE_ALL){
+        } else if (mode == Changer.ChangeMode.REMOVE_ALL && Skript.methodExists(PluginManager.class, "clearPermissions")){
             Bukkit.getPluginManager().clearPermissions();
         }
     }

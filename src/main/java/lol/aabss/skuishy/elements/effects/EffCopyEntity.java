@@ -26,11 +26,12 @@ import org.jetbrains.annotations.NotNull;
 public class EffCopyEntity extends Effect {
 
     static {
-        Skript.registerEffect(EffCopyEntity.class,
-                "copy %entity% and (store|put) it in %object%",
-                "copy %entity% and (spawn|put) it at %location%"
-        );
-
+        if (Skript.methodExists(Entity.class, "copy") && Skript.methodExists(Entity.class, "copy", Location.class)) {
+            Skript.registerEffect(EffCopyEntity.class,
+                    "copy %entity% and (store|put) it in %object%",
+                    "copy %entity% and (spawn|put) it at %location%"
+            );
+        }
     }
 
     private Expression<Entity> entity;

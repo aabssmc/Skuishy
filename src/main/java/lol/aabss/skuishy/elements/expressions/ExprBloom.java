@@ -20,7 +20,7 @@ import java.util.List;
 public class ExprBloom extends PropertyExpression<Block, Boolean> {
 
     static{
-        if (Skript.methodExists(SculkCatalyst.class, "isBloom") && Skript.methodExists(SculkCatalyst.class, "setBloom", Boolean.class)){
+        if (Skript.classExists("org.bukkit.block.data.type.SculkCatalyst")){
             register(ExprBloom.class, Boolean.class,
                     "bloom (state|mode)",
                     "blocks");

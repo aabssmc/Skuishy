@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffToggleHologram extends Effect {
 
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffToggleHologram.class,
                     "(en|:dis)able [(decent [hologram[s]]|dh)] [hologram] %hologram%"
             );

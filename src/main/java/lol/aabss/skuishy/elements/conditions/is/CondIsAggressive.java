@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.is;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -18,10 +19,12 @@ import org.jetbrains.annotations.NotNull;
 public class CondIsAggressive extends PropertyCondition<Entity> {
 
     static{
-        register(CondIsAggressive.class,
-                PropertyType.BE,
-                "aggressive",
-                "entities");
+        if (Skript.methodExists(Mob.class, "isAggressive")) {
+            register(CondIsAggressive.class,
+                    PropertyType.BE,
+                    "aggressive",
+                    "entities");
+        }
     }
 
     @Override

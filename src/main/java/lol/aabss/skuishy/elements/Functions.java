@@ -12,9 +12,9 @@ public class Functions {
 
     static {
         Parameter<?>[] numbersParam = new Parameter[]{new Parameter<>("ns", DefaultClasses.NUMBER, false, null)};
-        registerFunction(new SimpleJavaFunction<Number>("mean", numbersParam, DefaultClasses.NUMBER, true) {
+        registerFunction(new SimpleJavaFunction<>("mean", numbersParam, DefaultClasses.NUMBER, true) {
             @Override
-            public Number @NotNull [] executeSimple(Object[] [] params) {
+            public Number @NotNull [] executeSimple(Object[][] params) {
                 Object[] ns = params[0];
                 double sum = 0.0;
                 for (Object num : ns) {

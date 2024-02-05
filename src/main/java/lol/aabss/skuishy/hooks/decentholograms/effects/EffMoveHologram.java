@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffMoveHologram extends Effect {
 
     static{
-        if (Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffMoveHologram.class,
                     "(move|teleport) [(decent [hologram[s]]|dh)] [hologram] %hologram% to %location%"
             );

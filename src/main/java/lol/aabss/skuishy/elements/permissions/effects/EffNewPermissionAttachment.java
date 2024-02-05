@@ -2,12 +2,14 @@ package lol.aabss.skuishy.elements.permissions.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
-import ch.njol.skript.config.SectionNode;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.lang.*;
+import ch.njol.skript.lang.Effect;
+import ch.njol.skript.lang.Expression;
+import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.Variable;
 import ch.njol.skript.util.Timespan;
 import ch.njol.util.Kleenean;
 import org.bukkit.entity.Entity;
@@ -17,7 +19,6 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.Objects;
 
 import static lol.aabss.skuishy.Skuishy.instance;
@@ -39,10 +40,10 @@ import static lol.aabss.skuishy.Skuishy.last_permission_attachment;
         "make a permission attachment with permission \"essentials.fly\" with value true for player for 10 seconds and store it in {_var}"
 })
 @Since("2.1")
-public class EffNewPermissionAttachment extends EffectSection {
+public class EffNewPermissionAttachment extends Effect {
 
     static {
-        Skript.registerSection(EffNewPermissionAttachment.class,
+        Skript.registerEffect(EffNewPermissionAttachment.class,
                 "(create|make) [a] [new] empty perm[ission] attachment for %entity% [time:for %-timespan%] [and (store|save) it in %-object%]",
                 "(create|make) [a] [new] perm[ission] attachment [with perm[ission]] %permission%" +
                         " [[and] with value %-boolean%] for %entity% [time:for %-timespan%] [and (store|save) it in %-object%]"
@@ -58,7 +59,7 @@ public class EffNewPermissionAttachment extends EffectSection {
     private Variable<?> variable;
 
     @Override
-    protected @Nullable TriggerItem walk(Event e) {
+    protected void execute(@NotNull Event e) {
         Entity entity = this.entity.getSingle(e);
         if (entity != null) {
             PermissionAttachment attach;
@@ -105,7 +106,6 @@ public class EffNewPermissionAttachment extends EffectSection {
             }
             last_permission_attachment = attach;
         }
-        return getTrigger();
     }
 
     @Override
@@ -114,7 +114,7 @@ public class EffNewPermissionAttachment extends EffectSection {
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult, @Nullable SectionNode sectionNode, @Nullable List<TriggerItem> triggerItems) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (matchedPattern == 0) {
             entity = (Expression<Entity>) exprs[0];
             time = (Expression<Timespan>) exprs[1];

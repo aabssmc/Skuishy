@@ -27,9 +27,11 @@ import java.util.Objects;
 @Since("2.0")
 public class ExprParents extends EventValueExpression<Entity> {
     static {
-        Skript.registerExpression(ExprParents.class, Entity.class, ExpressionType.SIMPLE,
-                "[the] [event-](:mother|father)"
-        );
+        if (Skript.classExists("io.papermc.paper.event.entity.EntityFertilizeEggEvent")) {
+            Skript.registerExpression(ExprParents.class, Entity.class, ExpressionType.SIMPLE,
+                    "[the] [event-](:mother|father)"
+            );
+        }
     }
 
     private String parent;

@@ -31,10 +31,12 @@ import java.util.List;
 public class ExprFrozenState extends SimpleExpression<Boolean> {
 
     static{
-        Skript.registerExpression(ExprFrozenState.class, Boolean.class, ExpressionType.COMBINED,
-                "[the] frozen [tick[s]] (state|mode) of ([the] server|%-entities%)",
-                "([the] server|%-entities%)['s] frozen [tick[(s|[( |-)]rate)]] (state|mode)"
-        );
+        if (Skript.classExists("org.bukkit.ServerTickManager")) {
+            Skript.registerExpression(ExprFrozenState.class, Boolean.class, ExpressionType.COMBINED,
+                    "[the] frozen [tick[s]] (state|mode) of ([the] server|%-entities%)",
+                    "([the] server|%-entities%)['s] frozen [tick[(s|[( |-)]rate)]] (state|mode)"
+            );
+        }
     }
 
     private Expression<Entity> ent;

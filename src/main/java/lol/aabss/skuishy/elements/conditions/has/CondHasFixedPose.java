@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.conditions.has;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -17,7 +18,9 @@ import org.jetbrains.annotations.NotNull;
 public class CondHasFixedPose extends PropertyCondition<Entity> {
 
     static {
-        register(CondHasFixedPose.class, PropertyType.HAVE, "[a] fixed pose", "entities");
+        if (Skript.methodExists(Entity.class, "hasFixedPose")) {
+            register(CondHasFixedPose.class, PropertyType.HAVE, "[a] fixed pose", "entities");
+        }
     }
 
     @Override
