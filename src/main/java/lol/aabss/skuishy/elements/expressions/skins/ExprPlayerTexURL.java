@@ -30,11 +30,12 @@ import java.util.List;
 public class ExprPlayerTexURL extends PropertyExpression<Player, String> {
 
     static {
-        if (Skript.methodExists(PlayerProfile.class, "getTextures"))
-        register(ExprPlayerTexURL.class, String.class,
-                "[skin] texture url",
-                "players"
-        );
+        if (Skript.methodExists(PlayerProfile.class, "getTextures")) {
+            register(ExprPlayerTexURL.class, String.class,
+                    "[skin] texture url",
+                    "players"
+            );
+        }
     }
 
     @Override

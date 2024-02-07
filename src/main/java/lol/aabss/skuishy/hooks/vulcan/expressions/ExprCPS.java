@@ -8,13 +8,17 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static lol.aabss.skuishy.hooks.vulcan.Vulcan.vulcan;
+
 @Name("Vulcan - CPS of Player")
 @Description("Represents the clicks per second of a player.")
 @Examples({
@@ -33,13 +37,21 @@ public class ExprCPS extends PropertyExpression<Player, Number> {
 
     @Override
     protected Number @NotNull [] get(@NotNull Event event, Player @Nullable [] source) {
-        if (source != null && VulcanAPI.Factory.getApi() != null) {
+        if (source != null) {
+            List<Number> cps = new ArrayList<>();
             for (Player p : source) {
-                return new Number[]{VulcanAPI.Factory.getApi().getCps(p)};
+                cps.add(vulcan().getCps(p));
             }
+            return cps.toArray(Number[]::new);
         }
         return new Number[]{null};
     }
+
+    @Override
+    public boolean isSingle() {
+        return getExpr().isSingle();
+    }
+
     @Override
     public @NotNull Class<? extends Number> getReturnType() {
         return Number.class;

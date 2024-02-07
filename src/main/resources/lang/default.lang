@@ -115,3 +115,9 @@ permissiondefault:
     false: false, no, off
     op: op, operator, admin
     not_op: not op, not operator, not admin
+
+hologramclicktype:
+    left: left
+    right: right
+    shift_left: shift left
+    shift_right: shift right

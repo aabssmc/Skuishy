@@ -34,7 +34,7 @@ public class SubCommands {
             for (SkriptAddon addon : Skript.getAddons()) {
                 // if the loop plugin is not skuishy add a message
                 if (addon != instance.getAddonInstance()) {
-                    msgs.add("    <click:open_url:" + addon.plugin.getPluginMeta().getWebsite() + "><hover:show_text:'<gray>" + addon.plugin.getPluginMeta().getWebsite() + "'><gray>" + addon.plugin.getPluginMeta().getName()+": " + (addon.plugin.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + " " + addon.plugin.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + addon.plugin.getPluginMeta().getAuthors() + "</hover></click>");
+                    msgs.add("    <click:open_url:" + addon.plugin.getDescription().getWebsite() + "><hover:show_text:'<gray>" + addon.plugin.getDescription().getWebsite() + "'><gray>" + addon.plugin.getDescription().getName()+": " + (addon.plugin.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + " " + addon.plugin.getDescription().getVersion() + " <gray>| <color:#40ff00>" + addon.plugin.getDescription().getAuthors() + "</hover></click>");
                 }
             }
         }
@@ -45,20 +45,20 @@ public class SubCommands {
         // dependencies --
         List<String> deps = new ArrayList<>();
         for (SkriptAddon addon : Skript.getAddons()){
-            for (String dep : addon.plugin.getPluginMeta().getPluginSoftDependencies()){
+            for (String dep : addon.plugin.getDescription().getSoftDepend()){
                 Plugin pl = Bukkit.getPluginManager().getPlugin(dep);
                 if (pl != null) {
-                    String msgg = "    <click:open_url:" + pl.getPluginMeta().getWebsite() + "><hover:show_text:'<gray>" + pl.getPluginMeta().getWebsite() + "'><gray>" + pl.getPluginMeta().getName()+": " + (pl.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + " " + pl.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + pl.getPluginMeta().getAuthors() + "</hover></click>";
+                    String msgg = "    <click:open_url:" + pl.getDescription().getWebsite() + "><hover:show_text:'<gray>" + pl.getDescription().getWebsite() + "'><gray>" + pl.getDescription().getName()+": " + (pl.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + " " + pl.getDescription().getVersion() + " <gray>| <color:#40ff00>" + pl.getDescription().getAuthors() + "</hover></click>";
                     if (!deps.contains(msgg)) {
                         deps.add(msgg);
                     }
                 }
             }
         }
-        for (String dep : Skript.getInstance().getPluginMeta().getPluginSoftDependencies()){
+        for (String dep : Skript.getInstance().getDescription().getSoftDepend()){
             Plugin pl = Bukkit.getPluginManager().getPlugin(dep);
             if (pl != null){
-                deps.add("    <click:open_url:"+pl.getPluginMeta().getWebsite()+"><hover:show_text:'<gray>"+pl.getPluginMeta().getWebsite()+"'><gray>"+pl.getPluginMeta().getName()+": " + (pl.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + " " + pl.getPluginMeta().getVersion() + " <gray>| <color:#40ff00>" + pl.getPluginMeta().getAuthors() + "</hover></click>");
+                deps.add("    <click:open_url:"+pl.getDescription().getWebsite()+"><hover:show_text:'<gray>"+pl.getDescription().getWebsite()+"'><gray>"+pl.getDescription().getName()+": " + (pl.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + " " + pl.getDescription().getVersion() + " <gray>| <color:#40ff00>" + pl.getDescription().getAuthors() + "</hover></click>");
             }
         }
         StringBuilder dependencies = new StringBuilder();
@@ -86,8 +86,8 @@ public class SubCommands {
 
     @NotNull
     private static String getString(String sku, String sk) {
-        String skuishyv = instance.getPluginMeta().getVersion();
-        String skriptv = Skript.getInstance().getPluginMeta().getVersion();
+        String skuishyv = instance.getDescription().getVersion();
+        String skriptv = Skript.getInstance().getDescription().getVersion();
         return "\n<dark_gray>-- <color:#40ff00>Skuishy <gray>Info: <dark_gray>--<reset>\n\n" +
                 "<gray>Skuishy Version: <color:#40ff00>"+ skuishyv + (!Objects.equals(sku, skuishyv) ? " [Latest: "+ sku + "]" : "") +"<reset>\n" +
                 "<gray>Server Version: <color:#40ff00>"+instance.getServer().getMinecraftVersion()+"<reset>\n" +
@@ -117,6 +117,6 @@ public class SubCommands {
     }
 
     public static void cmdVersion(CommandSender sender){
-        sender.sendMessage(miniMessage().deserialize("<color:#40ff00>This server is running Skuishy v" + instance.getPluginMeta().getVersion() + " by aabss!"));
+        sender.sendMessage(miniMessage().deserialize("<color:#40ff00>This server is running Skuishy v" + instance.getDescription().getVersion() + " by aabss!"));
     }
 }

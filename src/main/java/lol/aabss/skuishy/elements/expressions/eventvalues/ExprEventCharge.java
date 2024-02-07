@@ -14,9 +14,8 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.SculkBloomEvent;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("NullableProblems")
 @Name("Block - Sculk Charge")
 @Description("Gets/sets the sculk charge.")

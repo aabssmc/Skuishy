@@ -47,7 +47,7 @@ public class UpdateChecker implements Listener {
 
     public static boolean updateCheck(CommandSender p){
         String version = latestVersion();
-        if (!Objects.equals(version, instance.getPluginMeta().getVersion())){
+        if (!Objects.equals(version, instance.getDescription().getVersion())){
             p.sendMessage(MiniMessage.miniMessage().deserialize("""
                         
                         <click:open_url:'https://modrinth.com/plugin/skuishy/version/<NEW_VERSION>'><hover:show_text:'Click to update!'><gray>There is a new <color:#40ff00>Skuishy <gray>update! <dark_gray>(v<NEW_VERSION>)

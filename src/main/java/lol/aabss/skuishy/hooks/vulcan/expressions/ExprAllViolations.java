@@ -6,12 +6,16 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static lol.aabss.skuishy.hooks.vulcan.Vulcan.vulcan;
 
 @SuppressWarnings("NullableProblems")
 public class ExprAllViolations extends SimpleExpression<Integer> {
@@ -19,13 +23,13 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
     static{
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
             Skript.registerExpression(ExprAllViolations.class, Integer.class, ExpressionType.COMBINED,
-                    "[all [[of] the]] violations of %player%",
-                    "[all [[of] the]] combat violations of %player%",
-                    "[all [[of] the]] movement violations of %player%",
-                    "[all [[of] the]] player violations of %player%",
-                    "[all [[of] the]] auto[( |-)]clicker violations of %player%",
-                    "[all [[of] the]] timer violations of %player%",
-                    "[all [[of] the]] scaffold violations of %player%"
+                    "[all [[of] the]] violations of %players%",
+                    "[all [[of] the]] combat violations of %players%",
+                    "[all [[of] the]] movement violations of %players%",
+                    "[all [[of] the]] player violations of %players%",
+                    "[all [[of] the]] auto[( |-)]clicker violations of %players%",
+                    "[all [[of] the]] timer violations of %players%",
+                    "[all [[of] the]] scaffold violations of %players%"
             );
         }
     }
@@ -35,26 +39,43 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
 
     @Override
     protected @Nullable Integer[] get(@NotNull Event e) {
-        Player p = player.getSingle(e);
-        VulcanAPI api = VulcanAPI.Factory.getApi();
-        if (p != null && api != null) {
-            return switch (vtype){
-                case "all" -> new Integer[]{api.getPlayerData(p).getTotalViolations()};
-                case "combat" -> new Integer[]{api.getPlayerData(p).getCombatViolations()};
-                case "movement" -> new Integer[]{api.getPlayerData(p).getMovementViolations()};
-                case "player" -> new Integer[]{api.getPlayerData(p).getPlayerViolations()};
-                case "auto clicker" -> new Integer[]{api.getPlayerData(p).getAutoClickerViolations()};
-                case "timer" -> new Integer[]{api.getPlayerData(p).getTimerViolations()};
-                case "scaffold" -> new Integer[]{api.getPlayerData(p).getScaffoldViolations()};
-                default -> new Integer[]{null};
-            };
-        }
-        return new Integer[]{null};
+        List<Integer> violations = new ArrayList<>();
+        switch (vtype){
+            case "all" -> {
+                for (Player p : this.player.getArray(e)) {
+                    violations.add(vulcan().getPlayerData(p).getTotalViolations());
+                }
+            } case "combat" -> {
+                for (Player p : this.player.getArray(e)) {
+                    violations.add(vulcan().getPlayerData(p).getCombatViolations());
+                }
+            } case "movement" -> {
+                for (Player p : this.player.getArray(e)) {
+                    violations.add(vulcan().getPlayerData(p).getMovementViolations());
+                }
+            } case "player" -> {
+                for (Player p : this.player.getArray(e)) {
+                    violations.add(vulcan().getPlayerData(p).getPlayerViolations());
+                }
+            } case "auto clicker" -> {
+                for (Player p : this.player.getArray(e)) {
+                    violations.add(vulcan().getPlayerData(p).getAutoClickerViolations());
+                }
+            } case "timer" -> {
+                for (Player p : this.player.getArray(e)) {
+                    violations.add(vulcan().getPlayerData(p).getTimerViolations());
+                }
+            } case "scaffold" -> {
+                for (Player p : this.player.getArray(e)) {
+                    violations.add(vulcan().getPlayerData(p).getScaffoldViolations());
+                }
+            } default -> {return new Integer[]{null};}
+        } return violations.toArray(Integer[]::new);
     }
 
     @Override
     public boolean isSingle() {
-        return true;
+        return player.isSingle();
     }
 
     @Override

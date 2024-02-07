@@ -25,6 +25,7 @@ repositories {
 dependencies {
     // paper
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    implementation "net.kyori:adventure-text-minimessage:4.15.0"
     // Skript
     compileOnly(group: 'com.github.SkriptLang', name: 'Skript', version: '2.7.0') {
         transitive = false
@@ -32,9 +33,9 @@ dependencies {
     // decent holograms
     compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.6'
     // vivecraft
-    implementation files('gradle/Vivecraft_Spigot_Extensions.jar')
+    implementation files('libs/Vivecraft_Spigot_Extensions.jar')
     // vulcan
-    implementation files('gradle/VulcanAPI.jar')
+    implementation files('libs/VulcanAPI.jar')
     // other things
     implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.800')
     implementation 'org.json:json:20231013'

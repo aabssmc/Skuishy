@@ -29,10 +29,11 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffUpdateResources extends Effect {
 
     static {
-        if (Skript.methodExists(Bukkit.class, "updateRecipes") && Skript.methodExists(Bukkit.class, "updateResources"))
-        Skript.registerEffect(EffUpdateResources.class,
-                "update [the] [server] (resources|:recipes)"
-        );
+        if (Skript.methodExists(Bukkit.class, "updateRecipes") && Skript.methodExists(Bukkit.class, "updateResources")) {
+            Skript.registerEffect(EffUpdateResources.class,
+                    "update [the] [server] (resources|:recipes)"
+            );
+        }
     }
 
     private boolean recipes;

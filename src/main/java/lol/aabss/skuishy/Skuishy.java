@@ -2,6 +2,7 @@ package lol.aabss.skuishy;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
+import ch.njol.skript.util.Version;
 import lol.aabss.skuishy.hooks.Metrics;
 import lol.aabss.skuishy.other.UpdateChecker;
 import org.bukkit.Bukkit;
@@ -11,9 +12,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,31 +48,16 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
             addon.loadClasses("lol.aabss.skuishy.elements");
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
                 getLogger().info("DecentHolograms found! Enabling DecentHolograms elements...");
-                String v = Bukkit.getPluginManager().getPlugin("DecentHolograms").getPluginMeta().getVersion();
-                // HOW DO I DO THIS BETTER !
-                if (
-                        v.equals("2.8.6") ||
-                        v.equals("2.8.7") ||
-                        v.equals("2.8.8") ||
-                        v.equals("2.8.9") ||
-                        v.equals("2.9.0") ||
-                        v.equals("2.9.1") ||
-                        v.equals("2.9.2") ||
-                        v.equals("2.9.3") ||
-                        v.equals("2.9.4") ||
-                        v.equals("2.9.5") ||
-                        v.equals("2.9.6") ||
-                        v.equals("2.9.7") ||
-                        v.equals("2.9.8") ||
-                        v.equals("2.9.9") ||
-                        v.equals("3.0.0")
-                ) {
+                String v = Bukkit.getPluginManager().getPlugin("DecentHolograms").getDescription().getVersion();
+                Plugin decentHolograms = Bukkit.getPluginManager().getPlugin("DecentHolograms");
+                Version decentHoloVersion = new Version(decentHolograms.getPluginMeta().getVersion());
+                if (decentHoloVersion.compareTo(2,8,6) < 0) {
+                    getLogger().warning("You must be running decent hologrames version 2.8.6 as the minimum");
+                    return;
+                } else{
                     addon.loadClasses("lol.aabss.skuishy.hooks.decentholograms");
                     getLogger().info("DecentHolograms elements loaded!");
                     dh = true;
-                } else{
-                    getLogger().warning("DecentHolograms needs to be at least version 2.8.6! Current version: " + v);
-                    getLogger().info("Skipping DecentHolograms!");
                 }
             } else getLogger().info("DecentHolograms not found, skipping!");
 
