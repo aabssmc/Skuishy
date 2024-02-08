@@ -4,6 +4,7 @@
 
 
 [![SkriptHubViewTheDocs](http://skripthub.net/static/addon/ViewTheDocsButton.png)](http://skripthub.net/docs/?addon=Skuishy)
+[![Get on skUnity](https://docs.skunity.com/skunity/library/Docs/Assets/assets/images/buttons/v2/get-the-syntax-square.png)](https://docs.skunity.com/syntax/search/addon:Skuishy)
 
 ## You need [Skript 2.7.0](https://github.com/SkriptLang/Skript) and up to use.
 
