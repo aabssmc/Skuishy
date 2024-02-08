@@ -66,8 +66,8 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET && delta != null) {
             for (Block b : getExpr().getArray(e)){
-                if (b instanceof org.bukkit.block.SculkCatalyst block){
-                    block.bloom(b, (Integer) delta[0]);
+                if (b.getBlockData() instanceof SculkCatalyst block){
+                    block.setBloom((Boolean) delta[0]);
                 }
             }
         }
@@ -76,7 +76,7 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     @Override
     public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Integer.class);
+            return CollectionUtils.array(Boolean.class);
         }
         return null;
     }

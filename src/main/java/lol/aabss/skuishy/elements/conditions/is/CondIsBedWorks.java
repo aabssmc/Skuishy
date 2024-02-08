@@ -19,7 +19,7 @@ public class CondIsBedWorks extends PropertyCondition<World> {
 
     static{
         if (Skript.methodExists(World.class, "isBedWorks")) {
-            register(CondIsAutoSave.class,
+            register(CondIsBedWorks.class,
                     PropertyType.BE,
                     "bed[ ]work[s]",
                     "worlds");

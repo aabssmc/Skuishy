@@ -30,7 +30,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EvtHangPlace extends SkriptEvent {
 
     static {
-        Skript.registerEvent("on entity hang", EvtHangPlace.class, HangingPlaceEvent.class,
+        Skript.registerEvent("on entity hang place", EvtHangPlace.class, HangingPlaceEvent.class,
                 "[entity] hang[ing] place[d]",
                 "[entity] place[d] hang[ing]"
         );
