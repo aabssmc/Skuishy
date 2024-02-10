@@ -85,11 +85,11 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
         metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> vu ? "true" : "false"));
         start = System.currentTimeMillis()/50;
         getLogger().info("Skuishy has been enabled!");
-        latest_version = latestVersion();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             latest_version = latestVersion();
             latest_skript_version = latestSkriptVersion();
-        }, 100L, 222000L);
+            if (getConfig().getBoolean("version-check-msg")) getLogger().info("Got latest version.");
+        }, 0L, 222000L);
     }
 
     @Override

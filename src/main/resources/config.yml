@@ -4,3 +4,5 @@ permission-message: "<red>You can not execute this sub-command!"
 # whether players with the permission 'skuishy.updatechecker' should be notified if there is an update.
 update-checker: true
 
+# whether a message should be sent whenever a new version check happens.
+version-check-msg: true

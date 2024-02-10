@@ -35,7 +35,7 @@ public class GetVersion {
                 .uri(URI.create("https://api.modrinth.com/v2/project/skuishy/version"))
                 .build();
         try {
-            String body = httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body();
+            String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
             return new JSONArray(body).getJSONObject(0).getString("version_number");
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -48,7 +48,7 @@ public class GetVersion {
                 .uri(URI.create("https://api.github.com/repos/SkriptLang/Skript/releases/latest"))
                 .build();
         try {
-            String body = httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body();
+            String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
             return new JSONObject(body).getString("tag_name");
         } catch (Exception e) {
             throw new RuntimeException(e);
