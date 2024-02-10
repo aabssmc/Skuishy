@@ -23,7 +23,7 @@ import java.util.List;
 @Examples({
         "send \"\\u0048\\u0065\\u006C\\u006C\\u006F\" to player # returns 'Hello'"
 })
-@Since("1.9")
+@Since("2.2")
 public class ExprUnicodeString extends SimpleExpression<String> {
 
     static {

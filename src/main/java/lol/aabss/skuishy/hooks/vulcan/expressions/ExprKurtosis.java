@@ -7,6 +7,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -15,8 +16,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static lol.aabss.skuishy.hooks.vulcan.Vulcan.vulcan;
 
 @Name("Vulcan - Kurtosis of Player")
 @Description("Represents the kurtosis of a player.")
@@ -36,7 +35,7 @@ public class ExprKurtosis extends PropertyExpression<Player, Number> {
         if (source != null) {
             List<Number> kurtosis = new ArrayList<>();
             for (Player p : source) {
-                kurtosis.add(vulcan().getKurtosis(p));
+                kurtosis.add(VulcanAPI.Factory.getApi().getKurtosis(p));
             }
             return kurtosis.toArray(Number[]::new);
         }

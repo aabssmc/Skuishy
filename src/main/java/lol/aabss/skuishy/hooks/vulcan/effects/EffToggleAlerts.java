@@ -9,13 +9,12 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
-
-import static lol.aabss.skuishy.hooks.vulcan.Vulcan.vulcan;
 
 @Name("Vulcan - Toggle Alerts")
 @Description("Toggles alerts for a player.")
@@ -38,7 +37,7 @@ public class EffToggleAlerts extends Effect {
     @Override
     protected void execute(@NotNull Event e) {
         for (Player p : this.p.getArray(e)) {
-            vulcan().toggleAlerts(p);
+            VulcanAPI.Factory.getApi().toggleAlerts(p);
         }
     }
 

@@ -6,6 +6,7 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
+import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -43,31 +44,31 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
         switch (vtype){
             case "all" -> {
                 for (Player p : this.player.getArray(e)) {
-                    violations.add(vulcan().getPlayerData(p).getTotalViolations());
+                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getTotalViolations());
                 }
             } case "combat" -> {
                 for (Player p : this.player.getArray(e)) {
-                    violations.add(vulcan().getPlayerData(p).getCombatViolations());
+                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getCombatViolations());
                 }
             } case "movement" -> {
                 for (Player p : this.player.getArray(e)) {
-                    violations.add(vulcan().getPlayerData(p).getMovementViolations());
+                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getMovementViolations());
                 }
             } case "player" -> {
                 for (Player p : this.player.getArray(e)) {
-                    violations.add(vulcan().getPlayerData(p).getPlayerViolations());
+                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getPlayerViolations());
                 }
             } case "auto clicker" -> {
                 for (Player p : this.player.getArray(e)) {
-                    violations.add(vulcan().getPlayerData(p).getAutoClickerViolations());
+                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getAutoClickerViolations());
                 }
             } case "timer" -> {
                 for (Player p : this.player.getArray(e)) {
-                    violations.add(vulcan().getPlayerData(p).getTimerViolations());
+                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getTimerViolations());
                 }
             } case "scaffold" -> {
                 for (Player p : this.player.getArray(e)) {
-                    violations.add(vulcan().getPlayerData(p).getScaffoldViolations());
+                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getScaffoldViolations());
                 }
             } default -> {return new Integer[]{null};}
         } return violations.toArray(Integer[]::new);

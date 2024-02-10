@@ -9,12 +9,11 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
-
-import static lol.aabss.skuishy.hooks.vulcan.Vulcan.vulcan;
 
 @Name("Vulcan - Toggle Verbose")
 @Description("Toggles verbose for a player.")
@@ -34,7 +33,7 @@ public class EffBanWave extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        vulcan().executeBanWave();
+        VulcanAPI.Factory.getApi().executeBanWave();
     }
 
     @Override

@@ -5,10 +5,9 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import static lol.aabss.skuishy.hooks.vulcan.Vulcan.vulcan;
 
 @Name("Vulcan - Is Frozen")
 @Description("Returns true if the player is frozen.")
@@ -28,7 +27,7 @@ public class CondIsFrozen extends PropertyCondition<Player> {
 
     @Override
     public boolean check(Player player) {
-        return vulcan().isFrozen(player);
+        return VulcanAPI.Factory.getApi().isFrozen(player);
     }
 
     @Override

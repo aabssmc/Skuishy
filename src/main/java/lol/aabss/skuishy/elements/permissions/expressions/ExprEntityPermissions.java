@@ -43,12 +43,14 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
 
     @Override
     protected Permission @NotNull [] get(@NotNull Event e) {
-        PermissionAttachment attach = this.attach.getSingle(e);
-        if (attach != null){
-            List<Permission> perms = new ArrayList<>();
-            for (String perm : attach.getPermissions().keySet()) {
-                perms.add(new Permission(perm));
-            } return perms.toArray(Permission[]::new);
+        if (this.attach != null) {
+            PermissionAttachment attach = this.attach.getSingle(e);
+            if (attach != null){
+                List<Permission> perms = new ArrayList<>();
+                for (String perm : attach.getPermissions().keySet()) {
+                    perms.add(new Permission(perm));
+                } return perms.toArray(Permission[]::new);
+            }
         }
         return Bukkit.getPluginManager().getPermissions().toArray(Permission[]::new);
     }

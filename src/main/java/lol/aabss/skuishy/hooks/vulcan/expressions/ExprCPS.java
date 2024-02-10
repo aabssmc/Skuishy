@@ -8,6 +8,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -16,8 +17,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static lol.aabss.skuishy.hooks.vulcan.Vulcan.vulcan;
 
 @Name("Vulcan - CPS of Player")
 @Description("Represents the clicks per second of a player.")
@@ -40,7 +39,7 @@ public class ExprCPS extends PropertyExpression<Player, Number> {
         if (source != null) {
             List<Number> cps = new ArrayList<>();
             for (Player p : source) {
-                cps.add(vulcan().getCps(p));
+                cps.add(VulcanAPI.Factory.getApi().getCps(p));
             }
             return cps.toArray(Number[]::new);
         }

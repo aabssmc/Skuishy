@@ -5,10 +5,9 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import me.frep.vulcan.api.VulcanAPI;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import static lol.aabss.skuishy.hooks.vulcan.Vulcan.vulcan;
 
 @Name("Vulcan - Has Alerts Enabled")
 @Description("Returns true if the player has the vulcan alerts enabled.")
@@ -28,7 +27,7 @@ public class CondHasAlertsEnabled extends PropertyCondition<Player> {
 
     @Override
     public boolean check(Player player) {
-        return vulcan().hasAlertsEnabled(player);
+        return VulcanAPI.Factory.getApi().hasAlertsEnabled(player);
     }
 
     @Override

@@ -37,9 +37,8 @@ public class EffFreeze extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        VulcanAPI api = VulcanAPI.Factory.getApi();
         for (Player p : this.p.getArray(e)){
-            api.setFrozen(p, freeze);
+            VulcanAPI.Factory.getApi().setFrozen(p, freeze);
         }
     }
 
