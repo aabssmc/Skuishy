@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static lol.aabss.skuishy.Skuishy.instance;
+import static lol.aabss.skuishy.Skuishy.*;
 import static lol.aabss.skuishy.other.UpdateChecker.*;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
@@ -22,8 +22,8 @@ public class SubCommands {
             sender.sendMessage(miniMessage().deserialize(instance.getConfig().getString("permission-message")));
             return;
         }
-        String sk = latestSkriptVersion();
-        String sku = latestVersion();
+        String sk = latest_skript_version;
+        String sku = latest_version;
         String msg = getString(sku, sk);
         // addons --
         List<String> msgs = new ArrayList<>();

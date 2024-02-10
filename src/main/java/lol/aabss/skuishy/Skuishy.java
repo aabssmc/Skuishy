@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lol.aabss.skuishy.other.GetVersion.latestSkriptVersion;
+import static lol.aabss.skuishy.other.GetVersion.latestVersion;
 import static lol.aabss.skuishy.other.SubCommands.*;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
@@ -34,6 +36,8 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
     public static boolean dh = false;
     public static boolean vc = false;
     public static boolean vu = false;
+    public static String latest_version;
+    public static String latest_skript_version;
 
     public void onEnable() {
         saveDefaultConfig();
@@ -81,6 +85,11 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
         metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> vu ? "true" : "false"));
         start = System.currentTimeMillis()/50;
         getLogger().info("Skuishy has been enabled!");
+        latest_version = latestVersion();
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            latest_version = latestVersion();
+            latest_skript_version = latestSkriptVersion();
+        }, 100L, 222000L);
     }
 
     @Override
