@@ -16,8 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lol.aabss.skuishy.hooks.vulcan.Vulcan.vulcan;
-
 @SuppressWarnings("NullableProblems")
 public class ExprAllViolations extends SimpleExpression<Integer> {
 
