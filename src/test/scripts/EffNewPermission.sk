@@ -1,6 +1,6 @@
 test "EffNewPermission":
   set {_permission} to "skuishy.test.permission"
-  assert permission named {_permission} is not set with "Permission existed before test"
+  assert all permissions where [permission name of input is {_permission}] is not set with "Permission existed before test"
   create permission named {_permission}
   assert permission named {_permission} is set with "Permission not created"
   delete permission named {_permission} from the plugin manager
