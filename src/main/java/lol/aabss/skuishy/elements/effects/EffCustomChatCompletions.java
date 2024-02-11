@@ -25,10 +25,7 @@ import java.util.List;
 public class EffCustomChatCompletions extends Effect {
 
     static {
-        if (Skript.methodExists(Player.class, "addCustomChatCompletions") &&
-                Skript.methodExists(Player.class, "removeCustomChatCompletions") &&
-                Skript.methodExists(Player.class, "setCustomChatCompletions")
-        ) {
+        if (Skript.methodExists(Player.class, "addCustomChatCompletions")) {
             Skript.registerEffect(EffCustomChatCompletions.class,
                     "add %strings% to [the] [custom] chat completions of %players%",
                     "remove %strings% from [the] [custom] chat completions of %players%",

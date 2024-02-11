@@ -6,10 +6,7 @@ import ch.njol.skript.util.Version;
 import lol.aabss.skuishy.hooks.Metrics;
 import lol.aabss.skuishy.other.UpdateChecker;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.*;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.Plugin;
@@ -26,7 +23,7 @@ import static lol.aabss.skuishy.other.GetVersion.latestVersion;
 import static lol.aabss.skuishy.other.SubCommands.*;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
-public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter {
+public class Skuishy extends JavaPlugin implements TabExecutor {
 
     public static Skuishy instance;
     public static SkriptAddon addon;
