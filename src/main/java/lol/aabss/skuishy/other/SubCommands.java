@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static lol.aabss.skuishy.Skuishy.*;
-import static lol.aabss.skuishy.other.UpdateChecker.*;
+import static lol.aabss.skuishy.other.GetVersion.latestVersion;
+import static lol.aabss.skuishy.other.UpdateChecker.updateCheck;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 public class SubCommands {
@@ -154,8 +155,12 @@ public class SubCommands {
             sender.sendMessage(miniMessage().deserialize(instance.getConfig().getString("permission-message")));
             return;
         }
-        if (!updateCheck(sender)){
+        String v = latestVersion();
+        if (v.equals(instance.getDescription().getVersion())){
             sender.sendMessage(miniMessage().deserialize("<color:#40ff00>You are up to date!"));
+        } else{
+            latest_version = v;
+            updateCheck(sender);
         }
     }
 

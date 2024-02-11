@@ -132,10 +132,10 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (args.length == 1) {
             List<String> completions = new ArrayList<>();
-            if ("info".startsWith(args[0])) completions.add("info");
-            if ("reload".startsWith(args[0])) completions.add("reload");
-            if ("update".startsWith(args[0])) completions.add("update");
-            if ("version".startsWith(args[0])) completions.add("version");
+            if ("info".startsWith(args[0].toLowerCase())) completions.add("info");
+            if ("reload".startsWith(args[0].toLowerCase())) completions.add("reload");
+            if ("update".startsWith(args[0].toLowerCase())) completions.add("update");
+            if ("version".startsWith(args[0].toLowerCase())) completions.add("version");
             return completions;
         } else if (args.length == 2){
             List<String> completions = new ArrayList<>();
