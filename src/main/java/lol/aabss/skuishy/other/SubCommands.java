@@ -38,10 +38,14 @@ public class SubCommands {
                 for (SkriptAddon addon : Skript.getAddons()) {
                     // if the loop plugin is not skuishy add a message
                     if (addon != instance.getAddonInstance()) {
-                        PluginDescriptionFile desc = addon.plugin.getDescription();
-                        msgs.add("    <hover:show_text:'<gray>" + desc.getAuthors() + "'><gray>" + desc.getName() + ": " + (addon.plugin.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + desc.getVersion() +
-                                (desc.getWebsite() != null ? "<gray>|<color:#40ff00> (<click:open_url:'" + desc.getWebsite() + "'>" + desc.getWebsite() + "</click>)" : "")
-                                + "</hover>");
+                        PluginDescriptionFile d = addon.plugin.getDescription();
+                        msgs.add(
+                                "    <click:open_url:'<URL>'><hover:show_text:'<gray><AUTHORS>'><gray><NAME>: <color:#40ff00><VERSION></hover></click>"
+                                        .replaceAll("<URL>", (d.getWebsite() != null ? d.getWebsite() : ""))
+                                        .replaceAll("<AUTHORS>", d.getAuthors() + "")
+                                        .replaceAll("<NAME>", d.getName())
+                                        .replaceAll("<VERSION>", d.getVersion())
+                        );
                     }
                 }
             }
@@ -54,11 +58,14 @@ public class SubCommands {
             for (SkriptAddon addon : Skript.getAddons()) {
                 for (String dep : addon.plugin.getDescription().getSoftDepend()) {
                     Plugin pl = Bukkit.getPluginManager().getPlugin(dep);
-                    if (pl != null) {
-                        PluginDescriptionFile desc = pl.getDescription();
-                        String msgg = "    <hover:show_text:'<gray>" + desc.getAuthors() + "'><gray>" + desc.getName() + ": " + (pl.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + desc.getVersion() +
-                                (desc.getWebsite() != null ? "<gray>|<color:#40ff00> (<click:open_url:'" + desc.getWebsite() + "'>" + desc.getWebsite() + "</click>)" : "")
-                                + "</hover>";
+                    if (pl != null && pl != Skript.getInstance()) {
+                        PluginDescriptionFile d = pl.getDescription();
+                        String msgg =
+                                "    <click:open_url:'<URL>'><hover:show_text:'<gray><AUTHORS>'><gray><NAME>: <color:#40ff00><VERSION></hover></click>"
+                                        .replaceAll("<URL>", (d.getWebsite() != null ? d.getWebsite() : ""))
+                                        .replaceAll("<AUTHORS>", d.getAuthors() + "")
+                                        .replaceAll("<NAME>", d.getName())
+                                        .replaceAll("<VERSION>", d.getVersion());
                         if (!deps.contains(msgg)) {
                             deps.add(msgg);
                         }
@@ -68,10 +75,14 @@ public class SubCommands {
             for (String dep : Skript.getInstance().getDescription().getSoftDepend()) {
                 Plugin pl = Bukkit.getPluginManager().getPlugin(dep);
                 if (pl != null) {
-                    PluginDescriptionFile desc = pl.getDescription();
-                    deps.add("    <hover:show_text:'<gray>" + desc.getAuthors() + "'><gray>" + desc.getName() + ": " + (pl.isEnabled() ? "<color:#40ff00>" : "<color:#ff0000>") + desc.getVersion() +
-                            (desc.getWebsite() != null ? "<gray>|<color:#40ff00> (<click:open_url:'" + desc.getWebsite() + "'>" + desc.getWebsite() + "</click>)" : "")
-                            + "</hover>");
+                    PluginDescriptionFile d = pl.getDescription();
+                    deps.add(
+                            "    <click:open_url:'<URL>'><hover:show_text:'<gray><AUTHORS>'><gray><NAME>: <color:#40ff00><VERSION></hover></click>"
+                                    .replaceAll("<URL>", (d.getWebsite() != null ? d.getWebsite() : ""))
+                                    .replaceAll("<AUTHORS>", d.getAuthors() + "")
+                                    .replaceAll("<NAME>", d.getName())
+                                    .replaceAll("<VERSION>", d.getVersion())
+                    );
                 }
             }
             StringBuilder dependencies = new StringBuilder();
@@ -115,7 +126,7 @@ public class SubCommands {
                         <dark_gray>----------------"""
                         .replaceAll("<NAME>", d.getName())
                         .replaceAll("<VERSION>", d.getVersion())
-                        .replaceAll("<WEBSITE>", (d.getWebsite() != null ? "<click:open_url:" + d.getWebsite() + ">" + d.getWebsite() + "</click>" : "<color:#ff0000>N/A"))
+                        .replaceAll("<WEBSITE>", (d.getWebsite() != null ? "<click:open_url:'" + d.getWebsite() + "'>" + d.getWebsite() + "</click>" : "<color:#ff0000>N/A"))
                         .replaceAll("<AUTHORS>", (!d.getAuthors().isEmpty() ? d.getAuthors() + "" : "<color:#ff0000>N/A"))
                         .replaceAll("<CONTRIBUTORS>", (!d.getContributors().isEmpty() ? d.getContributors() + "" : "<color:#ff0000>N/A"))
                         .replaceAll("<DESCRIPTION>", (d.getDescription() != null ? d.getDescription() : "<color:#ff0000>N/A"))
