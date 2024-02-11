@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -110,26 +111,34 @@ public class SubCommands {
             Plugin p = Bukkit.getPluginManager().getPlugin(plugin);
             if (p != null) {
                 PluginDescriptionFile d = p.getDescription();
+                List<String> mainl = Arrays.stream(p.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().split("/")).toList();
+                String main = mainl.get(mainl.size()-1);
                 sender.sendMessage(miniMessage().deserialize("""
                         
                         <dark_gray>-- <color:#40ff00>Skuishy <gray>Info: <dark_gray>--<reset>
                                             
                         <gray>Name: <color:#40ff00><NAME>
+                        <gray>File Name: <color:#40ff00><FILENAME>
                         <gray>Version: <color:#40ff00><VERSION>
                         <gray>Website: <color:#40ff00><WEBSITE>
                         <gray>Authors: <color:#40ff00><AUTHORS>
                         <gray>Contributors: <color:#40ff00><CONTRIBUTORS>
                         <gray>Description: <color:#40ff00><DESCRIPTION>
                         <gray>API Version: <color:#40ff00><APIV>
+                        <gray>Prefix: <color:#40ff00><PREFIX>
+                        <gray>Main Class: <color:#40ff00><MAINCLASS>
                                             
                         <dark_gray>----------------"""
                         .replaceAll("<NAME>", d.getName())
+                        .replaceAll("<FILENAME>", main.replaceAll("%20", " "))
                         .replaceAll("<VERSION>", d.getVersion())
                         .replaceAll("<WEBSITE>", (d.getWebsite() != null ? "<click:open_url:'" + d.getWebsite() + "'>" + d.getWebsite() + "</click>" : "<color:#ff0000>N/A"))
                         .replaceAll("<AUTHORS>", (!d.getAuthors().isEmpty() ? d.getAuthors() + "" : "<color:#ff0000>N/A"))
                         .replaceAll("<CONTRIBUTORS>", (!d.getContributors().isEmpty() ? d.getContributors() + "" : "<color:#ff0000>N/A"))
                         .replaceAll("<DESCRIPTION>", (d.getDescription() != null ? d.getDescription() : "<color:#ff0000>N/A"))
                         .replaceAll("<APIV>", (d.getAPIVersion() != null ? d.getAPIVersion() : "<color:#ff0000>N/A"))
+                        .replaceAll("<PREFIX>", (d.getPrefix() != null ? d.getPrefix() : "<color:#ff0000>N/A"))
+                        .replaceAll("<MAINCLASS>", d.getMain())
                 ));
             } else{
                 sender.sendMessage(miniMessage().deserialize("<red>Invalid plugin!"));

@@ -2,6 +2,7 @@ name: Skuishy
 version: '${version}'
 main: lol.aabss.skuishy.Skuishy
 api-version: '1.17'
+prefix: 'Skuishy'
 depend:
   - Skript
 softdepend:
