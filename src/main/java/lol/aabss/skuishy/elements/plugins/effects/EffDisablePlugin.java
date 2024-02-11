@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.effects;
+package lol.aabss.skuishy.elements.plugins.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
@@ -16,42 +16,39 @@ import org.jetbrains.annotations.NotNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 
-@Name("Plugin - Enable Plugin")
-@Description("Enables a plugin")
+@Name("Plugin - Disable Plugin")
+@Description("Disables a plugin")
 @Examples({
-        "enable plugin \"Essentials\""
+        "disable plugin named \"Essentials\""
 })
 @Since("1.4")
 
-public class EffEnablePlugin extends Effect {
+public class EffDisablePlugin extends Effect {
 
     static {
-        Skript.registerEffect(EffEnablePlugin.class,
-                "enable plugin %strings%"
+        Skript.registerEffect(EffDisablePlugin.class,
+                "disable [plugin] %plugins%"
         );
     }
 
-    private Expression<String> plugin;
+    private Expression<Plugin> plugin;
 
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parser) {
-        plugin = (Expression<String>) expressions[0];
+        plugin = (Expression<Plugin>) expressions[0];
         return true;
     }
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug)  {
-        return "enable plugin " + plugin.toString(event, debug);
+        return "disable plugin";
     }
 
     @Override
     protected void execute(@NotNull Event event) {
-        String[] pl = this.plugin.getArray(event);
-        for (String s : pl) {
-            Plugin plugin = Bukkit.getPluginManager().getPlugin(s);
-            if (plugin != null) {
-                Bukkit.getPluginManager().enablePlugin(plugin);
-            }
+        Plugin[] pl = this.plugin.getArray(event);
+        for (Plugin p : pl) {
+            Bukkit.getPluginManager().disablePlugin(p);
         }
     }
 }

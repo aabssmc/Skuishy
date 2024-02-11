@@ -10,6 +10,7 @@ types:
     permission: permission¦s @a
     permissionattachment: permissionattachment¦s @a
     permissiondefault: permissiondefault¦s @a
+    plugin: plugin¦s @a
 
     hologramclicktype: hologramclicktype¦s @a
     hologram: hologram¦s @a
