@@ -3,7 +3,7 @@ package lol.aabss.skuishy;
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import ch.njol.skript.util.Version;
-import lol.aabss.skuishy.hooks.Metrics;
+import lol.aabss.skuishy.other.Metrics;
 import lol.aabss.skuishy.other.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
@@ -35,6 +35,8 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public static boolean vu = false;
     public static String latest_version;
     public static String latest_skript_version;
+    private static final String CONSOLE_RED = "\u001B[31m";
+    private static final String CONSOLE_GREEN = "\u001B[32m";
 
     public void onEnable() {
         saveDefaultConfig();
@@ -46,7 +48,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         try {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
-            addon.loadClasses("lol.aabss.skuishy.elements");
+            addon.loadClasses("lol.aabss.skuishy.elements.general");
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
                 getLogger().info("DecentHolograms found! Enabling DecentHolograms elements...");
                 String v = Bukkit.getPluginManager().getPlugin("DecentHolograms").getDescription().getVersion();
@@ -55,25 +57,42 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
                 if (decentHoloVersion.compareTo(2,8,6) < 0) {
                     getLogger().warning("You must be running decent holograms version 2.8.6 as the minimum");
                 } else{
-                    addon.loadClasses("lol.aabss.skuishy.hooks.decentholograms");
-                    getLogger().info("DecentHolograms elements loaded!");
+                    getLogger().info("§aDecentHolograms elements loaded!");
                     dh = true;
                 }
-            } else getLogger().info("DecentHolograms not found, skipping!");
+            } else getLogger().info("§cDecentHolograms not found, skipping!");
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
-                getLogger().info("Vivecraft-Spigot-Extensions found! Enabling Vivecraft-Spigot-Extensions elements...");
-                addon.loadClasses("lol.aabss.skuishy.hooks.vivecraft");
-                getLogger().info("Vivecraft-Spigot-Extensions elements loaded!");
+                addon.loadClasses("lol.aabss.skuishy.elements.vivecraft");
+                getLogger().info("§aVivecraft-Spigot-Extensions elements loaded!");
                 vc = true;
-            } else getLogger().info("Vivecraft-Spigot-Extensions not found, skipping!");
+            } else getLogger().info("§cVivecraft-Spigot-Extensions not found, skipping!");
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
-                getLogger().info("Vulcan found! Enabling Vulcan elements...");
-                addon.loadClasses("lol.aabss.skuishy.hooks.vulcan");
-                getLogger().info("Vulcan elements loaded!");
+                addon.loadClasses("lol.aabss.skuishy.elements.vulcan");
+                getLogger().info("§aVulcan elements loaded!");
                 vu = true;
-            } else getLogger().info("Vulcan not found, skipping!");
+            } else getLogger().info("§cVulcan not found, skipping!");
+
+            if (getConfig().getBoolean("note-elements")){
+                addon.loadClasses("lol.aabss.skuishy.elements.notes");
+                getLogger().info("§aNote elements loaded!");
+            } else getLogger().warning("§cNote elements not loaded!");
+
+            if (getConfig().getBoolean("permission-elements")){
+                addon.loadClasses("lol.aabss.skuishy.elements.permissions");
+                getLogger().info("§aPermission elements loaded!");
+            } else getLogger().warning("§cPermission elements not loaded!");
+
+            if (getConfig().getBoolean("plugin-elements")){
+                addon.loadClasses("lol.aabss.skuishy.elements.plugins");
+                getLogger().info("§aPlugin elements loaded!");
+            } else getLogger().warning("§cPlugin elements not loaded!");
+
+            if (getConfig().getBoolean("tickmanager-elements")){
+                addon.loadClasses("lol.aabss.skuishy.elements.tickmanager");
+                getLogger().info("§aTick Manager elements loaded!");
+            } else getLogger().warning("§cTick Manager elements not loaded!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

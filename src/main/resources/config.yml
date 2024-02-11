@@ -6,3 +6,17 @@ update-checker: true
 
 # whether a message should be sent whenever a new version check happens.
 version-check-msg: true
+
+# elements --
+
+# whether note elements should be loaded
+note-elements: true
+
+# whether permission elements should be loaded
+permission-elements: true
+
+# whether plugin elements should be loaded
+plugin-elements: true
+
+# whether tickmanager elements should be loaded
+tickmanager-elements: true
