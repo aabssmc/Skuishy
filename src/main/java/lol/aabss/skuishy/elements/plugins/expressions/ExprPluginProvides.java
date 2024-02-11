@@ -28,7 +28,7 @@ public class ExprPluginProvides extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprPluginProvides.class, String.class, ExpressionType.COMBINED,
-                "[the] [plugin] provides of %plugins%",
+                "[all [of]] [the] [plugin] provides of %plugins%",
                 "%plugins%'s [plugin] provides"
         );
     }

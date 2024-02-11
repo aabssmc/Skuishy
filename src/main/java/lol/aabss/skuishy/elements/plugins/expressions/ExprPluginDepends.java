@@ -28,7 +28,7 @@ public class ExprPluginDepends extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprPluginContributors.class, String.class, ExpressionType.COMBINED,
-                "[the] [plugin] [:soft] depend[(encies|s)] of %plugins%",
+                "[all [of]] [the] [plugin] [:soft] depend[(encies|s)] of %plugins%",
                 "%plugins%'s [plugin] [:soft] depend[(encies|s)]"
         );
     }

@@ -28,7 +28,7 @@ public class ExprPluginAuthors extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprPluginAuthors.class, String.class, ExpressionType.COMBINED,
-                "[the] [plugin] authors of %plugins%",
+                "[all [of]] [the] [plugin] authors of %plugins%",
                 "%plugins%'s [plugin] authors"
         );
     }
