@@ -121,7 +121,6 @@ public class SubCommands {
                         <gray>Contributors: <color:#40ff00><CONTRIBUTORS>
                         <gray>Description: <color:#40ff00><DESCRIPTION>
                         <gray>API Version: <color:#40ff00><APIV>
-                        <gray>Load Order: <color:#40ff00><LOADORDER>
                                             
                         <dark_gray>----------------"""
                         .replaceAll("<NAME>", d.getName())
@@ -131,7 +130,6 @@ public class SubCommands {
                         .replaceAll("<CONTRIBUTORS>", (!d.getContributors().isEmpty() ? d.getContributors() + "" : "<color:#ff0000>N/A"))
                         .replaceAll("<DESCRIPTION>", (d.getDescription() != null ? d.getDescription() : "<color:#ff0000>N/A"))
                         .replaceAll("<APIV>", (d.getAPIVersion() != null ? d.getAPIVersion() : "<color:#ff0000>N/A"))
-                        .replaceAll("<LOADORDER>", d.getLoadOrder().name().toLowerCase())
                 ));
             } else{
                 sender.sendMessage(miniMessage().deserialize("<red>Invalid plugin!"));
