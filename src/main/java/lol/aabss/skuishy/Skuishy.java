@@ -97,7 +97,7 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
         if (args.length == 0){
             sender.sendMessage(miniMessage().deserialize(
                     "<red>/skuishy <" +
-                            "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>version</hover></click>" +
+                            "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>info</hover></click>" +
                             " | " +
                             "<click:run_command:'/skuishy reload'><hover:show_text:'<green>/skuishy reload'>reload</hover></click>" +
                             " | " +
@@ -108,13 +108,13 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
             ));
         } else{
             switch (args[0]) {
-                case "info" -> cmdInfo(sender);
+                case "info" -> cmdInfo(sender, (args.length >= 2 ? args[1] : null));
                 case "reload" -> cmdReload(sender);
                 case "update" -> cmdUpdate(sender);
                 case "version" -> cmdVersion(sender);
                 default -> sender.sendMessage(miniMessage().deserialize(
                         "<red>/skuishy <" +
-                                "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>version</hover></click>" +
+                                "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>info</hover></click>" +
                                 " | " +
                                 "<click:run_command:'/skuishy reload'><hover:show_text:'<green>/skuishy reload'>reload</hover></click>" +
                                 " | " +
@@ -130,12 +130,23 @@ public class Skuishy extends JavaPlugin implements CommandExecutor, TabCompleter
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-        List<String> completions = new ArrayList<>();
-        completions.add("info");
-        completions.add("reload");
-        completions.add("update");
-        completions.add("version");
-        return completions;
+        if (args.length == 1) {
+            List<String> completions = new ArrayList<>();
+            if ("info".startsWith(args[0])) completions.add("info");
+            if ("reload".startsWith(args[0])) completions.add("reload");
+            if ("update".startsWith(args[0])) completions.add("update");
+            if ("version".startsWith(args[0])) completions.add("version");
+            return completions;
+        } else if (args.length == 2){
+            List<String> completions = new ArrayList<>();
+            for (Plugin p : Bukkit.getPluginManager().getPlugins()){
+                if (p.getName().toLowerCase().startsWith(args[1].toLowerCase())) {
+                    completions.add(p.getName());
+                }
+            }
+            return completions;
+        }
+        return null;
     }
 
     public static Skuishy getInstance() {

@@ -9,6 +9,10 @@ softdepend:
   - Vivecraft-Spigot-Extensions
   - Vulcan
 authors: [aabss]
+description: yet another skript addon
+contributors:
+  - Fusezion
+  - CoffeeRequired
 website: https://aabss.lol
 commands:
   skuishy:
