@@ -105,7 +105,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             latest_version = latestVersion();
             latest_skript_version = latestSkriptVersion();
             if (getConfig().getBoolean("version-check-msg")) getLogger().info("Got latest version.");
-        }, 0L, 222000L);
+        }, 0L, 144000L);
     }
 
     @Override

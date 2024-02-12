@@ -24,7 +24,7 @@ import java.util.List;
 @Examples({
         "send neat 10 hours and 23 minutes and 97 seconds # 10h 24m"
 })
-@Since("1.7.5")
+@Since("2.3")
 public class ExprCompactTime extends SimpleExpression<String> {
 
     static {
@@ -36,7 +36,7 @@ public class ExprCompactTime extends SimpleExpression<String> {
     private Expression<Timespan> time;
 
     @Override
-    protected @Nullable String @NotNull [] get(Event e) {
+    protected @Nullable String @NotNull [] get(@NotNull Event e) {
         List<String> timespans = new ArrayList<>();
         for (Timespan time : this.time.getArray(e)){
             String timestring = time.toString().replaceAll("and", "");
