@@ -15,13 +15,14 @@ import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Name("Other - Compact Timespan")
 @Description("Sends the timespan neatly.")
 @Examples({
-        "send neat 10 minutes and 23 seconds # 10m 23s"
+        "send neat 10 hours and 23 minutes and 97 seconds # 10h 24m"
 })
 @Since("1.7.5")
 public class ExprCompactTime extends SimpleExpression<String> {
@@ -36,8 +37,8 @@ public class ExprCompactTime extends SimpleExpression<String> {
 
     @Override
     protected @Nullable String @NotNull [] get(Event e) {
-        Timespan time = this.time.getSingle(e);
-        if (time != null){
+        List<String> timespans = new ArrayList<>();
+        for (Timespan time : this.time.getArray(e)){
             String timestring = time.toString().replaceAll("and", "");
             timestring = timestring.replaceAll(" days", "d");
             timestring = timestring.replaceAll(" day", "d");
@@ -50,9 +51,9 @@ public class ExprCompactTime extends SimpleExpression<String> {
             timestring = timestring.replaceAll(" {2}", " ");
             List<String> times = Arrays.stream(timestring.split("\\.")).toList();
             timestring = times.get(0) + times.get(1).substring(times.get(1).length() - 1);
-            return new String[]{timestring};
+            timespans.add(timestring);
         }
-        return new String[]{null};
+        return timespans.toArray(String[]::new);
     }
 
     @Override
