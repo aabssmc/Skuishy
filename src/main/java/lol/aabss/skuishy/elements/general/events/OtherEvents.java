@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public class OtherEvents extends SkriptEvent {
     static{
         // fluid level change
-        Skript.registerEvent("fluid level change", OtherEvents.class, FluidLevelChangeEvent.class,
+        Skript.registerEvent("Other - Fluid Level Change", OtherEvents.class, FluidLevelChangeEvent.class,
                         "fluid level change[d]"
                 )
                 .description("Called when the fluid level of a block changes.")
@@ -39,7 +39,7 @@ public class OtherEvents extends SkriptEvent {
 
 // hopper inventory search
         if (Skript.classExists("org.bukkit.event.inventory.HopperInventorySearchEvent")) {
-            Skript.registerEvent("hopper inventory search", OtherEvents.class, HopperInventorySearchEvent.class,
+            Skript.registerEvent("Other - Hopper Inventory Search", OtherEvents.class, HopperInventorySearchEvent.class,
                             "hopper inventory search"
                     )
                     .description("Called when a hopper searches for an inventory to pull items from.")
@@ -61,7 +61,7 @@ public class OtherEvents extends SkriptEvent {
 
 // inventory block start
         if (Skript.classExists("org.bukkit.event.block.InventoryBlockStartEvent")) {
-            Skript.registerEvent("inventory block start", OtherEvents.class, InventoryBlockStartEvent.class,
+            Skript.registerEvent("Other - Inventory Block Start", OtherEvents.class, InventoryBlockStartEvent.class,
                             "inventory block start"
                     )
                     .description("Called when an inventory block starts processing.")
@@ -82,8 +82,8 @@ public class OtherEvents extends SkriptEvent {
         }
 
 // lootable inventory replenish
-        Skript.registerEvent("loot table inventory replenish", OtherEvents.class, LootableInventoryReplenishEvent.class,
-                        "loot[ |-]table [inventory] replenish"
+        Skript.registerEvent("Other - LootTable Inventory Replenish", OtherEvents.class, LootableInventoryReplenishEvent.class,
+                        "loot[ |-]table [inventory] (replenish|refill)"
                 )
                 .description("Called when a lootable inventory replenishes its contents.")
                 .examples("on lootable inventory replenish:")
@@ -97,8 +97,9 @@ public class OtherEvents extends SkriptEvent {
 
 // whitelist state update
         if (Skript.classExists("io.papermc.paper.event.server.WhitelistStateUpdateEvent")) {
-            Skript.registerEvent("whitelist state update", OtherEvents.class, WhitelistStateUpdateEvent.class,
-                            "whitelist (mode|state) update[d]"
+            Skript.registerEvent("Other - Whitelist State Update", OtherEvents.class, WhitelistStateUpdateEvent.class,
+                            "whitelist (mode|state) update[d]",
+                    "whitelist update[d] (mode|state)"
                     )
                     .description("Called when the server's whitelist state is updated.")
                     .examples("on whitelist state update:")

@@ -27,7 +27,7 @@ public class PlayerEvents extends SkriptEvent {
 
     static{
 // player leash entity
-        Skript.registerEvent("player leash entity", PlayerEvents.class, PlayerLeashEntityEvent.class,
+        Skript.registerEvent("Player - Leash Entity", PlayerEvents.class, PlayerLeashEntityEvent.class,
                         "[player] leash[ed] entity"
                 )
                 .description("Called when a player leashes an entity.")
@@ -47,7 +47,7 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player attack entity cooldown reset
-        Skript.registerEvent("player attack entity cool[ ]down reset", PlayerEvents.class, PlayerAttackEntityCooldownResetEvent.class,
+        Skript.registerEvent("Player - Attack Cooldown Reset", PlayerEvents.class, PlayerAttackEntityCooldownResetEvent.class,
                         "[player] attack [entity] cool[ ]down reset"
                 )
                 .description("Called when a player's attack entity cooldown is reset.")
@@ -61,7 +61,7 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player bed fail enter
-        Skript.registerEvent("player bed fail enter", PlayerEvents.class, PlayerBedFailEnterEvent.class,
+        Skript.registerEvent("Player - Bed Enter Fail", PlayerEvents.class, PlayerBedFailEnterEvent.class,
                         "[player] bed fail[ed] enter",
                 "[player] enter bed fail[ed]",
                 "[player] bed enter fail[ed]"
@@ -84,7 +84,7 @@ public class PlayerEvents extends SkriptEvent {
 
 // player exp cooldown change
         if (Skript.classExists("org.bukkit.event.player.PlayerExpCooldownChangeEvent")) {
-            Skript.registerEvent("player exp cooldown change", PlayerEvents.class, PlayerExpCooldownChangeEvent.class,
+            Skript.registerEvent("Player - Exp Cooldown Change", PlayerEvents.class, PlayerExpCooldownChangeEvent.class,
                             "[player] [e]xp[erience] cool[ ]down change"
                     )
                     .description("Called when a player's experience cooldown changes.")
@@ -106,7 +106,7 @@ public class PlayerEvents extends SkriptEvent {
 
 // player fail move
         if (Skript.classExists("io.papermc.paper.event.player.PlayerFailMoveEvent")) {
-            Skript.registerEvent("player fail move", PlayerEvents.class, PlayerFailMoveEvent.class,
+            Skript.registerEvent("Player - Fail Move", PlayerEvents.class, PlayerFailMoveEvent.class,
                             "[player] fail[ed] mov(e|ing)"
                     )
                     .description("Called when a player fails to move.")
@@ -121,7 +121,7 @@ public class PlayerEvents extends SkriptEvent {
         }
 
 // player flower pot manipulate
-        Skript.registerEvent("player flower pot manipulate", PlayerEvents.class, PlayerFlowerPotManipulateEvent.class,
+        Skript.registerEvent("Player - Flower Pot Manipulate", PlayerEvents.class, PlayerFlowerPotManipulateEvent.class,
                         "[player] flower[ ]pot manipulate"
                 )
                 .description("Called when a player manipulates a flower pot.")
@@ -147,8 +147,8 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player harvest block
-        Skript.registerEvent("player harvest block", PlayerEvents.class, PlayerHarvestBlockEvent.class,
-                        "[player] harvest[ed] block"
+        Skript.registerEvent("Player - Harvest Block", PlayerEvents.class, PlayerHarvestBlockEvent.class,
+                        "[player] harvest[ed] [block]"
                 )
                 .description("Called when a player harvests a block.")
                 .examples("on harvest block:")
@@ -167,7 +167,7 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player item cooldown
-        Skript.registerEvent("player item cooldown", PlayerEvents.class, PlayerItemCooldownEvent.class,
+        Skript.registerEvent("Player - Item Cooldown", PlayerEvents.class, PlayerItemCooldownEvent.class,
                         "[player] item cool[ ]down"
                 )
                 .description("Called when a player's item cooldown changes.")
@@ -188,7 +188,7 @@ public class PlayerEvents extends SkriptEvent {
 
 // player item frame change
         if (Skript.classExists("io.papermc.paper.event.player.PlayerItemFrameChangeEvent")) {
-            Skript.registerEvent("player item frame change", PlayerEvents.class, PlayerItemFrameChangeEvent.class,
+            Skript.registerEvent("Player - Item Frame Change", PlayerEvents.class, PlayerItemFrameChangeEvent.class,
                             "[player] item[ ]frame chang(e[d]|ing)"
                     )
                     .description("Called when a player changes an item frame.")
@@ -208,7 +208,7 @@ public class PlayerEvents extends SkriptEvent {
             }, 0);
         }
 // player lectern page change
-        Skript.registerEvent("player lectern page change", PlayerEvents.class, PlayerLecternPageChangeEvent.class,
+        Skript.registerEvent("Player - Lectern Page Change", PlayerEvents.class, PlayerLecternPageChangeEvent.class,
                         "[player] lectern page change[d]"
                 )
                 .description("Called when a player changes a lectern page.")
@@ -234,7 +234,7 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player loom pattern select
-        Skript.registerEvent("player loom pattern select", PlayerEvents.class, PlayerLoomPatternSelectEvent.class,
+        Skript.registerEvent("Player - Loom Pattern Select", PlayerEvents.class, PlayerLoomPatternSelectEvent.class,
                         "[player] loom pattern select[ed]"
                 )
                 .description("Called when a player selects a pattern in a loom.")
@@ -248,7 +248,7 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player name entity
-        Skript.registerEvent("player name entity", PlayerEvents.class, PlayerNameEntityEvent.class,
+        Skript.registerEvent("Player - Name Entity", PlayerEvents.class, PlayerNameEntityEvent.class,
                         "[player] name[d] entity"
                 )
                 .description("Called when a player names an entity.")
@@ -269,7 +269,7 @@ public class PlayerEvents extends SkriptEvent {
 
 // player open sign
         if (Skript.classExists("io.papermc.paper.event.player.PlayerOpenSignEvent")) {
-            Skript.registerEvent("player open sign", PlayerEvents.class, PlayerOpenSignEvent.class,
+            Skript.registerEvent("Player - Open Sign", PlayerEvents.class, PlayerOpenSignEvent.class,
                             "[player] open[ed] sign"
                     )
                     .description("Called when a player opens a sign.")
@@ -290,7 +290,7 @@ public class PlayerEvents extends SkriptEvent {
         }
 
 // player post respawn
-        Skript.registerEvent("player post respawn", PlayerEvents.class, PlayerPostRespawnEvent.class,
+        Skript.registerEvent("Player - Post Respawn", PlayerEvents.class, PlayerPostRespawnEvent.class,
                         "[player] post respawn[ed]"
                 )
                 .description("Called after a player respawns.")
@@ -304,7 +304,7 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player ready arrow
-        Skript.registerEvent("player ready arrow", PlayerEvents.class, PlayerReadyArrowEvent.class,
+        Skript.registerEvent("Player - Ready Arrow", PlayerEvents.class, PlayerReadyArrowEvent.class,
                         "[player] ready arrow"
                 )
                 .description("Called when a player readies an arrow.")
@@ -319,7 +319,7 @@ public class PlayerEvents extends SkriptEvent {
 
 // player recipe book settings change
         if (Skript.classExists("org.bukkit.event.player.PlayerRecipeBookSettingsChangeEvent")) {
-            Skript.registerEvent("recipe book settings change", PlayerEvents.class, PlayerRecipeBookSettingsChangeEvent.class,
+            Skript.registerEvent("Player - Recipe Book Settings Edit", PlayerEvents.class, PlayerRecipeBookSettingsChangeEvent.class,
                             "[player] recipe[ ]book settings [change|edit]"
                     )
                     .description("Called when a player's recipe book settings change.")
@@ -334,7 +334,7 @@ public class PlayerEvents extends SkriptEvent {
         }
 
 // player shear block
-        Skript.registerEvent("player shear block", PlayerEvents.class, PlayerShearBlockEvent.class,
+        Skript.registerEvent("Player - Shear Block", PlayerEvents.class, PlayerShearBlockEvent.class,
                         "[player] shear[ed] block"
                 )
                 .description("Called when a player shears a block.")
@@ -355,7 +355,7 @@ public class PlayerEvents extends SkriptEvent {
 
 // player show entity
         if (Skript.classExists("org.bukkit.event.player.PlayerShowEntityEvent")) {
-            Skript.registerEvent("player show entity", PlayerEvents.class, PlayerShowEntityEvent.class,
+            Skript.registerEvent("Player - Show Entity", PlayerEvents.class, PlayerShowEntityEvent.class,
                             "[player] show[n] entity"
                     )
                     .description("Called when a player shows an entity.")
@@ -376,7 +376,7 @@ public class PlayerEvents extends SkriptEvent {
         }
 
 // player stonecutter recipe select
-        Skript.registerEvent("player stonecutter recipe select", PlayerEvents.class, PlayerStonecutterRecipeSelectEvent.class,
+        Skript.registerEvent("Player - Stonecutter Recipe Select", PlayerEvents.class, PlayerStonecutterRecipeSelectEvent.class,
                         "[player] stone[ ]cutter recipe select[ed]"
                 )
                 .description("Called when a player selects a recipe in a stonecutter.")
@@ -390,7 +390,7 @@ public class PlayerEvents extends SkriptEvent {
         }, 0);
 
 // player take lectern book
-        Skript.registerEvent("player take lectern book", PlayerEvents.class, PlayerTakeLecternBookEvent.class,
+        Skript.registerEvent("Player - Take Lectern Book", PlayerEvents.class, PlayerTakeLecternBookEvent.class,
                         "[player] (take|took) lectern book"
                 )
                 .description("Called when a player takes a book from a lectern.")
@@ -417,7 +417,7 @@ public class PlayerEvents extends SkriptEvent {
 
 // player track entity
         if (Skript.classExists("io.papermc.paper.event.player.PlayerTrackEntityEvent")) {
-            Skript.registerEvent("player track entity", PlayerEvents.class, PlayerTrackEntityEvent.class,
+            Skript.registerEvent("Player - Track Entity", PlayerEvents.class, PlayerTrackEntityEvent.class,
                             "[player] track[ed] entity"
                     )
                     .description("Called when a player tracks an entity.")
@@ -439,7 +439,7 @@ public class PlayerEvents extends SkriptEvent {
 
 // player untrack entity
         if (Skript.classExists("io.papermc.paper.event.player.PlayerUntrackEntityEvent")) {
-            Skript.registerEvent("player untrack entity", PlayerEvents.class, PlayerUntrackEntityEvent.class,
+            Skript.registerEvent("Player - Untrack Entity", PlayerEvents.class, PlayerUntrackEntityEvent.class,
                             "[player] untrack[ed] entity"
                     )
                     .description("Called when a player untracks an entity.")
@@ -461,7 +461,7 @@ public class PlayerEvents extends SkriptEvent {
 
 // pre player attack entity
         if (Skript.classExists("io.papermc.paper.event.player.PrePlayerAttackEntityEvent")) {
-            Skript.registerEvent("pre player attack entity", PlayerEvents.class, PrePlayerAttackEntityEvent.class,
+            Skript.registerEvent("Player - Pre-Attack Entity", PlayerEvents.class, PrePlayerAttackEntityEvent.class,
                             "pre[ |-]player attack[ed] entity"
                     )
                     .description("Called before a player attacks an entity.")

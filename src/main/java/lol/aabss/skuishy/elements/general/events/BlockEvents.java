@@ -12,6 +12,8 @@ import io.papermc.paper.event.block.BlockPreDispenseEvent;
 import io.papermc.paper.event.block.CompostItemEvent;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.BellResonateEvent;
 import org.bukkit.event.block.BlockCookEvent;
@@ -22,16 +24,15 @@ import org.bukkit.event.inventory.BrewingStandFuelEvent;
 import org.bukkit.event.world.AsyncStructureGenerateEvent;
 import org.bukkit.event.world.AsyncStructureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockEvents extends SkriptEvent {
 
     static{
         // async structure generate
         if (Skript.classExists("org.bukkit.event.world.AsyncStructureGenerateEvent")) {
-            Skript.registerEvent("async structure generate", BlockEvents.class, AsyncStructureGenerateEvent.class,
+            Skript.registerEvent("World - Async Structure Generate", BlockEvents.class, AsyncStructureGenerateEvent.class,
                             "[async] structure generate[d]"
                     )
                     .description("Called when a structure generates asynchronously.")
@@ -41,7 +42,7 @@ public class BlockEvents extends SkriptEvent {
 
 // async structure spawn
         if (Skript.classExists("org.bukkit.event.world.AsyncStructureSpawnEvent")) {
-            Skript.registerEvent("async structure spawn", BlockEvents.class, AsyncStructureSpawnEvent.class,
+            Skript.registerEvent("World - Async Structure Spawn", BlockEvents.class, AsyncStructureSpawnEvent.class,
                             "[async] structure spawn[ed]"
                     )
                     .description("Called when a structure spawns asynchronously.")
@@ -51,7 +52,7 @@ public class BlockEvents extends SkriptEvent {
 
 // bell resonate
         if (Skript.classExists("org.bukkit.event.block.BellResonateEvent")) {
-            Skript.registerEvent("bell resonate", BlockEvents.class, BellResonateEvent.class,
+            Skript.registerEvent("Bell - Bell Resonate", BlockEvents.class, BellResonateEvent.class,
                             "bell resonate[d|s]"
                     )
                     .description("Called when a bell resonates.")
@@ -72,7 +73,7 @@ public class BlockEvents extends SkriptEvent {
         }
 
 // block cook
-        Skript.registerEvent("block cook", BlockEvents.class, BlockCookEvent.class,
+        Skript.registerEvent("Block - Block Cook", BlockEvents.class, BlockCookEvent.class,
                         "[block] cook[ed]"
                 )
                 .description("Called when a block cooks.")
@@ -84,9 +85,21 @@ public class BlockEvents extends SkriptEvent {
                 return e.getBlock();
             }
         }, 0);
+        EventValues.registerEventValue(BlockCookEvent.class, ItemStack.class, new Getter<>() {
+            @Override
+            public ItemStack get(BlockCookEvent e) {
+                return e.getResult();
+            }
+        }, 1);
+        EventValues.registerEventValue(BlockCookEvent.class, ItemStack.class, new Getter<>() {
+            @Override
+            public ItemStack get(BlockCookEvent e) {
+                return e.getSource();
+            }
+        }, -1);
 
 // block exp
-        Skript.registerEvent("block experience", BlockEvents.class, BlockExpEvent.class,
+        Skript.registerEvent("Block - Block Experience", BlockEvents.class, BlockExpEvent.class,
                         "block exp[erience]"
                 )
                 .description("Called when a block generates experience.")
@@ -106,7 +119,7 @@ public class BlockEvents extends SkriptEvent {
         }, 0);
 
 // block failed dispense
-        Skript.registerEvent("block failed dispense", BlockEvents.class, BlockFailedDispenseEvent.class,
+        Skript.registerEvent("Block - Dispense Fail", BlockEvents.class, BlockFailedDispenseEvent.class,
                         "[block] fail[ed] dispense[d]"
                 )
                 .description("Called when a block fails to dispense an item.")
@@ -121,7 +134,7 @@ public class BlockEvents extends SkriptEvent {
 
 // block lock check
         if (Skript.classExists("io.papermc.paper.event.block.BlockLockCheckEvent")) {
-            Skript.registerEvent("block lock check", BlockEvents.class, BlockLockCheckEvent.class,
+            Skript.registerEvent("Block - Lock Check", BlockEvents.class, BlockLockCheckEvent.class,
                             "[block] lock check",
                             "[block] check lock"
                     )
@@ -134,10 +147,16 @@ public class BlockEvents extends SkriptEvent {
                     return e.getBlock();
                 }
             }, 0);
+            EventValues.registerEventValue(BlockLockCheckEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(BlockLockCheckEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
         }
 
 // block pre dispense
-        Skript.registerEvent("block pre dispense", BlockEvents.class, BlockPreDispenseEvent.class,
+        Skript.registerEvent("Block - Pre-Dispense", BlockEvents.class, BlockPreDispenseEvent.class,
                         "[block] pre[( |-)]dispense"
                 )
                 .description("Called before a block dispenses an item.")
@@ -157,7 +176,7 @@ public class BlockEvents extends SkriptEvent {
         }, 0);
 
 // brew
-        Skript.registerEvent("brew", BlockEvents.class, BrewEvent.class,
+        Skript.registerEvent("Block - Brew", BlockEvents.class, BrewEvent.class,
                         "[brewing[ |-]stand] brew[ing|s]"
                 )
                 .description("Called when a brewing stand brews.")
@@ -171,7 +190,7 @@ public class BlockEvents extends SkriptEvent {
         }, 0);
 
 // brewing stand fuel
-        Skript.registerEvent("brewing stand fuel", BlockEvents.class, BrewingStandFuelEvent.class,
+        Skript.registerEvent("Block - Brewing Stand Fuel", BlockEvents.class, BrewingStandFuelEvent.class,
                         "brewing stand fuel[ed]"
                 )
                 .description("Called when a brewing stand is fueled.")
@@ -197,7 +216,7 @@ public class BlockEvents extends SkriptEvent {
         }, 0);
 
 // cauldron level change
-        Skript.registerEvent("cauldron level change", BlockEvents.class, CauldronLevelChangeEvent.class,
+        Skript.registerEvent("Block - Cauldron Level Change", BlockEvents.class, CauldronLevelChangeEvent.class,
                         "cauldron level change[d]"
                 )
                 .description("Called when the water level in a cauldron changes.")
@@ -209,10 +228,16 @@ public class BlockEvents extends SkriptEvent {
                 return e.getBlock();
             }
         }, 0);
+        EventValues.registerEventValue(CauldronLevelChangeEvent.class, Entity.class, new Getter<>() {
+            @Override
+            public Entity get(CauldronLevelChangeEvent e) {
+                return e.getEntity();
+            }
+        }, 0);
 
 // compost item
         if (Skript.classExists("io.papermc.paper.event.block.CompostItemEvent")) {
-            Skript.registerEvent("compost item", BlockEvents.class, CompostItemEvent.class,
+            Skript.registerEvent("Block - Compost Item", BlockEvents.class, CompostItemEvent.class,
                             "[block] compost[ed] item"
                     )
                     .description("Called when an item is composted.")

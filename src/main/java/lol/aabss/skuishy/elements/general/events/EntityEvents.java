@@ -22,7 +22,7 @@ public class EntityEvents extends SkriptEvent {
 
     static{
         // arrow body count change
-        Skript.registerEvent("arrow body count change", EntityEvents.class, ArrowBodyCountChangeEvent.class,
+        Skript.registerEvent("Entity - Arrow Body Count Change", EntityEvents.class, ArrowBodyCountChangeEvent.class,
                         "arrow body count change[d]"
                 )
                 .description("Called when an arrow enters or exists an entity's body.")
@@ -53,7 +53,7 @@ public class EntityEvents extends SkriptEvent {
             }
         }, 0);
         // bat sleep
-        Skript.registerEvent("bat sleep toggle", EntityEvents.class, BatToggleSleepEvent.class,
+        Skript.registerEvent("Entity - Bat Toggle Sleep", EntityEvents.class, BatToggleSleepEvent.class,
                 "bat [(state|mode)] toggle[d] sleep",
                 "bat sleep [(state|mode)] toggle[d]"
         )
@@ -76,7 +76,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // creeper ignite
-        Skript.registerEvent("creeper ignite", EntityEvents.class, CreeperIgniteEvent.class,
+        Skript.registerEvent("Entity - Creeper Ignite", EntityEvents.class, CreeperIgniteEvent.class,
                 "creeper ignite[d]",
                 "creeper blow[n] up",
                 "creeper explode[d]"
@@ -93,7 +93,7 @@ public class EntityEvents extends SkriptEvent {
 
         // dye
         if (Skript.classExists("io.papermc.paper.event.entity.EntityDyeEvent")) {
-            Skript.registerEvent("entity dye", EntityEvents.class, EntityDyeEvent.class,
+            Skript.registerEvent("Entity - Dye", EntityEvents.class, EntityDyeEvent.class,
                             "[entity] dye[d]"
                     )
                     .description("Called when an entity is dyed. Currently, this is called for org.bukkit.entity.Sheep being dyed, and org.bukkit.entity.Wolf/org.bukkit.entity.Cat collars being dyed")
@@ -120,7 +120,7 @@ public class EntityEvents extends SkriptEvent {
         }
 
         // elder guardian appearance
-        Skript.registerEvent("elder guardian appearance", EntityEvents.class, ElderGuardianAppearanceEvent.class,
+        Skript.registerEvent("Entity - Elder Guardian Appear", EntityEvents.class, ElderGuardianAppearanceEvent.class,
                 "[elder] guardian appear[(ance|ed)]"
         )
                 .description("Is called when an ElderGuardian appears in front of a Player.")
@@ -140,7 +140,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // ender dragon phase change
-        Skript.registerEvent("ender dragon phase change", EntityEvents.class, EnderDragonChangePhaseEvent.class,
+        Skript.registerEvent("Entity - Ender Dragon Phase Change", EntityEvents.class, EnderDragonChangePhaseEvent.class,
                 "(entity|[ender[ ]]dragon) phase change[d]"
         )
                 .description("Called when an EnderDragon switches controller phase.")
@@ -160,8 +160,8 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // ender dragon fireball shoot
-        Skript.registerEvent("ender dragon fireball shoot", EntityEvents.class, EnderDragonShootFireballEvent.class,
-                        "[ender[ ]]dragon fireball sho[o]t",
+        Skript.registerEvent("Entity - Ender Dragon Shoot", EntityEvents.class, EnderDragonShootFireballEvent.class,
+                        "[ender[ ]]dragon [fireball] sho[o]t",
                         "[ender[ ]]dragon sho[o]t fireball"
                 )
                 .description("Fired when an EnderDragon shoots a fireball")
@@ -175,8 +175,8 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // ender dragon fireball hit
-        Skript.registerEvent("ender dragon fireball hit", EntityEvents.class, EnderDragonFireballHitEvent.class,
-                        "[ender[ ]]dragon fireball hit",
+        Skript.registerEvent("Entity - Ender Dragon Hit", EntityEvents.class, EnderDragonFireballHitEvent.class,
+                        "[ender[ ]]dragon [fireball] hit",
                         "[ender[ ]]dragon hit fireball"
                 )
                 .description("Fired when a DragonFireball collides with a block/entity and spawns an AreaEffectCloud")
@@ -190,7 +190,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // ender man escape event
-        Skript.registerEvent("ender man escape", EntityEvents.class, EndermanEscapeEvent.class,
+        Skript.registerEvent("Entity - Enderman Escape", EntityEvents.class, EndermanEscapeEvent.class,
                         "ender[ ]man escape[d]"
                 )
                 .description("Fired when an ender man escapes")
@@ -204,7 +204,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // enter block
-        Skript.registerEvent("entity enter block", EntityEvents.class, EntityEnterBlockEvent.class,
+        Skript.registerEvent("Entity - Enter Block", EntityEvents.class, EntityEnterBlockEvent.class,
                 "[entity] enter[ed] block"
         )
                 .description("Called when an Entity enters a block and is stored in that block.\n" +
@@ -225,7 +225,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // enter love mode
-        Skript.registerEvent("enter love mode", EntityEvents.class, EntityEnterLoveModeEvent.class,
+        Skript.registerEvent("Entity - Enter Love Mode", EntityEvents.class, EntityEnterLoveModeEvent.class,
                         "[entity] [enter] love (mode|state)",
                 "[entity] [in] love[d]"
                 )
@@ -245,7 +245,7 @@ public class EntityEvents extends SkriptEvent {
             }
         }, 0);
         // entity exhaustion
-        Skript.registerEvent("entity exhaustion", EntityEvents.class, EntityExhaustionEvent.class,
+        Skript.registerEvent("Entity - Exhaustion", EntityEvents.class, EntityExhaustionEvent.class,
                         "[entity] exhaust[(ion|ed)]"
                 )
                 .description("Called when a human entity experiences exhaustion. An exhaustion level greater than 4.0 causes a decrease in saturation by 1.")
@@ -265,7 +265,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
         // fertilize egg
         if (Skript.classExists("io.papermc.paper.event.entity.EntityFertilizeEggEvent")) {
-            Skript.registerEvent("fertilize egg", EntityEvents.class, EntityFertilizeEggEvent.class,
+            Skript.registerEvent("Entity - Fertilize Egg", EntityEvents.class, EntityFertilizeEggEvent.class,
                             "[entity] fertilize[d] egg",
                             "[entity] egg fertilize[d]"
                     )
@@ -299,7 +299,7 @@ public class EntityEvents extends SkriptEvent {
             }, 0);
         }
         // entity load crossbow
-        Skript.registerEvent("load crossbow", EntityEvents.class, EntityLoadCrossbowEvent.class,
+        Skript.registerEvent("Entity - Load Crossbow", EntityEvents.class, EntityLoadCrossbowEvent.class,
                         "[entity] load crossbow",
                 "[entity] crossbow load"
                 )
@@ -319,7 +319,7 @@ public class EntityEvents extends SkriptEvent {
             }
         }, 0);
         // entity pose change
-        Skript.registerEvent("entity pose change event", EntityEvents.class, EntityPoseChangeEvent.class,
+        Skript.registerEvent("Entity - Pose Change", EntityEvents.class, EntityPoseChangeEvent.class,
                         "[entity] pose change[d]",
                 "[entity] change[d] pose"
                 )
@@ -334,7 +334,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
         // entity toggle sit
         if (Skript.classExists("io.papermc.paper.event.entity.EntityToggleSitEvent")) {
-            Skript.registerEvent("toggle sit", EntityEvents.class, EntityToggleSitEvent.class,
+            Skript.registerEvent("Entity - Sit Toggle", EntityEvents.class, EntityToggleSitEvent.class,
                             "[entity] toggle[d] sit (state|mode)",
                             "[entity] sit (state|mode) toggle[d]"
                     )
@@ -356,7 +356,7 @@ public class EntityEvents extends SkriptEvent {
             }, 0);
         }
         // entity unleash
-        Skript.registerEvent("entity unleash", EntityEvents.class, EntityUnleashEvent.class,
+        Skript.registerEvent("Entity - Unleash", EntityEvents.class, EntityUnleashEvent.class,
                         "[entity] unleash[ed]"
                 )
                 .description("Called when an entity is unleashed.")
@@ -370,7 +370,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // piglin barter
-        Skript.registerEvent("piglin barter", EntityEvents.class, PiglinBarterEvent.class,
+        Skript.registerEvent("Entity - Piglin Barter", EntityEvents.class, PiglinBarterEvent.class,
                         "piglin barter"
                 )
                 .description("Called when a Piglin starts bartering.")
@@ -384,8 +384,8 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // pig zombie anger
-        Skript.registerEvent("pig zombie anger", EntityEvents.class, PigZombieAngerEvent.class,
-                        "pig[zombie] anger[ed]"
+        Skript.registerEvent("Entity - Pig Zombie Anger", EntityEvents.class, PigZombieAngerEvent.class,
+                        "pig[ ]zombie anger[ed]"
                 )
                 .description("Called when a PigZombie gets angry.")
                 .examples("on pig zombie anger:")
