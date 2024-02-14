@@ -35,8 +35,10 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public static boolean vu = false;
     public static String latest_version;
     public static String latest_skript_version;
-    private static final String CONSOLE_RED = "\u001B[31m";
-    private static final String CONSOLE_GREEN = "\u001B[32m";
+
+    public Skuishy(){
+        System.out.println("why are you building skuishy");
+    }
 
     public void onEnable() {
         saveDefaultConfig();
@@ -93,12 +95,18 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
                 addon.loadClasses("lol.aabss.skuishy.elements.tickmanager");
                 getLogger().info("§aTick Manager elements loaded!");
             } else getLogger().warning("§cTick Manager elements not loaded!");
+
+            if (getConfig().getBoolean("skin-elements")){
+                addon.loadClasses("lol.aabss.skuishy.elements.skins");
+                getLogger().info("§aSkin elements loaded!");
+            } else getLogger().warning("§cSkin elements not loaded!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         metrics.addCustomChart(new Metrics.SimplePie("decentholograms", () -> dh ? "true" : "false"));
         metrics.addCustomChart(new Metrics.SimplePie("vivecraft", () -> vc ? "true" : "false"));
         metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> vu ? "true" : "false"));
+        metrics.addCustomChart(new Metrics.SimplePie("skript_version", () -> Skript.getVersion().toString()));
         start = System.currentTimeMillis()/50;
         getLogger().info("Skuishy has been enabled!");
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {

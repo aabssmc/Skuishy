@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.general.expressions.skins;
+package lol.aabss.skuishy.elements.skins.expressions;
 
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -8,7 +8,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.skins.SkinWrapper;
+import lol.aabss.skuishy.other.SkinWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
