@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class CondIsDisabled extends PropertyCondition<Plugin> {
 
     static {
-        register(CondIsEnabled.class, PropertyType.BE,
+        register(CondIsDisabled.class, PropertyType.BE,
                 "disabled", "plugins"
         );
     }
