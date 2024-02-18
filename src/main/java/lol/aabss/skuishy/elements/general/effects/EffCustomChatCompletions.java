@@ -14,6 +14,7 @@ import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
 import java.util.List;
 
 @Name("Player - Chat Completions")
@@ -25,7 +26,7 @@ import java.util.List;
 public class EffCustomChatCompletions extends Effect {
 
     static {
-        if (Skript.methodExists(Player.class, "addCustomChatCompletions")) {
+        if (Skript.methodExists(Player.class, "addCustomChatCompletions", Collection.class)) {
             Skript.registerEffect(EffCustomChatCompletions.class,
                     "add %strings% to [the] [custom] chat completions of %players%",
                     "remove %strings% from [the] [custom] chat completions of %players%",
