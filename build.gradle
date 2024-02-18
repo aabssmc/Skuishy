@@ -43,7 +43,6 @@ dependencies {
 
 shadowJar {
     dependencies {
-        include(dependency('org.json:json:20231013'))
         include(dependency('org.apache.commons:commons-text:1.11.0'))
     }
 }
