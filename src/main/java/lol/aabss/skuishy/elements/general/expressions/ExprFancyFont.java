@@ -12,9 +12,8 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.Text;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("NullableProblems")
 @Name("Other - Fancy Font")

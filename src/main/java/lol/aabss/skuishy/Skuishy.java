@@ -6,7 +6,9 @@ import ch.njol.skript.util.Version;
 import lol.aabss.skuishy.other.Metrics;
 import lol.aabss.skuishy.other.UpdateChecker;
 import org.bukkit.Bukkit;
-import org.bukkit.command.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.Plugin;
@@ -35,10 +37,6 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public static boolean vu = false;
     public static String latest_version;
     public static String latest_skript_version;
-
-    public Skuishy(){
-        System.out.println("why are you building skuishy");
-    }
 
     public void onEnable() {
         saveDefaultConfig();

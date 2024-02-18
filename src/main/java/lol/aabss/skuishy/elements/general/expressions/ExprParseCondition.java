@@ -27,7 +27,7 @@ public class ExprParseCondition extends SimpleExpression<Boolean> {
 
     static {
         Skript.registerExpression(ExprParseCondition.class, Boolean.class, ExpressionType.COMBINED,
-                "[parse] condition %string%"
+                "parse[d] condition %string%"
         );
     }
 

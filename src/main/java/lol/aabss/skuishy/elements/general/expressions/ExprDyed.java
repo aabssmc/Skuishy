@@ -39,8 +39,7 @@ public class ExprDyed extends SimpleExpression<Object> {
 
     static{
         Skript.registerExpression(ExprDyed.class, Object.class, ExpressionType.COMBINED,
-                "%itemtypes/itemstacks/slots% (dy|colo[u]r)ed %color%",
-                "%*color% %itemtypes/itemstacks/slots%"
+                "%itemtypes/itemstacks/slots% (dy|colo[u]r)ed %color%"
         );
     }
 

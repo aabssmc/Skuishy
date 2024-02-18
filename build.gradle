@@ -33,9 +33,9 @@ dependencies {
     // decent holograms
     compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.6'
     // vivecraft
-    implementation files('libs/Vivecraft_Spigot_Extensions.jar')
+    compileOnly files('libs/Vivecraft_Spigot_Extensions.jar')
     // vulcan
-    implementation files('libs/VulcanAPI.jar')
+    compileOnly files('libs/VulcanAPI.jar')
     // other things
     implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.800')
     implementation 'org.json:json:20231013'

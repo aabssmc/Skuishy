@@ -12,9 +12,8 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("NullableProblems")
 @Name("Server - Server IP")
 @Description("Gets the IP that this server is bound to, or empty string if not specified.")

@@ -18,9 +18,11 @@ public class UpdateChecker implements Listener {
         if (!Objects.equals(latest_version, instance.getDescription().getVersion())){
             p.sendMessage(MiniMessage.miniMessage().deserialize("""
                         
-                        <click:open_url:'https://modrinth.com/plugin/skuishy/version/<NEW_VERSION>'><hover:show_text:'Click to update!'><gray>There is a new <color:#40ff00>Skuishy <gray>update! <dark_gray>(v<NEW_VERSION>)
+                        <click:open_url:'https://modrinth.com/plugin/skuishy/version/<NEW_VERSION>'><hover:show_text:'Click to update!'><gray>There is a new <color:#40ff00>Skuishy <gray>update! <dark_gray>(v<OLD_VERSION> -> v<NEW_VERSION>)
                         <yellow>Click <green>here</green> to download!
-                        """.replaceAll("<NEW_VERSION>", latest_version)));
+                        """.replaceAll("<NEW_VERSION>", latest_version)
+                    .replaceAll("<OLD_VERSION>", instance.getDescription().getVersion())
+            ));
             return true;
         }return false;
     }
