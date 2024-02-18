@@ -29,8 +29,8 @@ public class ExprPluginName extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprPluginName.class, String.class, ExpressionType.COMBINED,
-                "[the] [:full] [plugin] name of %plugins%",
-                "%plugins%'s [:full] [plugin] name"
+                "[the] [:full] plugin name of %plugins%",
+                "%plugins%'s [:full] plugin name"
         );
     }
 

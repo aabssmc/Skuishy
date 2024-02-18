@@ -25,8 +25,8 @@ public class ExprPermissionName extends SimpleExpression<String> {
 
     static{
         Skript.registerExpression(ExprPermissionName.class, String.class, ExpressionType.COMBINED,
-                "[the] [permission] name [value] of %permission%",
-                "%permission%'s [permission] name [value]"
+                "[the] ([permission] name|name [permission]) [value] of %permission%",
+                "%permission%'s ([permission] name|name [permission]) [value]"
         );
     }
 
