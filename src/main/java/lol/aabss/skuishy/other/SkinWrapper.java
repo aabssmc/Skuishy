@@ -3,12 +3,11 @@ package lol.aabss.skuishy.other;
 import ch.njol.skript.Skript;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.profile.PlayerTextures;
 import org.eclipse.jdt.annotation.Nullable;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -108,9 +107,7 @@ public class SkinWrapper {
     }
 
     public static void setSkin(Player player, String value, @Nullable String signature){
-        JsonObject json = JsonParser.parseString(new String(Base64.getDecoder().decode(value))).getAsJsonObject();
-        setSkin(player,
-                json.getAsJsonArray("textures").getAsJsonObject().getAsJsonArray("SKIN").getAsJsonObject().get("url").getAsString()
-        );
+        JSONObject json = new JSONObject(new String(Base64.getDecoder().decode(value)));
+        setSkin(player,json.getJSONArray("textures").getJSONArray(0).getString(0));
     }
 }

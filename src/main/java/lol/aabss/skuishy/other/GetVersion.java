@@ -1,9 +1,8 @@
 package lol.aabss.skuishy.other;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.bukkit.Bukkit;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -40,9 +39,7 @@ public class GetVersion {
                 .build();
         try {
             String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
-            JsonArray releasesArray = JsonParser.parseString(body).getAsJsonArray();
-            JsonObject latestRelease = releasesArray.get(0).getAsJsonObject();
-            return latestRelease.get("version_number").getAsString();
+            return new JSONArray(body).getJSONObject(0).getString("version_number");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -55,7 +52,7 @@ public class GetVersion {
                 .build();
         try {
             String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
-            return JsonParser.parseString(body).getAsJsonObject().get("tag_name").getAsString();
+            return new JSONObject(body).getString("tag_name");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
