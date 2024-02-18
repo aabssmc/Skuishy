@@ -38,7 +38,6 @@ dependencies {
     compileOnly files('libs/VulcanAPI.jar')
     // other things
     implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.800')
-    implementation 'org.json:json:20231013'
     implementation 'org.apache.commons:commons-text:1.11.0'
 }
 
