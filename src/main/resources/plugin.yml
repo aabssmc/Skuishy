@@ -2,6 +2,7 @@ name: Skuishy
 version: '${version}'
 main: lol.aabss.skuishy.Skuishy
 api-version: '1.17'
+prefix: 'Skuishy'
 depend:
   - Skript
 softdepend:
@@ -9,6 +10,10 @@ softdepend:
   - Vivecraft-Spigot-Extensions
   - Vulcan
 authors: [aabss]
+description: yet another skript addon
+contributors:
+  - Fusezion
+  - CoffeeRequired
 website: https://aabss.lol
 commands:
   skuishy:

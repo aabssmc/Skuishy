@@ -1,4 +1,4 @@
-version: 2.1
+version: 2.2
 
 types:
     note: note¦s @a
@@ -10,6 +10,7 @@ types:
     permission: permission¦s @a
     permissionattachment: permissionattachment¦s @a
     permissiondefault: permissiondefault¦s @a
+    plugin: plugin¦s @a
 
     hologramclicktype: hologramclicktype¦s @a
     hologram: hologram¦s @a
@@ -62,8 +63,8 @@ spawncategory:
 hologramclicktype:
     right: right
     left: left
-    right_shift: right_shift
-    left_shift: left_shift
+    right_shift: right shift, shift right
+    left_shift: left shift, shift left
 
 potionitemtype:
     awkward: awkward
@@ -115,9 +116,3 @@ permissiondefault:
     false: false, no, off
     op: op, operator, admin
     not_op: not op, not operator, not admin
-
-hologramclicktype:
-    left: left
-    right: right
-    shift_left: shift left
-    shift_right: shift right
