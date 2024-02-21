@@ -29,10 +29,10 @@ public class EffPermissionAttachment extends Effect {
 
     static {
         Skript.registerEffect(EffPermissionAttachment.class,
-                "set permission of [perm[ission] attachment] %permissionattachment% to [perm[ission]] %permission% [with value %-boolean%]",
-                "(remove|unset) [perm[ission]] %permission% (of|from) %permissionattachment%",
+                "set permission of [perm[ission] attachment] %permissionattachment% to [perm[ission]] %bukkitpermission% [with value %-boolean%]",
+                "(remove|unset) [perm[ission]] %bukkitpermission% (of|from) %permissionattachment%",
                 "(remove|delete) [perm[ission] attachment] %permissionattachment%",
-                "add [perm[ission]] %permission% [with value %-boolean%] to permissions of [perm[ission] attachment] %permissionattachment%"
+                "add [perm[ission]] %bukkitpermission% [with value %-boolean%] to permissions of [perm[ission] attachment] %permissionattachment%"
         );
     }
 

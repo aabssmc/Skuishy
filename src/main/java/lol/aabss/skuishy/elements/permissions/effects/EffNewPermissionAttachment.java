@@ -45,7 +45,7 @@ public class EffNewPermissionAttachment extends Effect {
     static {
         Skript.registerEffect(EffNewPermissionAttachment.class,
                 "(create|make) [a] [new] empty perm[ission] attachment for %entity% [time:for %-timespan%] [and (store|save) it in %-object%]",
-                "(create|make) [a] [new] perm[ission] attachment [with perm[ission]] %permission%" +
+                "(create|make) [a] [new] perm[ission] attachment [with perm[ission]] %bukkitpermission%" +
                         " [[and] with value %-boolean%] for %entity% [time:for %-timespan%] [and (store|save) it in %-object%]"
 
         );

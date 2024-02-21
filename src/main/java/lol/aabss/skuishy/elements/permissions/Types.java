@@ -14,10 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class Types {
     static {
-        Classes.registerClass(new ClassInfo<>(Permission.class, "permission")
-                .user("permissions?")
-                .name("Permissions - Permission")
-                .description("Represents a permission.")
+        Classes.registerClass(new ClassInfo<>(Permission.class, "bukkitpermission")
+                .user("bukkit ?permissions?")
+                .name("Permissions - Bukkit Permission")
+                .description("Represents a bukkit permission.")
                 .since("2.1")
                 .parser(new Parser<>() {
 

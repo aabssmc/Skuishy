@@ -28,8 +28,8 @@ public class ExprPermissionDefault extends SimpleExpression<PermissionDefault> {
 
     static{
         Skript.registerExpression(ExprPermissionDefault.class, PermissionDefault.class, ExpressionType.COMBINED,
-                "[the] [permission] default [value] of %permission%",
-                "%permission%'s [permission] default [value]"
+                "[the] [permission] default [value] of %bukkitpermission%",
+                "%bukkitpermission%'s [permission] default [value]"
         );
     }
 

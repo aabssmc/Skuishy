@@ -30,7 +30,7 @@ public class EffNewPermission extends Effect {
     static {
         Skript.registerEffect(EffNewPermission.class,
                 "(create|make) [a] [new] permission (named|(by|with) name) %string% [and (store|save) it in %-object%]",
-                "(delete|remove) %permission% [from [the] (plugin|permission) manager]"
+                "(delete|remove) %bukkitpermission% [from [the] (plugin|permission) manager]"
         );
     }
 

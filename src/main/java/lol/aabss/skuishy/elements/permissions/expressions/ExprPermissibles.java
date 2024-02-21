@@ -27,7 +27,7 @@ public class ExprPermissibles extends SimpleExpression<Entity> {
 
     static {
         Skript.registerExpression(ExprPermissibles.class, Entity.class, ExpressionType.COMBINED,
-                "[all [of the]] (permissibles|entit(ies|ys)|users) (with|that have) %permission%"
+                "[all [of the]] (permissibles|entit(ies|ys)|users) (with|that have) %bukkitpermission%"
         );
     }
 
