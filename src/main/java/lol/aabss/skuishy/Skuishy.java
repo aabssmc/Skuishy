@@ -5,6 +5,7 @@ import ch.njol.skript.SkriptAddon;
 import ch.njol.skript.util.Version;
 import lol.aabss.skuishy.other.Metrics;
 import lol.aabss.skuishy.other.UpdateChecker;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -55,39 +56,39 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
                 Plugin decentHolograms = Bukkit.getPluginManager().getPlugin("DecentHolograms");
                 Version decentHoloVersion = new Version(decentHolograms.getPluginMeta().getVersion());
                 if (decentHoloVersion.compareTo(2,8,6) < 0) {
-                    getLogger().warning("You must be running decent holograms version 2.8.6 as the minimum");
+                    Bukkit.getConsoleSender().sendMessage(NamedTextColor.YELLOW + "You must be running decent holograms version 2.8.6 as the minimum");
                 } else{
-                    getLogger().info("§aDecentHolograms elements loaded!");
+                    Bukkit.getConsoleSender().sendMessage(NamedTextColor.GREEN + "DecentHolograms elements loaded!");
                     dh = true;
                 }
-            } else getLogger().info("§cDecentHolograms not found, skipping!");
+            } else Bukkit.getConsoleSender().sendMessage(NamedTextColor.RED + "DecentHolograms elements not loaded.");
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
                 addon.loadClasses("lol.aabss.skuishy.elements.vivecraft");
-                getLogger().info("§aVivecraft-Spigot-Extensions elements loaded!");
                 vc = true;
-            } else getLogger().info("§cVivecraft-Spigot-Extensions not found, skipping!");
+                Bukkit.getConsoleSender().sendMessage(NamedTextColor.GREEN + "Vivecraft elements loaded!");
+            } else Bukkit.getConsoleSender().sendMessage(NamedTextColor.RED + "Vivecraft elements not loaded.");
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
                 addon.loadClasses("lol.aabss.skuishy.elements.vulcan");
-                getLogger().info("§aVulcan elements loaded!");
                 vu = true;
-            } else getLogger().info("§cVulcan not found, skipping!");
+                Bukkit.getConsoleSender().sendMessage(NamedTextColor.GREEN + "Vulcan elements loaded!");
+            } else Bukkit.getConsoleSender().sendMessage(NamedTextColor.RED + "Vulcan elements not loaded.");
 
             if (getConfig().getBoolean("note-elements")){
                 addon.loadClasses("lol.aabss.skuishy.elements.notes");
-                getLogger().info("§aNote elements loaded!");
-            } else getLogger().warning("§cNote elements not loaded!");
+                Bukkit.getConsoleSender().sendMessage(NamedTextColor.GREEN + "Note elements loaded!");
+            } else Bukkit.getConsoleSender().sendMessage(NamedTextColor.RED + "Note elements not loaded.");
 
             if (getConfig().getBoolean("permission-elements")){
                 addon.loadClasses("lol.aabss.skuishy.elements.permissions");
-                getLogger().info("§aPermission elements loaded!");
-            } else getLogger().warning("§cPermission elements not loaded!");
+                Bukkit.getConsoleSender().sendMessage(NamedTextColor.GREEN + "Permission elements loaded!");
+            } else Bukkit.getConsoleSender().sendMessage(NamedTextColor.RED + "Permission elements not loaded.");
 
             if (getConfig().getBoolean("plugin-elements")){
                 addon.loadClasses("lol.aabss.skuishy.elements.plugins");
-                getLogger().info("§aPlugin elements loaded!");
-            } else getLogger().warning("§cPlugin elements not loaded!");
+                Bukkit.getConsoleSender().sendMessage(NamedTextColor.GREEN + "Plugin elements loaded!");
+            } else Bukkit.getConsoleSender().sendMessage(NamedTextColor.RED + "Plugin elements not loaded.");
 
             if (getConfig().getBoolean("skin-elements")){
                 addon.loadClasses("lol.aabss.skuishy.elements.skins");
