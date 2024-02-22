@@ -89,11 +89,6 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
                 getLogger().info("§aPlugin elements loaded!");
             } else getLogger().warning("§cPlugin elements not loaded!");
 
-            if (getConfig().getBoolean("tickmanager-elements")){
-                addon.loadClasses("lol.aabss.skuishy.elements.tickmanager");
-                getLogger().info("§aTick Manager elements loaded!");
-            } else getLogger().warning("§cTick Manager elements not loaded!");
-
             if (getConfig().getBoolean("skin-elements")){
                 addon.loadClasses("lol.aabss.skuishy.elements.skins");
                 getLogger().info("§aSkin elements loaded!");

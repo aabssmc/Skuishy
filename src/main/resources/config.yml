@@ -18,8 +18,5 @@ permission-elements: true
 # whether plugin elements should be loaded
 plugin-elements: true
 
-# whether tickmanager elements should be loaded
-tickmanager-elements: true
-
 # whether skin elements should be loaded
 skin-elements: true
