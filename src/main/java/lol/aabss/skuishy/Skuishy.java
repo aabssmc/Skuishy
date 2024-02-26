@@ -97,9 +97,9 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        metrics.addCustomChart(new Metrics.SimplePie("decentholograms", () -> dh ? "true" : "false"));
-        metrics.addCustomChart(new Metrics.SimplePie("vivecraft", () -> vc ? "true" : "false"));
-        metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> vu ? "true" : "false"));
+        metrics.addCustomChart(new Metrics.SimplePie("decentholograms", () -> Boolean.toString(dh)));
+        metrics.addCustomChart(new Metrics.SimplePie("vivecraft", () -> Boolean.toString(vc)));
+        metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> Boolean.toString(vu)));
         metrics.addCustomChart(new Metrics.SimplePie("skript_version", () -> Skript.getVersion().toString()));
         start = System.currentTimeMillis()/50;
         getLogger().info("Skuishy has been enabled!");
