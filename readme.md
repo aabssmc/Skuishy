@@ -17,6 +17,14 @@ You need Skript 2.7.0 and up to use.
 
 This addon is just a random addon I made to support/add random little things I thought would be nice to have in skript that for whatever reason any other addon doesn't have. I am always taking suggestions for syntaxes! Either message me on skUnity or join my Discord (I am more active on discord)
 
+<details>
+<summary>bStats</summary>
+
+![bStats](https://bstats.org/signatures/bukkit/skuishy.svg)
+
+</details>
+
+
 
 For any support or suggestions, join my Discord here!
 
