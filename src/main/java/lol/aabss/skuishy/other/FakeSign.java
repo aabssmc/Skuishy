@@ -1,27 +1,28 @@
 package lol.aabss.skuishy.other;
 
-import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 
 public class FakeSign {
 
-    public FakeSign(Block originalblock, Sign newblock, Player player) {
-        this.originalblock = originalblock;
+    public FakeSign(Sign newblock, BlockData oldblock, Player player) {
         this.newblock = newblock;
+        this.oldblock = oldblock;
         this.player = player;
     }
 
-    private final Block originalblock;
     private final Sign newblock;
+    private final BlockData oldblock;
     private final Player player;
 
-    public Block getOriginalBlock() {
-        return originalblock;
-    }
 
     public Sign getNewBlock() {
         return newblock;
+    }
+
+    public BlockData getOldBlock() {
+        return oldblock;
     }
 
     public Player getPlayer() {
@@ -29,6 +30,7 @@ public class FakeSign {
     }
 
     public void remove() {
-        newblock.setBlockData(originalblock.getBlockData());
+        newblock.setType(oldblock.getMaterial());
+        newblock.setBlockData(oldblock);
     }
 }

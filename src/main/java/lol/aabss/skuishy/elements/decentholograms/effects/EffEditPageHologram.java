@@ -29,7 +29,8 @@ public class EffEditPageHologram extends Effect {
             Skript.registerEffect(EffEditPageHologram.class,
                     "add [page] of [hologram] %hologram%",
                     "remove [page] %integer% of [hologram] %hologram%",
-                    "insert [page] %integer% of [hologram] %hologram%"
+                    "insert [page] %integer% of [hologram] %hologram%",
+                    "get [page] %integer% from [hologram] %hologram%"
             );
         }
     }
@@ -43,27 +44,29 @@ public class EffEditPageHologram extends Effect {
         Hologram hologram = this.hologram.getSingle(e);
         if (hologram == null){
             return;
-        }
-        if (Objects.equals(changetype, "add")){
+        } if (Objects.equals(changetype, "add")){
             DHAPI.addHologramPage(hologram);
-        }
-        else if (Objects.equals(changetype, "remove")){
+        } else if (Objects.equals(changetype, "remove")){
             Integer page = this.page.getSingle(e);
             if (page != null){
                 DHAPI.removeHologramPage(hologram, page);
             }
-        }
-        else if (Objects.equals(changetype, "insert")){
+        } else if (Objects.equals(changetype, "insert")){
             Integer page = this.page.getSingle(e);
             if (page != null){
                 DHAPI.insertHologramPage(hologram, page);
+            }
+        } else if (Objects.equals(changetype, "get")){
+            Integer page = this.page.getSingle(e);
+            if (page != null){
+                DHAPI.getHologramPage(hologram, page);
             }
         }
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "edit hologram";
+        return "edit hologram page";
     }
 
     @Override
@@ -79,6 +82,11 @@ public class EffEditPageHologram extends Effect {
         }
         else if (matchedPattern == 2){
             changetype = "insert";
+            page = (Expression<Integer>) exprs[0];
+            hologram = (Expression<Hologram>) exprs[1];
+        }
+        else if (matchedPattern == 3){
+            changetype = "get";
             page = (Expression<Integer>) exprs[0];
             hologram = (Expression<Hologram>) exprs[1];
         }

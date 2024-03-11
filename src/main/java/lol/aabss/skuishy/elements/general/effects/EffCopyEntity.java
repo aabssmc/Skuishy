@@ -43,13 +43,11 @@ public class EffCopyEntity extends Effect {
         Entity en = entity.getSingle(e);
         if (location != null) {
             Location loc = this.location.getSingle(e);
-            if (en != null) {
-                if (loc != null) {
-                    en.copy(loc);
-                } else {
-                    var.change(e, new Object[]{en.copy()}, Changer.ChangeMode.SET);
-                }
+            if (loc != null && en != null) {
+                en.copy(loc);
             }
+        } else{
+            var.change(e, new Object[]{en.copy()}, Changer.ChangeMode.SET);
         }
     }
 
