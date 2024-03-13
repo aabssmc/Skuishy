@@ -7,10 +7,10 @@ import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
 import eu.decentsoftware.holograms.api.actions.ClickType;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
+import eu.decentsoftware.holograms.api.holograms.HologramPage;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public class Types {
     static{
@@ -64,6 +64,29 @@ public class Types {
 
                         @Override
                         public @NotNull String toString(ClickType holo, int flags) {
+                            return toVariableNameString(holo);
+                        }
+                    })
+            );
+            Classes.registerClass(new ClassInfo<>(HologramPage.class, "hologrampage")
+                    .user("hologram ?pages?")
+                    .name("DecentHolograms - Hologram Page")
+                    .description("Represents a decent holograms page.")
+                    .since("2.5")
+                    .parser(new Parser<>() {
+
+                        @Override
+                        public boolean canParse(@NotNull ParseContext context) {
+                            return false;
+                        }
+
+                        @Override
+                        public @NotNull String toVariableNameString(HologramPage holo) {
+                            return "page "+holo.getIndex()+" of "+holo.getParent().getName();
+                        }
+
+                        @Override
+                        public @NotNull String toString(HologramPage holo, int flags) {
                             return toVariableNameString(holo);
                         }
                     })

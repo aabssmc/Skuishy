@@ -1,5 +1,3 @@
-version: 2.2
-
 types:
     note: note¦s @a
     tone: tone¦s @a
@@ -14,6 +12,7 @@ types:
 
     hologramclicktype: hologramclicktype¦s @a
     hologram: hologram¦s @a
+    hologrampage: hologrampage¦s @a
     viveplayer: viveplayer¦s @a
 
 tone:
