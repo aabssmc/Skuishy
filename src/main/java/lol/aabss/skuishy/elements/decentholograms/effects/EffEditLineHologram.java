@@ -35,8 +35,7 @@ public class EffEditLineHologram extends Effect {
                     "remove [line] %integer% of [hologram] %hologram%",
                     "create line from [page] %integer% of [hologram] %hologram% to show [text] %string%",
                     "insert [line] %integer% of [hologram] %hologram% to show [text] %string%",
-                    "set [line] %integer% of [hologram] %hologram% to show [text] %string%",
-                    "get [line] %integer% of [hologram] %hologram% from [page] %integer% and store it in %object%"
+                    "set [line] %integer% of [hologram] %hologram% to show [text] %string%"
             );
         }
     }

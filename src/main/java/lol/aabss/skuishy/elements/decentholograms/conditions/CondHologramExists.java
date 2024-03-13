@@ -6,12 +6,14 @@ import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import eu.decentsoftware.holograms.api.DHAPI;
+import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Name("Decent Holograms - Hologram Exists")
 @Description("Returns true if a hologram exists.")
@@ -26,7 +28,7 @@ public class CondHologramExists extends Condition {
     static{
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerCondition(CondHologramExists.class,
-                    "[hologram] [named|with name] %string% (does) exists",
+                    "[hologram] [named|with name] %string% [(does)] exist[s]",
                     "[hologram] %string% [named|with name] does(n't| not) exist"
             );
         }
@@ -38,11 +40,15 @@ public class CondHologramExists extends Condition {
     @Override
     public boolean check(@NotNull Event e) {
         String name = this.name.getSingle(e);
-        if (name == null) return false;
-        if (is) {
-            return DHAPI.getHologram(name) != null;
+        if (name != null) {
+            List<String> names = new ArrayList<>();
+            Hologram.getCachedHolograms().forEach(hologram -> names.add(hologram.getName()));
+            if (is){
+                return names.contains(name);
+            }
+            return !names.contains(name);
         }
-        return DHAPI.getHologram(name) == null;
+        return false;
     }
 
     @Override

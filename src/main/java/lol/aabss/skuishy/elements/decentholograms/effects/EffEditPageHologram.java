@@ -29,8 +29,7 @@ public class EffEditPageHologram extends Effect {
             Skript.registerEffect(EffEditPageHologram.class,
                     "add [page] of [hologram] %hologram%",
                     "remove [page] %integer% of [hologram] %hologram%",
-                    "insert [page] %integer% of [hologram] %hologram%",
-                    "get [page] %integer% from [hologram] %hologram%"
+                    "insert [page] %integer% of [hologram] %hologram%"
             );
         }
     }
