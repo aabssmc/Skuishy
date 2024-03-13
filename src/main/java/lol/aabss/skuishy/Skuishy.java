@@ -56,9 +56,8 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             addon.loadClasses("lol.aabss.skuishy.elements.general");
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
                 Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DecentHolograms found! Enabling DecentHolograms elements...");
-                String v = Bukkit.getPluginManager().getPlugin("DecentHolograms").getDescription().getVersion();
                 Plugin decentHolograms = Bukkit.getPluginManager().getPlugin("DecentHolograms");
-                Version decentHoloVersion = new Version(decentHolograms.getPluginMeta().getVersion());
+                Version decentHoloVersion = new Version(decentHolograms.getDescription().getVersion());
                 if (decentHoloVersion.compareTo(2,8,6) < 0) {
                     Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.YELLOW + "You must be running decent holograms version 2.8.6 as the minimum");
                 } else{
