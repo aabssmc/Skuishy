@@ -7,6 +7,7 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
+import eu.decentsoftware.holograms.api.holograms.HologramLine;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
@@ -27,8 +28,6 @@ public class ExprHologramLine extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprHologramLine.class, String.class, ExpressionType.COMBINED,
-                "[the] %integer%(st|nd|rd|th) line of %hologrampages%",
-                "%hologrampages%'s %integer%(st|nd|rd|th) line",
                 "[the] line %integer% of %hologrampages%",
                 "%hologrampages%'s line %integer%"
         );
@@ -43,7 +42,10 @@ public class ExprHologramLine extends SimpleExpression<String> {
         Integer line = this.line.getSingle(e);
         if (line != null) {
             for (HologramPage page : page.getArray(e)) {
-                pages.add(page.getLine(line).getContent());
+                HologramLine l = page.getLine(line);
+                if (l != null) {
+                    pages.add(l.getContent());
+                }
             }
             return pages.toArray(String[]::new);
         }

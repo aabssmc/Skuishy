@@ -27,7 +27,7 @@ public class EffUpdateHologram extends Effect {
     static{
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffUpdateHologram.class,
-                    "update [(decent [hologram[s]]|dh)] [hologram] %hologram%"
+                    "[(decent [hologram[s]]|dh)] update [hologram] %holograms%"
             );
         }
     }
@@ -36,8 +36,7 @@ public class EffUpdateHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Hologram holo = this.holo.getSingle(e);
-        if (holo != null) {
+        for (Hologram holo : this.holo.getArray(e)){
             DHAPI.updateHologram(holo.getName());
         }
     }

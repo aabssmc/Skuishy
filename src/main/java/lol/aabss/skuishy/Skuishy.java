@@ -160,13 +160,15 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             if ("version".startsWith(args[0].toLowerCase())) completions.add("version");
             return completions;
         } else if (args.length == 2){
-            List<String> completions = new ArrayList<>();
-            for (Plugin p : Bukkit.getPluginManager().getPlugins()){
-                if (p.getName().toLowerCase().startsWith(args[1].toLowerCase())) {
-                    completions.add(p.getName());
+             if (args[0].equalsIgnoreCase("info")) {
+                List<String> completions = new ArrayList<>();
+                for (Plugin p : Bukkit.getPluginManager().getPlugins()) {
+                    if (p.getName().toLowerCase().startsWith(args[1].toLowerCase())) {
+                        completions.add(p.getName());
+                    }
                 }
+                return completions;
             }
-            return completions;
         }
         return null;
     }

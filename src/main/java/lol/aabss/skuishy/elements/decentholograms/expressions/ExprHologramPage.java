@@ -43,7 +43,10 @@ public class ExprHologramPage extends SimpleExpression<HologramPage> {
         Integer page = this.page.getSingle(e);
         if (page != null) {
             for (Hologram holo : hologram.getArray(e)) {
-                pages.add(holo.getPage(page));
+                HologramPage p = holo.getPage(page);
+                if (p != null) {
+                    pages.add(p);
+                }
             }
             return pages.toArray(HologramPage[]::new);
         }
