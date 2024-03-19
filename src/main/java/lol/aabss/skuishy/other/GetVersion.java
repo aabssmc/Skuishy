@@ -4,7 +4,11 @@ import org.bukkit.Bukkit;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -40,6 +44,32 @@ public class GetVersion {
         try {
             String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
             return new JSONArray(body).getJSONObject(0).getString("version_number");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean latestFile(){
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.modrinth.com/v2/project/skuishy/version"))
+                .build();
+        try {
+            String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
+            String url = new JSONArray(body).getJSONObject(0).getString("url");
+            try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
+                 FileOutputStream fileOutputStream = new FileOutputStream(
+                         Bukkit.getPluginsFolder().getPath()+new JSONArray(body).getJSONObject(0).getString("filename"))
+            ) {
+                byte[] dataBuffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+                    fileOutputStream.write(dataBuffer, 0, bytesRead);
+                }
+                return true;
+            } catch (IOException e) {
+                throw new IOException(e);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

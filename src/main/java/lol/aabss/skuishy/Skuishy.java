@@ -107,11 +107,18 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         metrics.addCustomChart(new Metrics.SimplePie("skript_version", () -> Skript.getVersion().toString()));
         start = System.currentTimeMillis()/50;
         Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Skuishy has been enabled!");
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+        Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, () -> {
             latest_version = latestVersion();
             latest_skript_version = latestSkriptVersion();
             if (getConfig().getBoolean("version-check-msg")) Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.YELLOW + "Got latest version.");
         }, 0L, 144000L);
+    }
+
+    @Override
+    public void onDisable(){
+        if (getConfig().getBoolean("auto-update")){
+            UpdateChecker.update();
+        }
     }
 
     @Override

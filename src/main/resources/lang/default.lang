@@ -1,19 +1,21 @@
+version: @version@
+
 types:
     note: note¦s @a
     tone: tone¦s @a
     instrument: instrument¦s @a
     datapack: datapack¦s @a
-    spawncategory: spawncategory¦s @a
-    potionitemtype: potionitemtype¦s @a
+    spawncategory: spawn ?category¦s @a
+    potionitemtype: potion ?item ?type¦s @a
     permission: permission¦s @a
-    permissionattachment: permissionattachment¦s @a
-    permissiondefault: permissiondefault¦s @a
+    permissionattachment: permission ?attachment¦s @a
+    permissiondefault: permission ?default¦s @a
     plugin: plugin¦s @a
 
-    hologramclicktype: hologramclicktype¦s @a
+    hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
-    hologrampage: hologrampage¦s @a
-    viveplayer: viveplayer¦s @a
+    hologrampage: hologram ?page¦s @a
+    viveplayer: vive ?player¦s @a
 
 tone:
     g: G

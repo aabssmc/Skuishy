@@ -1,6 +1,5 @@
 package lol.aabss.skuishy.other;
 
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
@@ -11,12 +10,13 @@ import java.util.Objects;
 
 import static lol.aabss.skuishy.Skuishy.instance;
 import static lol.aabss.skuishy.Skuishy.latest_version;
+import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 public class UpdateChecker implements Listener {
 
     public static boolean updateCheck(CommandSender p){
         if (!Objects.equals(latest_version, instance.getDescription().getVersion())){
-            p.sendMessage(MiniMessage.miniMessage().deserialize("""
+            p.sendMessage(miniMessage().deserialize("""
                         
                         <click:open_url:'https://modrinth.com/plugin/skuishy/version/<NEW_VERSION>'><hover:show_text:'Click to update!'><gray>There is a new <color:#40ff00>Skuishy <gray>update! <dark_gray>(v<OLD_VERSION> -> v<NEW_VERSION>)
                         <yellow>Click <green>here</green> to download!
@@ -25,6 +25,20 @@ public class UpdateChecker implements Listener {
             ));
             return true;
         }return false;
+    }
+
+    public static void update(){
+        if (!Objects.equals(latest_version, instance.getDescription().getVersion())){
+            if (GetVersion.latestFile()) {
+                Bukkit.getConsoleSender().sendMessage(
+                        miniMessage().deserialize("<green>Successfully updated!")
+                );
+            } else{
+                Bukkit.getConsoleSender().sendMessage(
+                        miniMessage().deserialize("<red>Something went horribly wrong!")
+                );
+            }
+        }
     }
 
     @EventHandler
