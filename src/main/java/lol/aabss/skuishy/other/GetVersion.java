@@ -56,10 +56,11 @@ public class GetVersion {
                 .build();
         try {
             String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
-            String url = new JSONArray(body).getJSONObject(0).getString("url");
+            JSONObject object =  new JSONArray(body).getJSONObject(0).getJSONArray("files").getJSONObject(0);
+            String url = object.getString("url");
             try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
                  FileOutputStream fileOutputStream = new FileOutputStream(
-                         Bukkit.getPluginsFolder().getPath()+new JSONArray(body).getJSONObject(0).getString("filename"))
+                         Bukkit.getPluginsFolder().getPath()+object.getString("filename"))
             ) {
                 byte[] dataBuffer = new byte[1024];
                 int bytesRead;

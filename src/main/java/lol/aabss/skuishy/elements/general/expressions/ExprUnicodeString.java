@@ -10,13 +10,14 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import org.apache.commons.text.StringEscapeUtils;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Name("String - Unicode String")
 @Description("Replaces all the unicode in the string with the symbol.")
@@ -38,7 +39,16 @@ public class ExprUnicodeString extends SimpleExpression<String> {
     protected @Nullable String @NotNull [] get(@NotNull Event e) {
         List<String> strings = new ArrayList<>();
         for (String s : string.getArray(e)){
-            strings.add(StringEscapeUtils.unescapeJava(s));
+            Pattern pattern = Pattern.compile("\\\\u[0-9a-fA-F]{4}");
+            Matcher matcher = pattern.matcher(s);
+            StringBuilder decodedString = new StringBuilder();
+            while (matcher.find()) {
+                String unicodeSequence = matcher.group();
+                char unicodeChar = (char) Integer.parseInt(unicodeSequence.substring(2), 16);
+                matcher.appendReplacement(decodedString, Character.toString(unicodeChar));
+            }
+            matcher.appendTail(decodedString);
+            strings.add(decodedString.toString());
         }
         return strings.toArray(String[]::new);
     }

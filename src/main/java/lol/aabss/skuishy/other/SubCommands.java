@@ -20,6 +20,7 @@ import static lol.aabss.skuishy.other.GetVersion.latestVersion;
 import static lol.aabss.skuishy.other.UpdateChecker.updateCheck;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
+@SuppressWarnings("deprecation")
 public class SubCommands {
     public static void cmdInfo(CommandSender sender, @Nullable String plugin){
         if (!sender.hasPermission("skuishy.command.info")) {
