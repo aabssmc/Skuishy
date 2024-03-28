@@ -18,6 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,7 +118,9 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     @Override
     public void onDisable(){
         if (getConfig().getBoolean("auto-update")){
-            UpdateChecker.update();
+            if (new File(getInstance().getClass().getProtectionDomain().getCodeSource().getLocation().getFile()).delete()) {
+                UpdateChecker.update();
+            }
         }
     }
 

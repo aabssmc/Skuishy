@@ -4,8 +4,8 @@ permission-message: "<red>You can not execute this sub-command!"
 # whether players with the permission 'skuishy.updatechecker' should be notified if there is an update.
 update-checker: true
 
-# whether the plugin should automatically update when there is a new version
-auto-update: true
+# whether the plugin should automatically update during shutdown when there is a new version
+auto-update: false
 
 # whether a message should be sent whenever a new version check happens.
 version-check-msg: true

@@ -60,8 +60,9 @@ public class GetVersion {
             String url = object.getString("url");
             try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
                  FileOutputStream fileOutputStream = new FileOutputStream(
-                         Bukkit.getPluginsFolder().getPath()+object.getString("filename"))
+                         Bukkit.getPluginsFolder().getAbsoluteFile()+"/"+object.getString("filename"))
             ) {
+                Bukkit.getConsoleSender().sendMessage(Bukkit.getPluginsFolder().getAbsoluteFile()+"/"+object.getString("filename"));
                 byte[] dataBuffer = new byte[1024];
                 int bytesRead;
                 while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
