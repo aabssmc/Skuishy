@@ -3,7 +3,6 @@ package lol.aabss.skuishy;
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import ch.njol.skript.util.Version;
-import lol.aabss.skuishy.other.Events;
 import lol.aabss.skuishy.other.Metrics;
 import lol.aabss.skuishy.other.UpdateChecker;
 import org.bukkit.Bukkit;
@@ -45,7 +44,6 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public void onEnable() {
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(new UpdateChecker(), this);
-        getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginCommand("skuishy").setExecutor(this);
         getServer().getPluginCommand("skuishy").setTabCompleter(this);
         Metrics metrics = new Metrics(this, 20162);

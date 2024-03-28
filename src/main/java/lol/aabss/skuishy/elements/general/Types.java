@@ -6,7 +6,6 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
 import io.papermc.paper.datapack.Datapack;
-import lol.aabss.skuishy.other.FakeSign;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.potion.PotionType;
 import org.eclipse.jdt.annotation.Nullable;
@@ -95,29 +94,6 @@ public class Types {
                     @Override
                     public @NotNull String toString(PotionType type, int flags) {
                         return toVariableNameString(type);
-                    }
-                })
-        );
-        Classes.registerClass(new ClassInfo<>(FakeSign.class, "fakesign")
-                .user("fakesigns?")
-                .name("Fake Sign")
-                .description("Represents a fake sign.")
-                .since("2.5")
-                .parser(new Parser<>() {
-
-                    @Override
-                    public boolean canParse(@NotNull ParseContext context) {
-                        return false;
-                    }
-
-                    @Override
-                    public @NotNull String toVariableNameString(FakeSign sign) {
-                        return "fakesign";
-                    }
-
-                    @Override
-                    public @NotNull String toString(FakeSign sign, int flags) {
-                        return toVariableNameString(sign);
                     }
                 })
         );
