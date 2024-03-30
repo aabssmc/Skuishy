@@ -1,5 +1,9 @@
 package lol.aabss.skuishy.elements.skins.expressions;
 
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -9,6 +13,13 @@ import org.bukkit.OfflinePlayer;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
+@Name("Skins - Player Head")
+@Description("Returns a player's head as a string.")
+@Examples({
+        "send face of \"aabss\" # works with strings too",
+        "send no layer face of \"aabss\" # sends face without the outer layer"
+})
+@Since("2.6")
 public class ExprPlayerHead extends SimplePropertyExpression<Object, String> {
 
     static {
