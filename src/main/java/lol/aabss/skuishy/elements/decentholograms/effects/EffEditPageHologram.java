@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+
 @Name("Decent Holograms - Edit Page")
 @Description("Edits a page of a hologram.")
 @Examples({
@@ -27,9 +28,9 @@ public class EffEditPageHologram extends Effect {
     static{
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffEditPageHologram.class,
-                    "add [page] of [hologram] %hologram%",
-                    "remove [page] %integer% of [hologram] %hologram%",
-                    "insert [page] %integer% of [hologram] %hologram%"
+                    "add [page] of [hologram] %holograms%",
+                    "remove [page] %integer% of [hologram] %holograms%",
+                    "insert [page] %integer% of [hologram] %holograms%"
             );
         }
     }
@@ -40,25 +41,24 @@ public class EffEditPageHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Hologram hologram = this.hologram.getSingle(e);
-        if (hologram == null){
-            return;
-        } if (Objects.equals(changetype, "add")){
-            DHAPI.addHologramPage(hologram);
-        } else if (Objects.equals(changetype, "remove")){
-            Integer page = this.page.getSingle(e);
-            if (page != null){
-                DHAPI.removeHologramPage(hologram, page);
-            }
-        } else if (Objects.equals(changetype, "insert")){
-            Integer page = this.page.getSingle(e);
-            if (page != null){
-                DHAPI.insertHologramPage(hologram, page);
-            }
-        } else if (Objects.equals(changetype, "get")){
-            Integer page = this.page.getSingle(e);
-            if (page != null){
-                DHAPI.getHologramPage(hologram, page);
+        for (Hologram hologram : this.hologram.getArray(e)) {
+            if (Objects.equals(changetype, "add")){
+                DHAPI.addHologramPage(hologram);
+            } else if (Objects.equals(changetype, "remove")){
+                Integer page = this.page.getSingle(e);
+                if (page != null){
+                    DHAPI.removeHologramPage(hologram, page);
+                }
+            } else if (Objects.equals(changetype, "insert")){
+                Integer page = this.page.getSingle(e);
+                if (page != null){
+                    DHAPI.insertHologramPage(hologram, page);
+                }
+            } else if (Objects.equals(changetype, "get")){
+                Integer page = this.page.getSingle(e);
+                if (page != null){
+                    DHAPI.getHologramPage(hologram, page);
+                }
             }
         }
     }

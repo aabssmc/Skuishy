@@ -31,11 +31,11 @@ public class EffEditLineHologram extends Effect {
     static{
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffEditLineHologram.class,
-                    "add [line] of [hologram] %hologram% to show [text] %string%",
-                    "remove [line] %integer% of [hologram] %hologram%",
-                    "create line from [page] %integer% of [hologram] %hologram% to show [text] %string%",
-                    "insert [line] %integer% of [hologram] %hologram% to show [text] %string%",
-                    "set [line] %integer% of [hologram] %hologram% to show [text] %string%"
+                    "add [line] of [hologram] %holograms% to show [text] %string%",
+                    "remove [line] %integer% of [hologram] %holograms%",
+                    "create line from [page] %integer% of [hologram] %holograms% to show [text] %string%",
+                    "insert [line] %integer% of [hologram] %holograms% to show [text] %string%",
+                    "set [line] %integer% of [hologram] %holograms% to show [text] %string%"
             );
         }
     }
@@ -49,8 +49,7 @@ public class EffEditLineHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Hologram holo = hologram.getSingle(e);
-        if (holo != null) {
+        for (Hologram holo : hologram.getArray(e)) {
             if (Objects.equals(changetype, "add")) {
                 String text = this.text.getSingle(e);
                 if (text != null) {

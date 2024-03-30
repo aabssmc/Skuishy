@@ -38,10 +38,11 @@ public class EffMoveHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Hologram holo = hologram.getSingle(e);
         Location loc = location.getSingle(e);
-        if (holo != null && loc != null){
-            DHAPI.moveHologram(holo, loc);
+        if (loc != null){
+            for (Hologram holo : hologram.getArray(e)) {
+                DHAPI.moveHologram(holo, loc);
+            }
         }
     }
 

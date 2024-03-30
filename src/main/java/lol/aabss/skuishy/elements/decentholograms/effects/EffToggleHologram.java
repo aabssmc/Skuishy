@@ -26,7 +26,7 @@ public class EffToggleHologram extends Effect {
     static{
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffToggleHologram.class,
-                    "(en|:dis)able [(decent [hologram[s]]|dh)] [hologram] %hologram%"
+                    "(en|:dis)able [(decent [hologram[s]]|dh)] [hologram] %holograms%"
             );
         }
     }
@@ -36,8 +36,7 @@ public class EffToggleHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event e) {
-        Hologram holo = hologram.getSingle(e);
-        if (holo != null) {
+        for (Hologram holo : hologram.getArray(e)) {
             if (dis) {
                 holo.disable();
             } else {
