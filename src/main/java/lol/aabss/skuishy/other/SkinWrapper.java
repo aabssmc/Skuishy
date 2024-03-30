@@ -3,6 +3,7 @@ package lol.aabss.skuishy.other;
 import ch.njol.skript.Skript;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.profile.PlayerTextures;
@@ -21,26 +22,6 @@ import static lol.aabss.skuishy.Skuishy.instance;
 
 public class SkinWrapper {
 
-    public static BufferedImage get(Player player, @Nullable Number size, boolean lay) {
-        BufferedImage textureImage = imgTexture(player);
-        BufferedImage subImage = textureImage.getSubimage(8,8,8,8);
-        assert size != null;
-        BufferedImage face = new BufferedImage(size.intValue(), size.intValue(), subImage.getType());
-        Graphics2D faceTmp = face.createGraphics();
-        faceTmp.drawImage(textureImage, 0, 0, size.intValue(), size.intValue(), null);
-        faceTmp.dispose();
-        if (lay) {
-            try {
-                BufferedImage outerLayer = textureImage.getSubimage(40, 8, 8, 8);
-                faceTmp.drawImage(outerLayer, 0, 0, size.intValue(), size.intValue(), null);
-                faceTmp.dispose();
-            } catch (Exception e) {
-                throw new IllegalStateException(e);
-            }
-        }
-        return face;
-    }
-
     public static ProfileProperty getProfileProperties(Player p) {
         PlayerProfile playerProfile = p.getPlayerProfile();
         ProfileProperty prop = null;
@@ -53,21 +34,8 @@ public class SkinWrapper {
         return prop;
     }
 
-    public static BufferedImage imgTexture(Player player) {
-        if (Skript.methodExists(com.destroystokyo.paper.profile.PlayerProfile.class, "getTextures")) {
-            URL url = player.getPlayerProfile().getTextures().getSkin();
-            if (url != null) {
-                try {
-                    return ImageIO.read(url);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        } return null;
-    }
-
     public static void setSkin(Player player, @Nullable String skin){
-        if (Skript.methodExists(com.destroystokyo.paper.profile.PlayerProfile.class, "getTextures") && Skript.classExists("org.bukkit.profile.PlayerTextures")) {
+        if (Skript.methodExists(PlayerProfile.class, "getTextures") && Skript.classExists("org.bukkit.profile.PlayerTextures")) {
             if (skin != null) {
                 if (skin.length() <= 16) {
                     if (player.getName().equals(skin)) {
@@ -110,4 +78,25 @@ public class SkinWrapper {
         JSONObject json = new JSONObject(new String(Base64.getDecoder().decode(value)));
         setSkin(player,json.getJSONArray("textures").getJSONArray(0).getString(0));
     }
+
+    @SuppressWarnings("deprecation")
+    public static String sendHead(String name, boolean helm) {
+        BufferedImage img;
+        try {
+            img = ImageIO.read(new URL("https://minotar.net/"+(helm?"helm":"avatar")+"/" + name + "/8.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String[] result = new String[8];
+        for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+                ChatColor c = ChatColor.of(new Color(img.getRGB(x,y)));
+                if(result[y] == null) result[y] = "";
+                result[y] += (c.toString() + "\u2588").replaceAll("\\?", "");
+            }
+        }
+        return String.join("\n", result);
+    }
+
+
 }
