@@ -51,9 +51,9 @@ public class EffPlayNote extends Effect {
         for (final Location l : locations.getArray(e)){
             for (final Player p : players.getArray(e)){
                 Instrument inst = instrument.getSingle(e);
-                Note note1 = note.getSingle(e);
-                if (inst != null && note1 != null){
-                    p.playNote(l, inst, note1);
+                Note note = this.note.getSingle(e);
+                if (inst != null && note != null){
+                    p.playNote(l, inst, note);
                 }
             }
         }

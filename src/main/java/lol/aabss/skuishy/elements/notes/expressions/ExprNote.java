@@ -39,21 +39,26 @@ public class ExprNote extends SimpleExpression<Note> {
     @Override
     protected Note @Nullable [] get(@NotNull Event e) {
         Integer oct;
-        if (octave.getSingle(e) == null){
+        if (octave == null){
             oct = 0;
         } else{
-            oct = octave.getSingle(e);
+            Integer octave = this.octave.getSingle(e);
+            oct = Objects.requireNonNullElse(octave, 0);
         }
         Note.Tone tone = this.tone.getSingle(e);
-        if (tone != null && oct != null) {
-            if (oct == 0 || oct == 1) {
-                if (Objects.equals(accidental, "sharp")) {
+        if (tone != null) {
+            if (Objects.equals(accidental, "sharp")) {
+                if (oct == 0 || oct == 1 || oct == 2) {
                     Note note = Note.sharp(oct, tone);
                     return new Note[]{note};
-                } else if (Objects.equals(accidental, "flat")) {
+                }
+            } else if (Objects.equals(accidental, "flat")) {
+                if (oct == 0 || oct == 1) {
                     Note note = Note.flat(oct, tone);
                     return new Note[]{note};
-                } else if (Objects.equals(accidental, "natural")) {
+                }
+            } else if (Objects.equals(accidental, "natural")) {
+                if (oct == 0 || oct == 1) {
                     Note note = Note.natural(oct, tone);
                     return new Note[]{note};
                 }

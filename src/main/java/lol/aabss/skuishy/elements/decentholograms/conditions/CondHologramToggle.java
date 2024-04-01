@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
         "if hologram named \"hello\" is disabled:",
         "if hologram named \"hello\" is enabled:"
 })
-@Since("2.6")
+@Since("2.6 ")
 @RequiredPlugins("DecentHolograms")
 public class CondHologramToggle extends PropertyCondition<Hologram> {
 
