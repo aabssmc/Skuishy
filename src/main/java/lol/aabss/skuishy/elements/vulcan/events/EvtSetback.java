@@ -1,10 +1,6 @@
 package lol.aabss.skuishy.elements.vulcan.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,22 +11,18 @@ import me.frep.vulcan.api.event.VulcanSetbackEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
-@Name("Vulcan - On Player Setback")
-@Description("Called when a player gets setback by vulcan.")
-@Examples({
-        "on setback:"
-})
-@Since("1.9")
+import org.jetbrains.annotations.NotNull;
 public class EvtSetback extends SkriptEvent {
 
     static {
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
-            Skript.registerEvent("on vulcan setback event", EvtSetback.class, VulcanSetbackEvent.class,
+            Skript.registerEvent("Vulcan - Setback", EvtSetback.class, VulcanSetbackEvent.class,
                     "[vulcan] [player] setback"
-            );
+            )
+                    .description("Called when a player gets setback by vulcan.")
+                    .examples("on vulcan setback:")
+                    .since("1.9");
             EventValues.registerEventValue(VulcanSetbackEvent.class, Player.class, new Getter<>() {
                 @Override
                 public Player get(VulcanSetbackEvent e) {

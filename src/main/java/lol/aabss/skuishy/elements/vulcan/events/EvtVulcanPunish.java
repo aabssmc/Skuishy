@@ -1,10 +1,6 @@
 package lol.aabss.skuishy.elements.vulcan.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,22 +10,18 @@ import me.frep.vulcan.api.event.VulcanPunishEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
-@Name("Vulcan - On Vulcan Punish")
-@Description("Called when a player gets punished.")
-@Examples({
-        "on vulcan punish:"
-})
-@Since("1.9")
+import org.jetbrains.annotations.NotNull;
 public class EvtVulcanPunish extends SkriptEvent {
 
     static {
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
-            Skript.registerEvent("on vulcan punish event", EvtVulcanPunish.class, VulcanPunishEvent.class,
-                    "[vulcan] punish[ed]"
-            );
+            Skript.registerEvent("Vulcan - Player Punish", EvtVulcanPunish.class, VulcanPunishEvent.class,
+                    "[vulcan] [player] punish[ed]"
+            )
+                    .description("Called when a player gets punished.")
+                    .examples("on vulcan punish:")
+                    .since("1.9");
             EventValues.registerEventValue(VulcanPunishEvent.class, Player.class, new Getter<>() {
                 @Override
                 public Player get(VulcanPunishEvent e) {

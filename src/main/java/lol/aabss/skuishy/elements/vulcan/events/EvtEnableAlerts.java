@@ -1,10 +1,6 @@
 package lol.aabss.skuishy.elements.vulcan.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,22 +11,18 @@ import me.frep.vulcan.api.event.VulcanEnableAlertsEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
-@Name("Vulcan - On Enable Alerts")
-@Description("Called when the alerts get enabled.")
-@Examples({
-        "on enable alerts:"
-})
-@Since("1.9")
+import org.jetbrains.annotations.NotNull;
 public class EvtEnableAlerts extends SkriptEvent {
 
     static {
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
-            Skript.registerEvent("on vulcan enable alerts event", EvtEnableAlerts.class, VulcanEnableAlertsEvent.class,
+            Skript.registerEvent("Vulcan - Enable Alerts", EvtEnableAlerts.class, VulcanEnableAlertsEvent.class,
                     "[vulcan] enable alert[s]"
-            );
+            )
+                    .description("Called when the alerts get enabled.")
+                    .examples("on enable alerts:")
+                    .since("1.9");
             EventValues.registerEventValue(VulcanEnableAlertsEvent.class, Player.class, new Getter<>() {
                 @Override
                 public Player get(VulcanEnableAlertsEvent e) {

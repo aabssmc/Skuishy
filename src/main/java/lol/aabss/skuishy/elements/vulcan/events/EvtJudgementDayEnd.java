@@ -1,33 +1,25 @@
 package lol.aabss.skuishy.elements.vulcan.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import me.frep.vulcan.api.event.VulcanJudgementDayEndEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
-
-@Name("Vulcan - On Judgement Day End")
-@Description("Called when the judgement day ends.")
-@Examples({
-        "on judge day end:"
-})
-@Since("1.9")
 public class EvtJudgementDayEnd extends SkriptEvent {
 
     static {
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
-            Skript.registerEvent("on vulcan judgement day end event", EvtJudgementDayEnd.class, VulcanJudgementDayEndEvent.class,
+            Skript.registerEvent("Vulcan - Judgement Day End", EvtJudgementDayEnd.class, VulcanJudgementDayEndEvent.class,
                     "[vulcan] judge[ment] [day] end[ed]"
-            );
+            )
+                    .description("Called when the judgement day ends.")
+                    .examples("on judge day end:")
+                    .since("1.9");
         }
     }
 

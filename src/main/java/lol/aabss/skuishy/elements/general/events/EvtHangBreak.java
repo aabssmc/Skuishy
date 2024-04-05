@@ -1,10 +1,6 @@
 package lol.aabss.skuishy.elements.general.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -13,25 +9,20 @@ import ch.njol.skript.util.Getter;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.event.hanging.HangingBreakEvent;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
-
-@Name("Player - On Hang")
-@Description("Called when a entity gets hung.")
-@Examples({
-        "on entity hang break:",
-        "\tcancel event"
-})
-@Since("2.0")
 
 public class EvtHangBreak extends SkriptEvent {
 
     static {
-        Skript.registerEvent("on entity hang break", EvtHangBreak.class, HangingBreakEvent.class,
+        Skript.registerEvent("Entity - Hang Break", EvtHangBreak.class, HangingBreakEvent.class,
                 "[entity] hang[ing] break[ed]",
                 "[entity] break[ed] hang[ing]"
-        );
+        )
+                .description("Triggered when a hanging entity is removed")
+                .examples("on entity hang break:", "\tcancel event")
+                .since("2.0");
         EventValues.registerEventValue(HangingBreakEvent.class, Entity.class, new Getter<>() {
             @Override
             public Entity get(HangingBreakEvent e) {

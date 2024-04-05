@@ -1,10 +1,6 @@
 package lol.aabss.skuishy.elements.vulcan.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,22 +11,18 @@ import me.frep.vulcan.api.event.VulcanPostFlagEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
-@Name("Vulcan - On Vulcan Post Flag")
-@Description("Called before a player gets flagged.")
-@Examples({
-        "on vulcan post flag:"
-})
-@Since("1.9")
+import org.jetbrains.annotations.NotNull;
 public class EvtPostFlag extends SkriptEvent {
 
     static {
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
-            Skript.registerEvent("on vulcan post flag event", EvtPostFlag.class, VulcanPostFlagEvent.class,
+            Skript.registerEvent("Vulcan - Post Flag", EvtPostFlag.class, VulcanPostFlagEvent.class,
                     "[vulcan] (pre|post)[( |-)]flag[ged]"
-            );
+            )
+                    .description("Called before a player gets flagged.")
+                    .examples("on vulcan post flag:")
+                    .since("1.9");
             EventValues.registerEventValue(VulcanPostFlagEvent.class, Player.class, new Getter<>() {
                 @Override
                 public Player get(VulcanPostFlagEvent e) {

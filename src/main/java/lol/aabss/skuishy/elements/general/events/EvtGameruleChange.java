@@ -1,10 +1,6 @@
 package lol.aabss.skuishy.elements.general.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -17,22 +13,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-@Name("World - On Gamerule Change")
-@Description("Called when a gamerule is changed.")
-@Examples({
-        "on gamerule change in \"world\":",
-        "\tif gamerule is doDaylightCyle",
-        "\t\tsend \"%gamerule% is now %event-string%\" to commandsender"
-})
-@Since("1.6")
-
 public class EvtGameruleChange extends SkriptEvent {
 
     static {
-        Skript.registerEvent("on gamerule change", EvtGameruleChange.class, WorldGameRuleChangeEvent.class,
+        Skript.registerEvent("World - Gamerule Change", EvtGameruleChange.class, WorldGameRuleChangeEvent.class,
                 "game[( |-)]rule change [of %-gamerule%] [in %-world%]",
                 "game[( |-)]rule change [in %-world%] [of %-gamerule%]"
-        );
+        )
+                .description("Called when a gamerule is changed.")
+                .examples("on gamerule change in \"world\":", "\tif gamerule is doDaylightCyle", "\t\tsend \"%gamerule% is now %event-string%\" to commandsender")
+                .since("1.6");
         EventValues.registerEventValue(WorldGameRuleChangeEvent.class, World.class, new Getter<>() {
             @Override
             public World get(WorldGameRuleChangeEvent e) {

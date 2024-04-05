@@ -1,7 +1,6 @@
 package lol.aabss.skuishy.elements.decentholograms.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -13,25 +12,20 @@ import eu.decentsoftware.holograms.event.HologramClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
-
-@Name("Decent Holograms - Hologram Click")
-@Description("Called when a hologram gets clicked.")
-@Examples({
-        "on hologram click:"
-})
-@Since("1.7")
-@RequiredPlugins("DecentHolograms")
+import org.jetbrains.annotations.NotNull;
 
 public class EvtHologramClick extends SkriptEvent {
 
     static{
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
-            Skript.registerEvent("hologram click", EvtHologramClick.class, HologramClickEvent.class,
+            Skript.registerEvent("Decent Holograms - Hologram Click", EvtHologramClick.class, HologramClickEvent.class,
                     "[(decent [hologram[s]]|dh)] holo[gram] click"
-            );
+            )
+                    .description("Called when a hologram gets clicked.")
+                    .examples("on hologram click:", "\tbroadcast \"%player% clicked %event-hologram%\"")
+                    .since("1.7")
+                    .requiredPlugins("DecentHolograms");
             EventValues.registerEventValue(HologramClickEvent.class, Player.class, new Getter<>() {
                 @Override
                 public Player get(HologramClickEvent e) {

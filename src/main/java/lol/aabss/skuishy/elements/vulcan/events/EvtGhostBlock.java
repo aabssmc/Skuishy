@@ -1,10 +1,6 @@
 package lol.aabss.skuishy.elements.vulcan.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,22 +11,18 @@ import me.frep.vulcan.api.event.VulcanGhostBlockEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
-@Name("Vulcan - On Ghost Block")
-@Description("Called when a player is on a ghost block.")
-@Examples({
-        "on ghost block:"
-})
-@Since("1.9")
+import org.jetbrains.annotations.NotNull;
 public class EvtGhostBlock extends SkriptEvent {
 
     static {
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
-            Skript.registerEvent("on vulcan ghost block event", EvtGhostBlock.class, VulcanGhostBlockEvent.class,
+            Skript.registerEvent("Vulcan - Ghost Block", EvtGhostBlock.class, VulcanGhostBlockEvent.class,
                     "[vulcan] ghost block"
-            );
+            )
+                    .description("Called when a player is on a ghost block.")
+                    .examples("on ghost block:")
+                    .since("1.9");
             EventValues.registerEventValue(VulcanGhostBlockEvent.class, Player.class, new Getter<>() {
                 @Override
                 public Player get(VulcanGhostBlockEvent e) {

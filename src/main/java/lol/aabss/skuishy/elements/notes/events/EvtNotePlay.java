@@ -1,10 +1,6 @@
 package lol.aabss.skuishy.elements.notes.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.Description;
-import ch.njol.skript.doc.Examples;
-import ch.njol.skript.doc.Name;
-import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,24 +11,19 @@ import org.bukkit.Note;
 import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.NotePlayEvent;
+import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
-
-@Name("Notes - On Note Play")
-@Description("Called when a note block is played.")
-@Examples({
-        "on note play:",
-        "\tbroadcast \"%event-block% has been played\""
-})
-@Since("1.6")
 
 public class EvtNotePlay extends SkriptEvent {
 
     static{
-        Skript.registerEvent("on note play", EvtNotePlay.class, NotePlayEvent.class,
+        Skript.registerEvent("Notes - Note Play", EvtNotePlay.class, NotePlayEvent.class,
                 "note [block] play"
-        );
+        )
+                .description("Called when a note block is played.")
+                .examples("on note play:", "\tbroadcast \"%event-block% has been played!\"")
+                .since("1.6");
         EventValues.registerEventValue(NotePlayEvent.class, Note.Tone.class, new Getter<>() {
             @Override
             public Note.Tone get(NotePlayEvent e) {

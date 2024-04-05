@@ -1,7 +1,6 @@
 package lol.aabss.skuishy.elements.general.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -14,19 +13,14 @@ import org.bukkit.event.command.UnknownCommandEvent;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-@Name("Other - On Unknown Command")
-@Description("Thrown when someone executes a command that is not defined.")
-@Examples({
-        "on unknown command:",
-        "\tset unknown command message to \"that doesn't exist\""
-})
-@Since("1.3")
-@RequiredPlugins("Paper 1.13+")
 public class EvtUnknownCmd extends SkriptEvent {
     static {
-        Skript.registerEvent("unknown command", SimpleEvent.class, UnknownCommandEvent.class,
+        Skript.registerEvent("Other - Unknown Command", SimpleEvent.class, UnknownCommandEvent.class,
                 "unknown command"
-        );
+        )
+                .description("Thrown when someone executes a command that is not defined.")
+                .examples("on unknown command:", "\tset unknown command message to \"that doesn't exist\"")
+                .since("1.3");
         EventValues.registerEventValue(UnknownCommandEvent.class, CommandSender.class, new Getter<>() {
             @Override
             public CommandSender get(UnknownCommandEvent e) {
