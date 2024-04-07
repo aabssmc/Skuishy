@@ -13,7 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class Types {
     static{
-        Classes.registerClass(new ClassInfo<>(Datapack.class, "datapack")
+        if (Classes.getClassInfoNoError("datapack") == null) {
+            Classes.registerClass(new ClassInfo<>(Datapack.class, "datapack")
                     .user("datapacks?")
                     .name("datapack")
                     .description("Represents a datapack.")
@@ -35,67 +36,72 @@ public class Types {
                             return toVariableNameString(data);
                         }
                     })
-        );
-        EnumUtils<SpawnCategory> categorys = new EnumUtils<>(SpawnCategory.class, "spawncategory");
-        Classes.registerClass(new ClassInfo<>(SpawnCategory.class, "spawncategory")
-                .user("spawn ?categor(y|ies)")
-                .name("spawn category")
-                .description("Represents a spawn category.")
-                .since("1.7.5")
-                .parser(new Parser<>() {
+            );
+        }
+        if (Classes.getClassInfoNoError("spawncategory") == null) {
+            EnumUtils<SpawnCategory> categorys = new EnumUtils<>(SpawnCategory.class, "spawncategory");
+            Classes.registerClass(new ClassInfo<>(SpawnCategory.class, "spawncategory")
+                    .user("spawn ?categor(y|ies)")
+                    .name("spawn category")
+                    .description("Represents a spawn category.")
+                    .since("1.7.5")
+                    .parser(new Parser<>() {
 
-                    @Override
-                    @Nullable
-                    public SpawnCategory parse(@NotNull String input, @NotNull ParseContext context) {
-                        return categorys.parse(input);
-                    }
+                        @Override
+                        @Nullable
+                        public SpawnCategory parse(@NotNull String input, @NotNull ParseContext context) {
+                            return categorys.parse(input);
+                        }
 
-                    @Override
-                    public boolean canParse(@NotNull ParseContext context) {
-                        return true;
-                    }
+                        @Override
+                        public boolean canParse(@NotNull ParseContext context) {
+                            return true;
+                        }
 
-                    @Override
-                    public @NotNull String toVariableNameString(SpawnCategory category) {
-                        return category.name().replaceAll("_", " ").toLowerCase();
-                    }
+                        @Override
+                        public @NotNull String toVariableNameString(SpawnCategory category) {
+                            return category.name().replaceAll("_", " ").toLowerCase();
+                        }
 
-                    @Override
-                    public @NotNull String toString(SpawnCategory category, int flags) {
-                        return toVariableNameString(category);
-                    }
-                })
-        );
+                        @Override
+                        public @NotNull String toString(SpawnCategory category, int flags) {
+                            return toVariableNameString(category);
+                        }
+                    })
+            );
+        }
 
-        EnumUtils<PotionType> potiontypes = new EnumUtils<>(PotionType.class, "potionitemtype");
-        Classes.registerClass(new ClassInfo<>(PotionType.class, "potionitemtype")
-                .user("potion[ ]item[ ]type")
-                .name("Potion Item Type")
-                .description("Represents a potion item type that matches each potion state that can be obtained from the Creative mode inventory.")
-                .since("2.1")
-                .parser(new Parser<>() {
+        if (Classes.getClassInfoNoError("potionitemtype") == null) {
+            EnumUtils<PotionType> potiontypes = new EnumUtils<>(PotionType.class, "potionitemtype");
+            Classes.registerClass(new ClassInfo<>(PotionType.class, "potionitemtype")
+                    .user("potion[ ]item[ ]type")
+                    .name("Potion Item Type")
+                    .description("Represents a potion item type that matches each potion state that can be obtained from the Creative mode inventory.")
+                    .since("2.1")
+                    .parser(new Parser<>() {
 
-                    @Override
-                    @Nullable
-                    public PotionType parse(@NotNull String input, @NotNull ParseContext context) {
-                        return potiontypes.parse(input);
-                    }
+                        @Override
+                        @Nullable
+                        public PotionType parse(@NotNull String input, @NotNull ParseContext context) {
+                            return potiontypes.parse(input);
+                        }
 
-                    @Override
-                    public boolean canParse(@NotNull ParseContext context) {
-                        return true;
-                    }
+                        @Override
+                        public boolean canParse(@NotNull ParseContext context) {
+                            return true;
+                        }
 
-                    @Override
-                    public @NotNull String toVariableNameString(PotionType type) {
-                        return type.name().replaceAll("_", " ").toLowerCase();
-                    }
+                        @Override
+                        public @NotNull String toVariableNameString(PotionType type) {
+                            return type.name().replaceAll("_", " ").toLowerCase();
+                        }
 
-                    @Override
-                    public @NotNull String toString(PotionType type, int flags) {
-                        return toVariableNameString(type);
-                    }
-                })
-        );
+                        @Override
+                        public @NotNull String toString(PotionType type, int flags) {
+                            return toVariableNameString(type);
+                        }
+                    })
+            );
+        }
     }
 }

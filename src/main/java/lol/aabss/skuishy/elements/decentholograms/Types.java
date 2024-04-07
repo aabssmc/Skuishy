@@ -8,13 +8,12 @@ import ch.njol.skript.util.EnumUtils;
 import eu.decentsoftware.holograms.api.actions.ClickType;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
-import org.bukkit.Bukkit;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 public class Types {
     static{
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
+        if (Classes.getClassInfoNoError("hologram") == null) {
             Classes.registerClass(new ClassInfo<>(Hologram.class, "hologram")
                     .user("holograms?")
                     .name("hologram")
@@ -38,6 +37,8 @@ public class Types {
                         }
                     })
             );
+        }
+        if (Classes.getClassInfoNoError("hologramclicktype") == null) {
             EnumUtils<ClickType> clicktypes = new EnumUtils<>(ClickType.class, "hologramclicktype");
             Classes.registerClass(new ClassInfo<>(ClickType.class, "hologramclicktype")
                     .user("hologram ?click ?types?")
@@ -68,6 +69,8 @@ public class Types {
                         }
                     })
             );
+        }
+        if (Classes.getClassInfoNoError("hologrampage") == null) {
             Classes.registerClass(new ClassInfo<>(HologramPage.class, "hologrampage")
                     .user("hologram ?pages?")
                     .name("DecentHolograms - Hologram Page")
@@ -82,7 +85,7 @@ public class Types {
 
                         @Override
                         public @NotNull String toVariableNameString(HologramPage holo) {
-                            return "page "+holo.getIndex()+" of "+holo.getParent().getName();
+                            return "page " + holo.getIndex() + " of " + holo.getParent().getName();
                         }
 
                         @Override

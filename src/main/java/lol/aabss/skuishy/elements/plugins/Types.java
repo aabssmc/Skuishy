@@ -9,28 +9,30 @@ import org.jetbrains.annotations.NotNull;
 
 public class Types {
     static {
-        Classes.registerClass(new ClassInfo<>(Plugin.class, "plugin")
-                .user("plugins?")
-                .name("Plugin - Plugin")
-                .description("Represents a plugin.")
-                .since("2.3")
-                .parser(new Parser<>() {
+        if (Classes.getClassInfoNoError("plugin") == null) {
+            Classes.registerClass(new ClassInfo<>(Plugin.class, "plugin")
+                    .user("plugins?")
+                    .name("Plugin - Plugin")
+                    .description("Represents a plugin.")
+                    .since("2.3")
+                    .parser(new Parser<>() {
 
-                    @Override
-                    public boolean canParse(@NotNull ParseContext context) {
-                        return false;
-                    }
+                        @Override
+                        public boolean canParse(@NotNull ParseContext context) {
+                            return false;
+                        }
 
-                    @Override
-                    public @NotNull String toVariableNameString(Plugin plugin) {
-                        return plugin.getName();
-                    }
+                        @Override
+                        public @NotNull String toVariableNameString(Plugin plugin) {
+                            return plugin.getName();
+                        }
 
-                    @Override
-                    public @NotNull String toString(Plugin plugin, int flags) {
-                        return toVariableNameString(plugin);
-                    }
-                })
-        );
+                        @Override
+                        public @NotNull String toString(Plugin plugin, int flags) {
+                            return toVariableNameString(plugin);
+                        }
+                    })
+            );
+        }
     }
 }
