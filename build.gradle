@@ -8,36 +8,21 @@ version = '2.5'
 
 repositories {
     mavenCentral()
-    // paper
-    maven {
-        url = 'https://repo.papermc.io/repository/maven-public/'
-    }
-    // skipt
-    maven {
-        url = 'https://repo.skriptlang.org/releases'
-    }
-    // jitpack
-    maven {
-        url = "https://jitpack.io"
-    }
+    maven {url = 'https://repo.papermc.io/repository/maven-public/'}
+    maven {url = 'https://repo.skriptlang.org/releases'}
+    maven {url = "https://jitpack.io"}
 }
 
 dependencies {
-    // paper
-    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-    implementation "net.kyori:adventure-text-minimessage:4.15.0"
-    // Skript
-    compileOnly(group: 'com.github.SkriptLang', name: 'Skript', version: '2.7.0') {
+    compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
+    implementation 'net.kyori:adventure-text-minimessage:4.15.0'
+    compileOnly ('com.github.SkriptLang:Skript:2.7.0') {
         transitive = false
     }
-    // decent holograms
     compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.6'
-    // vivecraft
     compileOnly files('libs/Vivecraft_Spigot_Extensions.jar')
-    // vulcan
     compileOnly files('libs/VulcanAPI.jar')
-    // other things
-    implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.800')
+    implementation 'org.eclipse.jdt:org.eclipse.jdt.annotation:2.2.800'
     implementation 'org.json:json:20231013'
 }
 
