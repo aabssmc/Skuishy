@@ -78,22 +78,22 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
                 Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Vulcan elements loaded!");
             } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Vulcan elements not loaded.");
 
-            if (getConfig().getBoolean("note-elements")){
+            if (getConfig().getBoolean("note-elements", true)){
                 addon.loadClasses("lol.aabss.skuishy.elements.notes");
                 Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Note elements loaded!");
             } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Note elements not loaded.");
 
-            if (getConfig().getBoolean("permission-elements")){
+            if (getConfig().getBoolean("permission-elements", true)){
                 addon.loadClasses("lol.aabss.skuishy.elements.permissions");
                 Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Permission elements loaded!");
             } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Permission elements not loaded.");
 
-            if (getConfig().getBoolean("plugin-elements")){
+            if (getConfig().getBoolean("plugin-elements", true)){
                 addon.loadClasses("lol.aabss.skuishy.elements.plugins");
                 Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Plugin elements loaded!");
             } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Plugin elements not loaded.");
 
-            if (getConfig().getBoolean("skin-elements")){
+            if (getConfig().getBoolean("skin-elements", true)){
                 addon.loadClasses("lol.aabss.skuishy.elements.skins");
                 Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Skin elements loaded!");
             } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Skin elements not loaded!");
@@ -115,7 +115,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
 
     @Override
     public void onDisable(){
-        if (getConfig().getBoolean("auto-update")){
+        if (getConfig().getBoolean("auto-update", false)){
             if (new File(getInstance().getClass().getProtectionDomain().getCodeSource().getLocation().getFile()).delete()) {
                 UpdateChecker.update();
             }
