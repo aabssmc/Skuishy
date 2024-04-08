@@ -54,7 +54,7 @@ public class ExprPlayerVal extends PropertyExpression<Player, String> {
     protected String @NotNull [] get(@NotNull Event event, Player[] source) {
         List<String> values = new ArrayList<>();
         for (Player p : source){
-            values.add(SkinWrapper.getProfileProperties(p).getValue());
+            values.add(SkinWrapper.getProfileProperties(p.getPlayerProfile()).getValue());
         }
         return values.toArray(String[]::new);
     }

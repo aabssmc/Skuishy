@@ -39,7 +39,7 @@ public class ExprPlayerSig extends PropertyExpression<Player, String> {
     protected String @NotNull [] get(@NotNull Event event, Player @NotNull [] source) {
         List<String> values = new ArrayList<>();
         for (Player p : source){
-            values.add(SkinWrapper.getProfileProperties(p).getSignature());
+            values.add(SkinWrapper.getProfileProperties(p.getPlayerProfile()).getSignature());
         }
         return values.toArray(String[]::new);
     }

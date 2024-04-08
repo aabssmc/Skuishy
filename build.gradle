@@ -1,34 +1,37 @@
 plugins {
-    id 'java'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id "java"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
-group = 'lol.aabss'
-version = '2.5'
+group = "lol.aabss"
+version = "2.5"
 
 repositories {
     mavenCentral()
-    maven {url = 'https://repo.papermc.io/repository/maven-public/'}
-    maven {url = 'https://repo.skriptlang.org/releases'}
+    maven {url = "https://repo.papermc.io/repository/maven-public/"}
+    maven {url = "https://repo.skriptlang.org/releases"}
     maven {url = "https://jitpack.io"}
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
-    implementation 'net.kyori:adventure-text-minimessage:4.15.0'
-    compileOnly ('com.github.SkriptLang:Skript:2.7.0') {
+    compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
+    implementation "net.kyori:adventure-text-minimessage:4.15.0"
+    compileOnly ("com.github.SkriptLang:Skript:2.7.0") {
         transitive = false
     }
-    compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.6'
-    compileOnly files('libs/Vivecraft_Spigot_Extensions.jar')
-    compileOnly files('libs/VulcanAPI.jar')
-    implementation 'org.eclipse.jdt:org.eclipse.jdt.annotation:2.2.800'
-    implementation 'org.json:json:20231013'
+    compileOnly "com.github.decentsoftware-eu:decentholograms:2.8.6"
+    compileOnly files("libs/Vivecraft_Spigot_Extensions.jar")
+    compileOnly files("libs/VulcanAPI.jar")
+    implementation "org.eclipse.jdt:org.eclipse.jdt.annotation:2.2.800"
+    implementation "org.json:json:20231013"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.2"
+    implementation "org.jsoup:jsoup:1.17.2"
 }
 
 shadowJar {
     dependencies {
-        include(dependency('org.json:json:20231013'))
+        include(dependency("org.json:json:20231013"))
+        include(dependency("org.jsoup:jsoup:1.17.2"))
     }
 }
 
@@ -49,12 +52,12 @@ tasks.withType(JavaCompile).configureEach {
 processResources {
     def props = [version: version]
     inputs.properties props
-    filteringCharset 'UTF-8'
-    filesMatching('plugin.yml') {
+    filteringCharset "UTF-8"
+    filesMatching("plugin.yml") {
         expand props
     }
-    from ('lang') {
-        include '**/*'
-        into 'lang/'
+    from ("lang") {
+        include "**/*"
+        into "lang/"
     }
 }

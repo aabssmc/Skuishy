@@ -16,42 +16,32 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Player - Skin")
-@Description({"Sets/resets the skin of the player",
-"# NOTE: ",
-"### Only accepted values are; username, url (MUST BE textures.minecraft.net/texture/) or skin vaule"})
+@Description({"Sets the skin of the player to a value and a signature."})
 @Examples({
-        "set skin of player to \"aabss\"",
-        "set skin of player to \"http://textures.minecraft.net/texture/9c8acc755dc6b5e1d282d528030ebc20823a7608853ad5f747ff7ec45d576555\"",
-        "set skin of player to \"{SKIN VALUE}\" # not adding real skin value cuz its too long"
+        "set skin of player to \"value\" and \"signature\" "
 })
-@Since("2.3")
+@Since("2.3, 2.6 (fixed)")
 public class EffSetSkin extends Effect {
 
     static {
         Skript.registerEffect(EffSetSkin.class,
-                "set [minecraft] skin of %players% to %string%",
-                "set %player%'[s] [minecraft] skin to %string%",
-                "reset [minecraft] skin of %players%",
-                "reset %players%'[s] [minecraft] skin"
+                "set [minecraft] skin of %players% to [value] %string% and [signature] %string%",
+                "set %player%'[s] [minecraft] skin to [value] %string% and [signature] %string%"
         );
     }
 
     private Expression<Player> player;
-    private Expression<String> skin;
+    private Expression<String> value;
+    private Expression<String> signature;
 
     @Override
     protected void execute(@NotNull Event e) {
         for (Player p : player.getArray(e)){
-            if (skin == null){
-                SkinWrapper.setSkin(p, null);
-            } else{
-                String skin = this.skin.getSingle(e);
-                if (skin != null){
-                    if (skin.length() <= 200){
-                        SkinWrapper.setSkin(p, skin);
-                    } else{
-                        SkinWrapper.setSkin(p, skin, null);
-                    }
+            if (value != null && signature != null){
+                String value = this.value.getSingle(e);
+                String signature = this.signature.getSingle(e);
+                if (value != null && signature != null){
+                    SkinWrapper.setSkin(p, value, signature);
                 }
             }
         }
@@ -65,10 +55,8 @@ public class EffSetSkin extends Effect {
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         player = (Expression<Player>) exprs[0];
-        if (matchedPattern == 0 || matchedPattern == 1) {
-            skin = (Expression<String>) exprs[1];
-        } else {
-            skin = null;
-        } return true;
+        value = (Expression<String>) exprs[1];
+        signature = (Expression<String>) exprs[2];
+        return true;
     }
 }
