@@ -16,18 +16,15 @@ import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 @Name("Skins - Player Skin")
-@Description("Gets/Sets/Resets a player's skin.")
+@Description({"Gets/Resets a player's skin.",
+        "## SEE EffSetSkin"})
 @Examples({
-        "set skin of player to \"Dinnerbone\" #A name of a player",
-        "set skin of player to \"http://textures.minecraft.net/texture/9c8acc755dc6b5e1d282d528030ebc20823a7608853ad5f747ff7ec45d576555\" #Official minecraft skin site",
-        "set skin of player to \"https://i.imgur.com/KWITSCB.png\" #An image from any website (nothing but the image on the site)",
-        "set skin of player to \"{VALUE}\" #The full value of the skin (no signature)"
+        "send skin of player # minecraft textures url",
+        "reset skin of player # resets this skin"
 })
 @Since("1.4, 2.6 (fixed)")
 
@@ -73,7 +70,7 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
 
     @Override
     public @Nullable Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.RESET){
+        if (mode == Changer.ChangeMode.RESET){
             return CollectionUtils.array(String.class);
         }
         return null;
@@ -81,27 +78,7 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
 
     @Override
     public void change(@NotNull Event e, @Nullable Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            for (Player p : getExpr().getArray(e)) {
-                if (delta[0] == null) {
-                    SkinWrapper.setSkin(p, p.getName());
-                } else {
-                    String skin = (String) delta[0];
-                    if (skin.length() <= 16 || !skin.contains("://")) {
-                        SkinWrapper.setSkin(p, skin);
-                    } else {
-                        if (skin.contains("://")) {
-                            try {
-                                SkinWrapper.setSkin(p, new URL(skin));
-                            } catch (MalformedURLException ignored) {
-                            }
-                        } else {
-                            SkinWrapper.setSkin(p, skin, null);
-                        }
-                    }
-                }
-            }
-        } else{
+        if (mode == Changer.ChangeMode.RESET){
             for (Player p : getExpr().getArray(e)) {
                 SkinWrapper.setSkin(p, p.getName());
             }
