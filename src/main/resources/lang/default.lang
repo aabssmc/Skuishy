@@ -1,3 +1,5 @@
+version: 2.5
+
 types:
     note: note¦s @a
     tone: tone¦s @a
@@ -5,10 +7,12 @@ types:
     datapack: datapack¦s @a
     spawncategory: spawn ?category¦s @a
     potionitemtype: potion ?item ?type¦s @a
-    permission: permission¦s @a
+    bukkitpermission: bukkitpermission¦s @a
     permissionattachment: permission ?attachment¦s @a
     permissiondefault: permission ?default¦s @a
     plugin: plugin¦s @a
+    blueprint: blueprint¦s @a
+    skinmodel: skinmodel¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
@@ -115,3 +119,8 @@ permissiondefault:
     false: false, no, off
     op: op, operator, admin
     not_op: not op, not operator, not admin
+
+skinmodel:
+    slim: slim, alex
+    classic: classic, steve
+    auto: auto

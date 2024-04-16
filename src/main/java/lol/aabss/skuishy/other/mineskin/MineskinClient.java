@@ -20,7 +20,6 @@ import org.jsoup.Jsoup;
 import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.*;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -70,8 +69,6 @@ public class MineskinClient {
         return nextRequest;
     }
 
-    /////
-
     private Connection generateRequest(String endpoint) {
         Connection connection = Jsoup.connect(GENERATE_BASE + endpoint)
                 .method(Connection.Method.POST)
@@ -85,37 +82,6 @@ public class MineskinClient {
         return connection;
     }
 
-    private Connection getRequest(String endpoint) {
-        return Jsoup.connect(GET_BASE + endpoint)
-                .method(Connection.Method.GET)
-                .userAgent(userAgent)
-                .ignoreContentType(true)
-                .ignoreHttpErrors(true)
-                .timeout(5000);
-    }
-
-
-    public CompletableFuture<Skin> getId(long id) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                Connection connection = getRequest("/id/" + id);
-                return handleResponse(connection.execute().body());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }, requestExecutor);
-    }
-
-    public CompletableFuture<Skin> getUuid(UUID uuid) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                Connection connection = getRequest("/uuid/" + uuid);
-                return handleResponse(connection.execute().body());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }, requestExecutor);
-    }
 
     public CompletableFuture<Skin> generateUrl(String url) {
         return generateUrl(url, SkinOptions.none());
@@ -207,41 +173,12 @@ public class MineskinClient {
         return generateUpload(new ByteArrayInputStream(baos.toByteArray()), options);
     }
 
-    public CompletableFuture<Skin> generateUser(UUID uuid) {
-        return generateUser(uuid, SkinOptions.none());
-    }
-
-    /**
-     * Loads skin data from an existing player
-     */
-    public CompletableFuture<Skin> generateUser(UUID uuid, SkinOptions options) {
-        checkNotNull(uuid);
-        checkNotNull(options);
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                if (System.currentTimeMillis() < nextRequest) {
-                    long delay = (nextRequest - System.currentTimeMillis());
-                    Thread.sleep(delay + 10);
-                }
-
-                JsonObject body = options.toJson();
-                body.addProperty("uuid", uuid.toString());
-                Connection connection = generateRequest("/user")
-                        .header("Content-Type", "application/json")
-                        .requestBody(body.toString());
-                return handleResponse(connection.execute().body());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }, requestExecutor);
-    }
 
     Skin handleResponse(String body) throws MineskinException, JsonParseException {
         JsonObject jsonObject = gson.fromJson(body, JsonObject.class);
         if (jsonObject.has("error")) {
             throw new MineskinException(jsonObject.get("error").getAsString());
         }
-
         Skin skin = gson.fromJson(jsonObject, Skin.class);
         this.nextRequest = System.currentTimeMillis() + ((long) (skin.delayInfo.millis + (this.apiKey == null ? 10_000 : 100)));
         return skin;

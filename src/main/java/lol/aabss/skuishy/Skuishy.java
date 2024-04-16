@@ -5,6 +5,8 @@ import ch.njol.skript.SkriptAddon;
 import ch.njol.skript.util.Version;
 import lol.aabss.skuishy.other.Metrics;
 import lol.aabss.skuishy.other.UpdateChecker;
+import lol.aabss.skuishy.other.blueprints.Blueprint;
+import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -34,20 +36,23 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public static long start;
     public static PermissionAttachment last_permission_attachment;
     public static Permission last_permission;
+    public static Blueprint last_blueprint;
     public static boolean dh = false;
     public static boolean vc = false;
     public static boolean vu = false;
     public static String latest_version;
     public static String latest_skript_version;
+    public static String data_path;
 
     @SuppressWarnings("deprecation")
     public void onEnable() {
+        instance = this;
         saveDefaultConfig();
+        BlueprintUtils.loadJson();
         getServer().getPluginManager().registerEvents(new UpdateChecker(), this);
         getServer().getPluginCommand("skuishy").setExecutor(this);
         getServer().getPluginCommand("skuishy").setTabCompleter(this);
         Metrics metrics = new Metrics(this, 20162);
-        instance = this;
         String prefix = net.md_5.bungee.api.ChatColor.of("#40ff00") + "[Skuishy] " + ChatColor.RESET;
         try {
             addon = Skript.registerAddon(this);
@@ -111,10 +116,12 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             latest_skript_version = latestSkriptVersion();
             if (getConfig().getBoolean("version-check-msg")) Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.YELLOW + "Got latest version.");
         }, 0L, 144000L);
+        data_path = this.getDataFolder().getAbsolutePath();
     }
 
     @Override
     public void onDisable(){
+        getServer().getScheduler().cancelTasks(this);
         if (getConfig().getBoolean("auto-update", false)){
             if (new File(getInstance().getClass().getProtectionDomain().getCodeSource().getLocation().getFile()).delete()) {
                 UpdateChecker.update();

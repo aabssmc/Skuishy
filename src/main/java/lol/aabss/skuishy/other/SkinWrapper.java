@@ -3,11 +3,12 @@ package lol.aabss.skuishy.other;
 import ch.njol.skript.Skript;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import lol.aabss.skuishy.other.blueprints.Blueprint;
+import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import lol.aabss.skuishy.other.mineskin.MineskinClient;
 import lol.aabss.skuishy.other.mineskin.SkinOptions;
 import lol.aabss.skuishy.other.mineskin.Variant;
 import lol.aabss.skuishy.other.mineskin.Visibility;
-import lol.aabss.skuishy.other.mineskin.data.Skin;
 import lol.aabss.skuishy.other.mineskin.data.Texture;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -18,12 +19,13 @@ import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 public class SkinWrapper {
+
+    public static MineskinClient client = new MineskinClient("Skuishy-Agent");
 
     public static ProfileProperty getProfileProperties(PlayerProfile p) {
         ProfileProperty prop = null;
@@ -57,12 +59,17 @@ public class SkinWrapper {
         }
     }
 
-    public static void setSkin(Player player, URL skin){
+    public static void setSkin(Player player, URL skin) throws ExecutionException, InterruptedException {
         Texture texture = uploadSkin(skin.toString());
         setSkin(player, texture.value, texture.signature);
     }
 
-    public static void setSkin(Player player, RenderedImage img){
+    public static void setSkin(Player player, Blueprint img) throws IOException {
+        Texture texture = uploadSkin(img);
+        setSkin(player, texture.value, texture.signature);
+    }
+
+    public static void setSkin(Player player, BufferedImage img) {
         Texture texture = uploadSkin(img);
         setSkin(player, texture.value, texture.signature);
     }
@@ -92,26 +99,27 @@ public class SkinWrapper {
         }
     }
 
-    public static Texture uploadSkin(RenderedImage img) {
+    // TODO: make faster
+    private static Texture uploadSkin(Blueprint print) {
         try {
-            Skin skin = new MineskinClient("Skuishy-Agent")
-                    .generateUpload(img, SkinOptions.create("Skuishy-Upload", Variant.AUTO, Visibility.PRIVATE))
-                    .get();
-            return skin.data.texture;
-        } catch (IOException | ExecutionException | InterruptedException e) {
+            return client.generateUpload(print.image(), SkinOptions.create("Skuishy-Upload", print.model(), Visibility.PRIVATE)).get().data.texture;
+        } catch (IOException | InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static Texture uploadSkin(String img) {
+    // TODO: make faster
+    private static Texture uploadSkin(BufferedImage image) {
         try {
-            Skin skin = new MineskinClient("Skuishy-Agent")
-                    .generateUrl(img, SkinOptions.create("Skuishy-Upload", Variant.AUTO, Visibility.PRIVATE))
-                    .get();
-            return skin.data.texture;
-        } catch (ExecutionException | InterruptedException e) {
+            return client.generateUpload(image, SkinOptions.create("Skuishy-Upload", BlueprintUtils.getVariant(image), Visibility.PRIVATE)).get().data.texture;
+        } catch (IOException | InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // TODO: make faster
+    private static Texture uploadSkin(String url) throws ExecutionException, InterruptedException {
+        return client.generateUrl(url, SkinOptions.create("Skuishy-Upload", Variant.AUTO, Visibility.PRIVATE)).get().data.texture;
     }
 
 
