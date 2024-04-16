@@ -52,7 +52,7 @@ public class EffSetSkin extends Effect {
     private Expression<String> signature;
 
     @Override
-    protected void execute(Event e) {
+    protected void execute(@NotNull Event e) {
         if (value == null || signature == null) {
             if (skin != null) {
                 Object skin = this.skin.getSingle(e);
