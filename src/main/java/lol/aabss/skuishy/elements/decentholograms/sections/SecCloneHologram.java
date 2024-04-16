@@ -66,11 +66,13 @@ public class SecCloneHologram extends Section {
 
     @Override
     protected @Nullable TriggerItem walk(@NotNull Event e) {
-        Hologram holo = this.hologram.getSingle(e);
-        String name = this.name.getSingle(e);
-        Location loc = this.location.getSingle(e);
-        if (holo != null && name != null && loc != null) {
-            holo.clone(name, loc, temp);
+        if (hologram != null && name != null && location != null) {
+            Hologram holo = this.hologram.getSingle(e);
+            String name = this.name.getSingle(e);
+            Location loc = this.location.getSingle(e);
+            if (holo != null && name != null && loc != null) {
+                holo.clone(name, loc, temp);
+            }
         }
         return super.walk(e, false);
     }
