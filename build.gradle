@@ -23,7 +23,7 @@ dependencies {
     compileOnly files("libs/Vivecraft_Spigot_Extensions.jar")
     compileOnly files("libs/VulcanAPI.jar")
     implementation "org.eclipse.jdt:org.eclipse.jdt.annotation:2.2.800"
-    implementation "org.json:json:20231013"
+    compileOnly "org.json:json:20231013"
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.2"
     implementation "org.jsoup:jsoup:1.17.2"
 }

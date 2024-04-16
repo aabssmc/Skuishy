@@ -12,6 +12,7 @@ import static lol.aabss.skuishy.Skuishy.instance;
 import static lol.aabss.skuishy.Skuishy.latest_version;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
+@SuppressWarnings("deprecation")
 public class UpdateChecker implements Listener {
 
     public static boolean updateCheck(CommandSender p){
