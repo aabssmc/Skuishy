@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.skins.expressions;
 
 import ch.njol.skript.classes.Changer;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,6 +19,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@Name("Blueprint - Pixel Color")
+@Description("Gets the color of a pixel.")
+@Examples({
+        "send color at 1, 2 of {_print}"
+})
+@Since("2.6")
 public class ExprPixelColor extends PropertyExpression<Blueprint, Color> {
 
     static {

@@ -21,8 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Name("Blueprint - Overlay Blueprint")
-@Description("Overlays a blueprint on another blueprint.")
+@Name("Blueprint - New Blueprint")
+@Description("Returns a new blueprint.")
 @Examples({
         "set {_empty} to classic empty blueprint",
         "set {_blueprint} to slim new blueprint from player \"aabss\"",
