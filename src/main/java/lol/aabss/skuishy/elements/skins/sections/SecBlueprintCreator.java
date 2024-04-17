@@ -9,7 +9,6 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.*;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.elements.decentholograms.sections.SecCreateHologram;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.mineskin.Variant;
 import org.bukkit.Bukkit;
@@ -52,7 +51,7 @@ public class SecBlueprintCreator extends Section {
 
     static {
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
-            Skript.registerSection(SecCreateHologram.class,
+            Skript.registerSection(SecBlueprintCreator.class,
                     "(create|make) [a] [new] blueprint stored in %object%"
             );
             ENTRY_VALIDATOR.addEntryData(new ExpressionEntryData<>("head", null, false, Object.class));

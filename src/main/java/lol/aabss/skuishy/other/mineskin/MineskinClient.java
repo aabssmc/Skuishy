@@ -82,11 +82,6 @@ public class MineskinClient {
         return connection;
     }
 
-
-    public CompletableFuture<Skin> generateUrl(String url) {
-        return generateUrl(url, SkinOptions.none());
-    }
-
     /**
      * Generates skin data from an URL
      */
@@ -112,16 +107,9 @@ public class MineskinClient {
         }, requestExecutor);
     }
 
-    public CompletableFuture<Skin> generateUpload(InputStream is) {
-        return generateUpload(is, SkinOptions.none(), null);
-    }
 
     public CompletableFuture<Skin> generateUpload(InputStream is, SkinOptions options) {
         return generateUpload(is, options, options.getName() + ".png");
-    }
-
-    public CompletableFuture<Skin> generateUpload(InputStream is, String name) {
-        return generateUpload(is, SkinOptions.none(), name);
     }
 
     public CompletableFuture<Skin> generateUpload(InputStream is, SkinOptions options, String name) {
@@ -148,9 +136,6 @@ public class MineskinClient {
     /**
      * Uploads and generates skin data from a local file (with default options)
      */
-    public CompletableFuture<Skin> generateUpload(File file) throws FileNotFoundException {
-        return generateUpload(file, SkinOptions.none());
-    }
 
     public CompletableFuture<Skin> generateUpload(File file, SkinOptions options) throws FileNotFoundException {
         checkNotNull(file);
@@ -161,10 +146,6 @@ public class MineskinClient {
     /**
      * Uploads and generates skin data from a RenderedImage object (with default options)
      */
-    public CompletableFuture<Skin> generateUpload(RenderedImage image) throws IOException {
-        return generateUpload(image, SkinOptions.none());
-    }
-
     public CompletableFuture<Skin> generateUpload(RenderedImage image, SkinOptions options) throws IOException {
         checkNotNull(image);
         checkNotNull(options);
