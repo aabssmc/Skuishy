@@ -57,7 +57,6 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         try {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
-            addon.loadClasses("lol.aabss.skuishy.elements.general");
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
                 Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DecentHolograms found! Enabling DecentHolograms elements...");
                 Plugin decentHolograms = Bukkit.getPluginManager().getPlugin("DecentHolograms");
@@ -82,6 +81,11 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
                 vu = true;
                 Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Vulcan elements loaded!");
             } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Vulcan elements not loaded.");
+
+            if (getConfig().getBoolean("general-elements", true)){
+                addon.loadClasses("lol.aabss.skuishy.elements.general");
+                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "General elements loaded!");
+            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "General elements not loaded.");
 
             if (getConfig().getBoolean("note-elements", true)){
                 addon.loadClasses("lol.aabss.skuishy.elements.notes");

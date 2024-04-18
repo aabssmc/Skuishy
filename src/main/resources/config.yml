@@ -12,6 +12,9 @@ version-check-msg: true
 
 # elements -----
 
+# whether general elements should be loaded
+general-elements: true
+
 # whether note elements should be loaded
 note-elements: true
 
