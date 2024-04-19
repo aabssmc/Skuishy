@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lol.aabss.skuishy.other.GetVersion.latestSkriptVersion;
 import static lol.aabss.skuishy.other.GetVersion.latestVersion;
 import static lol.aabss.skuishy.other.SubCommands.*;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
@@ -41,7 +40,6 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public static boolean vc = false;
     public static boolean vu = false;
     public static String latest_version;
-    public static String latest_skript_version;
     public static String data_path;
 
     @SuppressWarnings("deprecation")
@@ -117,7 +115,6 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Skuishy has been enabled!");
         Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, () -> {
             latest_version = latestVersion();
-            latest_skript_version = latestSkriptVersion();
             if (getConfig().getBoolean("version-check-msg")) Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.YELLOW + "Got latest version.");
         }, 0L, 144000L);
         data_path = this.getDataFolder().getAbsolutePath();

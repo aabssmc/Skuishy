@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static lol.aabss.skuishy.Skuishy.*;
+import static lol.aabss.skuishy.other.GetVersion.latestSkriptVersion;
 import static lol.aabss.skuishy.other.GetVersion.latestVersion;
 import static lol.aabss.skuishy.other.UpdateChecker.updateCheck;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
@@ -28,7 +29,7 @@ public class SubCommands {
             return;
         }
         if (plugin == null) {
-            String sk = latest_skript_version;
+            String sk = latestSkriptVersion();
             String sku = latest_version;
             String msg = getString(sku, sk);
             // addons --
