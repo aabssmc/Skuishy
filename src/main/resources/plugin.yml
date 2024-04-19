@@ -1,20 +1,14 @@
 name: Skuishy
-version: '${version}'
+version: '2.6'
 main: lol.aabss.skuishy.Skuishy
 api-version: '1.17'
 prefix: 'Skuishy'
-depend:
-  - Skript
-softdepend:
-  - DecentHolograms
-  - Vivecraft-Spigot-Extensions
-  - Vulcan
-authors: [aabss]
+depend: [Skript]
+softdepend: [DecentHolograms, Vivecraft-Spigot-Extensions, Vulcan]
+author: aabss
 description: yet another skript addon
-contributors:
-  - Fusezion
-  - CoffeeRequired
-website: https://aabss.lol
+contributors: [Fusezion, CoffeeRequired, Pikachu920]
+website: https://aabss.cc
 commands:
   skuishy:
     description: The main command for Skuishy.

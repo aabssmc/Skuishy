@@ -17,7 +17,11 @@ public class EvtViolationReset extends SkriptEvent {
                     "[vulcan] violation[s] reset"
             )
                     .description("Called when all the violations get reset.")
-                    .examples("on violation reset:")
+                    .examples(
+                            "on violation reset:",
+                            "\tif {violationresetting} = false:",
+                            "\t\tcancel event"
+                    )
                     .since("1.9");
         }
     }

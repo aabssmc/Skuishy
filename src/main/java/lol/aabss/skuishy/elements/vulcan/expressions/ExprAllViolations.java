@@ -1,6 +1,10 @@
 package lol.aabss.skuishy.elements.vulcan.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -16,6 +20,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@Name("Vulcan - Player Violations")
+@Examples("send violations of player")
+@Description("Represents the violations of a player.")
+@Since("2.0")
 @SuppressWarnings("NullableProblems")
 public class ExprAllViolations extends SimpleExpression<Integer> {
 

@@ -21,7 +21,11 @@ public class EvtGhostBlock extends SkriptEvent {
                     "[vulcan] ghost block"
             )
                     .description("Called when a player is on a ghost block.")
-                    .examples("on ghost block:")
+                    .examples(
+                            "on ghost block:",
+                            "\tgive player 1 air",
+                            "\tpush player down with force 1"
+                    )
                     .since("1.9");
             EventValues.registerEventValue(VulcanGhostBlockEvent.class, Player.class, new Getter<>() {
                 @Override

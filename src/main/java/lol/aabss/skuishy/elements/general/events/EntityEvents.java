@@ -13,6 +13,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.hanging.HangingBreakEvent;
+import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -332,6 +334,50 @@ public class EntityEvents extends SkriptEvent {
                 return e.getEntity();
             }
         }, 0);
+
+        // hang break
+        Skript.registerEvent("Entity - Hang Break", EntityEvents.class, HangingBreakEvent.class,
+                        "[entity] hang[ing] break[ed]",
+                        "[entity] break[ed] hang[ing]"
+                )
+                .description("Triggered when a hanging entity is removed")
+                .examples("on entity hang break:", "\tcancel event")
+                .since("2.0");
+        EventValues.registerEventValue(HangingBreakEvent.class, Entity.class, new Getter<>() {
+            @Override
+            public Entity get(HangingBreakEvent e) {
+                return e.getEntity();
+            }
+        }, 0);
+
+        // hang place
+        Skript.registerEvent("Entity - Hang Place", EntityEvents.class, HangingPlaceEvent.class,
+                        "[entity] hang[ing] place[d]",
+                        "[entity] place[d] hang[ing]"
+                )
+                .description("Triggered when a hanging entity is created in the world")
+                .examples("on entity hang place:", "\tcancel event")
+                .since("2.0");
+        EventValues.registerEventValue(HangingPlaceEvent.class, Entity.class, new Getter<>() {
+            @Override
+            public Entity get(HangingPlaceEvent e) {
+                return e.getEntity();
+            }
+        }, 0);
+        EventValues.registerEventValue(HangingPlaceEvent.class, Player.class, new Getter<>() {
+            @Override
+            public Player get(HangingPlaceEvent e) {
+                return e.getPlayer();
+            }
+        }, 0);
+
+        EventValues.registerEventValue(HangingPlaceEvent.class, Block.class, new Getter<>() {
+            @Override
+            public Block get(HangingPlaceEvent e) {
+                return e.getBlock();
+            }
+        }, 0);
+
         // entity toggle sit
         if (Skript.classExists("io.papermc.paper.event.entity.EntityToggleSitEvent")) {
             Skript.registerEvent("Entity - Sit Toggle", EntityEvents.class, EntityToggleSitEvent.class,
@@ -399,8 +445,8 @@ public class EntityEvents extends SkriptEvent {
 
 
         // slime pathfind
-        Skript.registerEvent("slime pathfind", EntityEvents.class, SlimePathfindEvent.class,
-                        "slime pathfind"
+        Skript.registerEvent("Slime - Pathfind", EntityEvents.class, SlimePathfindEvent.class,
+                        "slime pathfind[ing]"
                 )
                 .description("Called when a slime starts pathfinding.")
                 .examples("on slime pathfind:")
@@ -413,7 +459,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // strider temperature change
-        Skript.registerEvent("strider temperature change", EntityEvents.class, StriderTemperatureChangeEvent.class,
+        Skript.registerEvent("Strider - Temperature Change", EntityEvents.class, StriderTemperatureChangeEvent.class,
                         "strider temperature change[d]"
                 )
                 .description("Called when a Strider's temperature changes.")
@@ -427,8 +473,8 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // thrown egg hatch
-        Skript.registerEvent("thrown egg hatch", EntityEvents.class, ThrownEggHatchEvent.class,
-                        "thrown egg hatch"
+        Skript.registerEvent("Entity - Egg Hatch", EntityEvents.class, ThrownEggHatchEvent.class,
+                        "[thrown] egg hatch"
                 )
                 .description("Called when a thrown egg hatches.")
                 .examples("on thrown egg hatch:")
@@ -441,7 +487,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // turtle go home
-        Skript.registerEvent("turtle go home", EntityEvents.class, TurtleGoHomeEvent.class,
+        Skript.registerEvent("Turtle - Go Home", EntityEvents.class, TurtleGoHomeEvent.class,
                         "turtle go home"
                 )
                 .description("Called when a turtle goes home.")
@@ -455,7 +501,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // turtle lay egg
-        Skript.registerEvent("turtle lay egg", EntityEvents.class, TurtleLayEggEvent.class,
+        Skript.registerEvent("Turtle - Lay Egg", EntityEvents.class, TurtleLayEggEvent.class,
                         "turtle lay egg"
                 )
                 .description("Called when a turtle lays an egg.")
@@ -469,7 +515,7 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // turtle start digging
-        Skript.registerEvent("turtle start digging", EntityEvents.class, TurtleStartDiggingEvent.class,
+        Skript.registerEvent("Turtle - Start Digging", EntityEvents.class, TurtleStartDiggingEvent.class,
                         "turtle start digging"
                 )
                 .description("Called when a turtle starts digging.")
@@ -483,8 +529,8 @@ public class EntityEvents extends SkriptEvent {
         }, 0);
 
         // villager acquire trade
-        Skript.registerEvent("villager acquire trade", EntityEvents.class, VillagerAcquireTradeEvent.class,
-                        "villager acquire trade"
+        Skript.registerEvent("Villager - Acquire Trade", EntityEvents.class, VillagerAcquireTradeEvent.class,
+                        "villager acquire trade[s]"
                 )
                 .description("Called when a villager acquires a new trade.")
                 .examples("on villager acquire trade:")
@@ -498,7 +544,7 @@ public class EntityEvents extends SkriptEvent {
 
 
         // villager career change
-        Skript.registerEvent("villager career change", EntityEvents.class, VillagerCareerChangeEvent.class,
+        Skript.registerEvent("Villager - Career Change", EntityEvents.class, VillagerCareerChangeEvent.class,
                         "villager career change[d]"
                 )
                 .description("Called when a villager changes its career.")
@@ -513,8 +559,8 @@ public class EntityEvents extends SkriptEvent {
 
 
         // villager replenish trade
-        Skript.registerEvent("villager replenish trade", EntityEvents.class, VillagerReplenishTradeEvent.class,
-                        "villager replenish trade"
+        Skript.registerEvent("Villager - Replenish Trade", EntityEvents.class, VillagerReplenishTradeEvent.class,
+                        "villager replenish[ed] trade[s]"
                 )
                 .description("Called when a villager replenishes its trade offers.")
                 .examples("on villager replenish trade:")
@@ -528,7 +574,7 @@ public class EntityEvents extends SkriptEvent {
 
         // warden anger change
         if (Skript.classExists("io.papermc.paper.event.entity.WardenAngerChangeEvent")) {
-            Skript.registerEvent("warden anger change", EntityEvents.class, WardenAngerChangeEvent.class,
+            Skript.registerEvent("Warden - Anger Change", EntityEvents.class, WardenAngerChangeEvent.class,
                             "warden anger change[d]"
                     )
                     .description("Called when a Warden's anger level changes.")

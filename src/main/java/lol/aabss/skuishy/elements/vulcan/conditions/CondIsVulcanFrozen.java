@@ -15,12 +15,12 @@ import org.jetbrains.annotations.NotNull;
         "if player is frozen:"
 })
 @Since("2.1")
-public class CondIsFrozen extends PropertyCondition<Player> {
+public class CondIsVulcanFrozen extends PropertyCondition<Player> {
 
     static {
-        register(CondIsFrozen.class,
+        register(CondIsVulcanFrozen.class,
                 PropertyType.BE,
-                "[vulcan] frozen",
+                "vulcan frozen",
                 "players"
         );
     }

@@ -18,7 +18,13 @@ public class EvtJudgementDayEnd extends SkriptEvent {
                     "[vulcan] judge[ment] [day] end[ed]"
             )
                     .description("Called when the judgement day ends.")
-                    .examples("on judge day end:")
+                    .examples(
+                            "on judge day end:",
+                            "\tstrike lightning at all players",
+                            "\tsend \"Judgement day has ended!\"",
+                            "\twait 1 tick",
+                            "\theal all players"
+                    )
                     .since("1.9");
         }
     }

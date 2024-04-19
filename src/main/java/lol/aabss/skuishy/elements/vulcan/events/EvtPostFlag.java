@@ -21,7 +21,11 @@ public class EvtPostFlag extends SkriptEvent {
                     "[vulcan] (pre|post)[( |-)]flag[ged]"
             )
                     .description("Called before a player gets flagged.")
-                    .examples("on vulcan post flag:")
+                    .examples(
+                            "on post-flag:",
+                            "\tsend \"%event-player% will be flagged!\" to all players where [input is op]",
+                            "\tteleport (all players where [gamemode of input = spectator]) to player"
+                    )
                     .since("1.9");
             EventValues.registerEventValue(VulcanPostFlagEvent.class, Player.class, new Getter<>() {
                 @Override

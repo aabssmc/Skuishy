@@ -17,7 +17,11 @@ public class EvtJudgementDayStart extends SkriptEvent {
                     "[vulcan] judge[ment] [day] start[ed]"
             )
                     .description("Called when the judgement day starts.")
-                    .examples("on judge day start:")
+                    .examples(
+                            "on judge day start:",
+                            "\tsend title \"&cJudgement day has started! &4Beware!\"",
+                            "\tapply infinite blindness to all players"
+                    )
                     .since("1.9");
         }
     }

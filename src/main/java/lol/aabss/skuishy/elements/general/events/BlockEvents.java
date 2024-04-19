@@ -15,10 +15,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.block.BellResonateEvent;
-import org.bukkit.event.block.BlockCookEvent;
-import org.bukkit.event.block.BlockExpEvent;
-import org.bukkit.event.block.CauldronLevelChangeEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.inventory.BrewEvent;
 import org.bukkit.event.inventory.BrewingStandFuelEvent;
 import org.bukkit.event.world.AsyncStructureGenerateEvent;
@@ -253,6 +250,22 @@ public class BlockEvents extends SkriptEvent {
                 @Override
                 public ItemStack get(CompostItemEvent e) {
                     return e.getItem();
+                }
+            }, 0);
+        }
+
+// sculk bloom
+        if (Skript.classExists("org.bukkit.event.block.SculkBloomEvent")){
+            Skript.registerEvent("Block - Sculk Bloom", BlockEvents.class, SculkBloomEvent.class,
+                            "sculk bloom[ing]"
+                    )
+                    .description("Represents an event triggered when a new cursor is created by a SculkCatalyst.")
+                    .examples("on sculk bloom:", "\tbroadcast \"that was really weird, dont do that again\"")
+                    .since("1.5");
+            EventValues.registerEventValue(SculkBloomEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(SculkBloomEvent e) {
+                    return e.getBlock();
                 }
             }, 0);
         }

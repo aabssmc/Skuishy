@@ -21,7 +21,10 @@ public class EvtSetback extends SkriptEvent {
                     "[vulcan] [player] setback"
             )
                     .description("Called when a player gets setback by vulcan.")
-                    .examples("on vulcan setback:")
+                    .examples(
+                            "on vulcan setback:",
+                            "\tsend \"%event-player% has been setback!\" to console"
+                    )
                     .since("1.9");
             EventValues.registerEventValue(VulcanSetbackEvent.class, Player.class, new Getter<>() {
                 @Override

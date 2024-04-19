@@ -1,6 +1,7 @@
 package lol.aabss.skuishy.elements.general.events;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.command.EffectCommandEvent;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
@@ -11,18 +12,43 @@ import com.destroystokyo.paper.loottable.LootableInventoryReplenishEvent;
 import io.papermc.paper.event.server.WhitelistStateUpdateEvent;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.FluidLevelChangeEvent;
 import org.bukkit.event.block.InventoryBlockStartEvent;
+import org.bukkit.event.command.UnknownCommandEvent;
 import org.bukkit.event.inventory.HopperInventorySearchEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public class OtherEvents extends SkriptEvent {
     static{
+// effect command
+        Skript.registerEvent("Other - Effect Command", OtherEvents.class, EffectCommandEvent.class,
+                        "[s(k|c)ript] effect command"
+                )
+                .description("Called when someone uses a skript effect command.")
+                .examples(
+                        "on effect command:",
+                        "\tif event-string contains \"ip\":",
+                        "\t\tcancel event"
+                )
+                .since("1.7");
+        EventValues.registerEventValue(EffectCommandEvent.class, String.class, new Getter<>() {
+            @Override
+            public String get(EffectCommandEvent e) {
+                return e.getCommand();
+            }
+        }, 0);
+        EventValues.registerEventValue(EffectCommandEvent.class, CommandSender.class, new Getter<>() {
+            @Override
+            public CommandSender get(EffectCommandEvent e) {
+                return e.getSender();
+            }
+        }, 0);
+
         // fluid level change
         Skript.registerEvent("Other - Fluid Level Change", OtherEvents.class, FluidLevelChangeEvent.class,
                         "fluid level change[d]"
@@ -40,7 +66,8 @@ public class OtherEvents extends SkriptEvent {
 // hopper inventory search
         if (Skript.classExists("org.bukkit.event.inventory.HopperInventorySearchEvent")) {
             Skript.registerEvent("Other - Hopper Inventory Search", OtherEvents.class, HopperInventorySearchEvent.class,
-                            "hopper inventory search"
+                            "hopper inventory search[ed]",
+                    "hopper search[ed] inventory"
                     )
                     .description("Called when a hopper searches for an inventory to pull items from.")
                     .examples("on hopper inventory search:")
@@ -92,6 +119,27 @@ public class OtherEvents extends SkriptEvent {
             @Override
             public LootableInventory get(LootableInventoryReplenishEvent e) {
                 return e.getInventory();
+            }
+        }, 0);
+
+// unknown command
+        Skript.registerEvent("Other - Unknown Command", OtherEvents.class, UnknownCommandEvent.class,
+                        "unknown command"
+                )
+                .description("Thrown when someone executes a command that is not defined.")
+                .examples("on unknown command:", "\tset unknown command message to \"that doesn't exist\"")
+                .since("1.3");
+        EventValues.registerEventValue(UnknownCommandEvent.class, CommandSender.class, new Getter<>() {
+            @Override
+            public CommandSender get(UnknownCommandEvent e) {
+                return e.getSender();
+            }
+        }, 0);
+
+        EventValues.registerEventValue(UnknownCommandEvent.class, String.class, new Getter<>() {
+            @Override
+            public String get(UnknownCommandEvent e) {
+                return e.getCommandLine();
             }
         }, 0);
 

@@ -20,7 +20,10 @@ public class EvtVulcanPunish extends SkriptEvent {
                     "[vulcan] [player] punish[ed]"
             )
                     .description("Called when a player gets punished.")
-                    .examples("on vulcan punish:")
+                    .examples(
+                            "on vulcan punish:",
+                            "\tsend \"%event-player% will be flagged!\" to all players where [input is op]"
+                    )
                     .since("1.9");
             EventValues.registerEventValue(VulcanPunishEvent.class, Player.class, new Getter<>() {
                 @Override

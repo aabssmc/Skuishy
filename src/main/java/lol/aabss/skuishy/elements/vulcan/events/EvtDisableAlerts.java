@@ -21,7 +21,10 @@ public class EvtDisableAlerts extends SkriptEvent {
                     "[vulcan] disable alert[s]"
             )
                     .description("Called when the alerts get disabled.")
-                    .examples("on disable alerts:")
+                    .examples(
+                            "on disable alerts:",
+                            "\tsend \"%event-player% has disabled vulcan alerts\" to console"
+                    )
                     .since("1.9");
             EventValues.registerEventValue(VulcanDisableAlertsEvent.class, Player.class, new Getter<>() {
                 @Override

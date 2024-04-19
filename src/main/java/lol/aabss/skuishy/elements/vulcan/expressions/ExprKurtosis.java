@@ -1,6 +1,7 @@
 package lol.aabss.skuishy.elements.vulcan.expressions;
 
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.PropertyExpression;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Name("Vulcan - Kurtosis of Player")
+@Examples("send kurtosis of player")
 @Description("Represents the kurtosis of a player.")
 @Since("2.0")
 public class ExprKurtosis extends PropertyExpression<Player, Number> {

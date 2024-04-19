@@ -11,6 +11,7 @@ import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent;
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.event.block.PlayerShearBlockEvent;
 import io.papermc.paper.event.player.*;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemFrame;
@@ -19,9 +20,8 @@ import org.bukkit.event.Event;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
-
 import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerEvents extends SkriptEvent {
 
@@ -247,6 +247,27 @@ public class PlayerEvents extends SkriptEvent {
             }
         }, 0);
 
+// player main hand change
+        Skript.registerEvent("Player - Main Hand Change", PlayerEvents.class, PlayerChangedMainHandEvent.class,
+                        "[player] main[(-| )]hand (switch|swap|change)"
+                )
+                .description("Called when a player changes their main hand in the client settings.")
+                .examples("on main hand change:", "\tif event-string is \"left\":", "\t\tsend \"eww! weirdo!!!\" to player")
+                .since("1.3");
+        EventValues.registerEventValue(PlayerChangedMainHandEvent.class, Player.class, new Getter<>() {
+            @Override
+            public Player get(PlayerChangedMainHandEvent e) {
+                return e.getPlayer();
+            }
+        }, 0);
+
+        EventValues.registerEventValue(PlayerChangedMainHandEvent.class, String.class, new Getter<>() {
+            @Override
+            public String get(PlayerChangedMainHandEvent e) {
+                return e.getMainHand().toString().toLowerCase();
+            }
+        }, 0);
+
 // player name entity
         Skript.registerEvent("Player - Name Entity", PlayerEvents.class, PlayerNameEntityEvent.class,
                         "[player] name[d] entity"
@@ -350,6 +371,20 @@ public class PlayerEvents extends SkriptEvent {
             @Override
             public Block get(PlayerShearBlockEvent e) {
                 return e.getBlock();
+            }
+        }, 0);
+
+// player shield break
+        Skript.registerEvent("Player - Shield Break", PlayerEvents.class, PlayerItemCooldownEvent.class,
+                        "[player] shield (disable|break)"
+                )
+                .description("Thrown when someone's shield gets broken.")
+                .examples("on shield break:", "\tbroadcast \"%player%'s shield broke!!\"")
+                .since("1.5, 2.1 (UPDATE)");
+        EventValues.registerEventValue(PlayerItemCooldownEvent.class, Player.class, new Getter<>() {
+            @Override
+            public Player get(PlayerItemCooldownEvent e) {
+                return e.getPlayer();
             }
         }, 0);
 
@@ -489,6 +524,12 @@ public class PlayerEvents extends SkriptEvent {
 
     @Override
     public boolean check(@NotNull Event event) {
+        if (event instanceof PlayerItemCooldownEvent) {
+            if (((PlayerItemCooldownEvent) event).getType() == Material.SHIELD) {
+                return ((PlayerItemCooldownEvent) event).getCooldown() > 0;
+            }
+            return false;
+        }
         return true;
     }
 
