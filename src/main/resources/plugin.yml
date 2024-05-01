@@ -1,5 +1,5 @@
 name: Skuishy
-version: '2.6'
+version: '2.7'
 main: lol.aabss.skuishy.Skuishy
 api-version: '1.17'
 prefix: 'Skuishy'
