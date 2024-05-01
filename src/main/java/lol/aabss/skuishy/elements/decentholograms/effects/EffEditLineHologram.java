@@ -16,7 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 @Name("Decent Holograms - Edit Line")
 @Description("Edits a line of a hologram.")

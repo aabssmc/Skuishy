@@ -13,7 +13,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Name("Jukebox - Eject Record")
 @Description("Ejects the current record from the music disc.")

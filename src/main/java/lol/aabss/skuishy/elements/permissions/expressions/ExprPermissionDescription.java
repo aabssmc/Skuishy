@@ -15,7 +15,7 @@ import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
 import org.jetbrains.annotations.NotNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Name("Permissions - Permission Description")
 @Description("Gets/Sets the permission description of a permission.")

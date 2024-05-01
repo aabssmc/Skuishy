@@ -16,7 +16,7 @@ import org.vivecraft.VivePlayer;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Name("ViveCraft - All Vive Players")

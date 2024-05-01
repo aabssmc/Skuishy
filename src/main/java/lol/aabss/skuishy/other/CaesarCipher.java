@@ -1,6 +1,6 @@
 package lol.aabss.skuishy.other;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class CaesarCipher {
     public static final String alpha = "abcdefghijklmnopqrstuvwxyz";

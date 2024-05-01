@@ -10,7 +10,7 @@ import org.bukkit.block.SculkCatalyst;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class EffBloom extends Effect {
 

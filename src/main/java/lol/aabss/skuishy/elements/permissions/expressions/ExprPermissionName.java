@@ -13,7 +13,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
 import org.jetbrains.annotations.NotNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Name("Permissions - Permission Name")
 @Description("Gets the permission name of a permission.")

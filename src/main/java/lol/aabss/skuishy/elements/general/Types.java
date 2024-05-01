@@ -8,7 +8,7 @@ import ch.njol.skript.util.EnumUtils;
 import io.papermc.paper.datapack.Datapack;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.potion.PotionType;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 public class Types {

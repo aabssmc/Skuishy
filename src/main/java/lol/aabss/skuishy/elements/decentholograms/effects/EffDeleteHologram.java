@@ -11,7 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 @Name("Decent Holograms - Delete Hologram")
 @Description("Deletes a hologram.")
 @Examples({

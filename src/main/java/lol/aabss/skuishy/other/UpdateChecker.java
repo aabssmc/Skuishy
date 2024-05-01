@@ -43,8 +43,8 @@ public class UpdateChecker implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
-        if (instance.getConfig().getBoolean("update-checker")) {
+    public void onJoin(PlayerJoinEvent e) {
+        if (instance.getConfig().getBoolean("update-checker", true)) {
             if (e.getPlayer().hasPermission("skuishy.updatechecker")) {
                 Bukkit.getScheduler().runTaskLater(instance, () -> updateCheck(e.getPlayer()), 100L);
             }

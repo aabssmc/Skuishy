@@ -14,7 +14,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.event.Event;
 import org.bukkit.util.BiomeSearchResult;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("NullableProblems")

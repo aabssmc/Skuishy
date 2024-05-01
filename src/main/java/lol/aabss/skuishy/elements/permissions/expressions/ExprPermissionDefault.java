@@ -16,7 +16,7 @@ import org.bukkit.event.Event;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Name("Permissions - Permission Default")
 @Description("Gets/Sets the permission default of a permission.")

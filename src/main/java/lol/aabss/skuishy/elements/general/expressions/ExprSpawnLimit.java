@@ -17,7 +17,7 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Name("World - Spawn Limit")

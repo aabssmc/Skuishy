@@ -13,7 +13,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.block.NotePlayEvent;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("NullableProblems")
 public class ExprEventNote extends EventValueExpression<Note> {
@@ -34,7 +34,7 @@ public class ExprEventNote extends EventValueExpression<Note> {
     }
 
     @Override
-    protected Note @org.eclipse.jdt.annotation.Nullable [] get(@NotNull Event e) {
+    protected Note @Nullable [] get(@NotNull Event e) {
         return new Note[]{((NotePlayEvent) e).getNote()};
     }
 

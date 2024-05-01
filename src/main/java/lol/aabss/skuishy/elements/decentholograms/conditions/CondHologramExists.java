@@ -9,7 +9,7 @@ import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.List;
 @Examples({
         "if hologram named \"hello\" exists:"
 })
-@Since("1.7")
+@Since("1.~7")
 @RequiredPlugins("DecentHolograms")
 
 public class CondHologramExists extends Condition {

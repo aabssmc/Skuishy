@@ -12,7 +12,7 @@ import ch.njol.util.coll.CollectionUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.event.Event;
 import org.bukkit.event.command.UnknownCommandEvent;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("NullableProblems")

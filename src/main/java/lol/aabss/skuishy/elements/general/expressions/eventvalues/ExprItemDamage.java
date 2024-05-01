@@ -16,7 +16,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("NullableProblems")
 @Name("Item - Item Damage")
 @Description("Gets/sets the item damage.")
@@ -52,7 +52,7 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
     }
 
     @Override
-    protected Integer @org.eclipse.jdt.annotation.Nullable [] get(@NotNull Event e) {
+    protected Integer @Nullable [] get(@NotNull Event e) {
         return new Integer[]{((PlayerItemDamageEvent) e).getDamage()};
     }
 

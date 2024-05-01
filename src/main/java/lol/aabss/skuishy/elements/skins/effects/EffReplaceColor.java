@@ -12,7 +12,7 @@ import ch.njol.skript.util.Color;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Blueprint - Replace Color")

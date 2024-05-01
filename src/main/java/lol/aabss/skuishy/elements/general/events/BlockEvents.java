@@ -21,7 +21,7 @@ import org.bukkit.event.inventory.BrewingStandFuelEvent;
 import org.bukkit.event.world.AsyncStructureGenerateEvent;
 import org.bukkit.event.world.AsyncStructureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 public class BlockEvents extends SkriptEvent {

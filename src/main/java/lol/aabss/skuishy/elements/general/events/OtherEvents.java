@@ -20,7 +20,7 @@ import org.bukkit.event.command.UnknownCommandEvent;
 import org.bukkit.event.inventory.HopperInventorySearchEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 public class OtherEvents extends SkriptEvent {

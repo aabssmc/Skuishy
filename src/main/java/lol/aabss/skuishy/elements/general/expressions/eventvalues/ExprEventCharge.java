@@ -14,7 +14,7 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.SculkBloomEvent;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("NullableProblems")
 @Name("Block - Sculk Charge")
@@ -53,7 +53,7 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
     }
 
     @Override
-    protected Integer @org.eclipse.jdt.annotation.Nullable [] get(@NotNull Event e) {
+    protected Integer @Nullable [] get(@NotNull Event e) {
         return new Integer[]{((SculkBloomEvent) e).getCharge()};
     }
 

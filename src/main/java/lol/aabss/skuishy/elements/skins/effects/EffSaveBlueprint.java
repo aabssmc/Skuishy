@@ -13,7 +13,7 @@ import ch.njol.skript.lang.Variable;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import org.jetbrains.annotations.NotNull;
 

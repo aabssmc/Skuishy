@@ -10,7 +10,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.SkinWrapper;
 import org.bukkit.OfflinePlayer;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Skins - Player Head")

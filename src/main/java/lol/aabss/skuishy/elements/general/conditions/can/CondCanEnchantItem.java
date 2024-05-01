@@ -13,7 +13,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Name("ItemStack - Can Be Enchanted")
 @Description("Returns true if the item can enchanted by the specified enchant.")

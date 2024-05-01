@@ -13,7 +13,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Name("Entity - Lock Freeze Ticks")
 @Description("Locks/Unlocks freeze ticks of player")

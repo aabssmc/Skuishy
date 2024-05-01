@@ -14,7 +14,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("NullableProblems")
 @Name("Server - Server Port")
 @Description("Gets the port of the server.")

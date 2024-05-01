@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 @Name("Player - Show Win Screen")
 @Description("Shows the win screen to a player.")
 @Examples({

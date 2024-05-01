@@ -13,7 +13,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Location;
 import org.bukkit.Raid;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("NullableProblems")

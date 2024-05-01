@@ -7,7 +7,7 @@ import ch.njol.skript.lang.SkriptParser;
 import me.frep.vulcan.api.event.VulcanViolationResetEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 public class EvtViolationReset extends SkriptEvent {
 

@@ -13,7 +13,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 
 import org.jetbrains.annotations.NotNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Name("Entity - Is Glowing")
 @Description("Checks whether a player is glowing.")

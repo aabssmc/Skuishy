@@ -12,7 +12,7 @@ import ch.njol.util.Kleenean;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 @Name("TickManager - Is Sprinting")
 @Description("Returns true if the server is sprinting.")
 @Examples({
