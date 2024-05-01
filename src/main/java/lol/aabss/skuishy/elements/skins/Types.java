@@ -7,7 +7,7 @@ import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.mineskin.Variant;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 public class Types {

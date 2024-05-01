@@ -28,14 +28,7 @@ public class SkinWrapper {
     public static MineskinClient client = new MineskinClient("Skuishy-Agent");
 
     public static ProfileProperty getProfileProperties(PlayerProfile p) {
-        ProfileProperty prop = null;
-        for (ProfileProperty property : p.getProperties()) {
-            if (property.getName().equals("textures")) {
-                prop = property;
-                break;
-            }
-        }
-        return prop;
+        return p.getProperties().iterator().next();
     }
 
     public static void setSkin(Player player, @Nullable String skin){
@@ -93,19 +86,14 @@ public class SkinWrapper {
                     result[y] += (c.toString() + "\u2588").replaceAll("\\?", "");
                 }
             }
-            return String.join("\n", result);
+            return java.lang.String.join("\n", result);
         } catch (IOException e){
             throw new RuntimeException(e);
         }
     }
 
-    // TODO: make faster
     private static Texture uploadSkin(Blueprint print) {
-        try {
-            return client.generateUpload(print.image(), SkinOptions.create("Skuishy-Upload", print.model(), Visibility.PRIVATE)).get().data.texture;
-        } catch (IOException | InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
-        }
+        return uploadSkin(print.image());
     }
 
     // TODO: make faster
