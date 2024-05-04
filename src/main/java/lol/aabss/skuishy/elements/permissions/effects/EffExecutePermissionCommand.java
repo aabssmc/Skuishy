@@ -40,8 +40,8 @@ public class EffExecutePermissionCommand extends Effect implements Listener {
     static {
         getServer().getPluginManager().registerEvents(new EffExecutePermissionCommand(), instance);
         Skript.registerEffect(EffExecutePermissionCommand.class,
-                "[execute] [the] %players% command[s] %string% (with|[while] using) %permission%",
-                "(let|make) %players% execute [[the] command[s]] %string% (with|[while] using) %permission%"
+                "[execute] [the] %players% command[s] %string% (with|[while] using) %bukkitpermission%",
+                "(let|make) %players% execute [[the] command[s]] %string% (with|[while] using) %bukkitpermission%"
         );
     }
 
