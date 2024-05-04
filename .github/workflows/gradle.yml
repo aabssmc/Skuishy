@@ -23,10 +23,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 17
+    - name: Set up JDK 21
       uses: actions/setup-java@v3
       with:
-        java-version: '17'
+        java-version: '21'
         distribution: 'temurin'
     - run: chmod +x ./gradlew
     - name: Build with Gradle
@@ -52,5 +52,5 @@ jobs:
         uses: SkriptLang/skript-test-action@v1.0
         with:
           test_script_directory: src/test/scripts
-          skript_repo_ref: dev/patch
+          skript_repo_ref: 2.8.5
           extra_plugins_directory: extra-plugins/
