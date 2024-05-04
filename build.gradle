@@ -8,13 +8,15 @@ version = "2.7"
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven {url = "https://repo.papermc.io/repository/maven-public/"}
     maven {url = "https://repo.skriptlang.org/releases"}
     maven {url = "https://jitpack.io"}
+    maven {url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"}
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
+    compileOnly "io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT"
     implementation "net.kyori:adventure-text-minimessage:4.15.0"
     compileOnly ("com.github.SkriptLang:Skript:2.7.0") {
         transitive = false
@@ -34,18 +36,13 @@ shadowJar {
     }
 }
 
-def targetJavaVersion = 17
 java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
+def oldestJava = 17
 tasks.withType(JavaCompile).configureEach {
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        options.release = targetJavaVersion
-    }
+    options.compilerArgs += ['-source', '' + oldestJava, '-target', '' + oldestJava]
 }
 
 processResources {

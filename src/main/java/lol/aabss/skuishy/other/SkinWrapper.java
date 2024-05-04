@@ -69,7 +69,7 @@ public class SkinWrapper {
 
     public static void setSkin(Player player, String value, @Nullable String signature){
         PlayerProfile profile = player.getPlayerProfile();
-        profile.removeProperty(getProfileProperties(player.getPlayerProfile()));
+        profile.removeProperty(getProfileProperties(profile));
         profile.setProperty(new ProfileProperty("textures", value, signature));
         player.setPlayerProfile(profile);
     }

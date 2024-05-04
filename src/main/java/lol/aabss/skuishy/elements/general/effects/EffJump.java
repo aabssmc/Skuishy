@@ -45,7 +45,7 @@ public class EffJump extends Effect {
             float f = p.getWorld().getBlockState(p.getLocation()).getBlock().getType() == Material.HONEY_BLOCK ? 0.5F : 1.0F;
             float g = p.getWorld().getBlockState(p.getVelocity().toLocation(p.getWorld())).getBlock().getType() == Material.HONEY_BLOCK ? 0.5F : 1.0F;
             float aa = (double) f == 1.0 ? g : f;
-            double d = ((double) 0.42F * aa) + (p.hasPotionEffect(PotionEffectType.JUMP) ? (double) (0.1F * (float) (p.getPotionEffect(PotionEffectType.JUMP).getAmplifier() + 1)) : 0.0);
+            double d = ((double) 0.42F * aa) + (p.hasPotionEffect(PotionEffectType.getById(8)) ? (double) (0.1F * (float) (p.getPotionEffect(PotionEffectType.getById(8)).getAmplifier() + 1)) : 0.0);
             Vector vec3d = p.getVelocity();
             p.setVelocity(new Vector(vec3d.getX(), d, vec3d.getZ()));
             if (p instanceof Player pp) {
