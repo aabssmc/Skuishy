@@ -11,16 +11,15 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.SkinWrapper;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
+import lol.aabss.skuishy.other.mineskin.data.Texture;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.ExecutionException;
+
+import static lol.aabss.skuishy.other.SkinWrapper.uploadSkin;
 
 @Name("Player - Set Skin")
 @Description({"Sets the skin of the player to a value and a signature."})
@@ -56,32 +55,36 @@ public class EffSetSkin extends Effect {
         if (value == null || signature == null) {
             if (skin != null) {
                 Object skin = this.skin.getSingle(e);
+                Texture texture = null;
+                String nullreason = "";
                 if (skin != null) {
-                    for (Player p : player.getArray(e)) {
-                        if (skin instanceof String str) {
-                            if (str.length() <= 16 || !str.contains("://")) {
-                                SkinWrapper.setSkin(p, str);
+                    if (skin instanceof String str) {
+                        if (str.length() <= 16 || !str.contains("://")) {
+                            texture = null;
+                            nullreason = "name";
+                        } else {
+                            if (str.contains("://")) {
+                                texture = SkinWrapper.uploadSkin(str);
                             } else {
-                                if (str.contains("://")) {
-                                    try {
-                                        SkinWrapper.setSkin(p, new URL(str));
-                                    } catch (MalformedURLException ignored) {
-                                    } catch (ExecutionException | InterruptedException ex) {
-                                        throw new RuntimeException(ex);
-                                    }
-                                } else {
-                                    SkinWrapper.setSkin(p, str, null);
-                                }
+                                texture = null;
+                                nullreason = "value";
                             }
-                        } else if (skin instanceof Blueprint print) {
-                            try {
-                                SkinWrapper.setSkin(p, print);
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
+                        }
+                    } else if (skin instanceof Blueprint print) {
+                        texture = uploadSkin(print.image());
+                    } else if (skin instanceof BufferedImage image){
+                        // images not supported by skuishy, but just in case you use another addon like SkImage :)
+                        texture = uploadSkin(image);
+                    }
+                    for (Player p : player.getArray(e)) {
+                        if (texture == null) {
+                            if (nullreason.equals("name")) {
+                                SkinWrapper.setSkin(p, (String) skin);
+                            } else if (nullreason.equals("value")){
+                                SkinWrapper.setSkin(p, (String) skin, null);
                             }
-                        } else if (skin instanceof BufferedImage image){
-                           // images not supported by skuishy, but just in case you use another addon like SkImage :)
-                           SkinWrapper.setSkin(p, image);
+                        } else {
+                            SkinWrapper.setSkin(p, texture);
                         }
                     }
                 }
