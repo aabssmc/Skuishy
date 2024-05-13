@@ -9,15 +9,17 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
+import eu.decentsoftware.holograms.api.DecentHologramsAPI;
+import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.skriptlang.skript.lang.entry.EntryContainer;
 import org.skriptlang.skript.lang.entry.EntryValidator;
 import org.skriptlang.skript.lang.entry.util.ExpressionEntryData;
 
-import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 @Name("DecentHolograms - Create Hologram")
@@ -72,7 +74,8 @@ public class SecCreateHologram extends Section {
         List<String> lines = List.of(this.lines.getArray(e));
         Location loc = this.location.getSingle(e);
         if (name != null && loc != null) {
-            DHAPI.createHologram(name, loc, persistent, lines);
+            Hologram hologram = DHAPI.createHologram(name, loc, persistent, lines);
+            DecentHologramsAPI.get().getHologramManager().registerHologram(hologram);
         }
         return super.walk(e, false);
     }
