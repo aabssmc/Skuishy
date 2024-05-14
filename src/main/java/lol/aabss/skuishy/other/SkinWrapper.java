@@ -3,7 +3,6 @@ package lol.aabss.skuishy.other;
 import ch.njol.skript.Skript;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
-import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.mineskin.MineskinClient;
 import lol.aabss.skuishy.other.mineskin.SkinOptions;
 import lol.aabss.skuishy.other.mineskin.Variant;
@@ -22,7 +21,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class SkinWrapper {
 
@@ -85,30 +83,25 @@ public class SkinWrapper {
 
 
     public static Texture uploadSkin(BufferedImage image) {
-        final Texture[] t = {};
-        Bukkit.getScheduler().runTaskAsynchronously(Skuishy.instance, bukkitTask -> {
-            try {
-                CompletableFuture<Skin> future = client.generateUpload(image, options);
-                t[0] = future.thenApplyAsync(result -> result.data.texture).get();
-            } catch (IOException | InterruptedException | ExecutionException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        return t[0];
+        try {
+            SkinInfo info = new SkinInfo();
+            CompletableFuture<Skin> future = client.generateUpload(image, options).whenComplete((skin, throwable) ->
+                    info.texture = skin.data.texture
+            );
+            return info.texture;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Texture uploadSkin(String url) {
-        final Texture[] t = {};
-        Bukkit.getScheduler().runTaskAsynchronously(Skuishy.instance, bukkitTask -> {
-            try {
-                CompletableFuture<Skin> future = client.generateUrl(url, options);
-                t[0] = future.thenApplyAsync(result -> result.data.texture).get();
-            } catch (InterruptedException | ExecutionException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        return t[0];
+        SkinInfo info = new SkinInfo();
+        CompletableFuture<Skin> future = client.generateUrl(url, options).whenComplete((skin, throwable) ->
+                info.texture = skin.data.texture
+        );
+        return info.texture;
     }
 
+    static class SkinInfo { public Texture texture; }
 
 }
