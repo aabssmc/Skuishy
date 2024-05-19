@@ -49,10 +49,8 @@ public class ExprEventNote extends EventValueExpression<Note> {
 
     @Override
     public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
-        if (delta != null) {
-            if (mode == Changer.ChangeMode.SET) {
-                ((NotePlayEvent) e).setNote((Note) delta[0]);
-            }
+        if (mode == Changer.ChangeMode.SET && delta != null) {
+            ((NotePlayEvent) e).setNote((Note) delta[0]);
         }
     }
 

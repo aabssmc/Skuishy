@@ -63,8 +63,10 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
 
     @Override
     public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
+        if (mode == Changer.ChangeMode.ADD) {
             return CollectionUtils.array(PotionEffect.class);
+        } else if (mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL){
+            return CollectionUtils.array();
         }
         return null;
     }
@@ -72,8 +74,8 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
     @Override
     public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         Entity en = getExpr().getSingle(e);
-        if (en instanceof Arrow && delta != null) {
-            if (mode == Changer.ChangeMode.ADD) {
+        if (en instanceof Arrow) {
+            if (mode == Changer.ChangeMode.ADD && delta != null) {
                 ((Arrow) en).addCustomEffect((PotionEffect) delta[0], true);
             }
             else if (mode == Changer.ChangeMode.REMOVE) {

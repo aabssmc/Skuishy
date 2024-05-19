@@ -65,18 +65,21 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
                 ((SculkBloomEvent) e).setCharge((Integer) delta[0]);
             } else if (mode == Changer.ChangeMode.ADD) {
                 ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() + (Integer) delta[0]);
-            } else if (mode == Changer.ChangeMode.REMOVE) {
-                ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() - (Integer) delta[0]);
-            } else if (mode == Changer.ChangeMode.REMOVE_ALL) {
-                ((SculkBloomEvent) e).setCharge(0);
             }
+        }
+        if (mode == Changer.ChangeMode.REMOVE) {
+            ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() - (Integer) delta[0]);
+        } else if (mode == Changer.ChangeMode.REMOVE_ALL) {
+            ((SculkBloomEvent) e).setCharge(0);
         }
     }
 
     @Override
     public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
+        if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD) {
             return CollectionUtils.array(Integer.class);
+        } else if (mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL){
+            return CollectionUtils.array();
         }
         return null;
     }

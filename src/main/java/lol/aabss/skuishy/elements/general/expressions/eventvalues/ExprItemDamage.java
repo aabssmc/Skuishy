@@ -64,17 +64,17 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
                 ((PlayerItemDamageEvent) e).setDamage((Integer) delta[0]);
             } else if (mode == Changer.ChangeMode.ADD) {
                 ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() + (Integer) delta[0]);
-            } else if (mode == Changer.ChangeMode.REMOVE) {
-                ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() - (Integer) delta[0]);
-            } else if (mode == Changer.ChangeMode.REMOVE_ALL) {
-                ((PlayerItemDamageEvent) e).setDamage(0);
             }
+        } if (mode == Changer.ChangeMode.REMOVE) {
+            ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() - (Integer) delta[0]);
+        } else if (mode == Changer.ChangeMode.REMOVE_ALL) {
+            ((PlayerItemDamageEvent) e).setDamage(0);
         }
     }
 
     @Override
     public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE || mode == Changer.ChangeMode.REMOVE_ALL) {
+        if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD) {
             return CollectionUtils.array(Integer.class);
         }
         return null;
