@@ -64,7 +64,7 @@ public class ExprMapColor extends PropertyExpression<Object, Color> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "block color from map";
     }
 

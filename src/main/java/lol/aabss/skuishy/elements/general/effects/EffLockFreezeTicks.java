@@ -36,14 +36,14 @@ public class EffLockFreezeTicks extends Effect {
     private boolean lock;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (Entity entity : this.entity.getArray(e)){
+    protected void execute(@NotNull Event event) {
+        for (Entity entity : this.entity.getArray(event)){
             entity.lockFreezeTicks(lock);
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "unlock freeze ticks";
     }
 

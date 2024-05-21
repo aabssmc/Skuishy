@@ -35,14 +35,14 @@ public class EffUpdateHologram extends Effect {
     private Expression<Hologram> holo;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (Hologram holo : this.holo.getArray(e)){
+    protected void execute(@NotNull Event event) {
+        for (Hologram holo : this.holo.getArray(event)){
             DHAPI.updateHologram(holo.getName());
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "update hologram";
     }
 

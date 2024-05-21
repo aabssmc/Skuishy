@@ -32,12 +32,12 @@ public class EffBanWave extends Effect {
     }
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NotNull Event event) {
         VulcanAPI.Factory.getApi().executeBanWave();
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "execute ban wave";
     }
 

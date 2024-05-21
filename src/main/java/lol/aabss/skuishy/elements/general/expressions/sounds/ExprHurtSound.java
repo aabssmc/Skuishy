@@ -57,7 +57,7 @@ public class ExprHurtSound extends PropertyExpression<LivingEntity, String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "hurt sound";
     }
 

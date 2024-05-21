@@ -59,13 +59,13 @@ public class EffNewPermissionAttachment extends Effect {
     private Variable<?> variable;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        Entity entity = this.entity.getSingle(e);
+    protected void execute(@NotNull Event event) {
+        Entity entity = this.entity.getSingle(event);
         if (entity != null) {
             PermissionAttachment attach;
             if (this.perm == null || this.value == null) {
                 if (this.time != null) {
-                    Timespan time = this.time.getSingle(e);
+                    Timespan time = this.time.getSingle(event);
                     if (time != null) {
                         attach = entity.addAttachment(instance, (int) time.getTicks_i());
                     } else {
@@ -75,14 +75,14 @@ public class EffNewPermissionAttachment extends Effect {
                     attach = entity.addAttachment(instance);
                 }
             } else {
-                Permission perm = this.perm.getSingle(e);
+                Permission perm = this.perm.getSingle(event);
                 if (this.time != null) {
-                    Timespan time = this.time.getSingle(e);
+                    Timespan time = this.time.getSingle(event);
                     if (perm != null && time != null) {
                         if (value == null) {
                             attach = entity.addAttachment(instance, perm.getName(), true, (int) time.getTicks_i());
                         } else {
-                            Boolean value = this.value.getSingle(e);
+                            Boolean value = this.value.getSingle(event);
                             attach = entity.addAttachment(instance, perm.getName(), Objects.requireNonNullElse(value, true), (int) time.getTicks_i());
                         }
                     } else {
@@ -93,7 +93,7 @@ public class EffNewPermissionAttachment extends Effect {
                         if (value == null) {
                             attach = entity.addAttachment(instance, perm.getName(), true);
                         } else {
-                            Boolean value = this.value.getSingle(e);
+                            Boolean value = this.value.getSingle(event);
                             attach = entity.addAttachment(instance, perm.getName(), Objects.requireNonNullElse(value, true));
                         }
                     } else {
@@ -102,14 +102,14 @@ public class EffNewPermissionAttachment extends Effect {
                 }
             }
             if (this.variable != null) {
-                variable.change(e, new Object[]{attach}, Changer.ChangeMode.SET);
+                variable.change(event, new Object[]{attach}, Changer.ChangeMode.SET);
             }
             last_permission_attachment = attach;
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "new permission attachment";
     }
 

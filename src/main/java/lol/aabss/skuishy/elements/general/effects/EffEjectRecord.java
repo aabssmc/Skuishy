@@ -31,8 +31,8 @@ public class EffEjectRecord extends Effect {
     private Expression<Block> block;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (Block b : block.getArray(e)){
+    protected void execute(@NotNull Event event) {
+        for (Block b : block.getArray(event)){
             if (b instanceof Jukebox){
                 ((Jukebox) b).eject();
             }
@@ -40,7 +40,7 @@ public class EffEjectRecord extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "eject record";
     }
 

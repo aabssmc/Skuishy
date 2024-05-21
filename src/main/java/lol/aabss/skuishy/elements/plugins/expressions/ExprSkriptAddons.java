@@ -37,7 +37,7 @@ public class ExprSkriptAddons extends SimpleExpression<Plugin> {
     }
 
     @Override
-    protected @Nullable Plugin @NotNull [] get(@NotNull Event e) {
+    protected @Nullable Plugin @NotNull [] get(@NotNull Event event) {
         List<Plugin> addons = new ArrayList<>();
         for (SkriptAddon addon : Skript.getAddons()){
             addons.add(addon.plugin);
@@ -56,7 +56,7 @@ public class ExprSkriptAddons extends SimpleExpression<Plugin> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "all skript addons";
     }
 

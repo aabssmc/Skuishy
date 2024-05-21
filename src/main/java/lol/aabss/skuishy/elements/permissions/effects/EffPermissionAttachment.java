@@ -44,23 +44,23 @@ public class EffPermissionAttachment extends Effect {
 
 
     @Override
-    protected void execute(@NotNull Event e) {
-        PermissionAttachment attach = this.attach.getSingle(e);
+    protected void execute(@NotNull Event event) {
+        PermissionAttachment attach = this.attach.getSingle(event);
         if (attach != null) {
             if (Objects.equals(part, "set") || Objects.equals(part, "add")){
-                Permission perm = this.perm.getSingle(e);
+                Permission perm = this.perm.getSingle(event);
                 if (value == null){
                     if (perm != null){
                         attach.setPermission(perm, true);
                     }
                 } else{
-                    Boolean value = this.value.getSingle(e);
+                    Boolean value = this.value.getSingle(event);
                     if (perm != null && value != null){
                         attach.setPermission(perm, value);
                     }
                 }
             } else if (Objects.equals(part, "unset")){
-                Permission perm = this.perm.getSingle(e);
+                Permission perm = this.perm.getSingle(event);
                 if (perm != null){
                     attach.unsetPermission(perm);
                 }
@@ -71,7 +71,7 @@ public class EffPermissionAttachment extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "permission attachment";
     }
 

@@ -39,9 +39,9 @@ public class ExprCenteredText extends SimpleExpression<String> {
     private Expression<String> text;
 
     @Override
-    protected @Nullable String[] get(@NotNull Event e) {
+    protected @Nullable String[] get(@NotNull Event event) {
         List<String> texts = new ArrayList<>();
-        for (String text : this.text.getArray(e)) {
+        for (String text : this.text.getArray(event)) {
             int totalWidth = max(80, text.length() + 4);
             int padSize = (totalWidth - text.length()) / 2;
             texts.add(" ".repeat(padSize) + text);
@@ -60,7 +60,7 @@ public class ExprCenteredText extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "centered text";
     }
 

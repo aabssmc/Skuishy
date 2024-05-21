@@ -54,7 +54,7 @@ public class ExprActiveHand extends PropertyExpression<Player, String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "active hand of viveplayer";
     }
 

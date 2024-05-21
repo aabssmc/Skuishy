@@ -39,20 +39,20 @@ public class EffCopyEntity extends Effect {
     private Expression<Location> location;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        Entity en = entity.getSingle(e);
+    protected void execute(@NotNull Event event) {
+        Entity en = entity.getSingle(event);
         if (location != null) {
-            Location loc = this.location.getSingle(e);
+            Location loc = this.location.getSingle(event);
             if (loc != null && en != null) {
                 en.copy(loc);
             }
         } else{
-            var.change(e, new Object[]{en.copy()}, Changer.ChangeMode.SET);
+            var.change(event, new Object[]{en.copy()}, Changer.ChangeMode.SET);
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "copy entity";
     }
 

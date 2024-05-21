@@ -46,19 +46,19 @@ public class ExprNewBlueprint extends SimpleExpression<Blueprint> {
     private Variant variant;
 
     @Override
-    protected Blueprint @NotNull [] get(@NotNull Event e) {
+    protected Blueprint @NotNull [] get(@NotNull Event event) {
         if (pattern == 0) {
             return new Blueprint[]{new Blueprint(variant)};
         } else if (pattern == 1){
             if (skin != null) {
-                Object skin = this.skin.getSingle(e);
+                Object skin = this.skin.getSingle(event);
                 if (skin != null) {
                     return new Blueprint[]{new Blueprint(skin instanceof OfflinePlayer ? ((OfflinePlayer) skin).getName() : (String) skin)};
                 }
             }
         } else if (pattern == 2){
             if (skin != null) {
-                Object skin = this.skin.getSingle(e);
+                Object skin = this.skin.getSingle(event);
                 if (skin != null) {
                     try {
                         return new Blueprint[]{new Blueprint(new URL((String) skin), variant)};
@@ -69,7 +69,7 @@ public class ExprNewBlueprint extends SimpleExpression<Blueprint> {
             }
         } else if (pattern == 3){
             if (skin != null) {
-                Object skin = this.skin.getSingle(e);
+                Object skin = this.skin.getSingle(event);
                 if (skin != null) {
                     return new Blueprint[]{new Blueprint((Color)skin, variant)};
                 }
@@ -89,7 +89,7 @@ public class ExprNewBlueprint extends SimpleExpression<Blueprint> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "new blueprint";
     }
 

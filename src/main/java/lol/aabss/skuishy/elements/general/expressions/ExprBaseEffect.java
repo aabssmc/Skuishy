@@ -59,7 +59,7 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "base potion type";
     }
 
@@ -78,9 +78,9 @@ public class ExprBaseEffect extends PropertyExpression<Entity, PotionType> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET && delta != null) {
-            Entity[] arrow = getExpr().getArray(e);
+            Entity[] arrow = getExpr().getArray(event);
             for (Entity en : arrow) {
                 if (en instanceof Arrow) {
                     ((Arrow) en).setBasePotionType((PotionType) delta[0]);

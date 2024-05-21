@@ -38,9 +38,9 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
     }
 
     @Override
-    protected Instrument @NotNull [] get(@NotNull Event e, Block @NotNull [] source) {
+    protected Instrument @NotNull [] get(@NotNull Event event, Block @NotNull [] source) {
         List<Instrument> instruments = new ArrayList<>();
-        for (Block block : getExpr().getArray(e)) {
+        for (Block block : getExpr().getArray(event)) {
             if (block.getBlockData() instanceof NoteBlock data)
                 instruments.add(data.getInstrument());
         }
@@ -53,9 +53,9 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET && delta != null) {
-            Block[] blocks = getExpr().getArray(e);
+            Block[] blocks = getExpr().getArray(event);
             for (Block block : blocks) {
                 if (block.getBlockData() instanceof NoteBlock data) {
                     data.setInstrument((Instrument) delta[0]);
@@ -78,7 +78,7 @@ public class ExprBlockInstrument extends PropertyExpression<Block, Instrument> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "instrument of " + getExpr();
     }
 

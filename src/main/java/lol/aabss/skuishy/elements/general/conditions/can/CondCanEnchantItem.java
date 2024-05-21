@@ -43,9 +43,9 @@ public class CondCanEnchantItem extends Condition {
     }
 
     @Override
-    public boolean check(@NotNull Event e) {
-        ItemStack i = item.getSingle(e);
-        Enchantment en = enchant.getSingle(e);
+    public boolean check(@NotNull Event event) {
+        ItemStack i = item.getSingle(event);
+        Enchantment en = enchant.getSingle(event);
         if (i != null && en != null){
             return can == en.canEnchantItem(i);
         }
@@ -53,7 +53,7 @@ public class CondCanEnchantItem extends Condition {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "can be enchanted";
     }
 }

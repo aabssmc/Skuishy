@@ -40,18 +40,18 @@ public class EffNewPermission extends Effect {
     private Variable<?> var;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NotNull Event event) {
         if (pat == 0){
-            String perm = this.name.getSingle(e);
+            String perm = this.name.getSingle(event);
             if (perm != null){
                 last_permission = new Permission(perm);
                 Bukkit.getPluginManager().addPermission(last_permission);
                 if (var != null){
-                    var.change(e, new Object[]{perm}, Changer.ChangeMode.SET);
+                    var.change(event, new Object[]{perm}, Changer.ChangeMode.SET);
                 }
             }
         } else {
-            Permission perm = this.perm.getSingle(e);
+            Permission perm = this.perm.getSingle(event);
             if (perm != null) {
                 if (last_permission == perm){
                     last_permission = null;
@@ -61,7 +61,7 @@ public class EffNewPermission extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "new permission";
     }
 

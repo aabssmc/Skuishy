@@ -43,7 +43,7 @@ public class ExprHologramFacing extends PropertyExpression<Hologram, Number> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "facing of hologram";
     }
 
@@ -62,9 +62,9 @@ public class ExprHologramFacing extends PropertyExpression<Hologram, Number> {
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, @Nullable Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
-            for (Hologram holo : getExpr().getArray(e)){
+            for (Hologram holo : getExpr().getArray(event)){
                 holo.setFacing((Float) delta[0]);
             }
         }

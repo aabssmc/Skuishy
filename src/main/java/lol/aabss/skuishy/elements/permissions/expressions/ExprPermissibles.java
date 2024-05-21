@@ -34,8 +34,8 @@ public class ExprPermissibles extends SimpleExpression<Entity> {
     private Expression<Permission> perm;
 
     @Override
-    protected Entity @NotNull [] get(@NotNull Event e) {
-        Permission perm = this.perm.getSingle(e);
+    protected Entity @NotNull [] get(@NotNull Event event) {
+        Permission perm = this.perm.getSingle(event);
         if (perm != null){
             return (Entity[]) perm.getPermissibles().toArray(Permissible[]::new);
         }
@@ -53,7 +53,7 @@ public class ExprPermissibles extends SimpleExpression<Entity> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "all permissibles with permission";
     }
 

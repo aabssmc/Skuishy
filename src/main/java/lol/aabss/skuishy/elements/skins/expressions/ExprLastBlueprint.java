@@ -32,7 +32,7 @@ public class ExprLastBlueprint extends SimpleExpression<Blueprint> {
     }
 
     @Override
-    protected @Nullable Blueprint @NotNull [] get(@NotNull Event e) {
+    protected @Nullable Blueprint @NotNull [] get(@NotNull Event event) {
         return new Blueprint[]{last_blueprint};
     }
 
@@ -47,7 +47,7 @@ public class ExprLastBlueprint extends SimpleExpression<Blueprint> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "last blueprint";
     }
 

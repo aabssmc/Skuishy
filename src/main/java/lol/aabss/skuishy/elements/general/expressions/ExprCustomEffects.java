@@ -51,7 +51,7 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "custom effects";
     }
 
@@ -72,8 +72,8 @@ public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> 
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
-        Entity en = getExpr().getSingle(e);
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+        Entity en = getExpr().getSingle(event);
         if (en instanceof Arrow) {
             if (mode == Changer.ChangeMode.ADD && delta != null) {
                 ((Arrow) en).addCustomEffect((PotionEffect) delta[0], true);

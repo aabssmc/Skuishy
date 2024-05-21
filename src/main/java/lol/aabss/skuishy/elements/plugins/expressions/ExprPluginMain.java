@@ -36,9 +36,9 @@ public class ExprPluginMain extends SimpleExpression<String> {
     private Expression<Plugin> plugin;
 
     @Override
-    protected @Nullable String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String @NotNull [] get(@NotNull Event event) {
         List<String> ver = new ArrayList<>();
-        for (Plugin p : this.plugin.getArray(e)) {
+        for (Plugin p : this.plugin.getArray(event)) {
             ver.add(p.getDescription().getMain());
         }
         return ver.toArray(String[]::new);
@@ -55,7 +55,7 @@ public class ExprPluginMain extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "main of plugin";
     }
 

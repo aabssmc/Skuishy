@@ -37,8 +37,8 @@ public class EvtViolationReset extends SkriptEvent {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
-        assert e != null;
-        return e.getEventName();
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
+        if (event != null) return event.getEventName();
+        return "vulcan violation reset";
     }
 }

@@ -33,9 +33,9 @@ public class ExprAllHologramLines extends SimpleExpression<String> {
     private Expression<HologramPage> page;
 
     @Override
-    protected @Nullable String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String @NotNull [] get(@NotNull Event event) {
         List<String> pages = new ArrayList<>();
-        for (HologramPage holo : page.getArray(e)) {
+        for (HologramPage holo : page.getArray(event)) {
             holo.getLines().forEach(hologramLine -> pages.add(hologramLine.getContent()));
         }
         return pages.toArray(String[]::new);
@@ -52,7 +52,7 @@ public class ExprAllHologramLines extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "all hologram lines";
     }
 

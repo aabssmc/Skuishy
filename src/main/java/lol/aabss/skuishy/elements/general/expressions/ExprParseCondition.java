@@ -34,12 +34,12 @@ public class ExprParseCondition extends SimpleExpression<Boolean> {
     private Expression<String> condition;
 
     @Override
-    protected Boolean @NotNull [] get(@NotNull Event e) {
-        String cond = condition.getSingle(e);
+    protected Boolean @NotNull [] get(@NotNull Event event) {
+        String cond = condition.getSingle(event);
         if (cond != null) {
             Condition condition = Condition.parse(cond, "Can't understand this condition: " + cond);
             if (condition != null)
-                return new Boolean[]{condition.check(e)};
+                return new Boolean[]{condition.check(event)};
         }
         return new Boolean[0];
     }
@@ -55,7 +55,7 @@ public class ExprParseCondition extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "parse condition";
     }
 

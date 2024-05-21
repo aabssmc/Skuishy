@@ -33,8 +33,8 @@ public class ExprPlugin extends SimpleExpression<Plugin> {
     private Expression<String> name;
 
     @Override
-    protected @Nullable Plugin @NotNull [] get(@NotNull Event e) {
-        String name = this.name.getSingle(e);
+    protected @Nullable Plugin @NotNull [] get(@NotNull Event event) {
+        String name = this.name.getSingle(event);
         if (name != null){
             return new Plugin[]{Bukkit.getPluginManager().getPlugin(name)};
         }
@@ -52,7 +52,7 @@ public class ExprPlugin extends SimpleExpression<Plugin> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "plugin";
     }
 

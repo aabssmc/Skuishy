@@ -29,13 +29,13 @@ public class ExprEventNote extends EventValueExpression<Note> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "event note";
     }
 
     @Override
-    protected Note @Nullable [] get(@NotNull Event e) {
-        return new Note[]{((NotePlayEvent) e).getNote()};
+    protected Note @Nullable [] get(@NotNull Event event) {
+        return new Note[]{((NotePlayEvent) event).getNote()};
     }
 
     @Override
@@ -48,9 +48,9 @@ public class ExprEventNote extends EventValueExpression<Note> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET && delta != null) {
-            ((NotePlayEvent) e).setNote((Note) delta[0]);
+            ((NotePlayEvent) event).setNote((Note) delta[0]);
         }
     }
 

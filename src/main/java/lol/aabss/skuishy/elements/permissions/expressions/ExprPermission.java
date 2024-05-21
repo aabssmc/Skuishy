@@ -37,8 +37,8 @@ public class ExprPermission extends SimpleExpression<Permission> {
     private boolean neww;
 
     @Override
-    protected Permission @NotNull [] get(@NotNull Event e) {
-        String name = this.name.getSingle(e);
+    protected Permission @NotNull [] get(@NotNull Event event) {
+        String name = this.name.getSingle(event);
         if (name != null) {
             Permission perm = new Permission(name);
             if (neww) {
@@ -61,7 +61,7 @@ public class ExprPermission extends SimpleExpression<Permission> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "permission";
     }
 

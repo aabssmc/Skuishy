@@ -58,7 +58,7 @@ public class ExprSlimeSize extends PropertyExpression<Entity, Integer> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "size of slime";
     }
 
@@ -69,9 +69,9 @@ public class ExprSlimeSize extends PropertyExpression<Entity, Integer> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET && delta != null){
-            for (Entity slime : getExpr().getArray(e)){
+            for (Entity slime : getExpr().getArray(event)){
                 if (slime instanceof Slime){
                     ((Slime) slime).setSize((Integer) delta[0]);
                 }

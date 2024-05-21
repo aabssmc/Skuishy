@@ -36,9 +36,9 @@ public class ExprUnicodeString extends SimpleExpression<String> {
     private Expression<String> string;
 
     @Override
-    protected @Nullable String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String @NotNull [] get(@NotNull Event event) {
         List<String> strings = new ArrayList<>();
-        for (String s : string.getArray(e)){
+        for (String s : string.getArray(event)){
             Pattern pattern = Pattern.compile("\\\\u[0-9a-fA-F]{4}");
             Matcher matcher = pattern.matcher(s);
             StringBuilder decodedString = new StringBuilder();
@@ -64,7 +64,7 @@ public class ExprUnicodeString extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "unicode string";
     }
 

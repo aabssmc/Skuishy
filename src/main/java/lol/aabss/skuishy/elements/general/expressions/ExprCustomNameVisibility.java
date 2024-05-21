@@ -35,17 +35,17 @@ public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean
     }
 
     @Override
-    protected @Nullable Boolean[] get(@NotNull Event e, Entity @NotNull [] source) {
+    protected @Nullable Boolean[] get(@NotNull Event event, Entity @NotNull [] source) {
         List<Boolean> entities = new ArrayList<>();
-        for (Entity entity : getExpr().getArray(e))
+        for (Entity entity : getExpr().getArray(event))
             entities.add(entity.isCustomNameVisible());
         return entities.toArray(Boolean[]::new);
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET && delta != null) {
-            Entity[] en = getExpr().getArray(e);
+            Entity[] en = getExpr().getArray(event);
             for (Entity entity : en) {
                 entity.setCustomNameVisible((Boolean) delta[0]);
             }
@@ -71,7 +71,7 @@ public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "custom name visibility";
     }
 

@@ -36,8 +36,8 @@ public class EffTeleport extends Effect {
     private boolean random;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        Entity enderman = this.enderman.getSingle(e);
+    protected void execute(@NotNull Event event) {
+        Entity enderman = this.enderman.getSingle(event);
         if (enderman instanceof Enderman){
             if (entity == null){
                 if (random) {
@@ -46,7 +46,7 @@ public class EffTeleport extends Effect {
                     ((Enderman) enderman).teleport();
                 }
             } else{
-                Entity entity = this.entity.getSingle(e);
+                Entity entity = this.entity.getSingle(event);
                 if (entity != null){
                     ((Enderman) enderman).teleportTowards(entity);
                 }
@@ -55,7 +55,7 @@ public class EffTeleport extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "make a enderman teleport";
     }
 

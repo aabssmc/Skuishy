@@ -36,8 +36,8 @@ public class ExprPermissionDefault extends SimpleExpression<PermissionDefault> {
     private Expression<Permission> perm;
 
     @Override
-    protected PermissionDefault @NotNull [] get(@NotNull Event e) {
-        Permission perm = this.perm.getSingle(e);
+    protected PermissionDefault @NotNull [] get(@NotNull Event event) {
+        Permission perm = this.perm.getSingle(event);
         if (perm != null) {
             return new PermissionDefault[]{perm.getDefault()};
         }
@@ -53,9 +53,9 @@ public class ExprPermissionDefault extends SimpleExpression<PermissionDefault> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
-            Permission perm = this.perm.getSingle(e);
+            Permission perm = this.perm.getSingle(event);
             if (perm != null) {
                 perm.setDefault((PermissionDefault) delta[0]);
             }
@@ -73,7 +73,7 @@ public class ExprPermissionDefault extends SimpleExpression<PermissionDefault> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "permission default of permission";
     }
 

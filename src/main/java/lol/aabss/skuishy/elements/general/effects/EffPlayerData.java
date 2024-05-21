@@ -40,8 +40,8 @@ public class EffPlayerData extends Effect {
     private Expression<Player> players;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (Player p : players.getArray(e)){
+    protected void execute(@NotNull Event event) {
+        for (Player p : players.getArray(event)){
             if (load) {
                 p.loadData();
             } else {
@@ -51,7 +51,7 @@ public class EffPlayerData extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "load/save data of player";
     }
 

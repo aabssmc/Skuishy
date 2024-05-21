@@ -36,8 +36,8 @@ public class CondIsFrozen extends Condition {
     private Expression<Entity> entity;
 
     @Override
-    public boolean check(@NotNull Event e) {
-        Entity en = entity.getSingle(e);
+    public boolean check(@NotNull Event event) {
+        Entity en = entity.getSingle(event);
         if (en != null){
             if (is){
                 return Bukkit.getServer().getServerTickManager().isFrozen(en);
@@ -51,7 +51,7 @@ public class CondIsFrozen extends Condition {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return ((entity != null) ? "entity" : "ticks") + "ticks are frozen";
     }
 

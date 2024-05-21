@@ -51,10 +51,10 @@ public class EffSetSkin extends Effect {
     private Expression<String> signature;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NotNull Event event) {
         if (value == null || signature == null) {
             if (skin != null) {
-                Object skin = this.skin.getSingle(e);
+                Object skin = this.skin.getSingle(event);
                 Texture texture = null;
                 String nullreason = "";
                 if (skin != null) {
@@ -76,7 +76,7 @@ public class EffSetSkin extends Effect {
                         // images not supported by skuishy, but just in case you use another addon like SkImage :)
                         texture = uploadSkin(image);
                     }
-                    for (Player p : player.getArray(e)) {
+                    for (Player p : player.getArray(event)) {
                         if (texture == null) {
                             if (nullreason.equals("name")) {
                                 SkinWrapper.setSkin(p, (String) skin);
@@ -90,10 +90,10 @@ public class EffSetSkin extends Effect {
                 }
             }
         } else{
-            String value = this.value.getSingle(e);
-            String signature = this.signature.getSingle(e);
+            String value = this.value.getSingle(event);
+            String signature = this.signature.getSingle(event);
             if (value != null && signature != null){
-                for (Player p : player.getArray(e)){
+                for (Player p : player.getArray(event)){
                     SkinWrapper.setSkin(p, value, signature);
                 }
             }
@@ -101,7 +101,7 @@ public class EffSetSkin extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "set skin of player";
     }
 

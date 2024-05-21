@@ -37,15 +37,15 @@ public class ExprNote extends SimpleExpression<Note> {
     private Expression<Integer> octave;
 
     @Override
-    protected Note @Nullable [] get(@NotNull Event e) {
+    protected Note @Nullable [] get(@NotNull Event event) {
         Integer oct;
         if (octave == null){
             oct = 0;
         } else{
-            Integer octave = this.octave.getSingle(e);
+            Integer octave = this.octave.getSingle(event);
             oct = Objects.requireNonNullElse(octave, 0);
         }
-        Note.Tone tone = this.tone.getSingle(e);
+        Note.Tone tone = this.tone.getSingle(event);
         if (tone != null) {
             if (Objects.equals(accidental, "sharp")) {
                 if (oct == 0 || oct == 1 || oct == 2) {
@@ -78,7 +78,7 @@ public class ExprNote extends SimpleExpression<Note> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "note";
     }
 

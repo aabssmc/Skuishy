@@ -38,19 +38,19 @@ public class ExprEventInstrument extends EventValueExpression<Instrument> {
     }
 
     @Override
-    protected Instrument @Nullable [] get(@NotNull Event e) {
-        return new Instrument[]{((NotePlayEvent) e).getInstrument()};
+    protected Instrument @Nullable [] get(@NotNull Event event) {
+        return new Instrument[]{((NotePlayEvent) event).getInstrument()};
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "event instrument";
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET && delta != null) {
-            ((NotePlayEvent) e).setInstrument((Instrument) delta[0]);
+            ((NotePlayEvent) event).setInstrument((Instrument) delta[0]);
         }
     }
 

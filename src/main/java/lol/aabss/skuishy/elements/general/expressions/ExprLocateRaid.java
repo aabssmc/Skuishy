@@ -36,9 +36,9 @@ public class ExprLocateRaid extends SimpleExpression<Location> {
     private Expression<Location> location;
 
     @Override
-    protected @Nullable Location[] get(@NotNull Event e) {
-        Location loc = location.getSingle(e);
-        Integer rad = radius.getSingle(e);
+    protected @Nullable Location[] get(@NotNull Event event) {
+        Location loc = location.getSingle(event);
+        Integer rad = radius.getSingle(event);
         if (loc != null && rad != null) {
             Raid r = loc.getWorld().locateNearestRaid(loc, rad);
             if (r != null) {
@@ -59,7 +59,7 @@ public class ExprLocateRaid extends SimpleExpression<Location> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "nearest biome";
     }
 

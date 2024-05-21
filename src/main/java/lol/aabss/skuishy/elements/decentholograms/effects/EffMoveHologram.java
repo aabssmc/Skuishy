@@ -37,17 +37,17 @@ public class EffMoveHologram extends Effect {
     private Expression<Location> location;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        Location loc = location.getSingle(e);
+    protected void execute(@NotNull Event event) {
+        Location loc = location.getSingle(event);
         if (loc != null){
-            for (Hologram holo : hologram.getArray(e)) {
+            for (Hologram holo : hologram.getArray(event)) {
                 DHAPI.moveHologram(holo, loc);
             }
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "move hologram";
     }
 

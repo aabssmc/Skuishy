@@ -69,20 +69,20 @@ public class SecCreateHologram extends Section {
     }
 
     @Override
-    protected @Nullable TriggerItem walk(@NotNull Event e) {
-        String name = this.name.getSingle(e);
-        List<String> lines = List.of(this.lines.getArray(e));
-        Location loc = this.location.getSingle(e);
+    protected @Nullable TriggerItem walk(@NotNull Event event) {
+        String name = this.name.getSingle(event);
+        List<String> lines = List.of(this.lines.getArray(event));
+        Location loc = this.location.getSingle(event);
         if (name != null && loc != null) {
             Hologram hologram = DHAPI.createHologram(name, loc, persistent, lines);
             DecentHologramsAPI.get().getHologramManager().registerHologram(hologram);
         }
-        return super.walk(e, false);
+        return super.walk(event, false);
     }
 
     @NotNull
     @Override
-    public String toString(@Nullable Event e, boolean debug) {
+    public String toString(@Nullable Event event, boolean debug) {
         return "make a new hologram";
     }
 }

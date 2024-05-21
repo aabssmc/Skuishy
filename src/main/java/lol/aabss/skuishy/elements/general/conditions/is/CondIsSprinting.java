@@ -32,7 +32,7 @@ public class CondIsSprinting extends Condition {
     private boolean is;
 
     @Override
-    public boolean check(@NotNull Event e) {
+    public boolean check(@NotNull Event event) {
         if (is){
             return Bukkit.getServer().getServerTickManager().isSprinting();
         }
@@ -40,7 +40,7 @@ public class CondIsSprinting extends Condition {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "ticks are sprinting";
     }
 

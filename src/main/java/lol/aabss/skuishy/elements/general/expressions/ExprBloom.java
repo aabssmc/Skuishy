@@ -52,7 +52,7 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "bloom state";
     }
 
@@ -63,9 +63,9 @@ public class ExprBloom extends PropertyExpression<Block, Boolean> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET && delta != null) {
-            for (Block b : getExpr().getArray(e)){
+            for (Block b : getExpr().getArray(event)){
                 if (b.getBlockData() instanceof SculkCatalyst block){
                     block.setBloom((Boolean) delta[0]);
                 }

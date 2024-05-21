@@ -38,8 +38,8 @@ public class ExprEntityPermissionAttachments extends SimpleExpression<Permission
     private Expression<Entity> entity;
 
     @Override
-    protected PermissionAttachment @NotNull [] get(@NotNull Event e) {
-        for (Entity en : entity.getArray(e)){
+    protected PermissionAttachment @NotNull [] get(@NotNull Event event) {
+        for (Entity en : entity.getArray(event)){
             List<PermissionAttachment> perms = new ArrayList<>();
             for (PermissionAttachmentInfo perm : en.getEffectivePermissions()){
                 perms.add(perm.getAttachment());
@@ -59,7 +59,7 @@ public class ExprEntityPermissionAttachments extends SimpleExpression<Permission
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "permission attachments of entity";
     }
 

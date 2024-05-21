@@ -30,7 +30,7 @@ public class ExprAllHolograms extends SimpleExpression<Hologram> {
     }
 
     @Override
-    protected @Nullable Hologram @NotNull [] get(@NotNull Event e) {
+    protected @Nullable Hologram @NotNull [] get(@NotNull Event event) {
         return PLUGIN.getHologramManager().getHolograms().toArray(Hologram[]::new);
     }
 
@@ -45,7 +45,7 @@ public class ExprAllHolograms extends SimpleExpression<Hologram> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "all holograms";
     }
 

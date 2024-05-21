@@ -70,19 +70,19 @@ public class EvtGameruleChange extends SkriptEvent {
     }
 
     @Override
-    public boolean check(@NotNull Event e) {
-        if (e instanceof WorldGameRuleChangeEvent) {
+    public boolean check(@NotNull Event event) {
+        if (event instanceof WorldGameRuleChangeEvent) {
             if (world == null) {
                 if (gamerule == null) {
                     return true;
                 }
-                return gamerule.getSingle(e) == ((WorldGameRuleChangeEvent) e).getGameRule();
+                return gamerule.getSingle(event) == ((WorldGameRuleChangeEvent) event).getGameRule();
             }
-            if (((WorldGameRuleChangeEvent) e).getWorld() == world.getSingle(e)) {
+            if (((WorldGameRuleChangeEvent) event).getWorld() == world.getSingle(event)) {
                 if (gamerule == null) {
                     return true;
                 }
-                return gamerule.getSingle(e) == ((WorldGameRuleChangeEvent) e).getGameRule();
+                return gamerule.getSingle(event) == ((WorldGameRuleChangeEvent) event).getGameRule();
             } else {
                 return false;
             }
@@ -91,7 +91,7 @@ public class EvtGameruleChange extends SkriptEvent {
     }
 
     @Override
-    public @NotNull String toString(Event e, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return "gamerule change event";
     }
 }

@@ -35,7 +35,7 @@ public class ExprUptime extends SimpleExpression<Timespan> {
     }
 
     @Override
-    protected @Nullable Timespan[] get(@NotNull Event e) {
+    protected @Nullable Timespan[] get(@NotNull Event event) {
         long uptime = (System.currentTimeMillis()/50) - start;
         return new Timespan[]{Timespan.fromTicks_i(uptime)};
     }
@@ -51,7 +51,7 @@ public class ExprUptime extends SimpleExpression<Timespan> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "uptime";
     }
 

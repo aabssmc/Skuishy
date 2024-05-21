@@ -36,12 +36,12 @@ public class EffReplaceColor extends Effect {
     private Expression<Blueprint> blueprint;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NotNull Event event) {
         if (newColor != null){
-            Color newColor = this.newColor.getSingle(e);
+            Color newColor = this.newColor.getSingle(event);
             if (newColor != null){
-                for (Blueprint blueprint : blueprint.getArray(e)){
-                    for (Color oldColor : this.oldColor.getArray(e)){
+                for (Blueprint blueprint : blueprint.getArray(event)){
+                    for (Color oldColor : this.oldColor.getArray(event)){
                         blueprint.replaceColor(oldColor, newColor);
                     }
                 }
@@ -50,7 +50,7 @@ public class EffReplaceColor extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "replace colors in blueprints";
     }
 

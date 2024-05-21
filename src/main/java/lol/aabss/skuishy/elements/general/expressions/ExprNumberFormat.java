@@ -37,8 +37,8 @@ public class ExprNumberFormat extends SimpleExpression<String> {
     Expression<Number> num;
 
     @Override
-    protected @Nullable String[] get(@NotNull Event e) {
-        Number num = this.num.getSingle(e);
+    protected @Nullable String[] get(@NotNull Event event) {
+        Number num = this.num.getSingle(event);
         if (num != null) {
             if (letter) {
                 return new String[]{NumberFormat.getCompactNumberInstance().format(num)};
@@ -58,7 +58,7 @@ public class ExprNumberFormat extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "number format";
     }
 

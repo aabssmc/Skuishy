@@ -38,9 +38,9 @@ public class ExprPluginName extends SimpleExpression<String> {
     private String type;
 
     @Override
-    protected @Nullable String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String @NotNull [] get(@NotNull Event event) {
         List<String> name = new ArrayList<>();
-        for (Plugin p : this.plugin.getArray(e)) {
+        for (Plugin p : this.plugin.getArray(event)) {
             if (Objects.equals(type, "full")){
                 name.add(p.getDescription().getFullName());
             } else{
@@ -61,7 +61,7 @@ public class ExprPluginName extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "version of plugin";
     }
 

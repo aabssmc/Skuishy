@@ -41,7 +41,7 @@ public class ExprHologramName extends PropertyExpression<Hologram, String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "name of hologram";
     }
 

@@ -38,8 +38,8 @@ public class CondHologramExists extends Condition {
     private boolean is;
 
     @Override
-    public boolean check(@NotNull Event e) {
-        String name = this.name.getSingle(e);
+    public boolean check(@NotNull Event event) {
+        String name = this.name.getSingle(event);
         if (name != null) {
             List<String> names = new ArrayList<>();
             Hologram.getCachedHolograms().forEach(hologram -> names.add(hologram.getName()));
@@ -52,7 +52,7 @@ public class CondHologramExists extends Condition {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "hologram exists";
     }
 

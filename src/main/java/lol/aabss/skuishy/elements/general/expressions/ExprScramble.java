@@ -36,9 +36,9 @@ public class ExprScramble extends SimpleExpression<String> {
     private Expression<String> string;
     
     @Override
-    protected @Nullable String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String @NotNull [] get(@NotNull Event event) {
         List<String> strings = new ArrayList<>();
-        for (String s: this.string.getArray(e)){
+        for (String s: this.string.getArray(event)){
             char[] chars = s.toCharArray();
             Random rand = new Random();
             for (int i = chars.length - 1; i > 0; i--) {
@@ -63,7 +63,7 @@ public class ExprScramble extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "scramble string";
     }
 

@@ -34,17 +34,17 @@ public class EffCloneBlueprint extends Effect {
     private Variable<?> var;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NotNull Event event) {
         if (print != null){
-            Blueprint print1 = this.print.getSingle(e);
+            Blueprint print1 = this.print.getSingle(event);
             if (print1 != null){
-                var.change(e, new Blueprint[]{print1.duplicate()}, Changer.ChangeMode.SET);
+                var.change(event, new Blueprint[]{print1.duplicate()}, Changer.ChangeMode.SET);
             }
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "overlay blueprints";
     }
 

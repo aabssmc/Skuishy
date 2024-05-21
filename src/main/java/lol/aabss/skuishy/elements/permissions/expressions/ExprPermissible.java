@@ -34,8 +34,8 @@ public class ExprPermissible extends SimpleExpression<Entity> {
     private Expression<PermissionAttachment> attach;
 
     @Override
-    protected Entity @NotNull [] get(@NotNull Event e) {
-        PermissionAttachment attach = this.attach.getSingle(e);
+    protected Entity @NotNull [] get(@NotNull Event event) {
+        PermissionAttachment attach = this.attach.getSingle(event);
         if (attach != null){
             return new Entity[]{(Entity) attach.getPermissible()};
         }
@@ -53,7 +53,7 @@ public class ExprPermissible extends SimpleExpression<Entity> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "permissible of permission attachment";
     }
 

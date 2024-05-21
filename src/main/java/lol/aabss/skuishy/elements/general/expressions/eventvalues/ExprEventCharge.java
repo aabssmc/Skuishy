@@ -39,7 +39,7 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "event charge";
     }
 
@@ -53,24 +53,24 @@ public class ExprEventCharge extends EventValueExpression<Integer> {
     }
 
     @Override
-    protected Integer @Nullable [] get(@NotNull Event e) {
-        return new Integer[]{((SculkBloomEvent) e).getCharge()};
+    protected Integer @Nullable [] get(@NotNull Event event) {
+        return new Integer[]{((SculkBloomEvent) event).getCharge()};
     }
 
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
-                ((SculkBloomEvent) e).setCharge((Integer) delta[0]);
+                ((SculkBloomEvent) event).setCharge((Integer) delta[0]);
             } else if (mode == Changer.ChangeMode.ADD) {
-                ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() + (Integer) delta[0]);
+                ((SculkBloomEvent) event).setCharge(((SculkBloomEvent) event).getCharge() + (Integer) delta[0]);
             }
         }
         if (mode == Changer.ChangeMode.REMOVE) {
-            ((SculkBloomEvent) e).setCharge(((SculkBloomEvent) e).getCharge() - (Integer) delta[0]);
+            ((SculkBloomEvent) event).setCharge(((SculkBloomEvent) event).getCharge() - (Integer) delta[0]);
         } else if (mode == Changer.ChangeMode.REMOVE_ALL) {
-            ((SculkBloomEvent) e).setCharge(0);
+            ((SculkBloomEvent) event).setCharge(0);
         }
     }
 

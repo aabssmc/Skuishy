@@ -93,16 +93,16 @@ public class SecBlueprintCreator extends Section {
     }
 
     @Override
-    protected @Nullable TriggerItem walk(@NotNull Event e) {
+    protected @Nullable TriggerItem walk(@NotNull Event event) {
         // great code ik
         if (head != null && torso != null && rightarm != null && leftarm != null && rightleg != null && leftleg != null && model != null){
-            Blueprint head = this.head.getSingle(e);
-            Blueprint torso = this.torso.getSingle(e);
-            Blueprint rightarm = this.rightarm.getSingle(e);
-            Blueprint leftarm = this.leftarm.getSingle(e);
-            Blueprint rightleg = this.rightleg.getSingle(e);
-            Blueprint leftleg = this.leftleg.getSingle(e);
-            Variant model = this.model.getSingle(e);
+            Blueprint head = this.head.getSingle(event);
+            Blueprint torso = this.torso.getSingle(event);
+            Blueprint rightarm = this.rightarm.getSingle(event);
+            Blueprint leftarm = this.leftarm.getSingle(event);
+            Blueprint rightleg = this.rightleg.getSingle(event);
+            Blueprint leftleg = this.leftleg.getSingle(event);
+            Variant model = this.model.getSingle(event);
             if (head != null && torso != null && rightarm != null && leftarm != null && rightleg != null && leftleg != null && model != null){
                 Blueprint blueprint = new Blueprint(model);
                 blueprint.overlay(head);
@@ -111,14 +111,14 @@ public class SecBlueprintCreator extends Section {
                 blueprint.overlay(leftarm);
                 blueprint.overlay(rightleg);
                 blueprint.overlay(leftleg);
-                var.change(e, new Blueprint[]{blueprint}, Changer.ChangeMode.SET);
+                var.change(event, new Blueprint[]{blueprint}, Changer.ChangeMode.SET);
             }
         }
-        return super.walk(e, false);
+        return super.walk(event, false);
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "blueprint builder";
     }
 }

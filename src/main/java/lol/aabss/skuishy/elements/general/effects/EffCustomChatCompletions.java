@@ -40,9 +40,9 @@ public class EffCustomChatCompletions extends Effect {
     private Expression<String> strings;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        Player[] players = this.player.getArray(e);
-        String[] strings = this.strings.getArray(e);
+    protected void execute(@NotNull Event event) {
+        Player[] players = this.player.getArray(event);
+        String[] strings = this.strings.getArray(event);
         if (pattern == 0) {
             for (Player p : players) p.addCustomChatCompletions(List.of(strings));
         } else if (pattern == 1) {
@@ -54,7 +54,7 @@ public class EffCustomChatCompletions extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "custom chat completions";
     }
 

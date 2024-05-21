@@ -27,9 +27,9 @@ public class EffBloom extends Effect {
     private Expression<Block> block;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        Block[] block = this.block.getArray(e);
-        Integer charge = this.charge.getSingle(e);
+    protected void execute(@NotNull Event event) {
+        Block[] block = this.block.getArray(event);
+        Integer charge = this.charge.getSingle(event);
         if (charge != null) {
             for (Block b : block) {
                 if (b instanceof SculkCatalyst bb) {
@@ -41,7 +41,7 @@ public class EffBloom extends Effect {
 
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "bloom location";
     }
 

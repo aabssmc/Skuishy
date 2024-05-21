@@ -51,10 +51,10 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
     }
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
-        Integer shift = this.shift == null ? null : this.shift.getSingle(e);
+    protected String @NotNull [] get(@NotNull Event event) {
+        Integer shift = this.shift == null ? null : this.shift.getSingle(event);
         List<String> strings = new ArrayList<>();
-        for (String string : this.string.getArray(e)) {
+        for (String string : this.string.getArray(event)) {
             strings.add(isDe ? CaesarCipher.decrypt(string, shift) : CaesarCipher.encrypt(string, shift));
         }
         return strings.toArray(String[]::new);
@@ -70,7 +70,7 @@ public class ExprCaesarCipher extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "caesar cipher " + (isDe ? "de" : "en") + "crypted string \"" + string.toString(e, debug) + "\"";
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
+        return "caesar cipher " + (isDe ? "de" : "en") + "crypted string \"" + string.toString(event, debug) + "\"";
     }
 }

@@ -36,8 +36,8 @@ public class CondIsGlowing extends Condition {
     private boolean is;
 
     @Override
-    public boolean check(@NotNull Event e) {
-        for (final Entity entity : entities.getArray(e)){
+    public boolean check(@NotNull Event event) {
+        for (final Entity entity : entities.getArray(event)){
             if (is){
                 return entity.isGlowing();
             }
@@ -47,8 +47,8 @@ public class CondIsGlowing extends Condition {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return entities.toString(e,debug) + " is glowing";
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
+        return entities.toString(event, debug) + " is glowing";
     }
 
 

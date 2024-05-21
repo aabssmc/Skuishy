@@ -51,7 +51,7 @@ public class ExprCollidable extends PropertyExpression<LivingEntity, Boolean> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "collidable of entity";
     }
 
@@ -70,9 +70,9 @@ public class ExprCollidable extends PropertyExpression<LivingEntity, Boolean> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET && delta != null) {
-            for (LivingEntity en : getExpr().getArray(e)) {
+            for (LivingEntity en : getExpr().getArray(event)) {
                 en.setCollidable((Boolean) delta[0]);
             }
         }

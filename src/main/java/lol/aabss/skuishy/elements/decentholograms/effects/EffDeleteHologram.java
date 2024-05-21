@@ -33,15 +33,15 @@ public class EffDeleteHologram extends Effect {
     private Expression<Hologram> hologram;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        Hologram[] holo = hologram.getArray(e);
+    protected void execute(@NotNull Event event) {
+        Hologram[] holo = hologram.getArray(event);
         for (Hologram h : holo) {
             h.delete();
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "delete hologram";
     }
 

@@ -51,8 +51,8 @@ public class ExprUnkwnCmdMsg extends EventValueExpression<String> {
     }
 
     @Override
-    protected @Nullable String[] get(@NotNull Event e) {
-        return new String[]{String.valueOf(((UnknownCommandEvent) e).message())};
+    protected @Nullable String[] get(@NotNull Event event) {
+        return new String[]{String.valueOf(((UnknownCommandEvent) event).message())};
     }
 
     @Override

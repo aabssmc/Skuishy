@@ -39,8 +39,8 @@ public class EffJump extends Effect {
     private Expression<LivingEntity> player;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (LivingEntity p : player.getArray(e)) {
+    protected void execute(@NotNull Event event) {
+        for (LivingEntity p : player.getArray(event)) {
             Vector from = p.getVelocity();
             float f = p.getWorld().getBlockState(p.getLocation()).getBlock().getType() == Material.HONEY_BLOCK ? 0.5F : 1.0F;
             float g = p.getWorld().getBlockState(p.getVelocity().toLocation(p.getWorld())).getBlock().getType() == Material.HONEY_BLOCK ? 0.5F : 1.0F;
@@ -74,7 +74,7 @@ public class EffJump extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "jump";
     }
 

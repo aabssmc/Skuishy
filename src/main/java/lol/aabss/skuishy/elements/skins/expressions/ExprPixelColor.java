@@ -59,7 +59,7 @@ public class ExprPixelColor extends PropertyExpression<Blueprint, Color> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "color at pixel of blueprint";
     }
 
@@ -86,12 +86,12 @@ public class ExprPixelColor extends PropertyExpression<Blueprint, Color> {
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, @Nullable Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (x != null && y != null && delta[0] != null){
-            Integer x = this.x.getSingle(e);
-            Integer y = this.y.getSingle(e);
+            Integer x = this.x.getSingle(event);
+            Integer y = this.y.getSingle(event);
             if (x != null && y != null){
-                for (Blueprint print : getExpr().getArray(e)){
+                for (Blueprint print : getExpr().getArray(event)){
                     print.pixelColor(x, y, (Color) delta[0]);
                 }
             }

@@ -34,7 +34,7 @@ public class ExprMemory extends SimpleExpression<Long> {
     private String size;
 
     @Override
-    protected @Nullable Long @NotNull [] get(@NotNull Event e) {
+    protected @Nullable Long @NotNull [] get(@NotNull Event event) {
         if (Objects.equals(size, "free")){
             return new Long[]{Runtime.getRuntime().freeMemory()};
         } else if (Objects.equals(size, "max")){
@@ -53,7 +53,7 @@ public class ExprMemory extends SimpleExpression<Long> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "memory of server";
     }
 

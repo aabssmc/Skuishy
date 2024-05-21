@@ -40,18 +40,18 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
     private Expression<World> world;
 
     @Override
-    protected @Nullable Boolean[] get(@NotNull Event e) {
+    protected @Nullable Boolean[] get(@NotNull Event event) {
         List<Boolean> modes = new ArrayList<>();
-        for (World world : this.world.getArray(e)){
+        for (World world : this.world.getArray(event)){
             modes.add(world.isHardcore());
         }
         return modes.toArray(Boolean[]::new);
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET && delta != null) {
-            World world = this.world.getSingle(e);
+            World world = this.world.getSingle(event);
             if (world != null) {
                 world.setHardcore((Boolean) delta[0]);
             }
@@ -77,7 +77,7 @@ public class ExprHardcoreMode extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "hardcore mode";
     }
 

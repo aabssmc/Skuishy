@@ -41,9 +41,9 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
     private Expression<World> world;
 
     @Override
-    protected @Nullable Integer[] get(@NotNull Event e) {
-        World world = this.world.getSingle(e);
-        SpawnCategory spawncategory = this.spawncategory.getSingle(e);
+    protected @Nullable Integer[] get(@NotNull Event event) {
+        World world = this.world.getSingle(event);
+        SpawnCategory spawncategory = this.spawncategory.getSingle(event);
         if (world != null && spawncategory != null) {
             return new Integer[]{world.getSpawnLimit(spawncategory)};
         }
@@ -51,10 +51,10 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET && delta != null) {
-            World world = this.world.getSingle(e);
-            SpawnCategory spawncategory = this.spawncategory.getSingle(e);
+            World world = this.world.getSingle(event);
+            SpawnCategory spawncategory = this.spawncategory.getSingle(event);
             if (world != null && spawncategory != null) {
                 world.setSpawnLimit(spawncategory, (Integer) delta[0]);
             }
@@ -80,7 +80,7 @@ public class ExprSpawnLimit extends SimpleExpression<Integer> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "spawn category";
     }
 

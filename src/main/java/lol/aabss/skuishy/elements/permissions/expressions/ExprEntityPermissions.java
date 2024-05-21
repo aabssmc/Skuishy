@@ -42,9 +42,9 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
     private Expression<PermissionAttachment> attach;
 
     @Override
-    protected Permission @NotNull [] get(@NotNull Event e) {
+    protected Permission @NotNull [] get(@NotNull Event event) {
         if (this.attach != null) {
-            PermissionAttachment attach = this.attach.getSingle(e);
+            PermissionAttachment attach = this.attach.getSingle(event);
             if (attach != null){
                 List<Permission> perms = new ArrayList<>();
                 for (String perm : attach.getPermissions().keySet()) {
@@ -64,7 +64,7 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.ADD){
             Bukkit.getPluginManager().addPermission((Permission) delta[0]);
         } else if (mode == Changer.ChangeMode.REMOVE){
@@ -85,7 +85,7 @@ public class ExprEntityPermissions extends SimpleExpression<Permission> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "permissions";
     }
 

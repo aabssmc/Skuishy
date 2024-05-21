@@ -41,12 +41,12 @@ public class EffSaveBlueprint extends Effect {
     private Variable<?> var;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NotNull Event event) {
         if (name == null) return;
-        String name = this.name.getSingle(e);
+        String name = this.name.getSingle(event);
         if (name != null) {
             if (blueprint != null) {
-                Blueprint blueprint = this.blueprint.getSingle(e);
+                Blueprint blueprint = this.blueprint.getSingle(event);
                 if (blueprint != null) {
                     blueprint.save(name);
                 }
@@ -54,14 +54,14 @@ public class EffSaveBlueprint extends Effect {
                 if (var == null){
                     BlueprintUtils.delete(name);
                 } else{
-                    var.change(e, new Blueprint[]{BlueprintUtils.load(name)}, Changer.ChangeMode.SET);
+                    var.change(event, new Blueprint[]{BlueprintUtils.load(name)}, Changer.ChangeMode.SET);
                 }
             }
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "save/load/delete blueprint";
     }
 

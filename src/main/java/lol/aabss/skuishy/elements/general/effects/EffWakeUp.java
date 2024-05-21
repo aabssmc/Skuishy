@@ -33,15 +33,15 @@ public class EffWakeUp extends Effect {
     Expression<Player> player;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        Player[] p = player.getArray(e);
+    protected void execute(@NotNull Event event) {
+        Player[] p = player.getArray(event);
         for (Player player : p){
             player.wakeup(spawn);
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "make player wakeup";
     }
 

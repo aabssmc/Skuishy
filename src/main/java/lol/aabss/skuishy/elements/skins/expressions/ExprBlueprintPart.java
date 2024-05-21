@@ -52,7 +52,7 @@ public class ExprBlueprintPart extends PropertyExpression<Blueprint, Blueprint> 
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "blueprint";
     }
 

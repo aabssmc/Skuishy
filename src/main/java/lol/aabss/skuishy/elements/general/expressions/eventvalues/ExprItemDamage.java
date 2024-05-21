@@ -38,7 +38,7 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "item damage";
     }
 
@@ -52,23 +52,23 @@ public class ExprItemDamage extends EventValueExpression<Integer> {
     }
 
     @Override
-    protected Integer @Nullable [] get(@NotNull Event e) {
-        return new Integer[]{((PlayerItemDamageEvent) e).getDamage()};
+    protected Integer @Nullable [] get(@NotNull Event event) {
+        return new Integer[]{((PlayerItemDamageEvent) event).getDamage()};
     }
 
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null) {
             if (mode == Changer.ChangeMode.SET) {
-                ((PlayerItemDamageEvent) e).setDamage((Integer) delta[0]);
+                ((PlayerItemDamageEvent) event).setDamage((Integer) delta[0]);
             } else if (mode == Changer.ChangeMode.ADD) {
-                ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() + (Integer) delta[0]);
+                ((PlayerItemDamageEvent) event).setDamage(((PlayerItemDamageEvent) event).getDamage() + (Integer) delta[0]);
             }
         } if (mode == Changer.ChangeMode.REMOVE) {
-            ((PlayerItemDamageEvent) e).setDamage(((PlayerItemDamageEvent) e).getDamage() - (Integer) delta[0]);
+            ((PlayerItemDamageEvent) event).setDamage(((PlayerItemDamageEvent) event).getDamage() - (Integer) delta[0]);
         } else if (mode == Changer.ChangeMode.REMOVE_ALL) {
-            ((PlayerItemDamageEvent) e).setDamage(0);
+            ((PlayerItemDamageEvent) event).setDamage(0);
         }
     }
 

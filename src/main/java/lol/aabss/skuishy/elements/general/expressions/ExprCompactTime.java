@@ -36,9 +36,9 @@ public class ExprCompactTime extends SimpleExpression<String> {
     private Expression<Timespan> time;
 
     @Override
-    protected @Nullable String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String @NotNull [] get(@NotNull Event event) {
         List<String> timespans = new ArrayList<>();
-        for (Timespan time : this.time.getArray(e)){
+        for (Timespan time : this.time.getArray(event)){
             String timestring = time.toString().replaceAll("and", "");
             timestring = timestring.replaceAll(" days", "d");
             timestring = timestring.replaceAll(" day", "d");
@@ -67,7 +67,7 @@ public class ExprCompactTime extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "compact timespan";
     }
 

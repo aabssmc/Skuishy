@@ -38,10 +38,10 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
     private Expression<Location> location;
 
     @Override
-    protected @Nullable Location[] get(@NotNull Event e) {
-        Location loc = location.getSingle(e);
-        Biome bio = biome.getSingle(e);
-        Integer rad = radius.getSingle(e);
+    protected @Nullable Location[] get(@NotNull Event event) {
+        Location loc = location.getSingle(event);
+        Biome bio = biome.getSingle(event);
+        Integer rad = radius.getSingle(event);
         if (loc != null && bio != null && rad != null) {
             if (Skript.classExists("org.bukkit.util.BiomeSearchResult")) {
                 BiomeSearchResult r = loc.getWorld().locateNearestBiome(loc, rad, bio);
@@ -69,7 +69,7 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "nearest biome";
     }
 

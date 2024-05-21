@@ -36,9 +36,9 @@ public class ExprBlockNote extends PropertyExpression<Block, Note> {
     }
 
     @Override
-    protected Note @NotNull [] get(@NotNull Event e, Block @NotNull [] source) {
+    protected Note @NotNull [] get(@NotNull Event event, Block @NotNull [] source) {
         List<Note> notes = new ArrayList<>();
-        for (Block block : getExpr().getArray(e)) {
+        for (Block block : getExpr().getArray(event)) {
             if (block.getBlockData() instanceof NoteBlock data)
                 notes.add(data.getNote());
         }
@@ -51,9 +51,9 @@ public class ExprBlockNote extends PropertyExpression<Block, Note> {
     }
 
     @Override
-    public void change(@NotNull Event e, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode) {
         if (delta != null && mode == Changer.ChangeMode.SET) {
-            Block[] blocks = getExpr().getArray(e);
+            Block[] blocks = getExpr().getArray(event);
             for (Block block : blocks) {
                 if (block.getBlockData() instanceof NoteBlock data)
                     data.setNote((Note) delta[0]);
@@ -75,7 +75,7 @@ public class ExprBlockNote extends PropertyExpression<Block, Note> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "note of " + getExpr();
     }
 

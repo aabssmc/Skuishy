@@ -35,8 +35,8 @@ public class EffToggleHologram extends Effect {
     private boolean dis;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (Hologram holo : hologram.getArray(e)) {
+    protected void execute(@NotNull Event event) {
+        for (Hologram holo : hologram.getArray(event)) {
             if (dis) {
                 holo.disable();
             } else {
@@ -46,7 +46,7 @@ public class EffToggleHologram extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "toggle hologram";
     }
 

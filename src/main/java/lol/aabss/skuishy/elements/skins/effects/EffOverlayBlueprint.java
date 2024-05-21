@@ -32,11 +32,11 @@ public class EffOverlayBlueprint extends Effect {
     private Expression<Blueprint> top;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NotNull Event event) {
         if (bottom != null){
-            Blueprint bottom = this.bottom.getSingle(e);
+            Blueprint bottom = this.bottom.getSingle(event);
             if (bottom != null){
-                for (Blueprint top : this.top.getArray(e)) {
+                for (Blueprint top : this.top.getArray(event)) {
                     top.overlay(bottom);
                 }
             }
@@ -44,7 +44,7 @@ public class EffOverlayBlueprint extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "overlay blueprints";
     }
 

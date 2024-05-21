@@ -56,12 +56,12 @@ public class EvtNotePlay extends SkriptEvent {
     }
 
     @Override
-    public boolean check(@NotNull Event e) {
+    public boolean check(@NotNull Event event) {
         return true;
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "note play event";
     }
 }

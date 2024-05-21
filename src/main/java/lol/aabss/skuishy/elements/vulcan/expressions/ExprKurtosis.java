@@ -55,7 +55,7 @@ public class ExprKurtosis extends PropertyExpression<Player, Number> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "kurtosis of player";
     }
 

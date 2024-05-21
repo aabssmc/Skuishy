@@ -51,7 +51,7 @@ public class EffReload extends Effect {
     private int pat;
 
     @Override
-    protected void execute(@NotNull Event e) {
+    protected void execute(@NotNull Event event) {
         if (pat == 0){
             Bukkit.reload();
         } else if (pat == 1){
@@ -66,7 +66,7 @@ public class EffReload extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "reload";
     }
 

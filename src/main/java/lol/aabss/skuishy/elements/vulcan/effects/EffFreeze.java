@@ -36,14 +36,14 @@ public class EffFreeze extends Effect {
     private boolean freeze;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (Player p : this.p.getArray(e)){
+    protected void execute(@NotNull Event event) {
+        for (Player p : this.p.getArray(event)){
             VulcanAPI.Factory.getApi().setFrozen(p, freeze);
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "freeze player";
     }
 

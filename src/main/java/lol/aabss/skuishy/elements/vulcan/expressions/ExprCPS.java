@@ -57,7 +57,7 @@ public class ExprCPS extends PropertyExpression<Player, Number> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "cps of player";
     }
 

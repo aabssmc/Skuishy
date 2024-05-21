@@ -77,9 +77,9 @@ public class ExprPlayerSkin extends PropertyExpression<Player, String> {
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, @Nullable Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.RESET){
-            for (Player p : getExpr().getArray(e)) {
+            for (Player p : getExpr().getArray(event)) {
                 SkinWrapper.setSkin(p, p.getName());
             }
         }

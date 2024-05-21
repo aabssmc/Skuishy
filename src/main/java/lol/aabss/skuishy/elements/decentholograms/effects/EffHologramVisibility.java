@@ -34,9 +34,9 @@ public class EffHologramVisibility extends Effect {
     private int pattern;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (Hologram holo : hologram.getArray(e)) {
-            for (Player p : player.getArray(e)) {
+    protected void execute(@NotNull Event event) {
+        for (Hologram holo : hologram.getArray(event)) {
+            for (Player p : player.getArray(event)) {
                 if (pattern == 0) holo.setHidePlayer(p);
                 else holo.setShowPlayer(p);
             }
@@ -44,7 +44,7 @@ public class EffHologramVisibility extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "hologram visibility for player";
     }
 

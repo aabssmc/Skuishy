@@ -37,12 +37,12 @@ public class ExprViveOnly extends SimpleExpression<Boolean> {
     }
 
     @Override
-    protected @Nullable Boolean[] get(@NotNull Event e) {
+    protected @Nullable Boolean[] get(@NotNull Event event) {
         return new Boolean[]{VSE.me.getConfig().getBoolean("general.vive-only")};
     }
 
     @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
+    public void change(@NotNull Event event, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
         if (mode == Changer.ChangeMode.SET) {
             VSE.me.getConfig().set("general.vive-only", delta[0]);
         }
@@ -70,7 +70,7 @@ public class ExprViveOnly extends SimpleExpression<Boolean> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "vivecraft only mode";
     }
 

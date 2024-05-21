@@ -33,12 +33,12 @@ public class CondNotBoolean extends Condition {
     
 
     @Override
-    public boolean check(@NotNull Event e) {
-        return !cond.check(e);
+    public boolean check(@NotNull Event event) {
+        return !cond.check(event);
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "not boolean";
     }
 

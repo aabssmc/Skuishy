@@ -37,7 +37,7 @@ public class ExprSomeone extends SimpleExpression<Player> {
     }
 
     @Override
-    protected @Nullable Player[] get(@NotNull Event e) {
+    protected @Nullable Player[] get(@NotNull Event event) {
         List<Player> players = (List<Player>) Bukkit.getOnlinePlayers().stream().toList();
         return new Player[]{players.get(new Random().nextInt(players.size()))};
     }
@@ -53,7 +53,7 @@ public class ExprSomeone extends SimpleExpression<Player> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "someone";
     }
 

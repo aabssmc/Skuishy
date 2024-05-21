@@ -32,7 +32,7 @@ public class ExprLastPermissionAttachment extends SimpleExpression<PermissionAtt
     }
 
     @Override
-    protected PermissionAttachment @NotNull [] get(@NotNull Event e) {
+    protected PermissionAttachment @NotNull [] get(@NotNull Event event) {
         return new PermissionAttachment[]{last_permission_attachment};
     }
 
@@ -47,7 +47,7 @@ public class ExprLastPermissionAttachment extends SimpleExpression<PermissionAtt
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "last permission attachment";
     }
 

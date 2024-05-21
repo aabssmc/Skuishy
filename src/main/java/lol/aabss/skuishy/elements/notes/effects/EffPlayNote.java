@@ -47,11 +47,11 @@ public class EffPlayNote extends Effect {
     }
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (final Location l : locations.getArray(e)){
-            for (final Player p : players.getArray(e)){
-                Instrument inst = instrument.getSingle(e);
-                Note note = this.note.getSingle(e);
+    protected void execute(@NotNull Event event) {
+        for (final Location l : locations.getArray(event)){
+            for (final Player p : players.getArray(event)){
+                Instrument inst = instrument.getSingle(event);
+                Note note = this.note.getSingle(event);
                 if (inst != null && note != null){
                     p.playNote(l, inst, note);
                 }
@@ -60,7 +60,7 @@ public class EffPlayNote extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "play note";
     }
 }

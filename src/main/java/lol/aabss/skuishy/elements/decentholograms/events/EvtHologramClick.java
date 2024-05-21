@@ -58,7 +58,7 @@ public class EvtHologramClick extends SkriptEvent {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "hologram click";
     }
 }

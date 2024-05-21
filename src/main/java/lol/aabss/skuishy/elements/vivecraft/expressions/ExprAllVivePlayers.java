@@ -36,7 +36,7 @@ public class ExprAllVivePlayers extends SimpleExpression<VivePlayer> {
     }
 
     @Override
-    protected @Nullable VivePlayer[] get(@NotNull Event e) {
+    protected @Nullable VivePlayer[] get(@NotNull Event event) {
         return VSE.vivePlayers.values().toArray(VivePlayer[]::new);
     }
 
@@ -51,7 +51,7 @@ public class ExprAllVivePlayers extends SimpleExpression<VivePlayer> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "all vive players";
     }
 

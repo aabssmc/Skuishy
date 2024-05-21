@@ -34,15 +34,15 @@ public class EffShowWinScreen extends Effect {
     private Expression<Player> p;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        Player[] p = this.p.getArray(e);
+    protected void execute(@NotNull Event event) {
+        Player[] p = this.p.getArray(event);
         for (Player player : p) {
             player.showWinScreen();
         }
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "show win screen";
     }
 

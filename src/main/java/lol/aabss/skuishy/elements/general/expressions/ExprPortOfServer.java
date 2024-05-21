@@ -33,7 +33,7 @@ public class ExprPortOfServer extends SimpleExpression<Integer> {
 
 
     @Override
-    protected @Nullable Integer[] get(@NotNull Event e) {
+    protected @Nullable Integer[] get(@NotNull Event event) {
         return new Integer[]{Bukkit.getPort()};
     }
 
@@ -48,7 +48,7 @@ public class ExprPortOfServer extends SimpleExpression<Integer> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "port of server";
     }
 

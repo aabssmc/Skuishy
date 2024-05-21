@@ -40,11 +40,11 @@ public class ExprDrinkingSound extends SimpleExpression<String> {
     private Expression<LivingEntity> entity;
 
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
-        ItemStack item = this.item.getSingle(e);
+    protected String @NotNull [] get(@NotNull Event event) {
+        ItemStack item = this.item.getSingle(event);
         if (item != null) {
             List<String> sounds = new ArrayList<>();
-            for (LivingEntity en : entity.getArray(e)) {
+            for (LivingEntity en : entity.getArray(event)) {
                 sounds.add(en.getDrinkingSound(item).getKey().getKey());
             } return sounds.toArray(String[]::new);
         }
@@ -62,7 +62,7 @@ public class ExprDrinkingSound extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "drinking sound";
     }
 

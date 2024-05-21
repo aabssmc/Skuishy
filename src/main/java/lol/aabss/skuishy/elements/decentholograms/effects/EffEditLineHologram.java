@@ -48,21 +48,21 @@ public class EffEditLineHologram extends Effect {
     private Variable<?> var;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (Hologram holo : hologram.getArray(e)) {
+    protected void execute(@NotNull Event event) {
+        for (Hologram holo : hologram.getArray(event)) {
             if (Objects.equals(changetype, "add")) {
-                String text = this.text.getSingle(e);
+                String text = this.text.getSingle(event);
                 if (text != null) {
                     DHAPI.addHologramLine(holo, text);
                 }
             } else if (Objects.equals(changetype, "remove")) {
-                Integer line = this.line.getSingle(e);
+                Integer line = this.line.getSingle(event);
                 if (line != null) {
                     DHAPI.removeHologramLine(holo, line);
                 }
             } else if (Objects.equals(changetype, "create")) {
-                Integer page = this.page.getSingle(e);
-                String text = this.text.getSingle(e);
+                Integer page = this.page.getSingle(event);
+                String text = this.text.getSingle(event);
                 if (page != null && text != null) {
                     HologramPage pagee = DHAPI.getHologramPage(holo, page);
                     if (pagee != null) {
@@ -70,26 +70,26 @@ public class EffEditLineHologram extends Effect {
                     }
                 }
             } else if (Objects.equals(changetype, "insert")) {
-                Integer line = this.line.getSingle(e);
-                String text = this.text.getSingle(e);
+                Integer line = this.line.getSingle(event);
+                String text = this.text.getSingle(event);
                 if (line != null && text != null) {
                     DHAPI.insertHologramLine(holo, line, text);
                 }
             } else if (Objects.equals(changetype, "set")) {
-                Integer line = this.line.getSingle(e);
-                String text = this.text.getSingle(e);
+                Integer line = this.line.getSingle(event);
+                String text = this.text.getSingle(event);
                 if (line != null && text != null) {
                     DHAPI.setHologramLine(holo, line, text);
                 }
             } else if (Objects.equals(changetype, "get")) {
-                Integer pagen = this.page.getSingle(e);
-                Integer l = this.line.getSingle(e);
+                Integer pagen = this.page.getSingle(event);
+                Integer l = this.line.getSingle(event);
                 if (pagen != null) {
                     HologramPage page = DHAPI.getHologramPage(holo, pagen);
                     if (page != null && l != null) {
                         HologramLine line = DHAPI.getHologramLine(page, l);
                         if (line != null){
-                            Variables.setVariable(var.getName().toString(), line.getContent(), e, var.isLocal());
+                            Variables.setVariable(var.getName().toString(), line.getContent(), event, var.isLocal());
                         }
                     }
                 }
@@ -98,7 +98,7 @@ public class EffEditLineHologram extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "edit hologram";
     }
 

@@ -40,22 +40,22 @@ public class EffEditPageHologram extends Effect {
     private Expression<Integer> page;
 
     @Override
-    protected void execute(@NotNull Event e) {
-        for (Hologram hologram : this.hologram.getArray(e)) {
+    protected void execute(@NotNull Event event) {
+        for (Hologram hologram : this.hologram.getArray(event)) {
             if (Objects.equals(changetype, "add")){
                 DHAPI.addHologramPage(hologram);
             } else if (Objects.equals(changetype, "remove")){
-                Integer page = this.page.getSingle(e);
+                Integer page = this.page.getSingle(event);
                 if (page != null){
                     DHAPI.removeHologramPage(hologram, page);
                 }
             } else if (Objects.equals(changetype, "insert")){
-                Integer page = this.page.getSingle(e);
+                Integer page = this.page.getSingle(event);
                 if (page != null){
                     DHAPI.insertHologramPage(hologram, page);
                 }
             } else if (Objects.equals(changetype, "get")){
-                Integer page = this.page.getSingle(e);
+                Integer page = this.page.getSingle(event);
                 if (page != null){
                     DHAPI.getHologramPage(hologram, page);
                 }
@@ -64,7 +64,7 @@ public class EffEditPageHologram extends Effect {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "edit hologram page";
     }
 

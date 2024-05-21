@@ -36,9 +36,9 @@ public class ExprPluginLoadBefore extends SimpleExpression<String> {
     private Expression<Plugin> plugin;
 
     @Override
-    protected @Nullable String @NotNull [] get(@NotNull Event e) {
+    protected @Nullable String @NotNull [] get(@NotNull Event event) {
         List<String> provides = new ArrayList<>();
-        for (Plugin p : this.plugin.getArray(e)) {
+        for (Plugin p : this.plugin.getArray(event)) {
             provides.addAll(p.getDescription().getLoadBefore());
         }
         return provides.toArray(String[]::new);
@@ -55,7 +55,7 @@ public class ExprPluginLoadBefore extends SimpleExpression<String> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "load before of plugin";
     }
 

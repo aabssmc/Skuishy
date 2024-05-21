@@ -39,8 +39,8 @@ public class ExprNumberUnformat extends SimpleExpression<Number> {
     Expression<String> num;
 
     @Override
-    protected @Nullable Number[] get(@NotNull Event e) {
-        String num = this.num.getSingle(e);
+    protected @Nullable Number[] get(@NotNull Event event) {
+        String num = this.num.getSingle(event);
         if (num != null) {
             try {
                 if (letter) {
@@ -64,7 +64,7 @@ public class ExprNumberUnformat extends SimpleExpression<Number> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "number unformat";
     }
 

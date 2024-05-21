@@ -614,8 +614,8 @@ public class EntityEvents extends SkriptEvent {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
-        if (e != null) return e.getEventName();
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
+        if (event != null) return event.getEventName();
         return "entity event";
     }
 }

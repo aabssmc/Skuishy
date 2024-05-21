@@ -41,7 +41,7 @@ public class ExprParents extends EventValueExpression<Entity> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "event parent";
     }
 
@@ -56,12 +56,12 @@ public class ExprParents extends EventValueExpression<Entity> {
     }
 
     @Override
-    protected Entity @NotNull [] get(@NotNull Event e) {
+    protected Entity @NotNull [] get(@NotNull Event event) {
         if (Objects.equals(parent, "mother")) {
-            return new Entity[]{((EntityFertilizeEggEvent) e).getMother()};
+            return new Entity[]{((EntityFertilizeEggEvent) event).getMother()};
         }
         else if (Objects.equals(parent, "father")) {
-            return new Entity[]{((EntityFertilizeEggEvent) e).getFather()};
+            return new Entity[]{((EntityFertilizeEggEvent) event).getFather()};
         }
         return new Entity[]{null};
     }

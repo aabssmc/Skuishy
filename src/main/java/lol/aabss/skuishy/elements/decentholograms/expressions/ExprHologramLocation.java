@@ -44,7 +44,7 @@ public class ExprHologramLocation extends PropertyExpression<Hologram, Location>
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "location of hologram";
     }
 
@@ -63,9 +63,9 @@ public class ExprHologramLocation extends PropertyExpression<Hologram, Location>
     }
 
     @Override
-    public void change(@NotNull Event e, @Nullable Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+    public void change(@NotNull Event event, @Nullable Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET){
-            for (Hologram holo : getExpr().getArray(e)){
+            for (Hologram holo : getExpr().getArray(event)){
                 holo.setLocation((Location) delta[0]);
             }
         }

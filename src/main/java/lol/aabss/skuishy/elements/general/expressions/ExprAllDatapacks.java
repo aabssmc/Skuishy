@@ -35,7 +35,7 @@ public class ExprAllDatapacks extends SimpleExpression<Datapack> {
     private boolean enabled;
 
     @Override
-    protected @Nullable Datapack[] get(@NotNull Event e) {
+    protected @Nullable Datapack[] get(@NotNull Event event) {
         if (enabled){
             return Bukkit.getDatapackManager().getEnabledPacks().toArray(Datapack[]::new);
         }
@@ -53,7 +53,7 @@ public class ExprAllDatapacks extends SimpleExpression<Datapack> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "all datapacks";
     }
 

@@ -45,35 +45,35 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
     private Expression<Player> player;
 
     @Override
-    protected @Nullable Integer[] get(@NotNull Event e) {
+    protected @Nullable Integer[] get(@NotNull Event event) {
         List<Integer> violations = new ArrayList<>();
         switch (vtype){
             case "all" -> {
-                for (Player p : this.player.getArray(e)) {
+                for (Player p : this.player.getArray(event)) {
                     violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getTotalViolations());
                 }
             } case "combat" -> {
-                for (Player p : this.player.getArray(e)) {
+                for (Player p : this.player.getArray(event)) {
                     violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getCombatViolations());
                 }
             } case "movement" -> {
-                for (Player p : this.player.getArray(e)) {
+                for (Player p : this.player.getArray(event)) {
                     violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getMovementViolations());
                 }
             } case "player" -> {
-                for (Player p : this.player.getArray(e)) {
+                for (Player p : this.player.getArray(event)) {
                     violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getPlayerViolations());
                 }
             } case "auto clicker" -> {
-                for (Player p : this.player.getArray(e)) {
+                for (Player p : this.player.getArray(event)) {
                     violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getAutoClickerViolations());
                 }
             } case "timer" -> {
-                for (Player p : this.player.getArray(e)) {
+                for (Player p : this.player.getArray(event)) {
                     violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getTimerViolations());
                 }
             } case "scaffold" -> {
-                for (Player p : this.player.getArray(e)) {
+                for (Player p : this.player.getArray(event)) {
                     violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getScaffoldViolations());
                 }
             } default -> {return new Integer[]{null};}
@@ -91,7 +91,7 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
     }
 
     @Override
-    public @NotNull String toString(@Nullable Event e, boolean debug) {
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
         return "player violations";
     }
 
