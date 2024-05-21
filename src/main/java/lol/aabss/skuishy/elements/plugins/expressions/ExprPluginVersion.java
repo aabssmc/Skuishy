@@ -24,6 +24,7 @@ import java.util.List;
         "send version of plugin named \"Skuishy\""
 })
 @Since("2.3")
+@SuppressWarnings("deprecation")
 public class ExprPluginVersion extends SimpleExpression<String> {
 
     static {

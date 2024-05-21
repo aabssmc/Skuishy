@@ -45,6 +45,7 @@ public class ExprNewBlueprint extends SimpleExpression<Blueprint> {
     private int pattern;
     private Variant variant;
 
+    @SuppressWarnings("deprecation")
     @Override
     protected Blueprint @NotNull [] get(@NotNull Event event) {
         if (pattern == 0) {

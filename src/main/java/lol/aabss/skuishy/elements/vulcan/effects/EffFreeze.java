@@ -48,7 +48,7 @@ public class EffFreeze extends Effect {
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
             p = (Expression<Player>) exprs[0];
             freeze = !parseResult.hasTag("un");

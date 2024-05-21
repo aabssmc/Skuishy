@@ -24,6 +24,7 @@ import java.util.List;
         "send soft dependencies of plugin named \"Skuishy\""
 })
 @Since("2.3")
+@SuppressWarnings("deprecation")
 public class ExprPluginDepends extends SimpleExpression<String> {
 
     static {

@@ -58,6 +58,7 @@ public class EffSetSkin extends Effect {
                 Texture texture = null;
                 String nullreason = "";
                 if (skin != null) {
+                    // noinspection all
                     if (skin instanceof String str) {
                         if (str.length() <= 16 || !str.contains("://")) {
                             texture = null;

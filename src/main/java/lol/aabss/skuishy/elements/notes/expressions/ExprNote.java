@@ -38,7 +38,7 @@ public class ExprNote extends SimpleExpression<Note> {
 
     @Override
     protected Note @Nullable [] get(@NotNull Event event) {
-        Integer oct;
+        int oct;
         if (octave == null){
             oct = 0;
         } else{

@@ -24,6 +24,7 @@ import java.util.List;
         "send load before of plugin named \"Skuishy\""
 })
 @Since("2.3")
+@SuppressWarnings("deprecation")
 public class ExprPluginLoadBefore extends SimpleExpression<String> {
 
     static {

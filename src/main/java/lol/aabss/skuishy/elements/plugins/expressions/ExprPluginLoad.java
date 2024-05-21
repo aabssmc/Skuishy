@@ -24,6 +24,7 @@ import java.util.List;
         "send load order of plugin named \"Skuishy\""
 })
 @Since("2.3")
+@SuppressWarnings("deprecation")
 public class ExprPluginLoad extends SimpleExpression<String> {
 
     static {

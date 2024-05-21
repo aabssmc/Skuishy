@@ -38,6 +38,7 @@ public class ExprLocateBiome extends SimpleExpression<Location> {
     private Expression<Location> location;
 
     @Override
+    @SuppressWarnings("deprecation")
     protected @Nullable Location[] get(@NotNull Event event) {
         Location loc = location.getSingle(event);
         Biome bio = biome.getSingle(event);

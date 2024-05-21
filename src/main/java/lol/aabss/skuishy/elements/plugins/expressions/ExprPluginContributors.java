@@ -24,6 +24,7 @@ import java.util.List;
         "send contributors of plugin named \"Skuishy\""
 })
 @Since("2.3")
+@SuppressWarnings("deprecation")
 public class ExprPluginContributors extends SimpleExpression<String> {
 
     static {

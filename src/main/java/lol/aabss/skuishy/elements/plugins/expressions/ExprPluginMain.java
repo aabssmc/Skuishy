@@ -24,6 +24,7 @@ import java.util.List;
         "send main class of plugin named \"Skuishy\""
 })
 @Since("2.3")
+@SuppressWarnings("deprecation")
 public class ExprPluginMain extends SimpleExpression<String> {
 
     static {

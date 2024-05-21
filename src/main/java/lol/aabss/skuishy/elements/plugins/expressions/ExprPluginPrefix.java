@@ -24,6 +24,7 @@ import java.util.List;
         "send prefix of plugin named \"Skuishy\""
 })
 @Since("2.3")
+@SuppressWarnings("deprecation")
 public class ExprPluginPrefix extends SimpleExpression<String> {
 
     static {
