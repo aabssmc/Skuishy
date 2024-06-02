@@ -2,7 +2,6 @@ package lol.aabss.skuishy;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import ch.njol.skript.util.Version;
 import lol.aabss.skuishy.other.Metrics;
 import lol.aabss.skuishy.other.UpdateChecker;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
@@ -56,16 +55,9 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DecentHolograms found! Enabling DecentHolograms elements...");
-                Plugin decentHolograms = Bukkit.getPluginManager().getPlugin("DecentHolograms");
-                Version decentHoloVersion = new Version(decentHolograms.getDescription().getVersion());
-                if (decentHoloVersion.compareTo(2,8,6) < 0) {
-                    Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.YELLOW + "You must be running decent holograms version 2.8.6 as the minimum");
-                } else{
-                    Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DecentHolograms elements loaded!");
-                    addon.loadClasses("lol.aabss.skuishy.elements.decentholograms");
-                    dh = true;
-                }
+                addon.loadClasses("lol.aabss.skuishy.elements.decentholograms");
+                dh = true;
+                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DecentHolograms elements loaded!");
             } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "DecentHolograms elements not loaded.");
 
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {

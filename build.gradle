@@ -21,7 +21,7 @@ dependencies {
     compileOnly ("com.github.SkriptLang:Skript:2.7.0") {
         transitive = false
     }
-    compileOnly "com.github.decentsoftware-eu:decentholograms:2.8.6"
+    compileOnly "com.github.decentsoftware-eu:decentholograms:2.8.8"
     compileOnly files("libs/Vivecraft_Spigot_Extensions.jar")
     compileOnly files("libs/VulcanAPI.jar")
     implementation 'org.json:json:20240303'
