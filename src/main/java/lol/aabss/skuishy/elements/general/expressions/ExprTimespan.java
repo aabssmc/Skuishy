@@ -19,14 +19,14 @@ import org.jetbrains.annotations.Nullable;
 @Description("Returns a timespan.")
 @Examples({
         "set {_num} to 10",
-        "send {_num} minutes to player"
+        "send time {_num} minutes to player"
 })
 @Since("2.7")
 public class ExprTimespan extends SimpleExpression<Timespan> {
 
     static {
         Skript.registerExpression(ExprTimespan.class, Timespan.class, ExpressionType.COMBINED,
-                "%integer% (:(tick|second|minute|hour|day|week|month|year))[s] [%-timespan%]"
+                "time %integer% (:(tick|second|minute|hour|day|week|month|year))[s] [%-timespan%]"
         );
     }
 
