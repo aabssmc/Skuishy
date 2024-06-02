@@ -76,7 +76,7 @@ public class Blueprint {
             File print = new File(file.getAbsolutePath()+"/"+name+".png");
             ImageIO.write(image, "png", print);
             json.remove(name);
-            json.put(name, model.name());
+            json.addProperty(name, model.name());
             BlueprintUtils.saveJson();
         } catch (IOException e) {
             throw new RuntimeException(e);
