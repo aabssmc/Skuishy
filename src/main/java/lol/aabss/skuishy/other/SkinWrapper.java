@@ -18,8 +18,10 @@ import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Base64;
 import java.util.concurrent.CompletableFuture;
 
 public class SkinWrapper {
@@ -95,11 +97,22 @@ public class SkinWrapper {
     }
 
     public static Texture uploadSkin(String url) {
-        SkinInfo info = new SkinInfo();
-        CompletableFuture<Skin> future = client.generateUrl(url, options).whenComplete((skin, throwable) ->
-                info.texture = skin.data.texture
-        );
-        return info.texture;
+        if (url.startsWith("data:image/")){
+            url = url.substring(url.indexOf(",") + 1);
+            byte[] imageBytes = Base64.getDecoder().decode(url);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(imageBytes);
+            try {
+                return uploadSkin(ImageIO.read(inputStream));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            SkinInfo info = new SkinInfo();
+            CompletableFuture<Skin> future = client.generateUrl(url, options).whenComplete((skin, throwable) ->
+                    info.texture = skin.data.texture
+            );
+            return info.texture;
+        }
     }
 
     static class SkinInfo { public Texture texture; }
