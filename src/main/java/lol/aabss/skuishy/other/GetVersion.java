@@ -1,8 +1,8 @@
 package lol.aabss.skuishy.other;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.bukkit.Bukkit;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
@@ -43,7 +43,7 @@ public class GetVersion {
                 .build();
         try {
             String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
-            return new JSONArray(body).getJSONObject(0).getString("version_number");
+            return JsonParser.parseString(body).getAsJsonArray().get(0).getAsJsonObject().get("version_number").getAsString();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -56,13 +56,13 @@ public class GetVersion {
                 .build();
         try {
             String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
-            JSONObject object =  new JSONArray(body).getJSONObject(0).getJSONArray("files").getJSONObject(0);
-            String url = object.getString("url");
+            JsonObject object = JsonParser.parseString(body).getAsJsonArray().get(0).getAsJsonObject().get("files").getAsJsonArray().get(0).getAsJsonObject();
+            String url = object.get("url").getAsString();
             try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
                  FileOutputStream fileOutputStream = new FileOutputStream(
-                         Bukkit.getPluginsFolder().getAbsoluteFile()+"/"+object.getString("filename"))
+                         Bukkit.getPluginsFolder().getAbsoluteFile()+"/"+object.get("filename").getAsString())
             ) {
-                Bukkit.getConsoleSender().sendMessage(Bukkit.getPluginsFolder().getAbsoluteFile()+"/"+object.getString("filename"));
+                Bukkit.getConsoleSender().sendMessage(Bukkit.getPluginsFolder().getAbsoluteFile()+"/"+object.get("filename").getAsString());
                 byte[] dataBuffer = new byte[1024];
                 int bytesRead;
                 while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
@@ -84,7 +84,7 @@ public class GetVersion {
                 .build();
         try {
             String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
-            return new JSONObject(body).getString("tag_name");
+            return JsonParser.parseString(body).getAsJsonObject().get("tag_name").getAsString();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

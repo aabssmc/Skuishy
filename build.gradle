@@ -24,14 +24,12 @@ dependencies {
     compileOnly "com.github.decentsoftware-eu:decentholograms:2.8.8"
     compileOnly files("libs/Vivecraft_Spigot_Extensions.jar")
     compileOnly files("libs/VulcanAPI.jar")
-    implementation 'org.json:json:20240303'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0-M1'
     implementation "org.jsoup:jsoup:1.17.2"
 }
 
 shadowJar {
     dependencies {
-        include(dependency("org.json:json:20240303"))
         include(dependency("org.jsoup:jsoup:1.17.2"))
     }
 }

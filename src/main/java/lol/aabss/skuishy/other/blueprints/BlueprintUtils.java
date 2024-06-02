@@ -1,8 +1,11 @@
 package lol.aabss.skuishy.other.blueprints;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.mineskin.Variant;
-import org.json.JSONObject;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -15,7 +18,8 @@ import java.util.Scanner;
 
 public class BlueprintUtils {
 
-    public static JSONObject json;
+    public static JsonObject json;
+    public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void loadJson(){
         try {
@@ -25,8 +29,8 @@ public class BlueprintUtils {
                     File jsonfile = new File(file.getAbsolutePath() + "/blueprints.json");
                     if (jsonfile.createNewFile()) {
                         FileWriter writer = new FileWriter(jsonfile);
-                        writer.write(new JSONObject().toString(4));
-                        json = new JSONObject();
+                        writer.write(gson.toJson(new JsonObject()));
+                        json = new JsonObject();
                         writer.close();
                     }
                 }
@@ -44,7 +48,7 @@ public class BlueprintUtils {
             return null;
         }
         try {
-            return new Blueprint(ImageIO.read(file), Variant.valueOf(getJson().getString(name)));
+            return new Blueprint(ImageIO.read(file), Variant.valueOf(getJson().get(name).getAsString()));
         } catch (IOException e){
             throw new RuntimeException(e);
         }
@@ -59,7 +63,7 @@ public class BlueprintUtils {
         saveJson();
     }
 
-    public static JSONObject getJson(){
+    public static JsonObject getJson(){
         try {
             File jsonfile = new File(Skuishy.instance.getDataFolder().getAbsolutePath() + "/blueprints/blueprints.json");
             Scanner scan = new Scanner(jsonfile);
@@ -67,7 +71,7 @@ public class BlueprintUtils {
             while (scan.hasNextLine()) {
                 jsonstr.append(scan.nextLine());
             }
-            return new JSONObject(jsonstr);
+            return JsonParser.parseString(jsonstr.toString()).getAsJsonObject();
         } catch (IOException e){
             throw new RuntimeException(e);
         }
@@ -79,7 +83,7 @@ public class BlueprintUtils {
             jsonfile.delete();
             jsonfile.createNewFile();
             FileWriter writer = new FileWriter(jsonfile);
-            writer.write(json.toString(4));
+            writer.write(gson.toJson(json));
             writer.close();
         } catch (IOException e){
             throw new RuntimeException(e);
