@@ -3,11 +3,11 @@ package lol.aabss.skuishy.other;
 import ch.njol.skript.Skript;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import lol.aabss.skuishy.other.mineskin.MineskinClient;
 import lol.aabss.skuishy.other.mineskin.SkinOptions;
 import lol.aabss.skuishy.other.mineskin.Variant;
 import lol.aabss.skuishy.other.mineskin.Visibility;
-import lol.aabss.skuishy.other.mineskin.data.Skin;
 import lol.aabss.skuishy.other.mineskin.data.Texture;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -18,11 +18,8 @@ import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Base64;
-import java.util.concurrent.CompletableFuture;
 
 public class SkinWrapper {
 
@@ -77,44 +74,47 @@ public class SkinWrapper {
                     result[y] += (c.toString() + "\u2588").replaceAll("\\?", "");
                 }
             }
-            return java.lang.String.join("\n", result);
+            return String.join("\n", result);
         } catch (IOException e){
             throw new RuntimeException(e);
         }
     }
 
 
-    public static Texture uploadSkin(BufferedImage image) {
+    public static void uploadSkin(BufferedImage image, TextureCallback callback) {
         try {
-            SkinInfo info = new SkinInfo();
-            CompletableFuture<Skin> future = client.generateUpload(image, options).whenComplete((skin, throwable) ->
-                    info.texture = skin.data.texture
-            );
-            return info.texture;
+            client.generateUpload(image, SkinOptions.create("Skuishy-Upload", BlueprintUtils.getVariant(image), Visibility.PRIVATE))
+                    .thenApply(result -> result.data.texture)
+                    .whenComplete((texture, ex) -> {
+                        if (ex != null) {
+                            callback.onError(ex);
+                        } else {
+                            callback.onComplete(texture);
+                        }
+                    });
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            callback.onError(e);
         }
     }
 
-    public static Texture uploadSkin(String url) {
-        if (url.startsWith("data:image/")){
-            url = url.substring(url.indexOf(",") + 1);
-            byte[] imageBytes = Base64.getDecoder().decode(url);
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(imageBytes);
-            try {
-                return uploadSkin(ImageIO.read(inputStream));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            SkinInfo info = new SkinInfo();
-            CompletableFuture<Skin> future = client.generateUrl(url, options).whenComplete((skin, throwable) ->
-                    info.texture = skin.data.texture
-            );
-            return info.texture;
+    public static void uploadSkin(String url, TextureCallback callback) {
+        client.generateUrl(url, SkinOptions.create("Skuishy-Upload", Variant.AUTO, Visibility.PRIVATE))
+                .thenApply(result -> result.data.texture)
+                .whenComplete((texture, ex) -> {
+                    if (ex != null) {
+                        callback.onError(ex);
+                    } else {
+                        callback.onComplete(texture);
+                    }
+                });
+    }
+
+    public interface TextureCallback {
+        void onComplete(Texture texture);
+        default void onError(Throwable t){
+            throw new RuntimeException(t);
         }
     }
 
-    static class SkinInfo { public Texture texture; }
 
 }

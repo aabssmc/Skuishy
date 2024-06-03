@@ -9,7 +9,6 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.SkinWrapper;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.mineskin.data.Texture;
 import org.bukkit.entity.Player;
@@ -18,7 +17,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.image.BufferedImage;
+import java.util.concurrent.atomic.AtomicReference;
 
+import static lol.aabss.skuishy.other.SkinWrapper.setSkin;
 import static lol.aabss.skuishy.other.SkinWrapper.uploadSkin;
 
 @Name("Player - Set Skin")
@@ -55,37 +56,37 @@ public class EffSetSkin extends Effect {
         if (value == null || signature == null) {
             if (skin != null) {
                 Object skin = this.skin.getSingle(event);
-                Texture texture = null;
+                AtomicReference<Texture> texture = new AtomicReference<>();
                 String nullreason = "";
                 if (skin != null) {
                     // noinspection all
                     if (skin instanceof String str) {
                         if (str.length() <= 16 || !str.contains("://")) {
-                            texture = null;
+                            texture.set(null);
                             nullreason = "name";
                         } else {
                             if (str.contains("://")) {
-                                texture = SkinWrapper.uploadSkin(str);
+                                uploadSkin(str, texture::set);
                             } else {
-                                texture = null;
+                                texture.set(null);
                                 nullreason = "value";
                             }
                         }
                     } else if (skin instanceof Blueprint print) {
-                        texture = uploadSkin(print.image());
+                        uploadSkin(print.image(), texture::set);
                     } else if (skin instanceof BufferedImage image){
                         // images not supported by skuishy, but just in case you use another addon like SkImage :)
-                        texture = uploadSkin(image);
+                        uploadSkin(image, texture::set);
                     }
                     for (Player p : player.getArray(event)) {
-                        if (texture == null) {
+                        if (texture.get() == null) {
                             if (nullreason.equals("name")) {
-                                SkinWrapper.setSkin(p, (String) skin);
+                                setSkin(p, (String) skin);
                             } else if (nullreason.equals("value")){
-                                SkinWrapper.setSkin(p, (String) skin, null);
+                                setSkin(p, (String) skin, null);
                             }
                         } else {
-                            SkinWrapper.setSkin(p, texture);
+                            setSkin(p, texture.get());
                         }
                     }
                 }
@@ -95,7 +96,7 @@ public class EffSetSkin extends Effect {
             String signature = this.signature.getSingle(event);
             if (value != null && signature != null){
                 for (Player p : player.getArray(event)){
-                    SkinWrapper.setSkin(p, value, signature);
+                    setSkin(p, value, signature);
                 }
             }
         }
