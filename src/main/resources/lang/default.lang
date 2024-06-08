@@ -13,6 +13,8 @@ types:
     plugin: plugin¦s @a
     blueprint: blueprint¦s @a
     skinmodel: skinmodel¦s @a
+    namespacedkey: namespacedkey¦s @a
+    persistentdatacontainer: [persistent ?]data ?container¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
