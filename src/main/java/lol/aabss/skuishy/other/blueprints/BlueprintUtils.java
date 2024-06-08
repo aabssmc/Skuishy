@@ -63,7 +63,7 @@ public class BlueprintUtils {
         saveJson();
     }
 
-    public static JsonObject getJson(){
+    private static JsonObject getJson(){
         try {
             File jsonfile = new File(Skuishy.instance.getDataFolder().getAbsolutePath() + "/blueprints/blueprints.json");
             Scanner scan = new Scanner(jsonfile);
@@ -90,7 +90,7 @@ public class BlueprintUtils {
         }
     }
 
-    public static Blueprint fromImage(BufferedImage image){
+    private static Blueprint fromImage(BufferedImage image){
         return new Blueprint(image, Variant.AUTO);
     }
 

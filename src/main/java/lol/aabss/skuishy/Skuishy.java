@@ -8,6 +8,7 @@ import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -86,6 +87,11 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
                 addon.loadClasses("lol.aabss.skuishy.elements.permissions");
                 Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Permission elements loaded!");
             } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Permission elements not loaded.");
+
+            if (getConfig().getBoolean("persistence-elements", true)){
+                addon.loadClasses("lol.aabss.skuishy.elements.persistence");
+                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Persistence elements loaded!");
+            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Persistence elements not loaded.");
 
             if (getConfig().getBoolean("plugin-elements", true)){
                 addon.loadClasses("lol.aabss.skuishy.elements.plugins");
@@ -187,5 +193,21 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
 
     public SkriptAddon getAddonInstance() {
         return addon;
+    }
+
+    @Nullable
+    public static NamespacedKey namespacedKeyFromObject(Object object){
+        if (object instanceof String string) {
+            String[] split = string.split(":");
+            if (split.length > 1) {
+                String namespace = split[0];
+                String key = split[1];
+                return new NamespacedKey(split[0], split[1]);
+            }
+            return null;
+        } else if (object instanceof NamespacedKey){
+            return (NamespacedKey) object;
+        }
+        return null;
     }
 }

@@ -21,6 +21,9 @@ note-elements: true
 # whether permission elements should be loaded
 permission-elements: true
 
+# whether persistence elements should be loaded
+persistence-elements: true
+
 # whether plugin elements should be loaded
 plugin-elements: true
 
