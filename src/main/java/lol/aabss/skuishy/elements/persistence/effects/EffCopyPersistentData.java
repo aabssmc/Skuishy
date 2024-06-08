@@ -24,7 +24,7 @@ public class EffCopyPersistentData extends Effect {
 
     static {
         Skript.registerEffect(EffEditPersistentData.class,
-                "(:replace|copy) persistent data [container] from %datacontainer% to %datacontainers%");
+                "(:replace|copy) persistent data [container] from %persistentdatacontainer% to %persistentdatacontainers%");
     }
 
     private boolean replace;

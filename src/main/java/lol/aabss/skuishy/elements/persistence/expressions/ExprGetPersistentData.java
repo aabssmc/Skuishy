@@ -38,7 +38,7 @@ public class ExprGetPersistentData extends PropertyExpression<PersistentDataCont
     static {
         register(ExprGetPersistentData.class, Object.class,
                 "%*classinfo% data key %namespacedkey/string% [default:(or default|if not found) %-object%]",
-                "datacontainers"
+                "persistentdatacontainers"
         );
     }
 

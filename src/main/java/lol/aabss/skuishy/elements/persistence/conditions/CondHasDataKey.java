@@ -31,8 +31,8 @@ public class CondHasDataKey extends Condition {
 
     static {
         Skript.registerCondition(CondHasDataKey.class,
-                "%datacontainer% (has|have) [%-*classinfo%] data key %namespacedkey/string%",
-                "%datacontainer% (doesn't|does not|do not|don't) have [%-*classinfo%] data key %namespacedkey/string%"
+                "%persistentdatacontainers% (has|have) [%-*classinfo%] data key %namespacedkey/string%",
+                "%persistentdatacontainers% (doesn't|does not|do not|don't) have [%-*classinfo%] data key %namespacedkey/string%"
         );
     }
 

@@ -29,10 +29,10 @@ public class EffEditPersistentData extends Effect {
 
     static {
         Skript.registerEffect(EffEditPersistentData.class,
-                "set %*classinfo% data key %namespacedkey/string% of %datacontainers% to %object%",
-                "set %datacontainers%'s %*classinfo% data key %namespacedkey/string% to %object%",
-                "remove data key %namespacedkey/string% from %datacontainers%",
-                "remove %datacontainers%'s data key %namespacedkey/string%"
+                "set %*classinfo% data key %namespacedkey/string% of %persistentdatacontainers% to %object%",
+                "set %persistentdatacontainers%'s %*classinfo% data key %namespacedkey/string% to %object%",
+                "remove data key %namespacedkey/string% from %persistentdatacontainers%",
+                "remove %persistentdatacontainers%'s data key %namespacedkey/string%"
         );
     }
 
