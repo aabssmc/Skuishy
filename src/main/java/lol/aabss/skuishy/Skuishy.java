@@ -2,7 +2,8 @@ package lol.aabss.skuishy;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import lol.aabss.skuishy.other.Metrics;
+import ch.njol.skript.bstats.bukkit.Metrics;
+import ch.njol.skript.bstats.charts.SimplePie;
 import lol.aabss.skuishy.other.UpdateChecker;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
@@ -28,6 +29,7 @@ import static lol.aabss.skuishy.other.GetVersion.latestVersion;
 import static lol.aabss.skuishy.other.SubCommands.*;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
+@SuppressWarnings("deprecation")
 public class Skuishy extends JavaPlugin implements TabExecutor {
 
     public static Skuishy instance;
@@ -41,8 +43,9 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public static boolean vu = false;
     public static String latest_version;
     public static String data_path;
+    private static String prefix = net.md_5.bungee.api.ChatColor.of("#40ff00") + "[Skuishy] " + ChatColor.RESET;
+    private static Metrics metrics;
 
-    @SuppressWarnings("deprecation")
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
@@ -50,65 +53,23 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         getServer().getPluginManager().registerEvents(new UpdateChecker(), this);
         getServer().getPluginCommand("skuishy").setExecutor(this);
         getServer().getPluginCommand("skuishy").setTabCompleter(this);
-        Metrics metrics = new Metrics(this, 20162);
-        String prefix = net.md_5.bungee.api.ChatColor.of("#40ff00") + "[Skuishy] " + ChatColor.RESET;
+        metrics = new Metrics(this, 20162);
         try {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
-            if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
-                addon.loadClasses("lol.aabss.skuishy.elements.decentholograms");
-                dh = true;
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DecentHolograms elements loaded!");
-            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "DecentHolograms elements not loaded.");
-
-            if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vivecraft-Spigot-Extensions")) {
-                addon.loadClasses("lol.aabss.skuishy.elements.vivecraft");
-                vc = true;
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Vivecraft elements loaded!");
-            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Vivecraft elements not loaded.");
-
-            if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
-                addon.loadClasses("lol.aabss.skuishy.elements.vulcan");
-                vu = true;
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Vulcan elements loaded!");
-            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Vulcan elements not loaded.");
-
-            if (getConfig().getBoolean("general-elements", true)){
-                addon.loadClasses("lol.aabss.skuishy.elements.general");
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "General elements loaded!");
-            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "General elements not loaded.");
-
-            if (getConfig().getBoolean("note-elements", true)){
-                addon.loadClasses("lol.aabss.skuishy.elements.notes");
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Note elements loaded!");
-            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Note elements not loaded.");
-
-            if (getConfig().getBoolean("permission-elements", true)){
-                addon.loadClasses("lol.aabss.skuishy.elements.permissions");
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Permission elements loaded!");
-            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Permission elements not loaded.");
-
-            if (getConfig().getBoolean("persistence-elements", true)){
-                addon.loadClasses("lol.aabss.skuishy.elements.persistence");
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Persistence elements loaded!");
-            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Persistence elements not loaded.");
-
-            if (getConfig().getBoolean("plugin-elements", true)){
-                addon.loadClasses("lol.aabss.skuishy.elements.plugins");
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Plugin elements loaded!");
-            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Plugin elements not loaded.");
-
-            if (getConfig().getBoolean("skin-elements", true)){
-                addon.loadClasses("lol.aabss.skuishy.elements.skins");
-                Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Skin elements loaded!");
-            } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "Skin elements not loaded!");
+            registerPluginElements("DecentHolograms", "DecentHolograms");
+            registerPluginElements("Vivecraft-Spigot-Extensions", "Vivecraft");
+            registerPluginElements("Vulcan", "Vulcan");
+            registerElements("General", "General");
+            registerElements("Note", "Notes");
+            registerElements("Permission", "Permissions");
+            registerElements("Persistence", "Persistence");
+            registerElements("Plugin", "Plugins");
+            registerElements("Skin", "Skins");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        metrics.addCustomChart(new Metrics.SimplePie("decentholograms", () -> Boolean.toString(dh)));
-        metrics.addCustomChart(new Metrics.SimplePie("vivecraft", () -> Boolean.toString(vc)));
-        metrics.addCustomChart(new Metrics.SimplePie("vulcan", () -> Boolean.toString(vu)));
-        metrics.addCustomChart(new Metrics.SimplePie("skript_version", () -> Skript.getVersion().toString()));
+        metrics.addCustomChart(new SimplePie("skript_version", () -> Skript.getVersion().toString()));
         start = System.currentTimeMillis()/50;
         Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Skuishy has been enabled!");
         Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, () -> {
@@ -193,6 +154,22 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
 
     public SkriptAddon getAddonInstance() {
         return addon;
+    }
+
+    public void registerPluginElements(String pluginName, String name) throws IOException {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled(pluginName)) {
+            addon.loadClasses("lol.aabss.skuishy.elements."+name.toLowerCase());
+            vu = true;
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + name+" elements loaded!");
+        } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + name+" elements not loaded.");
+        metrics.addCustomChart(new SimplePie(name, () -> Boolean.toString(dh)));
+    }
+
+    public void registerElements(String name, String plural) throws IOException {
+        if (getConfig().getBoolean(name.toLowerCase()+"-elements", true)){
+            addon.loadClasses("lol.aabss.skuishy.elements."+plural.toLowerCase());
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + name+" elements loaded!");
+        } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + name+" elements not loaded!");
     }
 
     @Nullable
