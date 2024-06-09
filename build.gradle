@@ -1,6 +1,5 @@
 plugins {
     id "java"
-    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
 group = "lol.aabss"
@@ -24,14 +23,6 @@ dependencies {
     compileOnly "com.github.decentsoftware-eu:decentholograms:2.8.8"
     compileOnly files("libs/Vivecraft_Spigot_Extensions.jar")
     compileOnly files("libs/VulcanAPI.jar")
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0-M1'
-    implementation "org.jsoup:jsoup:1.17.2"
-}
-
-shadowJar {
-    dependencies {
-        include(dependency("org.jsoup:jsoup:1.17.2"))
-    }
 }
 
 java {

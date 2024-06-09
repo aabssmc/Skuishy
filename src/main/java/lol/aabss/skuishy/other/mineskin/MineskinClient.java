@@ -10,16 +10,21 @@
 package lol.aabss.skuishy.other.mineskin;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import lol.aabss.skuishy.other.mineskin.data.MineskinException;
 import lol.aabss.skuishy.other.mineskin.data.Skin;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
 
 import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -69,17 +74,20 @@ public class MineskinClient {
         return nextRequest;
     }
 
-    private Connection generateRequest(String endpoint) {
-        Connection connection = Jsoup.connect(GENERATE_BASE + endpoint)
-                .method(Connection.Method.POST)
-                .userAgent(userAgent)
-                .ignoreContentType(true)
-                .ignoreHttpErrors(true)
-                .timeout(30000);
+    private HttpRequest.Builder generateRequest(String endpoint) {
+        HttpRequest.Builder builder = HttpRequest.newBuilder()
+                .uri(URI.create(GENERATE_BASE + endpoint))
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .header("User-Agent", userAgent)
+                .timeout(java.time.Duration.ofSeconds(30))
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json");
+
         if (apiKey != null) {
-            connection.header("Authorization", "Bearer " + apiKey);
+            builder.header("Authorization", "Bearer " + apiKey);
         }
-        return connection;
+
+        return builder;
     }
 
     /**
@@ -94,13 +102,12 @@ public class MineskinClient {
                     long delay = (nextRequest - System.currentTimeMillis());
                     Thread.sleep(delay + 10);
                 }
-
                 JsonObject body = options.toJson();
                 body.addProperty("url", url);
-                Connection connection = generateRequest("/url")
+                HttpRequest.Builder request = generateRequest("/url")
                         .header("Content-Type", "application/json")
-                        .requestBody(body.toString());
-                return handleResponse(connection.execute().body());
+                        .POST(HttpRequest.BodyPublishers.ofString(body.toString()));
+                return handleResponse(request);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -122,15 +129,50 @@ public class MineskinClient {
                     Thread.sleep(delay + 10);
                 }
 
-                Connection connection = generateRequest("/upload")
-                        // It really doesn't like setting a content-type header here for some reason
-                        .data("file", name, is);
-                options.addAsData(connection);
-                return handleResponse(connection.execute().body());
+                byte[] fileBytes = inputStreamToByteArray(is);
+
+                String boundary = "Boundary-" + System.currentTimeMillis();
+                String multipartBody = buildMultipartBody(boundary, fileBytes, name, options);
+
+                HttpRequest.Builder request = generateRequest("/upload")
+                        .header("Content-Type", "multipart/form-data; boundary=" + boundary)
+                        .POST(HttpRequest.BodyPublishers.ofString(multipartBody));
+
+                return handleResponse(request);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }, requestExecutor);
+    }
+
+    private byte[] inputStreamToByteArray(InputStream is) throws IOException {
+        try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+            int nRead;
+            byte[] data = new byte[1024];
+            while ((nRead = is.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+            buffer.flush();
+            return buffer.toByteArray();
+        }
+    }
+
+    private String buildMultipartBody(String boundary, byte[] fileBytes, String fileName, SkinOptions options) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("--").append(boundary).append("\r\n");
+        sb.append("Content-Disposition: form-data; name=\"file\"; filename=\"").append(fileName).append("\"\r\n");
+        sb.append("Content-Type: application/octet-stream\r\n\r\n");
+        sb.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
+
+        JsonObject body = options.toJson();
+        for (Map.Entry<String, JsonElement> entry : body.entrySet()) {
+            sb.append("--").append(boundary).append("\r\n");
+            sb.append("Content-Disposition: form-data; name=\"").append(entry.getKey()).append("\"\r\n\r\n");
+            sb.append(entry.getValue().getAsString()).append("\r\n");
+        }
+
+        sb.append("--").append(boundary).append("--\r\n");
+        return sb.toString();
     }
 
     /**
@@ -155,8 +197,8 @@ public class MineskinClient {
     }
 
 
-    Skin handleResponse(String body) throws MineskinException, JsonParseException {
-        JsonObject jsonObject = gson.fromJson(body, JsonObject.class);
+    Skin handleResponse(HttpRequest.Builder request) throws MineskinException, JsonParseException, IOException, InterruptedException {
+        JsonObject jsonObject = gson.fromJson(HttpClient.newHttpClient().send(request.build(), HttpResponse.BodyHandlers.ofString()).body(), JsonObject.class);
         if (jsonObject.has("error")) {
             throw new MineskinException(jsonObject.get("error").getAsString());
         }
