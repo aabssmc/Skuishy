@@ -17,7 +17,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.image.BufferedImage;
-import java.util.concurrent.atomic.AtomicReference;
+import java.io.IOException;
+import java.util.function.BiConsumer;
 
 import static lol.aabss.skuishy.other.SkinWrapper.setSkin;
 import static lol.aabss.skuishy.other.SkinWrapper.uploadSkin;
@@ -33,7 +34,7 @@ import static lol.aabss.skuishy.other.SkinWrapper.uploadSkin;
         "set skin of player to {_bufferedimage} # Images not supported by Skuishy, but just in case you want to use another addon like SkImage :)",
         "set skin of player to {_blueprint} #A blueprint"
 })
-@Since("2.3, 2.6 (fixed)")
+@Since("2.3, 2.6/2.7 (fixed)")
 
 public class EffSetSkin extends Effect {
 
@@ -41,8 +42,8 @@ public class EffSetSkin extends Effect {
         Skript.registerEffect(EffSetSkin.class,
                 "set [minecraft] skin of %players% to %object%",
                 "set %players%'[s] [minecraft] skin to %object%",
-                "set [minecraft] skin of %players% to [value] %string% and [signature] %string%",
-                "set %player%'[s] [minecraft] skin to [value] %string% and [signature] %string%"
+                "set [minecraft] skin of %players% to [value] %string% [and [signature] %-string%]",
+                "set %player%'[s] [minecraft] skin to [value] %string% [and [signature] %-string%]"
         );
     }
 
@@ -53,53 +54,57 @@ public class EffSetSkin extends Effect {
 
     @Override
     protected void execute(@NotNull Event event) {
-        if (value == null || signature == null) {
-            if (skin != null) {
-                Object skin = this.skin.getSingle(event);
-                AtomicReference<Texture> texture = new AtomicReference<>();
-                String nullreason = "";
+        try {
+            if (value == null || signature == null) {
                 if (skin != null) {
-                    // noinspection all
-                    if (skin instanceof String str) {
-                        if (str.length() <= 16 || !str.contains("://")) {
-                            texture.set(null);
-                            nullreason = "name";
-                        } else {
-                            if (str.contains("://")) {
-                                uploadSkin(str, texture::set);
+                    Object skin = this.skin.getSingle(event);
+                    String nullreason = "";
+                    if (skin != null) {
+                        // noinspection all
+                        if (skin instanceof String str) {
+                            if (str.length() <= 16 || !str.contains("://")) {
+                                for (Player p : player.getArray(event)) {
+                                    setSkin(p, str);
+                                }
                             } else {
-                                texture.set(null);
-                                nullreason = "value";
+                                if (str.contains("://")) {
+                                    uploadSkin(str).whenComplete(getWhenComplete(event));
+                                } else {
+                                    if (value != null) {
+                                        for (Player p : player.getArray(event)) {
+                                            setSkin(p, value.getSingle(event), null);
+                                        }
+                                    }
+                                }
                             }
-                        }
-                    } else if (skin instanceof Blueprint print) {
-                        uploadSkin(print.image(), texture::set);
-                    } else if (skin instanceof BufferedImage image){
-                        // images not supported by skuishy, but just in case you use another addon like SkImage :)
-                        uploadSkin(image, texture::set);
-                    }
-                    for (Player p : player.getArray(event)) {
-                        if (texture.get() == null) {
-                            if (nullreason.equals("name")) {
-                                setSkin(p, (String) skin);
-                            } else if (nullreason.equals("value")){
-                                setSkin(p, (String) skin, null);
-                            }
-                        } else {
-                            setSkin(p, texture.get());
+                        } else if (skin instanceof Blueprint print) {
+                            uploadSkin(print.image()).whenComplete(getWhenComplete(event));
+                        } else if (skin instanceof BufferedImage image){
+                            // images not supported by skuishy, but just in case you use another addon like SkImage :)
+                            uploadSkin(image).whenComplete(getWhenComplete(event));
                         }
                     }
                 }
-            }
-        } else{
-            String value = this.value.getSingle(event);
-            String signature = this.signature.getSingle(event);
-            if (value != null && signature != null){
-                for (Player p : player.getArray(event)){
-                    setSkin(p, value, signature);
+            } else{
+                String value = this.value.getSingle(event);
+                String signature = this.signature.getSingle(event);
+                if (value != null && signature != null){
+                    for (Player p : player.getArray(event)){
+                        setSkin(p, value, signature);
+                    }
                 }
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    private java.util.function.BiConsumer<? super Texture, ? super Throwable> getWhenComplete(Event event){
+        return (BiConsumer<Texture, Throwable>) (texture, throwable) -> {
+            for (Player p : player.getArray(event)) {
+                setSkin(p, texture);
+            }
+        };
     }
 
     @Override

@@ -20,6 +20,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.CompletableFuture;
 
 public class SkinWrapper {
 
@@ -62,59 +63,52 @@ public class SkinWrapper {
         player.setPlayerProfile(profile);
     }
 
-    @SuppressWarnings("deprecation")
-    public static String sendHead(String name, boolean helm) {
-        try {
-            BufferedImage img = ImageIO.read(new URL("https://minotar.net/" + (helm ? "helm" : "avatar") + "/" + name + "/8.png"));
-            String[] result = new String[8];
-            for (int x = 0; x < 8; x++) {
-                for (int y = 0; y < 8; y++) {
-                    ChatColor c = ChatColor.of(new Color(img.getRGB(x, y)));
-                    if (result[y] == null) result[y] = "";
-                    result[y] += (c.toString() + "\u2588").replaceAll("\\?", "");
+    private static BufferedImage getHead(String name, boolean helm, boolean online) throws IOException {
+        if (online){
+            Player player = Bukkit.getPlayer(name);
+            if (player != null){
+                BufferedImage skin = ImageIO.read(player.getPlayerProfile().getTextures().getSkin());
+                BufferedImage front = skin.getSubimage(8, 8, 8, 8);
+                if (helm){
+                    front.getGraphics().drawImage(skin.getSubimage(40, 8, 8, 8), 40, 8, null);
                 }
+                return front;
+            } else{
+                return getHead(name, helm, false);
             }
-            return String.join("\n", result);
-        } catch (IOException e){
-            throw new RuntimeException(e);
         }
+        return ImageIO.read(new URL("https://minotar.net/" + (helm ? "helm" : "avatar") + "/" + name + "/8.png"));
     }
 
-
-    public static void uploadSkin(BufferedImage image, TextureCallback callback) {
-        try {
-            client.generateUpload(image, SkinOptions.create("Skuishy-Upload", BlueprintUtils.getVariant(image), Visibility.PRIVATE))
-                    .thenApply(result -> result.data.texture)
-                    .whenComplete((texture, ex) -> {
-                        if (ex != null) {
-                            callback.onError(ex);
-                        } else {
-                            callback.onComplete(texture);
-                        }
-                    });
-        } catch (IOException e) {
-            callback.onError(e);
-        }
-    }
-
-    public static void uploadSkin(String url, TextureCallback callback) {
-        client.generateUrl(url, SkinOptions.create("Skuishy-Upload", Variant.AUTO, Visibility.PRIVATE))
-                .thenApply(result -> result.data.texture)
-                .whenComplete((texture, ex) -> {
-                    if (ex != null) {
-                        callback.onError(ex);
-                    } else {
-                        callback.onComplete(texture);
+    @SuppressWarnings("deprecation")
+    public static CompletableFuture<String> sendHead(String name, boolean helm, boolean online) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                BufferedImage img = getHead(name, helm, online);
+                String[] result = new String[8];
+                for (int x = 0; x < 8; x++) {
+                    for (int y = 0; y < 8; y++) {
+                        ChatColor c = ChatColor.of(new Color(img.getRGB(x, y)));
+                        if (result[y] == null) result[y] = "";
+                        result[y] += (c.toString() + "\u2588").replaceAll("\\?", "");
                     }
-                });
+                }
+                return String.join("\n", result);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
-    public interface TextureCallback {
-        void onComplete(Texture texture);
-        default void onError(Throwable t){
-            throw new RuntimeException(t);
-        }
+
+    public static CompletableFuture<Texture> uploadSkin(BufferedImage image) throws IOException {
+        return client.generateUpload(image, SkinOptions.create("Skuishy-Upload", BlueprintUtils.getVariant(image), Visibility.PRIVATE))
+                .thenApply(result -> result.data.texture);
     }
 
+    public static CompletableFuture<Texture> uploadSkin(String url) {
+        return client.generateUrl(url, SkinOptions.create("Skuishy-Upload", Variant.AUTO, Visibility.PRIVATE))
+                .thenApply(result -> result.data.texture);
+    }
 
 }
