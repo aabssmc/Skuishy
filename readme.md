@@ -10,7 +10,7 @@
 
 ## Make a pull request or issue if you have a feature request, or join my [discord](https://discord.gg/66DF7pMdnp).
 
-## DOWNLOAD AT [MODRINTH.COM/PLUGIN/SKRIPT](https://modrinth.com/plugin/skript)
+## DOWNLOAD AT [MODRINTH.COM/PLUGIN/SKUISHY](https://modrinth.com/plugin/skuishy)
 
 ## Please suggest syntax ideas in my discord [here](https://discord.gg/66DF7pMdnp)
 
