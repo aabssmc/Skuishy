@@ -12,3 +12,13 @@ website: https://aabss.cc
 commands:
   skuishy:
     description: The main command for Skuishy.
+
+permissions:
+  skuishy.command.dependencies:
+    description: Dependencies sub command for /skuishy.
+  skuishy.command.info:
+    description: Info sub command for /skuishy.
+  skuishy.command.reload:
+    description: Reload sub command for /skuishy.
+  skuishy.command.update:
+    description: Update sub command for /skuishy.

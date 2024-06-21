@@ -23,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static lol.aabss.skuishy.other.GetVersion.latestVersion;
@@ -38,12 +39,10 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public static PermissionAttachment last_permission_attachment;
     public static Permission last_permission;
     public static Blueprint last_blueprint;
-    public static boolean dh = false;
-    public static boolean vc = false;
-    public static boolean vu = false;
     public static String latest_version;
     public static String data_path;
-    private static String prefix = net.md_5.bungee.api.ChatColor.of("#40ff00") + "[Skuishy] " + ChatColor.RESET;
+    public static HashMap<String, Boolean> element_map = new HashMap<>();
+    public static final String prefix = net.md_5.bungee.api.ChatColor.of("#00ff00") + "[Skuishy] " + ChatColor.RESET;
     private static Metrics metrics;
 
     public void onEnable() {
@@ -71,10 +70,10 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         }
         metrics.addCustomChart(new SimplePie("skript_version", () -> Skript.getVersion().toString()));
         start = System.currentTimeMillis()/50;
-        Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "Skuishy has been enabled!");
+        Logger.success("Skuishy has been enabled!");
         Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, () -> {
             latest_version = latestVersion();
-            if (getConfig().getBoolean("version-check-msg")) Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.YELLOW + "Got latest version.");
+            if (getConfig().getBoolean("version-check-msg")) Logger.warn("Got latest version."); // not a warn just want yellow
         }, 0L, 144000L);
         data_path = this.getDataFolder().getAbsolutePath();
     }
@@ -94,6 +93,8 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         if (args.length == 0){
             sender.sendMessage(miniMessage().deserialize(
                     "<red>/skuishy <" +
+                            "<click:run_command:'/skuishy dependencies'><hover:show_text:'<green>/skuishy dependencies'>dependencies</hover></click>" +
+                            " | " +
                             "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>info</hover></click>" +
                             " | " +
                             "<click:run_command:'/skuishy reload'><hover:show_text:'<green>/skuishy reload'>reload</hover></click>" +
@@ -105,12 +106,15 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             ));
         } else{
             switch (args[0]) {
+                case "dependencies" -> cmdDependencies(sender);
                 case "info" -> cmdInfo(sender, (args.length >= 2 ? args[1] : null));
                 case "reload" -> cmdReload(sender);
                 case "update" -> cmdUpdate(sender);
                 case "version" -> cmdVersion(sender);
                 default -> sender.sendMessage(miniMessage().deserialize(
                         "<red>/skuishy <" +
+                                "<click:run_command:'/skuishy dependencies'><hover:show_text:'<green>/skuishy dependencies'>dependencies</hover></click>" +
+                                " | " +
                                 "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>info</hover></click>" +
                                 " | " +
                                 "<click:run_command:'/skuishy reload'><hover:show_text:'<green>/skuishy reload'>reload</hover></click>" +
@@ -129,6 +133,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (args.length == 1) {
             List<String> completions = new ArrayList<>();
+            if ("dependencies".startsWith(args[0].toLowerCase())) completions.add("dependencies");
             if ("info".startsWith(args[0].toLowerCase())) completions.add("info");
             if ("reload".startsWith(args[0].toLowerCase())) completions.add("reload");
             if ("update".startsWith(args[0].toLowerCase())) completions.add("update");
@@ -157,19 +162,22 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     }
 
     public void registerPluginElements(String pluginName, String name) throws IOException {
+        element_map.put(name, false);
         if (Bukkit.getServer().getPluginManager().isPluginEnabled(pluginName)) {
             addon.loadClasses("lol.aabss.skuishy.elements."+name.toLowerCase());
-            vu = true;
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + name+" elements loaded!");
-        } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + name+" elements not loaded.");
-        metrics.addCustomChart(new SimplePie(name, () -> Boolean.toString(dh)));
+            Logger.success(name+" elements loaded.");
+            element_map.put(name, true);
+        } else Logger.error(name+" elements not loaded.");
+        metrics.addCustomChart(new SimplePie(name, () -> Boolean.toString(element_map.get(name))));
     }
 
     public void registerElements(String name, String plural) throws IOException {
+        element_map.put(plural, false);
         if (getConfig().getBoolean(name.toLowerCase()+"-elements", true)){
             addon.loadClasses("lol.aabss.skuishy.elements."+plural.toLowerCase());
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + name+" elements loaded!");
-        } else Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + name+" elements not loaded!");
+            Logger.success(name+" elements loaded.");
+            element_map.put(plural, true);
+        } else Logger.error(name+" elements not loaded.");
     }
 
     @Nullable
@@ -186,5 +194,24 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             return (NamespacedKey) object;
         }
         return null;
+    }
+
+    public static class Logger{
+
+        public static void success(String message){
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + message);
+        }
+
+        public static void log(String message){
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.WHITE + message);
+        }
+
+        public static void warn(String message){
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.YELLOW + message);
+        }
+
+        public static void error(String message){
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + message);
+        }
     }
 }
