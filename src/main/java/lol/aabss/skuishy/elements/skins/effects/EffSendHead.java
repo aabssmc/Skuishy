@@ -19,27 +19,26 @@ import org.jetbrains.annotations.Nullable;
 @Name("Skins - Player Head")
 @Description("Sends a player's head as a string.")
 @Examples({
-        "send face of \"aabss\" # works with strings too",
-        "send no layer face of \"aabss\" # sends face without the outer layer"
+        "show face of \"aabss\" # works with strings too.",
+        "show face of player without the outer layer # sends face without the outer layer."
 })
 @Since("2.6")
 public class EffSendHead extends Effect {
 
     static {
         Skript.registerEffect(EffSendHead.class,
-                "show [:offline] (head|face) of %offlineplayers/strings% [without:[the] [outer] layer] [to %-commandsenders%]"
+                "(show|send) (head|face) of %offlineplayers/strings% [without:without [the] [outer] layer] [to %-commandsenders%]"
         );
     }
 
     private Expression<Object> player;
     private Expression<CommandSender> receiver;
-    private boolean offline;
     private boolean without;
 
     @Override
     protected void execute(@NotNull Event event) {
         for (Object o : player.getArray(event)) {
-            SkinWrapper.sendHead((o instanceof OfflinePlayer ? ((OfflinePlayer) o).getName() : o.toString()), !without, offline).whenComplete((string, throwable) -> {
+            SkinWrapper.sendHead((o instanceof OfflinePlayer ? ((OfflinePlayer) o).getName() : o.toString()), !without).whenCompleteAsync((string, throwable) -> {
                 if (receiver != null) {
                     for (CommandSender sender : receiver.getArray(event)) {
                         sender.sendMessage(string);
@@ -67,7 +66,6 @@ public class EffSendHead extends Effect {
         player = (Expression<Object>) expressions[0];
         receiver = (Expression<CommandSender>) expressions[1];
         without = parseResult.hasTag("without");
-        offline = parseResult.hasTag("offline");
         return true;
     }
 }

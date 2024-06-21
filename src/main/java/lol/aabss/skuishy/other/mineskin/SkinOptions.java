@@ -11,13 +11,7 @@ package lol.aabss.skuishy.other.mineskin;
 
 import com.google.common.base.Strings;
 import com.google.gson.JsonObject;
-
-import java.net.URLEncoder;
-import java.net.http.HttpRequest;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringJoiner;
+import org.jsoup.Connection;
 
 public class SkinOptions {
 
@@ -52,27 +46,16 @@ public class SkinOptions {
         return json;
     }
 
-    protected void addAsData(HttpRequest.Builder builder) {
-        Map<String, String> parameters = new HashMap<>();
-        if (name != null && !name.isEmpty()) {
-            parameters.put("name", name);
+    protected void addAsData(Connection connection) {
+        if (!Strings.isNullOrEmpty(name)) {
+            connection.data("name", name);
         }
-        if (variant != null && !variant.equals(Variant.AUTO)) {
-            parameters.put("variant", variant.getName());
+        if (variant != null && variant != Variant.AUTO) {
+            connection.data("variant", variant.getName());
         }
         if (visibility != null) {
-            parameters.put("visibility", String.valueOf(visibility));
+            connection.data("visibility", String.valueOf(visibility.getCode()));
         }
-
-        StringJoiner sj = new StringJoiner("&");
-        for (Map.Entry<String, String> entry : parameters.entrySet()) {
-            sj.add(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8) + "="
-                    + URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
-        }
-
-        String form = sj.toString();
-        builder.POST(HttpRequest.BodyPublishers.ofString(form))
-                .header("Content-Type", "application/x-www-form-urlencoded");
     }
 
     public String getName() {

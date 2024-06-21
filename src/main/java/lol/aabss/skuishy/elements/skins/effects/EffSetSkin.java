@@ -58,7 +58,6 @@ public class EffSetSkin extends Effect {
             if (value == null || signature == null) {
                 if (skin != null) {
                     Object skin = this.skin.getSingle(event);
-                    String nullreason = "";
                     if (skin != null) {
                         // noinspection all
                         if (skin instanceof String str) {
@@ -68,7 +67,7 @@ public class EffSetSkin extends Effect {
                                 }
                             } else {
                                 if (str.contains("://")) {
-                                    uploadSkin(str).whenComplete(getWhenComplete(event));
+                                    uploadSkin(str).whenCompleteAsync(getWhenComplete(event));
                                 } else {
                                     if (value != null) {
                                         for (Player p : player.getArray(event)) {
@@ -78,10 +77,10 @@ public class EffSetSkin extends Effect {
                                 }
                             }
                         } else if (skin instanceof Blueprint print) {
-                            uploadSkin(print.image()).whenComplete(getWhenComplete(event));
+                            uploadSkin(print.image()).whenCompleteAsync(getWhenComplete(event));
                         } else if (skin instanceof BufferedImage image){
                             // images not supported by skuishy, but just in case you use another addon like SkImage :)
-                            uploadSkin(image).whenComplete(getWhenComplete(event));
+                            uploadSkin(image).whenCompleteAsync(getWhenComplete(event));
                         }
                     }
                 }
@@ -101,8 +100,12 @@ public class EffSetSkin extends Effect {
 
     private java.util.function.BiConsumer<? super Texture, ? super Throwable> getWhenComplete(Event event){
         return (BiConsumer<Texture, Throwable>) (texture, throwable) -> {
-            for (Player p : player.getArray(event)) {
-                setSkin(p, texture);
+            if (throwable == null) {
+                for (Player p : player.getArray(event)) {
+                    setSkin(p, texture);
+                }
+            } else {
+                throw new RuntimeException(throwable);
             }
         };
     }

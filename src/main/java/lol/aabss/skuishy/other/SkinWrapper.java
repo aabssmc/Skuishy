@@ -11,6 +11,7 @@ import lol.aabss.skuishy.other.mineskin.Visibility;
 import lol.aabss.skuishy.other.mineskin.data.Texture;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.profile.PlayerTextures;
 
@@ -63,28 +64,24 @@ public class SkinWrapper {
         player.setPlayerProfile(profile);
     }
 
-    private static BufferedImage getHead(String name, boolean helm, boolean online) throws IOException {
-        if (online){
-            Player player = Bukkit.getPlayer(name);
-            if (player != null){
-                BufferedImage skin = ImageIO.read(player.getPlayerProfile().getTextures().getSkin());
-                BufferedImage front = skin.getSubimage(8, 8, 8, 8);
-                if (helm){
-                    front.getGraphics().drawImage(skin.getSubimage(40, 8, 8, 8), 40, 8, null);
-                }
-                return front;
-            } else{
-                return getHead(name, helm, false);
-            }
+    private static BufferedImage getHead(String name, boolean helm) throws IOException {
+        OfflinePlayer player = Bukkit.getOfflinePlayer(name);
+        if (player.getPlayerProfile().getTextures().getSkin() == null){
+            return ImageIO.read(new URL("https://minotar.net/"+(helm ? "helm" : "avatar")+"/"+name+"/8.png"));
         }
-        return ImageIO.read(new URL("https://minotar.net/" + (helm ? "helm" : "avatar") + "/" + name + "/8.png"));
+        BufferedImage skin = ImageIO.read(player.getPlayerProfile().getTextures().getSkin());
+        BufferedImage front = skin.getSubimage(8, 8, 8, 8);
+        if (helm) {
+            front.getGraphics().drawImage(skin.getSubimage(40, 8, 8, 8), 0, 0, null);
+        }
+        return front;
     }
 
     @SuppressWarnings("deprecation")
-    public static CompletableFuture<String> sendHead(String name, boolean helm, boolean online) {
+    public static CompletableFuture<String> sendHead(String name, boolean helm) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                BufferedImage img = getHead(name, helm, online);
+                BufferedImage img = getHead(name, helm);
                 String[] result = new String[8];
                 for (int x = 0; x < 8; x++) {
                     for (int y = 0; y < 8; y++) {
