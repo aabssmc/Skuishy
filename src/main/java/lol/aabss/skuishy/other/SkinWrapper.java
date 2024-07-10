@@ -78,25 +78,25 @@ public class SkinWrapper {
     }
 
     @SuppressWarnings("deprecation")
-    public static CompletableFuture<String> sendHead(String name, boolean helm) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                BufferedImage img = getHead(name, helm);
-                String[] result = new String[8];
+    public static String sendHead(String name, boolean helm, String... texts) {
+        try {
+            BufferedImage img = getHead(name, helm);
+            String[] result = new String[8];
+            for (int y = 0; y < 8; y++) {
+                result[y] = "";
                 for (int x = 0; x < 8; x++) {
-                    for (int y = 0; y < 8; y++) {
-                        ChatColor c = ChatColor.of(new Color(img.getRGB(x, y)));
-                        if (result[y] == null) result[y] = "";
-                        result[y] += (c.toString() + "\u2588").replaceAll("\\?", "");
-                    }
+                    ChatColor c = ChatColor.of(new Color(img.getRGB(x, y)));
+                    result[y] += (c.toString() + "\u2588").replaceAll("\\?", "");
                 }
-                return String.join("\n", result);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                if (texts.length > y) {
+                    result[y] += " " + ChatColor.RESET + texts[y];
+                }
             }
-        });
+            return String.join("\n", result);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 
     public static CompletableFuture<Texture> uploadSkin(BufferedImage image) throws IOException {
         return client.generateUpload(image, SkinOptions.create("Skuishy-Upload", BlueprintUtils.getVariant(image), Visibility.PRIVATE))
