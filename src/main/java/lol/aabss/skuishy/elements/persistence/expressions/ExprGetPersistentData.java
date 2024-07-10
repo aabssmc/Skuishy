@@ -29,8 +29,8 @@ import static lol.aabss.skuishy.Skuishy.namespacedKeyFromObject;
         "All classinfo types are supported.",
         "See EffEditPersistentData"})
 @Examples({
-        "set {_integer} to integer data key namespaced key from \"skuishy:rocks\" of player",
-        "set {_string} to string data key \"simple:string\" or default \"\"of player"
+        "set {_integer} to integer data key namespaced key from \"skuishy:rocks\" of player's data container",
+        "set {_string} to string data key \"simple:string\" or default \"\" of player's data container"
 })
 @Since("2.7")
 public class ExprGetPersistentData extends PropertyExpression<PersistentDataContainer, Object> {
@@ -88,7 +88,9 @@ public class ExprGetPersistentData extends PropertyExpression<PersistentDataCont
             classInfo = (Literal<ClassInfo<Object>>) expressions[0];
             namespacedKey = (Expression<Object>) expressions[1];
             defaultObject = (Expression<Object>) expressions[2];
+            setExpr((Expression<? extends PersistentDataContainer>) expressions[3]);
         } else {
+            setExpr((Expression<? extends PersistentDataContainer>) expressions[0]);
             classInfo = (Literal<ClassInfo<Object>>) expressions[1];
             namespacedKey = (Expression<Object>) expressions[2];
             defaultObject = (Expression<Object>) expressions[3];

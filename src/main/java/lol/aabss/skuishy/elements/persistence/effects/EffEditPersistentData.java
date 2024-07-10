@@ -50,7 +50,7 @@ public class EffEditPersistentData extends Effect {
         if (namespacedKey == null){
             return;
         }
-        if (classInfo == null && newValue == null){
+        if (classInfo == null || newValue == null){
             for (PersistentDataContainer container : this.dataContainer.getArray(event)){
                 container.remove(namespacedKey);
             }

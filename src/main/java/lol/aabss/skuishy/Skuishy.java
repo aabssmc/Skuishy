@@ -188,8 +188,9 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
                 String namespace = split[0];
                 String key = split[1];
                 return new NamespacedKey(split[0], split[1]);
+            } else {
+                return new NamespacedKey(Skuishy.instance, string);
             }
-            return null;
         } else if (object instanceof NamespacedKey){
             return (NamespacedKey) object;
         }
