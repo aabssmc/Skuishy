@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 public class EffCopyPersistentData extends Effect {
 
     static {
-        Skript.registerEffect(EffEditPersistentData.class,
+        Skript.registerEffect(EffCopyPersistentData.class,
                 "(:replace|copy) persistent data [container] from %persistentdatacontainer% to %persistentdatacontainers%");
     }
 

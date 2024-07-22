@@ -15,6 +15,7 @@ types:
     skinmodel: skinmodel¦s @a
     namespacedkey: namespacedkey¦s @a
     persistentdatacontainer: [persistent ?]data ?container¦s @a
+    statistic: statistic¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a

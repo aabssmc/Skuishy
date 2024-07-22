@@ -12,6 +12,7 @@ import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.event.block.PlayerShearBlockEvent;
 import io.papermc.paper.event.player.*;
 import org.bukkit.Material;
+import org.bukkit.Statistic;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemFrame;
@@ -20,8 +21,8 @@ import org.bukkit.event.Event;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PlayerEvents extends SkriptEvent {
 
@@ -388,7 +389,6 @@ public class PlayerEvents extends SkriptEvent {
             }
         }, 0);
 
-// player show entity
         if (Skript.classExists("org.bukkit.event.player.PlayerShowEntityEvent")) {
             Skript.registerEvent("Player - Show Entity", PlayerEvents.class, PlayerShowEntityEvent.class,
                             "[player] show[n] entity"
@@ -410,7 +410,6 @@ public class PlayerEvents extends SkriptEvent {
             }, 0);
         }
 
-// player stonecutter recipe select
         Skript.registerEvent("Player - Stonecutter Recipe Select", PlayerEvents.class, PlayerStonecutterRecipeSelectEvent.class,
                         "[player] stone[ ]cutter recipe select[ed]"
                 )
@@ -424,7 +423,6 @@ public class PlayerEvents extends SkriptEvent {
             }
         }, 0);
 
-// player take lectern book
         Skript.registerEvent("Player - Take Lectern Book", PlayerEvents.class, PlayerTakeLecternBookEvent.class,
                         "[player] (take|took) lectern book"
                 )
@@ -450,7 +448,6 @@ public class PlayerEvents extends SkriptEvent {
             }
         }, 0);
 
-// player track entity
         if (Skript.classExists("io.papermc.paper.event.player.PlayerTrackEntityEvent")) {
             Skript.registerEvent("Player - Track Entity", PlayerEvents.class, PlayerTrackEntityEvent.class,
                             "[player] track[ed] entity"
@@ -472,7 +469,6 @@ public class PlayerEvents extends SkriptEvent {
             }, 0);
         }
 
-// player untrack entity
         if (Skript.classExists("io.papermc.paper.event.player.PlayerUntrackEntityEvent")) {
             Skript.registerEvent("Player - Untrack Entity", PlayerEvents.class, PlayerUntrackEntityEvent.class,
                             "[player] untrack[ed] entity"
@@ -494,27 +490,52 @@ public class PlayerEvents extends SkriptEvent {
             }, 0);
         }
 
-// pre player attack entity
-        if (Skript.classExists("io.papermc.paper.event.player.PrePlayerAttackEntityEvent")) {
-            Skript.registerEvent("Player - Pre-Attack Entity", PlayerEvents.class, PrePlayerAttackEntityEvent.class,
-                            "pre[ |-]player attack[ed] entity"
+        if (Skript.classExists("org.bukkit.event.player.PlayerStatisticIncrementEvent")) {
+            Skript.registerEvent("Player - Statistic Increment", PlayerEvents.class, PlayerStatisticIncrementEvent.class,
+                            "[player] stat[istic] increment"
                     )
-                    .description("Called before a player attacks an entity.")
-                    .examples("on pre player attack entity:")
-                    .since("2.0");
-            EventValues.registerEventValue(PrePlayerAttackEntityEvent.class, Player.class, new Getter<>() {
+                    .description("Called when a player statistic is incremented.\n" +
+                            "This event is not called for some high frequency statistics, e. g. movement based statistics.")
+                    .examples("on async preplayer login:")
+                    .since("2.8");
+            EventValues.registerEventValue(PlayerStatisticIncrementEvent.class, Player.class, new Getter<>() {
                 @Override
-                public Player get(PrePlayerAttackEntityEvent e) {
+                public Player get(PlayerStatisticIncrementEvent e) {
                     return e.getPlayer();
                 }
             }, 0);
-            EventValues.registerEventValue(PrePlayerAttackEntityEvent.class, Entity.class, new Getter<>() {
+            EventValues.registerEventValue(PlayerStatisticIncrementEvent.class, Integer.class, new Getter<>() {
                 @Override
-                public Entity get(PrePlayerAttackEntityEvent e) {
-                    return e.getAttacked();
+                public Integer get(PlayerStatisticIncrementEvent e) {
+                    return e.getNewValue();
                 }
-            }, 0);
+            }, 1);
+            EventValues.registerEventValue(PlayerStatisticIncrementEvent.class, Integer.class, new Getter<>() {
+                @Override
+                public Integer get(PlayerStatisticIncrementEvent e) {
+                    return e.getPreviousValue();
+                }
+            }, -1);
+            EventValues.registerEventValue(PlayerStatisticIncrementEvent.class, org.bukkit.entity.EntityType.class, new Getter<>() {
+                @Override
+                public org.bukkit.entity.EntityType get(PlayerStatisticIncrementEvent e) {
+                    return e.getEntityType();
+                }
+            }, -1);
+            EventValues.registerEventValue(PlayerStatisticIncrementEvent.class, Material.class, new Getter<>() {
+                @Override
+                public Material get(PlayerStatisticIncrementEvent e) {
+                    return e.getMaterial();
+                }
+            }, -1);
+            EventValues.registerEventValue(PlayerStatisticIncrementEvent.class, Statistic.class, new Getter<>() {
+                @Override
+                public Statistic get(PlayerStatisticIncrementEvent e) {
+                    return e.getStatistic();
+                }
+            }, -1);
         }
+
     }
 
     @Override

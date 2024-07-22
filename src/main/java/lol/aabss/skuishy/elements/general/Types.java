@@ -6,6 +6,7 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
 import io.papermc.paper.datapack.Datapack;
+import org.bukkit.Statistic;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.Nullable;
@@ -98,6 +99,38 @@ public class Types {
 
                         @Override
                         public @NotNull String toString(PotionType type, int flags) {
+                            return toVariableNameString(type);
+                        }
+                    })
+            );
+        }
+        if (Classes.getClassInfoNoError("statistic") == null) {
+            EnumUtils<Statistic> stats = new EnumUtils<>(Statistic.class, "statistic");
+            Classes.registerClass(new ClassInfo<>(Statistic.class, "statistic")
+                    .user("statistics?")
+                    .name("Statistic")
+                    .description("Represents a statistic of a player.")
+                    .since("2.8")
+                    .parser(new Parser<>() {
+
+                        @Override
+                        @Nullable
+                        public Statistic parse(@NotNull String input, @NotNull ParseContext context) {
+                            return stats.parse(input);
+                        }
+
+                        @Override
+                        public boolean canParse(@NotNull ParseContext context) {
+                            return true;
+                        }
+
+                        @Override
+                        public @NotNull String toVariableNameString(Statistic type) {
+                            return type.name().replaceAll("_", " ").toLowerCase();
+                        }
+
+                        @Override
+                        public @NotNull String toString(Statistic type, int flags) {
                             return toVariableNameString(type);
                         }
                     })
