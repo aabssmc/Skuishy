@@ -5,8 +5,8 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import org.bukkit.entity.Entity;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,11 +16,11 @@ import org.jetbrains.annotations.Nullable;
         "set {_container} to persistent data container of player"
 })
 @Since("2.7")
-public class ExprPersistentDataContainer extends SimplePropertyExpression<Entity, PersistentDataContainer> {
+public class ExprPersistentDataContainer extends SimplePropertyExpression<Object, PersistentDataContainer> {
     static {
         register(ExprPersistentDataContainer.class, PersistentDataContainer.class,
                 "[persistent] data container",
-                "entities");
+                "objects");
     }
 
     @Override
@@ -29,8 +29,11 @@ public class ExprPersistentDataContainer extends SimplePropertyExpression<Entity
     }
 
     @Override
-    public @Nullable PersistentDataContainer convert(Entity entity) {
-        return entity.getPersistentDataContainer();
+    public @Nullable PersistentDataContainer convert(Object object) {
+        if (object instanceof PersistentDataHolder){
+            return ((PersistentDataHolder) object).getPersistentDataContainer();
+        }
+        return null;
     }
 
     @Override

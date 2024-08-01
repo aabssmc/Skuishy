@@ -26,7 +26,7 @@ import java.util.List;
 
 import static lol.aabss.skuishy.Skuishy.namespacedKeyFromObject;
 
-@Name("Persistence - Get Persistent Data")
+@Name("Persistence - Persistent Data")
 @Description({
         "Gets the data key from a data container, if not found, can optionally return anything.",
         "All classinfo types are supported."})
@@ -39,7 +39,7 @@ public class ExprPersistentData extends PropertyExpression<PersistentDataContain
 
     static {
         register(ExprPersistentData.class, Object.class,
-                "[%*classinfo%] data key %namespacedkey/string% [default:(or default|if not found) %-object%]",
+                "[%-*classinfo%] data key %namespacedkey/string% [default:(or default|if not found) %-object%]",
                 "persistentdatacontainers"
         );
     }
@@ -47,7 +47,6 @@ public class ExprPersistentData extends PropertyExpression<PersistentDataContain
     private Literal<ClassInfo<Object>> classInfo;
     private Expression<Object> namespacedKey;
     private Expression<Object> defaultObject;
-
 
     @Override
     protected Object @NotNull [] get(@NotNull Event event, PersistentDataContainer @NotNull [] persistentDataContainers) {
@@ -140,6 +139,5 @@ public class ExprPersistentData extends PropertyExpression<PersistentDataContain
                 container.remove(namespacedKey);
             }
         }
-        super.change(event, delta, mode);
     }
 }

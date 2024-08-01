@@ -62,7 +62,7 @@ public class Types {
             Classes.registerClass(new ClassInfo<>(PersistentDataContainer.class, "persistentdatacontainer")
                     .user("[persistent ?]data ?containers?")
                     .name("Persistence - Persistent Data Container")
-                    .description("Represents a data container of an entity",
+                    .description("Represents a data container of something",
                             "Can be used as an alternative as variables")
                     .since("2.7")
                     .parser(new Parser<>() {
