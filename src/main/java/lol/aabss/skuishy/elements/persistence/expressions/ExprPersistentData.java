@@ -1,6 +1,7 @@
 package lol.aabss.skuishy.elements.persistence.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.classes.Changer;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -11,6 +12,8 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import ch.njol.util.coll.CollectionUtils;
+import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.ClassInfoDataType;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.Event;
@@ -26,18 +29,17 @@ import static lol.aabss.skuishy.Skuishy.namespacedKeyFromObject;
 @Name("Persistence - Get Persistent Data")
 @Description({
         "Gets the data key from a data container, if not found, can optionally return anything.",
-        "All classinfo types are supported.",
-        "See EffEditPersistentData"})
+        "All classinfo types are supported."})
 @Examples({
         "set {_integer} to integer data key namespaced key from \"skuishy:rocks\" of player's data container",
         "set {_string} to string data key \"simple:string\" or default \"\" of player's data container"
 })
 @Since("2.7")
-public class ExprGetPersistentData extends PropertyExpression<PersistentDataContainer, Object> {
+public class ExprPersistentData extends PropertyExpression<PersistentDataContainer, Object> {
 
     static {
-        register(ExprGetPersistentData.class, Object.class,
-                "%*classinfo% data key %namespacedkey/string% [default:(or default|if not found) %-object%]",
+        register(ExprPersistentData.class, Object.class,
+                "[%*classinfo%] data key %namespacedkey/string% [default:(or default|if not found) %-object%]",
                 "persistentdatacontainers"
         );
     }
@@ -49,7 +51,7 @@ public class ExprGetPersistentData extends PropertyExpression<PersistentDataCont
 
     @Override
     protected Object @NotNull [] get(@NotNull Event event, PersistentDataContainer @NotNull [] persistentDataContainers) {
-        if (namespacedKey == null){
+        if (namespacedKey == null || classInfo == null){
             return new Object[]{};
         }
         Object namespacedKeyObject = namespacedKey.getSingle(event);
@@ -103,5 +105,41 @@ public class ExprGetPersistentData extends PropertyExpression<PersistentDataCont
             }
         }
         return true;
+    }
+
+    @Override
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
+        if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.REMOVE){
+            return CollectionUtils.array(Object.class);
+        }
+        return null;
+    }
+
+    @Override
+    public void change(@NotNull Event event, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+        if (mode == Changer.ChangeMode.SET){
+            if (namespacedKey == null || classInfo == null){
+                return;
+            }
+            NamespacedKey namespacedKey = Skuishy.namespacedKeyFromObject(this.namespacedKey.getSingle(event));
+            if (namespacedKey == null){
+                return;
+            }
+            for (PersistentDataContainer container : this.getExpr().getArray(event)){
+                container.set(namespacedKey, new ClassInfoDataType(classInfo.getSingle()), delta[0]);
+            }
+        } else if (mode == Changer.ChangeMode.REMOVE){
+            if (namespacedKey == null){
+                return;
+            }
+            NamespacedKey namespacedKey = Skuishy.namespacedKeyFromObject(this.namespacedKey.getSingle(event));
+            if (namespacedKey == null){
+                return;
+            }
+            for (PersistentDataContainer container : this.getExpr().getArray(event)){
+                container.remove(namespacedKey);
+            }
+        }
+        super.change(event, delta, mode);
     }
 }
