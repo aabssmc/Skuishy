@@ -197,6 +197,11 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         return null;
     }
 
+    public static int index(int index) {
+        boolean skriptIndex = getInstance().getConfig().getBoolean("prefer-skript-index", false);
+        return (skriptIndex ? index+1 : index);
+    }
+
     public static class Logger{
 
         public static void success(String message){

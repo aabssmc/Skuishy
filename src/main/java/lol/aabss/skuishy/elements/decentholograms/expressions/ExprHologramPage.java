@@ -9,6 +9,7 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
+import lol.aabss.skuishy.Skuishy;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,7 @@ public class ExprHologramPage extends SimpleExpression<HologramPage> {
         Integer page = this.page.getSingle(event);
         if (page != null) {
             for (Hologram holo : hologram.getArray(event)) {
-                HologramPage p = holo.getPage(page);
+                HologramPage p = holo.getPage(Skuishy.index(page));
                 if (p != null) {
                     pages.add(p);
                 }

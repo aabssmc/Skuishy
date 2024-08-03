@@ -10,6 +10,9 @@ auto-update: false
 # whether a message should be sent whenever a new version check happens.
 version-check-msg: true
 
+# whether index should start from 0 (false) or it should start from 1 (true)
+prefer-skript-index: false
+
 # elements -----
 
 # whether general elements should be loaded

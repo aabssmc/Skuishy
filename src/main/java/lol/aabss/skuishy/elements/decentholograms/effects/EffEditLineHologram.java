@@ -12,6 +12,7 @@ import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramLine;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
+import lol.aabss.skuishy.Skuishy;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -58,13 +59,13 @@ public class EffEditLineHologram extends Effect {
             } else if (Objects.equals(changetype, "remove")) {
                 Integer line = this.line.getSingle(event);
                 if (line != null) {
-                    DHAPI.removeHologramLine(holo, line);
+                    DHAPI.removeHologramLine(holo, Skuishy.index(line));
                 }
             } else if (Objects.equals(changetype, "create")) {
                 Integer page = this.page.getSingle(event);
                 String text = this.text.getSingle(event);
                 if (page != null && text != null) {
-                    HologramPage pagee = DHAPI.getHologramPage(holo, page);
+                    HologramPage pagee = DHAPI.getHologramPage(holo, Skuishy.index(page));
                     if (pagee != null) {
                         DHAPI.createHologramLine(pagee, text);
                     }
@@ -73,21 +74,21 @@ public class EffEditLineHologram extends Effect {
                 Integer line = this.line.getSingle(event);
                 String text = this.text.getSingle(event);
                 if (line != null && text != null) {
-                    DHAPI.insertHologramLine(holo, line, text);
+                    DHAPI.insertHologramLine(holo, Skuishy.index(line), text);
                 }
             } else if (Objects.equals(changetype, "set")) {
                 Integer line = this.line.getSingle(event);
                 String text = this.text.getSingle(event);
                 if (line != null && text != null) {
-                    DHAPI.setHologramLine(holo, line, text);
+                    DHAPI.setHologramLine(holo, Skuishy.index(line), text);
                 }
             } else if (Objects.equals(changetype, "get")) {
                 Integer pagen = this.page.getSingle(event);
                 Integer l = this.line.getSingle(event);
                 if (pagen != null) {
-                    HologramPage page = DHAPI.getHologramPage(holo, pagen);
+                    HologramPage page = DHAPI.getHologramPage(holo, Skuishy.index(pagen));
                     if (page != null && l != null) {
-                        HologramLine line = DHAPI.getHologramLine(page, l);
+                        HologramLine line = DHAPI.getHologramLine(page, Skuishy.index(l));
                         if (line != null){
                             Variables.setVariable(var.getName().toString(), line.getContent(), event, var.isLocal());
                         }

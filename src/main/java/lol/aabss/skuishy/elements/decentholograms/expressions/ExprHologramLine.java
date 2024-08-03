@@ -9,6 +9,7 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.holograms.HologramLine;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
+import lol.aabss.skuishy.Skuishy;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
@@ -28,6 +29,8 @@ public class ExprHologramLine extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprHologramLine.class, String.class, ExpressionType.COMBINED,
+                "[the] %integer%(st|nd|rd|th) line of %hologrampages%",
+                "%hologrampages%'s %integer%(st|nd|rd|th) line",
                 "[the] line %integer% of %hologrampages%",
                 "%hologrampages%'s line %integer%"
         );
@@ -42,7 +45,7 @@ public class ExprHologramLine extends SimpleExpression<String> {
         Integer line = this.line.getSingle(event);
         if (line != null) {
             for (HologramPage page : page.getArray(event)) {
-                HologramLine l = page.getLine(line);
+                HologramLine l = page.getLine(Skuishy.index(line));
                 if (l != null) {
                     pages.add(l.getContent());
                 }

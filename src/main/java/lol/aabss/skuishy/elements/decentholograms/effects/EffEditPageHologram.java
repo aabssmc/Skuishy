@@ -8,10 +8,11 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
+import lol.aabss.skuishy.Skuishy;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -47,17 +48,17 @@ public class EffEditPageHologram extends Effect {
             } else if (Objects.equals(changetype, "remove")){
                 Integer page = this.page.getSingle(event);
                 if (page != null){
-                    DHAPI.removeHologramPage(hologram, page);
+                    DHAPI.removeHologramPage(hologram, Skuishy.index(page));
                 }
             } else if (Objects.equals(changetype, "insert")){
                 Integer page = this.page.getSingle(event);
                 if (page != null){
-                    DHAPI.insertHologramPage(hologram, page);
+                    DHAPI.insertHologramPage(hologram, Skuishy.index(page));
                 }
             } else if (Objects.equals(changetype, "get")){
                 Integer page = this.page.getSingle(event);
                 if (page != null){
-                    DHAPI.getHologramPage(hologram, page);
+                    DHAPI.getHologramPage(hologram, Skuishy.index(page));
                 }
             }
         }
