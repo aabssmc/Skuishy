@@ -29,7 +29,7 @@ public class ExprTinyText extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprTinyText.class, String.class, ExpressionType.COMBINED,
-                "[:super] tiny (text|caps) %objects%",
+                "[:super] tiny [(text|caps)] %objects%",
                 "%objects% in [:super] tiny (text|caps)"
         );
     }
