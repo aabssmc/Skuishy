@@ -48,39 +48,43 @@ public class EffEditLineHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event event) {
-        for (Hologram holo : hologram.getArray(event)) {
-            if (Objects.equals(changetype, "add")) {
-                String text = this.text.getSingle(event);
-                if (text != null) {
-                    DHAPI.addHologramLine(holo, text);
-                }
-            } else if (Objects.equals(changetype, "remove")) {
-                Integer line = this.line.getSingle(event);
-                if (line != null) {
-                    DHAPI.removeHologramLine(holo, Skuishy.index(line));
-                }
-            } else if (Objects.equals(changetype, "create")) {
-                Integer page = this.page.getSingle(event);
-                String text = this.text.getSingle(event);
-                if (page != null && text != null) {
-                    HologramPage pagee = DHAPI.getHologramPage(holo, Skuishy.index(page));
-                    if (pagee != null) {
-                        DHAPI.createHologramLine(pagee, text);
+        try {
+            for (Hologram holo : hologram.getArray(event)) {
+                if (Objects.equals(changetype, "add")) {
+                    String text = this.text.getSingle(event);
+                    if (text != null) {
+                        DHAPI.addHologramLine(holo, text);
+                    }
+                } else if (Objects.equals(changetype, "remove")) {
+                    Integer line = this.line.getSingle(event);
+                    if (line != null) {
+                        DHAPI.removeHologramLine(holo, Skuishy.index(line));
+                    }
+                } else if (Objects.equals(changetype, "create")) {
+                    Integer page = this.page.getSingle(event);
+                    String text = this.text.getSingle(event);
+                    if (page != null && text != null) {
+                        HologramPage pagee = DHAPI.getHologramPage(holo, Skuishy.index(page));
+                        if (pagee != null) {
+                            DHAPI.createHologramLine(pagee, text);
+                        }
+                    }
+                } else if (Objects.equals(changetype, "insert")) {
+                    Integer line = this.line.getSingle(event);
+                    String text = this.text.getSingle(event);
+                    if (line != null && text != null) {
+                        DHAPI.insertHologramLine(holo, Skuishy.index(line), text);
+                    }
+                } else if (Objects.equals(changetype, "set")) {
+                    Integer line = this.line.getSingle(event);
+                    String text = this.text.getSingle(event);
+                    if (line != null && text != null) {
+                        DHAPI.setHologramLine(holo, Skuishy.index(line), text);
                     }
                 }
-            } else if (Objects.equals(changetype, "insert")) {
-                Integer line = this.line.getSingle(event);
-                String text = this.text.getSingle(event);
-                if (line != null && text != null) {
-                    DHAPI.insertHologramLine(holo, Skuishy.index(line), text);
-                }
-            } else if (Objects.equals(changetype, "set")) {
-                Integer line = this.line.getSingle(event);
-                String text = this.text.getSingle(event);
-                if (line != null && text != null) {
-                    DHAPI.setHologramLine(holo, Skuishy.index(line), text);
-                }
             }
+        } catch (IllegalArgumentException e) {
+            Skuishy.Logger.exception(e);
         }
     }
 

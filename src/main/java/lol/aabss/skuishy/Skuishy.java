@@ -10,7 +10,6 @@ import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -145,7 +144,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             if ("version".startsWith(args[0].toLowerCase())) completions.add("version");
             return completions;
         } else if (args.length == 2){
-             if (args[0].equalsIgnoreCase("info")) {
+            if (args[0].equalsIgnoreCase("info")) {
                 List<String> completions = new ArrayList<>();
                 for (Plugin p : Bukkit.getPluginManager().getPlugins()) {
                     if (p.getName().toLowerCase().startsWith(args[1].toLowerCase())) {
@@ -218,15 +217,22 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         }
 
         public static void exception(Throwable throwable) {
-            for (OfflinePlayer p : Bukkit.getOperators()) {
-                if (p.isOnline()) {
-                    ((Player) p).sendMessage(prefix + ChatColor.RED + "Something went wrong! See the problem in console.");
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (p.isOp()) {
+                    p.sendMessage(prefix + ChatColor.RED+"Something went wrong! See the problem in console.");
                 }
             }
             Bukkit.getConsoleSender().sendMessage(prefix+ChatColor.DARK_RED+
-                    "An unexpected error occurred! See the stacktrace below:\n"
-                    +ChatColor.RED+throwable+ChatColor.DARK_RED+"\nIf needed, report the problem here: https://discord.gg/PUb887ymgs"
+                    "An unexpected error occurred! See the stacktrace below:"
             );
+            Bukkit.getConsoleSender().sendMessage(
+                    prefix+ChatColor.RED+throwable+"\n"+ChatColor.DARK_RED
+            );
+            for (StackTraceElement element : throwable.getStackTrace()) {
+                Bukkit.getConsoleSender().sendMessage(
+                        prefix+"| "+ChatColor.RED+element
+                );
+            }
         }
 
         public static void exception(Class<? extends Throwable> exceptionClass, String message) {
