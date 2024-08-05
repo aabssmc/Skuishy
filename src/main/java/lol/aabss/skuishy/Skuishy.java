@@ -87,7 +87,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public void onDisable(){
         getServer().getScheduler().cancelTasks(this);
         if (getConfig().getBoolean("auto-update", false)){
-            if (new File(getInstance().getClass().getProtectionDomain().getCodeSource().getLocation().getFile()).delete()) {
+            if (new File(getClass().getProtectionDomain().getCodeSource().getLocation().getFile()).delete()) {
                 UpdateChecker.update();
             }
         }
@@ -158,14 +158,6 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         return null;
     }
 
-    public static Skuishy getInstance() {
-        return instance;
-    }
-
-    public SkriptAddon getAddonInstance() {
-        return addon;
-    }
-
     public void registerPluginElements(String pluginName, String name) throws IOException {
         element_map.put(name, false);
         if (Bukkit.getServer().getPluginManager().isPluginEnabled(pluginName)) {
@@ -203,7 +195,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     }
 
     public static int index(int index) {
-        boolean skriptIndex = getInstance().getConfig().getBoolean("prefer-skript-index", false);
+        boolean skriptIndex = instance.getConfig().getBoolean("prefer-skript-index", false);
         return (skriptIndex ? index+1 : index);
     }
 
