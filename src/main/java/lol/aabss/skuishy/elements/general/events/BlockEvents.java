@@ -10,19 +10,21 @@ import io.papermc.paper.event.block.BlockFailedDispenseEvent;
 import io.papermc.paper.event.block.BlockLockCheckEvent;
 import io.papermc.paper.event.block.BlockPreDispenseEvent;
 import io.papermc.paper.event.block.CompostItemEvent;
-import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.block.*;
+import org.bukkit.event.block.BlockCookEvent;
+import org.bukkit.event.block.BlockExpEvent;
+import org.bukkit.event.block.CauldronLevelChangeEvent;
+import org.bukkit.event.block.SculkBloomEvent;
 import org.bukkit.event.inventory.BrewEvent;
 import org.bukkit.event.inventory.BrewingStandFuelEvent;
 import org.bukkit.event.world.AsyncStructureGenerateEvent;
 import org.bukkit.event.world.AsyncStructureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BlockEvents extends SkriptEvent {
 
@@ -45,28 +47,6 @@ public class BlockEvents extends SkriptEvent {
                     .description("Called when a structure spawns asynchronously.")
                     .examples("on structure spawn:")
                     .since("2.0");
-        }
-
-// bell resonate
-        if (Skript.classExists("org.bukkit.event.block.BellResonateEvent")) {
-            Skript.registerEvent("Bell - Bell Resonate", BlockEvents.class, BellResonateEvent.class,
-                            "bell resonate[d|s]"
-                    )
-                    .description("Called when a bell resonates.")
-                    .examples("on bell resonate:")
-                    .since("2.0");
-            EventValues.registerEventValue(BellResonateEvent.class, Location.class, new Getter<>() {
-                @Override
-                public Location get(BellResonateEvent e) {
-                    return e.getBlock().getLocation();
-                }
-            }, 0);
-            EventValues.registerEventValue(BellResonateEvent.class, Block.class, new Getter<>() {
-                @Override
-                public Block get(BellResonateEvent e) {
-                    return e.getBlock();
-                }
-            }, 0);
         }
 
 // block cook

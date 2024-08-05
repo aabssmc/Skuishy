@@ -8,7 +8,6 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import com.destroystokyo.paper.event.player.PlayerAttackEntityCooldownResetEvent;
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent;
-import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.event.block.PlayerShearBlockEvent;
 import io.papermc.paper.event.player.*;
 import org.bukkit.Material;
@@ -325,20 +324,6 @@ public class PlayerEvents extends SkriptEvent {
             }
         }, 0);
 
-// player ready arrow
-        Skript.registerEvent("Player - Ready Arrow", PlayerEvents.class, PlayerReadyArrowEvent.class,
-                        "[player] ready arrow"
-                )
-                .description("Called when a player readies an arrow.")
-                .examples("on ready arrow:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerReadyArrowEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerReadyArrowEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
-
 // player recipe book settings change
         if (Skript.classExists("org.bukkit.event.player.PlayerRecipeBookSettingsChangeEvent")) {
             Skript.registerEvent("Player - Recipe Book Settings Edit", PlayerEvents.class, PlayerRecipeBookSettingsChangeEvent.class,
@@ -409,19 +394,6 @@ public class PlayerEvents extends SkriptEvent {
                 }
             }, 0);
         }
-
-        Skript.registerEvent("Player - Stonecutter Recipe Select", PlayerEvents.class, PlayerStonecutterRecipeSelectEvent.class,
-                        "[player] stone[ ]cutter recipe select[ed]"
-                )
-                .description("Called when a player selects a recipe in a stonecutter.")
-                .examples("on stonecutter recipe select:")
-                .since("2.0");
-        EventValues.registerEventValue(PlayerStonecutterRecipeSelectEvent.class, Player.class, new Getter<>() {
-            @Override
-            public Player get(PlayerStonecutterRecipeSelectEvent e) {
-                return e.getPlayer();
-            }
-        }, 0);
 
         Skript.registerEvent("Player - Take Lectern Book", PlayerEvents.class, PlayerTakeLecternBookEvent.class,
                         "[player] (take|took) lectern book"

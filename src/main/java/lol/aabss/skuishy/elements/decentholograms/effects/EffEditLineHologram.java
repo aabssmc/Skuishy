@@ -5,7 +5,6 @@ import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
-import ch.njol.skript.lang.Variable;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
@@ -44,7 +43,6 @@ public class EffEditLineHologram extends Effect {
     private Expression<String> text;
     private Expression<Integer> line;
     private Expression<Integer> page;
-    private Variable<?> var;
 
     @Override
     protected void execute(@NotNull Event event) {
