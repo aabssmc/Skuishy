@@ -11,6 +11,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.util.Color;
 import ch.njol.util.Kleenean;
+import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.mineskin.Variant;
 import org.bukkit.OfflinePlayer;
@@ -64,7 +65,8 @@ public class ExprNewBlueprint extends SimpleExpression<Blueprint> {
                     try {
                         return new Blueprint[]{new Blueprint(new URL((String) skin), variant)};
                     } catch (MalformedURLException ex) {
-                        throw new RuntimeException(ex);
+                        Skuishy.Logger.exception(ex);
+                        return null;
                     }
                 }
             }

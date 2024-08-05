@@ -12,6 +12,7 @@ package lol.aabss.skuishy.other.mineskin;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.mineskin.data.MineskinException;
 import lol.aabss.skuishy.other.mineskin.data.Skin;
 import org.jsoup.Connection;
@@ -102,7 +103,8 @@ public class MineskinClient {
                         .requestBody(body.toString());
                 return handleResponse(connection.execute().body());
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                Skuishy.Logger.exception(e);
+                return null;
             }
         }, requestExecutor);
     }
@@ -128,7 +130,8 @@ public class MineskinClient {
                 options.addAsData(connection);
                 return handleResponse(connection.execute().body());
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                Skuishy.Logger.exception(e);
+                return null;
             }
         }, requestExecutor);
     }
@@ -158,7 +161,7 @@ public class MineskinClient {
     Skin handleResponse(String body) throws MineskinException, JsonParseException {
         JsonObject jsonObject = gson.fromJson(body, JsonObject.class);
         if (jsonObject.has("error")) {
-            throw new MineskinException(jsonObject.get("error").getAsString());
+            Skuishy.Logger.exception(MineskinException.class, jsonObject.get("error").getAsString());
         }
         Skin skin = gson.fromJson(jsonObject, Skin.class);
         this.nextRequest = System.currentTimeMillis() + ((long) (skin.delayInfo.millis + (this.apiKey == null ? 10_000 : 100)));

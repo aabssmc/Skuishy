@@ -11,6 +11,7 @@ import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.DecentHologramsAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
+import lol.aabss.skuishy.Skuishy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
@@ -70,14 +71,19 @@ public class SecCreateHologram extends Section {
 
     @Override
     protected @Nullable TriggerItem walk(@NotNull Event event) {
-        String name = this.name.getSingle(event);
-        List<String> lines = List.of(this.lines.getArray(event));
-        Location loc = this.location.getSingle(event);
-        if (name != null && loc != null) {
-            Hologram hologram = DHAPI.createHologram(name, loc, persistent, lines);
-            DecentHologramsAPI.get().getHologramManager().registerHologram(hologram);
+        try {
+            String name = this.name.getSingle(event);
+            List<String> lines = List.of(this.lines.getArray(event));
+            Location loc = this.location.getSingle(event);
+            if (name != null && loc != null) {
+                Hologram hologram = DHAPI.createHologram(name, loc, persistent, lines);
+                DecentHologramsAPI.get().getHologramManager().registerHologram(hologram);
+            }
+            return super.walk(event, false);
+        } catch (IllegalArgumentException e) {
+            Skuishy.Logger.exception(e);
+            return null;
         }
-        return super.walk(event, false);
     }
 
     @NotNull

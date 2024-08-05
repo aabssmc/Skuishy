@@ -42,25 +42,29 @@ public class EffEditPageHologram extends Effect {
 
     @Override
     protected void execute(@NotNull Event event) {
-        for (Hologram hologram : this.hologram.getArray(event)) {
-            if (Objects.equals(changetype, "add")){
-                DHAPI.addHologramPage(hologram);
-            } else if (Objects.equals(changetype, "remove")){
-                Integer page = this.page.getSingle(event);
-                if (page != null){
-                    DHAPI.removeHologramPage(hologram, Skuishy.index(page));
-                }
-            } else if (Objects.equals(changetype, "insert")){
-                Integer page = this.page.getSingle(event);
-                if (page != null){
-                    DHAPI.insertHologramPage(hologram, Skuishy.index(page));
-                }
-            } else if (Objects.equals(changetype, "get")){
-                Integer page = this.page.getSingle(event);
-                if (page != null){
-                    DHAPI.getHologramPage(hologram, Skuishy.index(page));
+        try {
+            for (Hologram hologram : this.hologram.getArray(event)) {
+                if (Objects.equals(changetype, "add")) {
+                    DHAPI.addHologramPage(hologram);
+                } else if (Objects.equals(changetype, "remove")) {
+                    Integer page = this.page.getSingle(event);
+                    if (page != null) {
+                        DHAPI.removeHologramPage(hologram, Skuishy.index(page));
+                    }
+                } else if (Objects.equals(changetype, "insert")) {
+                    Integer page = this.page.getSingle(event);
+                    if (page != null) {
+                        DHAPI.insertHologramPage(hologram, Skuishy.index(page));
+                    }
+                } else if (Objects.equals(changetype, "get")) {
+                    Integer page = this.page.getSingle(event);
+                    if (page != null) {
+                        DHAPI.getHologramPage(hologram, Skuishy.index(page));
+                    }
                 }
             }
+        } catch (IllegalArgumentException e) {
+            Skuishy.Logger.exception(e);
         }
     }
 

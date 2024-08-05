@@ -6,6 +6,7 @@ import ch.njol.skript.classes.Serializer;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.yggdrasil.Fields;
+import lol.aabss.skuishy.Skuishy;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
@@ -41,7 +42,7 @@ public class Types {
                         protected NamespacedKey deserialize(Fields fields) throws StreamCorruptedException {
                             String key = fields.getObject("key", String.class);
                             if (key == null) {
-                                throw new StreamCorruptedException("NamespacedKey string is null");
+                                Skuishy.Logger.exception(StreamCorruptedException.class, "NamespacedKey string is null");
                             }
                             return NamespacedKey.fromString(key);
                         }

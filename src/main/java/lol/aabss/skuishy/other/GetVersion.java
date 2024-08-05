@@ -2,6 +2,7 @@ package lol.aabss.skuishy.other;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import lol.aabss.skuishy.Skuishy;
 import org.bukkit.Bukkit;
 
 import java.io.BufferedInputStream;
@@ -45,7 +46,8 @@ public class GetVersion {
             String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
             return JsonParser.parseString(body).getAsJsonArray().get(0).getAsJsonObject().get("version_number").getAsString();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
+            return null;
         }
     }
 
@@ -70,10 +72,12 @@ public class GetVersion {
                 }
                 return true;
             } catch (IOException e) {
-                throw new IOException(e);
+                Skuishy.Logger.exception(e);
+                return false;
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
+            return false;
         }
     }
 
@@ -86,7 +90,8 @@ public class GetVersion {
             String body = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get().body();
             return JsonParser.parseString(body).getAsJsonObject().get("tag_name").getAsString();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
+            return null;
         }
     }
 }

@@ -36,7 +36,8 @@ public class BlueprintUtils {
                 }
             }
         } catch (IOException e){
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
+            return;
         }
         if (json == null) json = getJson();
     }
@@ -50,7 +51,8 @@ public class BlueprintUtils {
         try {
             return new Blueprint(ImageIO.read(file), Variant.valueOf(getJson().get(name).getAsString()));
         } catch (IOException e){
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
+            return null;
         }
     }
 
@@ -73,7 +75,8 @@ public class BlueprintUtils {
             }
             return JsonParser.parseString(jsonstr.toString()).getAsJsonObject();
         } catch (IOException e){
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
+            return null;
         }
     }
 
@@ -86,7 +89,7 @@ public class BlueprintUtils {
             writer.write(gson.toJson(json));
             writer.close();
         } catch (IOException e){
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
         }
     }
 

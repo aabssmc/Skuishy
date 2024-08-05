@@ -9,6 +9,7 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.mineskin.data.Texture;
 import org.bukkit.entity.Player;
@@ -94,7 +95,7 @@ public class EffSetSkin extends Effect {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
         }
     }
 
@@ -105,7 +106,7 @@ public class EffSetSkin extends Effect {
                     setSkin(p, texture);
                 }
             } else {
-                throw new RuntimeException(throwable);
+                Skuishy.Logger.exception(throwable);
             }
         };
     }

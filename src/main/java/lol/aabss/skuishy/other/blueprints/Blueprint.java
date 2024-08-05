@@ -19,8 +19,8 @@ import static lol.aabss.skuishy.other.blueprints.BlueprintUtils.json;
 
 public class Blueprint {
 
-    private final BufferedImage image;
-    private final @NotNull Variant model;
+    private BufferedImage image = null;
+    private @NotNull Variant model = null;
 
     public Blueprint(@NotNull Variant model) {
         this.model = model;
@@ -50,7 +50,8 @@ public class Blueprint {
         try {
             this.image = ImageIO.read(url);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
+            return;
         }
         last_blueprint = this;
     }
@@ -60,7 +61,8 @@ public class Blueprint {
             this.image = ImageIO.read(new URL("https://minotar.net/skin/"+player));
             this.model = BlueprintUtils.getVariant(image);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
+            return;
         }
         last_blueprint = this;
     }
@@ -79,7 +81,7 @@ public class Blueprint {
             json.addProperty(name, model.name());
             BlueprintUtils.saveJson();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
         }
     }
 

@@ -3,6 +3,7 @@ package lol.aabss.skuishy.other;
 import ch.njol.skript.Skript;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import lol.aabss.skuishy.other.mineskin.MineskinClient;
 import lol.aabss.skuishy.other.mineskin.SkinOptions;
@@ -94,7 +95,8 @@ public class SkinWrapper {
             }
             return String.join("\n", result);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Skuishy.Logger.exception(e);
+            return null;
         }
     }
 

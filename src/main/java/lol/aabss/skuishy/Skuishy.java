@@ -10,9 +10,11 @@ import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.Plugin;
@@ -22,6 +24,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,7 +70,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             registerElements("Plugin", "Plugins");
             registerElements("Skin", "Skins");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Logger.exception(e);
         }
         metrics.addCustomChart(new SimplePie("skript_version", () -> Skript.getVersion().toString()));
         start = System.currentTimeMillis()/50;
@@ -218,6 +222,34 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
 
         public static void error(String message){
             Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + message);
+        }
+
+        public static void exception(Throwable throwable) {
+            for (OfflinePlayer p : Bukkit.getOperators()) {
+                if (p.isOnline()) {
+                    ((Player) p).sendMessage(prefix + ChatColor.RED + "Something went wrong! See the problem in console.");
+                }
+            }
+            Bukkit.getConsoleSender().sendMessage(prefix+ChatColor.DARK_RED+
+                    "An unexpected error occurred! See the stacktrace below:\n"
+                    +ChatColor.RED+throwable+ChatColor.DARK_RED+"\nIf needed, report the problem here: https://discord.gg/PUb887ymgs"
+            );
+        }
+
+        public static void exception(Class<? extends Throwable> exceptionClass, String message) {
+            for (Constructor<?> constructor : exceptionClass.getDeclaredConstructors()) {
+                if (constructor.getParameterCount() == 1 && constructor.getParameters()[0].getType().equals(String.class)) {
+                    try {
+                        exception((Throwable) constructor.newInstance(message));
+                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                        exception(e);
+                    }
+                }
+            }
+        }
+
+        public static void exception(String message) {
+            exception(new RuntimeException(message));
         }
     }
 }

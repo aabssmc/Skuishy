@@ -6,18 +6,16 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.Variable;
-import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
-import eu.decentsoftware.holograms.api.holograms.HologramLine;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
 import lol.aabss.skuishy.Skuishy;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+
 import java.util.Objects;
 @Name("Decent Holograms - Edit Line")
 @Description("Edits a line of a hologram.")
@@ -82,18 +80,6 @@ public class EffEditLineHologram extends Effect {
                 if (line != null && text != null) {
                     DHAPI.setHologramLine(holo, Skuishy.index(line), text);
                 }
-            } else if (Objects.equals(changetype, "get")) {
-                Integer pagen = this.page.getSingle(event);
-                Integer l = this.line.getSingle(event);
-                if (pagen != null) {
-                    HologramPage page = DHAPI.getHologramPage(holo, Skuishy.index(pagen));
-                    if (page != null && l != null) {
-                        HologramLine line = DHAPI.getHologramLine(page, Skuishy.index(l));
-                        if (line != null){
-                            Variables.setVariable(var.getName().toString(), line.getContent(), event, var.isLocal());
-                        }
-                    }
-                }
             }
         }
     }
@@ -109,42 +95,25 @@ public class EffEditLineHologram extends Effect {
             changetype = "add";
             hologram = (Expression<Hologram>) exprs[0];
             text = (Expression<String>) exprs[1];
-        }
-        else if (matchedPattern == 1){
+        } else if (matchedPattern == 1){
             changetype = "remove";
             line = (Expression<Integer>) exprs[0];
             hologram = (Expression<Hologram>) exprs[1];
-        }
-        else if (matchedPattern == 2){
+        } else if (matchedPattern == 2){
             changetype = "create";
             page = (Expression<Integer>) exprs[0];
             hologram = (Expression<Hologram>) exprs[1];
             text = (Expression<String>) exprs[2];
-        }
-        else if (matchedPattern == 3){
+        } else if (matchedPattern == 3){
             changetype = "insert";
             line = (Expression<Integer>) exprs[0];
             hologram = (Expression<Hologram>) exprs[1];
             text = (Expression<String>) exprs[2];
-        }
-        else if (matchedPattern == 4){
+        } else if (matchedPattern == 4){
             changetype = "set";
             line = (Expression<Integer>) exprs[0];
             hologram = (Expression<Hologram>) exprs[1];
             text = (Expression<String>) exprs[2];
-        }
-        else if (matchedPattern == 5){
-            changetype = "get";
-            line = (Expression<Integer>) exprs[0];
-            hologram = (Expression<Hologram>) exprs[1];
-            page = (Expression<Integer>) exprs[2];
-            if (exprs[3] instanceof Variable<?>){
-                var = (Variable<?>) exprs[3];
-            }
-            else{
-                Skript.error("Object must be a variable!");
-                return false;
-            }
         }
         return true;
     }
