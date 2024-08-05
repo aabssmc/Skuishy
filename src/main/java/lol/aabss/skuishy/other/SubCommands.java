@@ -56,7 +56,7 @@ public class SubCommands {
             if (!addonlist.isEmpty()) {
                 for (SkriptAddon addon : Skript.getAddons()) {
                     // if the loop plugin is not skuishy add a message
-                    if (addon != instance.getAddonInstance()) {
+                    if (addon != Skuishy.addon) {
                         PluginDescriptionFile d = addon.plugin.getDescription();
                         msgs.add(
                                 "    <click:open_url:'<URL>'><hover:show_text:'<gray><AUTHORS>'><gray><NAME>: <color:#00ff00><VERSION></hover></click>"
