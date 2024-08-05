@@ -7,8 +7,10 @@ import ch.njol.skript.bstats.charts.SimplePie;
 import lol.aabss.skuishy.other.UpdateChecker;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -45,7 +47,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public static String latest_version;
     public static String data_path;
     public static HashMap<String, Boolean> element_map = new HashMap<>();
-    public static final String prefix = net.md_5.bungee.api.ChatColor.of("#00ff00") + "[Skuishy] " + ChatColor.RESET;
+    public static final String prefix = ChatColor.of("#00ff00") + "[Skuishy] " + ChatColor.RESET;
     private static Metrics metrics;
     public static final boolean skript_reflect_supported = Skript.classExists("com.btk5h.skriptmirror.ObjectWrapper");
 
@@ -217,21 +219,28 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         }
 
         public static void exception(Throwable throwable) {
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                if (p.isOp()) {
-                    p.sendMessage(prefix + ChatColor.RED+"Something went wrong! See the problem in console.");
-                }
-            }
             Bukkit.getConsoleSender().sendMessage(prefix+ChatColor.DARK_RED+
                     "An unexpected error occurred! See the stacktrace below:"
             );
             Bukkit.getConsoleSender().sendMessage(
                     prefix+ChatColor.RED+throwable+"\n"+ChatColor.DARK_RED
             );
+            ComponentBuilder stackTrace = new ComponentBuilder();
             for (StackTraceElement element : throwable.getStackTrace()) {
                 Bukkit.getConsoleSender().sendMessage(
                         prefix+"| "+ChatColor.RED+element
                 );
+                stackTrace.append(" "+element+"\n").color(ChatColor.RED);
+            }
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (p.isOp()) {
+                    ComponentBuilder component = new ComponentBuilder();
+                    component
+                            .append("[Skuishy] ").color(ChatColor.of("#00ff00"))
+                            .append("Something went wrong! See the problem in console.").color(ChatColor.RED)
+                            .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, stackTrace.create()));
+                    p.sendMessage(component.build());
+                }
             }
         }
 
