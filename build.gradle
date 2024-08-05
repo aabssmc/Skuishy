@@ -24,6 +24,7 @@ dependencies {
     compileOnly files("libs/Vivecraft_Spigot_Extensions.jar")
     compileOnly files("libs/VulcanAPI.jar")
     implementation "org.jsoup:jsoup:1.17.2"
+    implementation "com.github.SkriptLang:skript-reflect:2.4-dev1"
 }
 
 java {

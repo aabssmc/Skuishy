@@ -48,6 +48,7 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
     public static HashMap<String, Boolean> element_map = new HashMap<>();
     public static final String prefix = net.md_5.bungee.api.ChatColor.of("#00ff00") + "[Skuishy] " + ChatColor.RESET;
     private static Metrics metrics;
+    public static final boolean skript_reflect_supported = Skript.classExists("com.btk5h.skriptmirror.ObjectWrapper");
 
     public void onEnable() {
         instance = this;
