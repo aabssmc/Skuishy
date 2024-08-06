@@ -1,23 +1,30 @@
 package lol.aabss.skuishy.elements.general.events;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.lang.*;
+import ch.njol.skript.lang.Literal;
+import ch.njol.skript.lang.SkriptEvent;
+import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Color;
 import ch.njol.skript.util.Getter;
 import ch.njol.skript.util.SkriptColor;
+import com.destroystokyo.paper.event.entity.EntityKnockbackByEntityEvent;
 import com.destroystokyo.paper.event.entity.*;
 import io.papermc.paper.event.entity.*;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
+import org.bukkit.event.vehicle.VehicleMoveEvent;
+import org.bukkit.event.vehicle.VehicleUpdateEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 public class EntityEvents extends SkriptEvent {
@@ -600,7 +607,286 @@ public class EntityEvents extends SkriptEvent {
             }, -1);
         }
 
+        if (Skript.classExists("org.bukkit.event.vehicle.VehicleUpdateEvent")) {
+            Skript.registerEvent("Vehicle - Update", EntityEvents.class, VehicleUpdateEvent.class,
+                    "vehicle update[d]"
+            )
+                    .description("Called when a vehicle updates.")
+                    .examples("on vehicle update:")
+                    .since("2.8");
+            EventValues.registerEventValue(VehicleUpdateEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public @Nullable Entity get(VehicleUpdateEvent event) {
+                    return event.getVehicle();
+                }
+            }, 0);
+        }
 
+        if (Skript.classExists("org.bukkit.event.vehicle.VehicleMoveEvent")) {
+            Skript.registerEvent("Vehicle - Move", EntityEvents.class, VehicleMoveEvent.class,
+                            "vehicle move[d]"
+                    )
+                    .description("Called when a vehicle moves.")
+                    .examples("on vehicle move:")
+                    .since("2.8");
+            EventValues.registerEventValue(VehicleMoveEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public @Nullable Entity get(VehicleMoveEvent event) {
+                    return event.getVehicle();
+                }
+            }, 0);
+            EventValues.registerEventValue(VehicleMoveEvent.class, Location.class, new Getter<>() {
+                @Override
+                public @Nullable Location get(VehicleMoveEvent event) {
+                    return event.getFrom();
+                }
+            }, -1);
+            EventValues.registerEventValue(VehicleMoveEvent.class, Location.class, new Getter<>() {
+                @Override
+                public @Nullable Location get(VehicleMoveEvent event) {
+                    return event.getTo();
+                }
+            }, 1);
+        }
+
+        if (Skript.classExists("org.bukkit.event.entity.EntityPlaceEvent")) {
+            Skript.registerEvent("Entity - Place", EntityEvents.class, EntityPlaceEvent.class,
+                            "entity place[d]"
+                    )
+                    .description("Called when a entity is placed.")
+                    .examples("on entity place:")
+                    .since("2.8");
+            EventValues.registerEventValue(EntityPlaceEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public @Nullable Entity get(EntityPlaceEvent event) {
+                    return event.getEntity();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityPlaceEvent.class, EntityType.class, new Getter<>() {
+                @Override
+                public @Nullable EntityType get(EntityPlaceEvent event) {
+                    return event.getEntityType();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityPlaceEvent.class, Block.class, new Getter<>() {
+                @Override
+                public @Nullable Block get(EntityPlaceEvent event) {
+                    return event.getBlock();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityPlaceEvent.class, Player.class, new Getter<>() {
+                @Override
+                public @Nullable Player get(EntityPlaceEvent event) {
+                    return event.getPlayer();
+                }
+            }, 0);
+        }
+
+        if (Skript.classExists("org.bukkit.event.entity.SheepDyeWoolEvent")) {
+            Skript.registerEvent("Entity - Sheep Dye Wool", EntityEvents.class, SheepDyeWoolEvent.class,
+                            "(sheep|entity) dye[d] wool"
+                    )
+                    .description("Called when a sheep's wool is dyed.")
+                    .examples("on sheep dye wool:")
+                    .since("2.8");
+            EventValues.registerEventValue(SheepDyeWoolEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(SheepDyeWoolEvent e) {
+                    return e.getEntity();
+                }
+            }, 0);
+            EventValues.registerEventValue(SheepDyeWoolEvent.class, EntityType.class, new Getter<>() {
+                @Override
+                public EntityType get(SheepDyeWoolEvent e) {
+                    return e.getEntityType();
+                }
+            }, 0);
+            EventValues.registerEventValue(SheepDyeWoolEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(SheepDyeWoolEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(SheepDyeWoolEvent.class, SkriptColor.class, new Getter<>() {
+                @Override
+                public SkriptColor get(SheepDyeWoolEvent e) {
+                    return SkriptColor.fromDyeColor(e.getColor());
+                }
+            }, 0);
+        }
+
+        if (Skript.classExists("org.bukkit.event.entity.EntityKnockbackByEntityEvent")) {
+            Skript.registerEvent("Entity - Knockback by Entity", EntityEvents.class, EntityKnockbackByEntityEvent.class,
+                            "[entity] knockback[ed] by entity"
+                    )
+                    .description("Fired when an Entity is knocked back by the hit of another Entity. If this event is cancelled, the entity is not knocked back.")
+                    .examples("on knockback by entity:")
+                    .since("2.8");
+            EventValues.registerEventValue(EntityKnockbackByEntityEvent.class, Vector.class, new Getter<>() {
+                @Override
+                public Vector get(EntityKnockbackByEntityEvent e) {
+                    return e.getKnockback();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityKnockbackByEntityEvent.class, Float.class, new Getter<>() {
+                @Override
+                public Float get(EntityKnockbackByEntityEvent e) {
+                    return e.getKnockbackStrength();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityKnockbackByEntityEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(EntityKnockbackByEntityEvent e) {
+                    return e.getPushedBy();
+                }
+            }, -1);
+            EventValues.registerEventValue(EntityKnockbackByEntityEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(EntityKnockbackByEntityEvent e) {
+                    return e.getHitBy();
+                }
+            }, 1);
+        }
+        if (Skript.classExists("org.bukkit.event.entity.EntityPortalExitEvent")) {
+            Skript.registerEvent("Entity - Portal Exit", EntityEvents.class, EntityPortalExitEvent.class,
+                            "[entity] portal exit"
+                    )
+                    .description("Called before an entity exits a portal.")
+                    .examples("on portal exit:")
+                    .since("2.8");
+            EventValues.registerEventValue(EntityPortalExitEvent.class, Vector.class, new Getter<>() {
+                @Override
+                public Vector get(EntityPortalExitEvent e) {
+                    return e.getBefore();
+                }
+            }, -1);
+            EventValues.registerEventValue(EntityPortalExitEvent.class, Vector.class, new Getter<>() {
+                @Override
+                public Vector get(EntityPortalExitEvent e) {
+                    return e.getAfter();
+                }
+            }, 1);
+            EventValues.registerEventValue(EntityPortalExitEvent.class, Location.class, new Getter<>() {
+                @Override
+                public Location get(EntityPortalExitEvent e) {
+                    return e.getFrom();
+                }
+            }, -1);
+            EventValues.registerEventValue(EntityPortalExitEvent.class, Location.class, new Getter<>() {
+                @Override
+                public Location get(EntityPortalExitEvent e) {
+                    return e.getTo();
+                }
+            }, 1);
+            EventValues.registerEventValue(EntityPortalExitEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(EntityPortalExitEvent e) {
+                    return e.getEntity();
+                }
+            }, 1);
+            EventValues.registerEventValue(EntityPortalExitEvent.class, EntityType.class, new Getter<>() {
+                @Override
+                public EntityType get(EntityPortalExitEvent e) {
+                    return e.getEntityType();
+                }
+            }, 1);
+        }
+        if (Skript.classExists("org.bukkit.event.entity.PotionSplashEvent")) {
+            Skript.registerEvent("Entity - Potion Splash", EntityEvents.class, PotionSplashEvent.class,
+                            "[entity] potion splash"
+                    )
+                    .description("Called when a splash potion hits an area.")
+                    .examples("on potion splash:")
+                    .since("2.8");
+            EventValues.registerEventValue(PotionSplashEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(PotionSplashEvent e) {
+                    return e.getEntity();
+                }
+            }, -1);
+            EventValues.registerEventValue(PotionSplashEvent.class, EntityType.class, new Getter<>() {
+                @Override
+                public EntityType get(PotionSplashEvent e) {
+                    return e.getEntityType();
+                }
+            }, -1);
+            EventValues.registerEventValue(PotionSplashEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(PotionSplashEvent e) {
+                    return e.getHitBlock();
+                }
+            }, -1);
+            EventValues.registerEventValue(PotionSplashEvent.class, Location.class, new Getter<>() {
+                @Override
+                public Location get(PotionSplashEvent e) {
+                    return e.getPotion().getLocation();
+                }
+            }, -1);
+        }
+        if (Skript.classExists("org.bukkit.event.entity.LingeringPotionSplashEvent")) {
+            Skript.registerEvent("Entity - Lingering Potion Splash", EntityEvents.class, LingeringPotionSplashEvent.class,
+                            "[entity] lingering potion splash"
+                    )
+                    .description("Called when a lingering potion hits an area.")
+                    .examples("on lingering potion splash:")
+                    .since("2.8");
+            EventValues.registerEventValue(LingeringPotionSplashEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(LingeringPotionSplashEvent e) {
+                    return e.getHitEntity();
+                }
+            }, -1);
+            EventValues.registerEventValue(LingeringPotionSplashEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(LingeringPotionSplashEvent e) {
+                    return e.getHitBlock();
+                }
+            }, -1);
+            EventValues.registerEventValue(LingeringPotionSplashEvent.class, Location.class, new Getter<>() {
+                @Override
+                public Location get(LingeringPotionSplashEvent e) {
+                    return e.getEntity().getLocation();
+                }
+            }, -1);
+        }
+        if (Skript.classExists("org.bukkit.event.entity.ExpBottleEvent")) {
+            Skript.registerEvent("Entity - Exp Bottle Splash", EntityEvents.class, ExpBottleEvent.class,
+                            "[entity] exp[erience] bottle [splash]"
+                    )
+                    .description("Called when a ThrownExpBottle hits and releases experience.")
+                    .examples("on exp bottle:")
+                    .since("2.8");
+            EventValues.registerEventValue(ExpBottleEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(ExpBottleEvent e) {
+                    return e.getHitEntity();
+                }
+            }, -1);
+            EventValues.registerEventValue(ExpBottleEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(ExpBottleEvent e) {
+                    return e.getHitBlock();
+                }
+            }, -1);
+            EventValues.registerEventValue(ExpBottleEvent.class, Location.class, new Getter<>() {
+                @Override
+                public Location get(ExpBottleEvent e) {
+                    return e.getEntity().getLocation();
+                }
+            }, -1);
+            EventValues.registerEventValue(ExpBottleEvent.class, Integer.class, new Getter<>() {
+                @Override
+                public Integer get(ExpBottleEvent e) {
+                    return e.getExperience();
+                }
+            }, -1);
+            EventValues.registerEventValue(ExpBottleEvent.class, Boolean.class, new Getter<>() {
+                @Override
+                public Boolean get(ExpBottleEvent e) {
+                    return e.getShowEffect();
+                }
+            }, -1);
+        }
     }
 
     @Override

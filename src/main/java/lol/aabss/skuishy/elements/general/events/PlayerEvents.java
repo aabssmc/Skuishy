@@ -20,6 +20,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -468,7 +469,7 @@ public class PlayerEvents extends SkriptEvent {
                     )
                     .description("Called when a player statistic is incremented.\n" +
                             "This event is not called for some high frequency statistics, e. g. movement based statistics.")
-                    .examples("on async preplayer login:")
+                    .examples("on statistic increment:")
                     .since("2.8");
             EventValues.registerEventValue(PlayerStatisticIncrementEvent.class, Player.class, new Getter<>() {
                 @Override
@@ -507,7 +508,107 @@ public class PlayerEvents extends SkriptEvent {
                 }
             }, -1);
         }
-
+        if (Skript.classExists("org.bukkit.event.player.PlayerVelocityEvent")) {
+            Skript.registerEvent("Player - Velocity", PlayerEvents.class, PlayerVelocityEvent.class,
+                            "player velocity"
+                    )
+                    .description("Called when the velocity of a player changes.")
+                    .examples("on player velocity:")
+                    .since("2.8");
+            EventValues.registerEventValue(PlayerVelocityEvent.class, Player.class, new Getter<>() {
+                @Override
+                public @Nullable Player get(PlayerVelocityEvent event) {
+                    return event.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerVelocityEvent.class, Vector.class, new Getter<>() {
+                @Override
+                public @Nullable Vector get(PlayerVelocityEvent event) {
+                    return event.getVelocity();
+                }
+            }, 0);
+        }
+        if (Skript.classExists("org.bukkit.event.player.PlayerBucketEntityEvent")) {
+            Skript.registerEvent("Player - Bucket Entity", PlayerEvents.class, PlayerBucketEntityEvent.class,
+                            "player bucket entity"
+                    )
+                    .description("Called when a player captures a player in a bucket.")
+                    .examples("on player bucket entity:")
+                    .since("2.8");
+            EventValues.registerEventValue(PlayerBucketEntityEvent.class, Player.class, new Getter<>() {
+                @Override
+                public @Nullable Player get(PlayerBucketEntityEvent event) {
+                    return event.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerBucketEntityEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public @Nullable Entity get(PlayerBucketEntityEvent event) {
+                    return event.getEntity();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerBucketEntityEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public @Nullable ItemStack get(PlayerBucketEntityEvent event) {
+                    return event.getEntityBucket();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerBucketEntityEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public @Nullable ItemStack get(PlayerBucketEntityEvent event) {
+                    return event.getOriginalBucket();
+                }
+            }, -1);
+        }
+        if (Skript.classExists("org.bukkit.event.player.PlayerHideEntityEvent")) {
+            Skript.registerEvent("Player - Hide Entity", PlayerEvents.class, PlayerHideEntityEvent.class,
+                            "player hide entity"
+                    )
+                    .description("""
+                            Called when a visible entity is hidden from a player.
+                            This event is only called when the entity's visibility status is actually changed.
+                            This event is called regardless of if the entity was within tracking range.""")
+                    .examples("on player hide entity:")
+                    .since("2.8");
+            EventValues.registerEventValue(PlayerHideEntityEvent.class, Player.class, new Getter<>() {
+                @Override
+                public @Nullable Player get(PlayerHideEntityEvent event) {
+                    return event.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerHideEntityEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public @Nullable Entity get(PlayerHideEntityEvent event) {
+                    return event.getEntity();
+                }
+            }, 0);
+        }
+        if (Skript.classExists("org.bukkit.event.player.PlayerArmorStandManipulateEvent")) {
+            Skript.registerEvent("Player - Armor Stand Manipulate", PlayerEvents.class, PlayerArmorStandManipulateEvent.class,
+                            "[player] armor[ |-]stand manipulate"
+                    )
+                    .description("Called when a player interacts with an armor stand and will either swap, retrieve or place an item")
+                    .examples("on armorstand manipulate:")
+                    .since("2.8");
+            EventValues.registerEventValue(PlayerArmorStandManipulateEvent.class, Player.class, new Getter<>() {
+                @Override
+                public @Nullable Player get(PlayerArmorStandManipulateEvent event) {
+                    return event.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerArmorStandManipulateEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public @Nullable Entity get(PlayerArmorStandManipulateEvent event) {
+                    return event.getRightClicked();
+                }
+            }, 0);
+            EventValues.registerEventValue(PlayerArmorStandManipulateEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public @Nullable ItemStack get(PlayerArmorStandManipulateEvent event) {
+                    return event.getPlayerItem();
+                }
+            }, 0);
+        }
     }
 
     @Override

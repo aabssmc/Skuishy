@@ -14,15 +14,13 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.block.BlockCookEvent;
-import org.bukkit.event.block.BlockExpEvent;
-import org.bukkit.event.block.CauldronLevelChangeEvent;
-import org.bukkit.event.block.SculkBloomEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.inventory.BrewEvent;
 import org.bukkit.event.inventory.BrewingStandFuelEvent;
 import org.bukkit.event.world.AsyncStructureGenerateEvent;
 import org.bukkit.event.world.AsyncStructureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -246,6 +244,152 @@ public class BlockEvents extends SkriptEvent {
                 @Override
                 public Block get(SculkBloomEvent e) {
                     return e.getBlock();
+                }
+            }, 0);
+        }
+
+        if (Skript.classExists("org.bukkit.event.block.BlockDispenseArmorEvent")){
+            Skript.registerEvent("Block - Dispense Armor", BlockEvents.class, BlockDispenseArmorEvent.class,
+                            "[block] dispense[d] armor"
+                    )
+                    .description("Called when an equippable item is dispensed from a block and equipped on a nearby entity.\n" +
+                            "If a Block Dispense Armor event is cancelled, the equipment will not be equipped on the target entity.")
+                    .examples("on dispense armor:")
+                    .since("2.8");
+            EventValues.registerEventValue(BlockDispenseArmorEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(BlockDispenseArmorEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+            EventValues.registerEventValue(BlockDispenseArmorEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public ItemStack get(BlockDispenseArmorEvent e) {
+                    return e.getItem();
+                }
+            }, 0);
+            EventValues.registerEventValue(BlockDispenseArmorEvent.class, Vector.class, new Getter<>() {
+                @Override
+                public Vector get(BlockDispenseArmorEvent e) {
+                    return e.getVelocity();
+                }
+            }, 0);
+            EventValues.registerEventValue(BlockDispenseArmorEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(BlockDispenseArmorEvent e) {
+                    return e.getTargetEntity();
+                }
+            }, 0);
+        }
+
+        if (Skript.classExists("org.bukkit.event.block.BlockMultiPlaceEvent")){
+            Skript.registerEvent("Block - Mutli Place", BlockEvents.class, BlockMultiPlaceEvent.class,
+                            "[block] multi[-| ]place"
+                    )
+                    .description("Fired when a single block placement action of a player triggers the creation of multiple blocks(e. g. placing a bed block).")
+                    .examples("on multi place:")
+                    .since("2.8");
+            EventValues.registerEventValue(BlockMultiPlaceEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(BlockMultiPlaceEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+            EventValues.registerEventValue(BlockMultiPlaceEvent.class, Player.class, new Getter<>() {
+                @Override
+                public Player get(BlockMultiPlaceEvent e) {
+                    return e.getPlayer();
+                }
+            }, 0);
+            EventValues.registerEventValue(BlockMultiPlaceEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public ItemStack get(BlockMultiPlaceEvent e) {
+                    return e.getItemInHand();
+                }
+            }, 0);
+            EventValues.registerEventValue(BlockMultiPlaceEvent.class, Boolean.class, new Getter<>() {
+                @Override
+                public Boolean get(BlockMultiPlaceEvent e) {
+                    return e.canBuild();
+                }
+            }, 0);
+        }
+
+        if (Skript.classExists("org.bukkit.event.block.CampfireStartEvent")){
+            Skript.registerEvent("Block - Campfire Start Event", BlockEvents.class, CampfireStartEvent.class,
+                            "[block] campfire start[ed]"
+                    )
+                    .description("Called when a Campfire starts to cook.\uD83D\uDD25")
+                    .examples("on campfire start:")
+                    .since("2.8");
+            EventValues.registerEventValue(CampfireStartEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(CampfireStartEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+            EventValues.registerEventValue(CampfireStartEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public ItemStack get(CampfireStartEvent e) {
+                    return e.getSource();
+                }
+            }, 0);
+            EventValues.registerEventValue(CampfireStartEvent.class, Integer.class, new Getter<>() {
+                @Override
+                public Integer get(CampfireStartEvent e) {
+                    return e.getTotalCookTime();
+                }
+            }, 0);
+        }
+
+        if (Skript.classExists("org.bukkit.event.block.BrewingStartEvent")){
+            Skript.registerEvent("Block - Brewing Start Event", BlockEvents.class, BrewingStartEvent.class,
+                            "[block] brew[ing [stand]] start[ed]"
+                    )
+                    .description("Called when a brewing stand starts to brew.")
+                    .examples("on brewing stand start:")
+                    .since("2.8");
+            EventValues.registerEventValue(BrewingStartEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(BrewingStartEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+            EventValues.registerEventValue(BrewingStartEvent.class, ItemStack.class, new Getter<>() {
+                @Override
+                public ItemStack get(BrewingStartEvent e) {
+                    return e.getSource();
+                }
+            }, 0);
+            EventValues.registerEventValue(BrewingStartEvent.class, Integer.class, new Getter<>() {
+                @Override
+                public Integer get(BrewingStartEvent e) {
+                    return e.getTotalBrewTime();
+                }
+            }, 0);
+        }
+
+        if (Skript.classExists("org.bukkit.event.block.EntityBlockFormEvent")){
+            Skript.registerEvent("Block - Entity Block Form", BlockEvents.class, EntityBlockFormEvent.class,
+                            "[block] form[ed] event"
+                    )
+                    .description("""
+                            Called when a block is formed by entities.
+                            Examples:
+                            - Snow formed by a org. bukkit. entity. Snowman.
+                            - Frosted Ice formed by the Frost Walker enchantment.""")
+                    .examples("on brewing stand start:")
+                    .since("2.8");
+            EventValues.registerEventValue(EntityBlockFormEvent.class, Block.class, new Getter<>() {
+                @Override
+                public Block get(EntityBlockFormEvent e) {
+                    return e.getBlock();
+                }
+            }, 0);
+            EventValues.registerEventValue(EntityBlockFormEvent.class, Entity.class, new Getter<>() {
+                @Override
+                public Entity get(EntityBlockFormEvent e) {
+                    return e.getEntity();
                 }
             }, 0);
         }

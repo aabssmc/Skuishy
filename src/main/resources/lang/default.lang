@@ -16,6 +16,7 @@ types:
     namespacedkey: namespacedkey¦s @a
     persistentdatacontainer: [persistent ?]data ?container¦s @a
     statistic: statistic¦s @a
+    skipreason: skipreason¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
@@ -127,3 +128,8 @@ skinmodel:
     slim: slim, alex
     classic: classic, steve
     auto: auto
+
+skipreason:
+    command: command
+    custom: custom
+    night_skip: night skip
