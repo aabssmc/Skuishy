@@ -72,6 +72,6 @@ public class CondHasDataKey extends Condition {
         if (namespacedkey instanceof UnparsedLiteral) {
             namespacedkey = LiteralUtils.defendExpression(namespacedkey);
         }
-        return true;
+        return LiteralUtils.canInitSafely(namespacedkey, classInfo);
     }
 }

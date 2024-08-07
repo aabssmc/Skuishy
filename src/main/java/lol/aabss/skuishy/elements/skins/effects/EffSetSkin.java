@@ -131,6 +131,6 @@ public class EffSetSkin extends Effect {
             value = (Expression<String>) exprs[1];
             signature = (Expression<String>) exprs[2];
         }
-        return true;
+        return LiteralUtils.canInitSafely(skin);
     }
 }

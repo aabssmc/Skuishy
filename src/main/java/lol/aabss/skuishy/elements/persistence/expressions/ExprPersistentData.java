@@ -116,8 +116,9 @@ public class ExprPersistentData extends PropertyExpression<PersistentDataContain
                         "("+classInfo.getSingle().getC().getSimpleName()+" and "+defaultObject.getReturnType().getSimpleName()+")");
                 return false;
             }
+            return LiteralUtils.canInitSafely(namespacedKey, classInfo, defaultObject);
         }
-        return true;
+        return LiteralUtils.canInitSafely(namespacedKey, classInfo);
     }
 
     @Override

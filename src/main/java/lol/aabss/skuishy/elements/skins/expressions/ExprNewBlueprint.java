@@ -113,6 +113,6 @@ public class ExprNewBlueprint extends SimpleExpression<Blueprint> {
         if (skin instanceof UnparsedLiteral) {
             skin = LiteralUtils.defendExpression(skin);
         }
-        return true;
+        return LiteralUtils.canInitSafely(skin);
     }
 }

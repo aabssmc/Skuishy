@@ -70,6 +70,6 @@ public class ExprTinyText extends SimpleExpression<String> {
             text = LiteralUtils.defendExpression(text);
         }
         superTiny = parseResult.hasTag("super");
-        return true;
+        return LiteralUtils.canInitSafely(text);
     }
 }

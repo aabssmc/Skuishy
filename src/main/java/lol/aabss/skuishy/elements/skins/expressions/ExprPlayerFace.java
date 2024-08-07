@@ -80,6 +80,6 @@ public class ExprPlayerFace extends SimpleExpression<String> {
         }
         texts = (Expression<String>) exprs[1];
         helmet = !parseResult.hasTag("without");
-        return true;
+        return LiteralUtils.canInitSafely(player);
     }
 }
