@@ -5,6 +5,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.jetbrains.annotations.NotNull;
@@ -30,8 +31,11 @@ public class ExprPersistentDataContainer extends SimplePropertyExpression<Object
 
     @Override
     public @Nullable PersistentDataContainer convert(Object object) {
+
         if (object instanceof PersistentDataHolder){
             return ((PersistentDataHolder) object).getPersistentDataContainer();
+        } else if (object instanceof ItemStack) {
+            return ((ItemStack) object).getItemMeta().getPersistentDataContainer();
         }
         return null;
     }

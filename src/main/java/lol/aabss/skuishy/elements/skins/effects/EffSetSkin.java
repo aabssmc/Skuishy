@@ -8,6 +8,7 @@ import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.UnparsedLiteral;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
@@ -121,6 +122,9 @@ public class EffSetSkin extends Effect {
         if (matchedPattern == 0 || matchedPattern == 1) {
             player = (Expression<Player>) exprs[0];
             skin = (Expression<Object>) exprs[1];
+            if (skin instanceof UnparsedLiteral) {
+                skin = (Expression<Object>) skin.getConvertedExpression(Object.class);
+            }
         } else {
             player = (Expression<Player>) exprs[0];
             value = (Expression<String>) exprs[1];

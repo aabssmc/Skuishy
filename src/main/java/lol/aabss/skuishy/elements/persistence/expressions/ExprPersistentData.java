@@ -11,6 +11,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.UnparsedLiteral;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import lol.aabss.skuishy.Skuishy;
@@ -88,13 +89,25 @@ public class ExprPersistentData extends PropertyExpression<PersistentDataContain
         if (matchedPattern == 0){
             classInfo = (Literal<ClassInfo<Object>>) expressions[0];
             namespacedKey = (Expression<Object>) expressions[1];
+            if (namespacedKey instanceof UnparsedLiteral) {
+                namespacedKey = (Expression<Object>) namespacedKey.getConvertedExpression(Object.class);
+            }
             defaultObject = (Expression<Object>) expressions[2];
+            if (defaultObject instanceof UnparsedLiteral) {
+                defaultObject = (Expression<Object>) defaultObject.getConvertedExpression(Object.class);
+            }
             setExpr((Expression<? extends PersistentDataContainer>) expressions[3]);
         } else {
             setExpr((Expression<? extends PersistentDataContainer>) expressions[0]);
             classInfo = (Literal<ClassInfo<Object>>) expressions[1];
             namespacedKey = (Expression<Object>) expressions[2];
+            if (namespacedKey instanceof UnparsedLiteral) {
+                namespacedKey = (Expression<Object>) namespacedKey.getConvertedExpression(Object.class);
+            }
             defaultObject = (Expression<Object>) expressions[3];
+            if (defaultObject instanceof UnparsedLiteral) {
+                defaultObject = (Expression<Object>) defaultObject.getConvertedExpression(Object.class);
+            }
         }
         if (defaultObject != null){
             if (classInfo.getSingle().getC() != defaultObject.getReturnType()){

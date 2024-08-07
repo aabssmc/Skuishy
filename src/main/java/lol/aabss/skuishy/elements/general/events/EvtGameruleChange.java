@@ -53,8 +53,8 @@ public class EvtGameruleChange extends SkriptEvent {
 
     }
 
-    Literal<World> world;
-    Literal<GameRule<?>> gamerule;
+    private Literal<World> world;
+    private Literal<GameRule<?>> gamerule;
 
     @Override
     public boolean init(Literal<?> @NotNull [] exprs, int matchedPattern, SkriptParser.@NotNull ParseResult parseResult) {

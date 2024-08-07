@@ -8,6 +8,7 @@ import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.UnparsedLiteral;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.util.Kleenean;
@@ -64,6 +65,9 @@ public class ExprTinyText extends SimpleExpression<String> {
     @Override
     public boolean init(Expression<?>[] exprs, int i, @NotNull Kleenean kleenean, SkriptParser.ParseResult parseResult) {
         text = (Expression<Object>) exprs[0];
+        if (text instanceof UnparsedLiteral) {
+            text = (Expression<Object>) text.getConvertedExpression(Object.class);
+        }
         superTiny = parseResult.hasTag("super");
         return true;
     }

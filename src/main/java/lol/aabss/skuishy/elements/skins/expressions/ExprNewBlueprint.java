@@ -8,6 +8,7 @@ import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.UnparsedLiteral;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.util.Color;
 import ch.njol.util.Kleenean;
@@ -108,6 +109,9 @@ public class ExprNewBlueprint extends SimpleExpression<Blueprint> {
         }
         if (matchedPattern == 0) return true;
         skin = (Expression<Object>) exprs[0];
+        if (skin instanceof UnparsedLiteral) {
+            skin = (Expression<Object>) skin.getConvertedExpression(Object.class);
+        }
         return true;
     }
 }

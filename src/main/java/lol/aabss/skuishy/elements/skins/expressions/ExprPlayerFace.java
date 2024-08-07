@@ -8,6 +8,7 @@ import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.UnparsedLiteral;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.other.SkinWrapper;
@@ -73,6 +74,9 @@ public class ExprPlayerFace extends SimpleExpression<String> {
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         player = (Expression<Object>) exprs[0];
+        if (player instanceof UnparsedLiteral) {
+            player = (Expression<Object>) player.getConvertedExpression(Object.class);
+        }
         texts = (Expression<String>) exprs[1];
         helmet = !parseResult.hasTag("without");
         return true;
