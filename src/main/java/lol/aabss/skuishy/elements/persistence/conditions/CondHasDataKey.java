@@ -7,6 +7,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.*;
+import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.ClassInfoDataType;
@@ -69,7 +70,7 @@ public class CondHasDataKey extends Condition {
         classInfo = (Literal<ClassInfo<Object>>) expressions[1];
         namespacedkey = (Expression<Object>) expressions[2];
         if (namespacedkey instanceof UnparsedLiteral) {
-            namespacedkey = (Expression<Object>) namespacedkey.getConvertedExpression(Object.class);
+            namespacedkey = LiteralUtils.defendExpression(namespacedkey);
         }
         return true;
     }

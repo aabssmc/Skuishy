@@ -12,6 +12,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.UnparsedLiteral;
+import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import lol.aabss.skuishy.Skuishy;
@@ -90,11 +91,11 @@ public class ExprPersistentData extends PropertyExpression<PersistentDataContain
             classInfo = (Literal<ClassInfo<Object>>) expressions[0];
             namespacedKey = (Expression<Object>) expressions[1];
             if (namespacedKey instanceof UnparsedLiteral) {
-                namespacedKey = (Expression<Object>) namespacedKey.getConvertedExpression(Object.class);
+                namespacedKey = LiteralUtils.defendExpression(namespacedKey);
             }
             defaultObject = (Expression<Object>) expressions[2];
             if (defaultObject instanceof UnparsedLiteral) {
-                defaultObject = (Expression<Object>) defaultObject.getConvertedExpression(Object.class);
+                defaultObject = LiteralUtils.defendExpression(defaultObject);
             }
             setExpr((Expression<? extends PersistentDataContainer>) expressions[3]);
         } else {
@@ -102,11 +103,11 @@ public class ExprPersistentData extends PropertyExpression<PersistentDataContain
             classInfo = (Literal<ClassInfo<Object>>) expressions[1];
             namespacedKey = (Expression<Object>) expressions[2];
             if (namespacedKey instanceof UnparsedLiteral) {
-                namespacedKey = (Expression<Object>) namespacedKey.getConvertedExpression(Object.class);
+                namespacedKey = LiteralUtils.defendExpression(namespacedKey);
             }
             defaultObject = (Expression<Object>) expressions[3];
             if (defaultObject instanceof UnparsedLiteral) {
-                defaultObject = (Expression<Object>) defaultObject.getConvertedExpression(Object.class);
+                defaultObject = LiteralUtils.defendExpression(namespacedKey);
             }
         }
         if (defaultObject != null){

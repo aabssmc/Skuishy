@@ -11,6 +11,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.UnparsedLiteral;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.util.Color;
+import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
@@ -110,7 +111,7 @@ public class ExprNewBlueprint extends SimpleExpression<Blueprint> {
         if (matchedPattern == 0) return true;
         skin = (Expression<Object>) exprs[0];
         if (skin instanceof UnparsedLiteral) {
-            skin = (Expression<Object>) skin.getConvertedExpression(Object.class);
+            skin = LiteralUtils.defendExpression(skin);
         }
         return true;
     }
