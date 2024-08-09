@@ -9,9 +9,6 @@ author: aabss
 description: yet another skript addon
 contributors: [Fusezion, CoffeeRequired, Pikachu920]
 website: https://aabss.cc
-commands:
-  skuishy:
-    description: The main command for Skuishy.
 
 permissions:
   skuishy.command.dependencies:

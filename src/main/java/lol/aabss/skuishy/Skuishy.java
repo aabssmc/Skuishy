@@ -4,6 +4,10 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import ch.njol.skript.bstats.bukkit.Metrics;
 import ch.njol.skript.bstats.charts.SimplePie;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import io.papermc.paper.command.brigadier.Commands;
+import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import lol.aabss.skuishy.other.UpdateChecker;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
@@ -12,31 +16,25 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static lol.aabss.skuishy.other.GetVersion.latestVersion;
 import static lol.aabss.skuishy.other.SubCommands.*;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 @SuppressWarnings("deprecation")
-public class Skuishy extends JavaPlugin implements TabExecutor {
+public class Skuishy extends JavaPlugin {
 
     public static Skuishy instance;
     public static SkriptAddon addon;
@@ -56,8 +54,6 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
         saveDefaultConfig();
         BlueprintUtils.loadJson();
         getServer().getPluginManager().registerEvents(new UpdateChecker(), this);
-        getServer().getPluginCommand("skuishy").setExecutor(this);
-        getServer().getPluginCommand("skuishy").setTabCompleter(this);
         metrics = new Metrics(this, 20162);
         try {
             addon = Skript.registerAddon(this);
@@ -82,6 +78,66 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
             if (getConfig().getBoolean("version-check-msg")) Logger.warn("Got latest version."); // not a warn just want yellow
         }, 0L, 144000L);
         data_path = this.getDataFolder().getAbsolutePath();
+
+        LifecycleEventManager<Plugin> manager = this.getLifecycleManager();
+        manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            Commands commands = event.registrar();
+            commands.register(
+                    Commands.literal("skuishy")
+                            .then(Commands.argument("arg", StringArgumentType.word())
+                                    .then(Commands.argument("plugin", StringArgumentType.word())
+                                            .suggests((ctx, builder) -> {
+                                                if (ctx.getInput().split(" ").length > 1 && ctx.getInput().split(" ")[1].startsWith("info")) {
+                                                    for (Plugin p : Bukkit.getPluginManager().getPlugins()) {
+                                                        builder.suggest(p.getName());
+                                                    }
+                                                    return builder.buildFuture();
+                                                }
+                                                return null;
+                                            })
+                                            .executes(ctx -> {
+                                                if (ctx.getArgument("arg", String.class).equals("info")) {
+                                                    cmdInfo(ctx.getSource().getSender(), ctx.getArgument("plugin", String.class));
+                                                }
+                                                return 1;
+                                            }))
+                                    .suggests((ctx, builder) -> builder
+                                            .suggest("dependencies")
+                                            .suggest("info")
+                                            .suggest("reload")
+                                            .suggest("update")
+                                            .suggest("version").buildFuture())
+                                    .executes(ctx -> {
+                                        switch (ctx.getArgument("arg", String.class)) {
+                                            case "dependencies" -> cmdDependencies(ctx.getSource().getSender());
+                                            case "info" -> cmdInfo(ctx.getSource().getSender(), null);
+                                            case "reload" -> cmdReload(ctx.getSource().getSender());
+                                            case "update" -> cmdUpdate(ctx.getSource().getSender());
+                                            case "version" -> cmdVersion(ctx.getSource().getSender());
+                                        }
+                                        return 1;
+                                    })
+                            )
+                            .executes(ctx -> {
+                                ctx.getSource().getSender().sendMessage(miniMessage().deserialize(
+                                        "<red>/skuishy <" +
+                                                "<click:run_command:'/skuishy dependencies'><hover:show_text:'<green>/skuishy dependencies'>dependencies</hover></click>" +
+                                                " | " +
+                                                "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>info</hover></click>" +
+                                                " | " +
+                                                "<click:run_command:'/skuishy reload'><hover:show_text:'<green>/skuishy reload'>reload</hover></click>" +
+                                                " | " +
+                                                "<click:run_command:'/skuishy update'><hover:show_text:'<green>/skuishy update'>update</hover></click>" +
+                                                " | " +
+                                                "<click:run_command:'/skuishy version'><hover:show_text:'<green>/skuishy version'>version</hover></click>" +
+                                                ">"
+                                ));
+                                return 1;
+                            })
+                            .build(),
+                    "The main command for Skuishy."
+            );
+        });
     }
 
     @Override
@@ -92,71 +148,6 @@ public class Skuishy extends JavaPlugin implements TabExecutor {
                 UpdateChecker.update();
             }
         }
-    }
-
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (args.length == 0){
-            sender.sendMessage(miniMessage().deserialize(
-                    "<red>/skuishy <" +
-                            "<click:run_command:'/skuishy dependencies'><hover:show_text:'<green>/skuishy dependencies'>dependencies</hover></click>" +
-                            " | " +
-                            "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>info</hover></click>" +
-                            " | " +
-                            "<click:run_command:'/skuishy reload'><hover:show_text:'<green>/skuishy reload'>reload</hover></click>" +
-                            " | " +
-                            "<click:run_command:'/skuishy update'><hover:show_text:'<green>/skuishy update'>update</hover></click>" +
-                            " | " +
-                            "<click:run_command:'/skuishy version'><hover:show_text:'<green>/skuishy version'>version</hover></click>" +
-                            ">"
-            ));
-        } else{
-            switch (args[0]) {
-                case "dependencies" -> cmdDependencies(sender);
-                case "info" -> cmdInfo(sender, (args.length >= 2 ? args[1] : null));
-                case "reload" -> cmdReload(sender);
-                case "update" -> cmdUpdate(sender);
-                case "version" -> cmdVersion(sender);
-                default -> sender.sendMessage(miniMessage().deserialize(
-                        "<red>/skuishy <" +
-                                "<click:run_command:'/skuishy dependencies'><hover:show_text:'<green>/skuishy dependencies'>dependencies</hover></click>" +
-                                " | " +
-                                "<click:run_command:'/skuishy info'><hover:show_text:'<green>/skuishy info'>info</hover></click>" +
-                                " | " +
-                                "<click:run_command:'/skuishy reload'><hover:show_text:'<green>/skuishy reload'>reload</hover></click>" +
-                                " | " +
-                                "<click:run_command:'/skuishy update'><hover:show_text:'<green>/skuishy update'>update</hover></click>" +
-                                " | " +
-                                "<click:run_command:'/skuishy version'><hover:show_text:'<green>/skuishy version'>version</hover></click>" +
-                                ">"
-                ));
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-        if (args.length == 1) {
-            List<String> completions = new ArrayList<>();
-            if ("dependencies".startsWith(args[0].toLowerCase())) completions.add("dependencies");
-            if ("info".startsWith(args[0].toLowerCase())) completions.add("info");
-            if ("reload".startsWith(args[0].toLowerCase())) completions.add("reload");
-            if ("update".startsWith(args[0].toLowerCase())) completions.add("update");
-            if ("version".startsWith(args[0].toLowerCase())) completions.add("version");
-            return completions;
-        } else if (args.length == 2){
-            if (args[0].equalsIgnoreCase("info")) {
-                List<String> completions = new ArrayList<>();
-                for (Plugin p : Bukkit.getPluginManager().getPlugins()) {
-                    if (p.getName().toLowerCase().startsWith(args[1].toLowerCase())) {
-                        completions.add(p.getName());
-                    }
-                }
-                return completions;
-            }
-        }
-        return null;
     }
 
     public void registerPluginElements(String pluginName, String name) throws IOException {
