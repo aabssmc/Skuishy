@@ -169,10 +169,10 @@ public class SubCommands {
         String skuishyv = instance.getDescription().getVersion();
         String skriptv = Skript.getInstance().getDescription().getVersion();
         return "\n<dark_gray>-- <color:#00ff00>Skuishy <gray>Info: <dark_gray>--<reset>\n\n" +
-                "<gray>Skuishy Version: <color:#00ff00>"+ skuishyv + (!Objects.equals(sku, skuishyv) ? " [Latest: "+ sku + "]" : "") +"<reset>\n" +
+                "<gray>Skuishy Version: <click:open_url:'https://github.com/SkriptLang/Skript/releases/tag/"+sku+"'><color:#00ff00>"+ skuishyv + (!Objects.equals(sku, skuishyv) ? " [Latest: "+ sku + "]" : "") +"<reset>\n" +
                 "<gray>Server Version: <color:#00ff00>"+instance.getServer().getMinecraftVersion()+"<reset>\n" +
                 "<gray>Server Implementation: <color:#00ff00>"+instance.getServer().getVersion()+"<reset>\n" +
-                "<gray>Skript Version: <color:#00ff00>"+skriptv+(!Objects.equals(sk, skriptv) ? " [Latest: "+ sk + "]" : "") +"<reset>\n" +
+                "<gray>Skript Version: <click:open_url:'https://github.com/SkriptLang/Skript/releases/tag/"+sk+"'><color:#00ff00>"+skriptv+(!Objects.equals(sk, skriptv) ? " [Latest: "+ sk + "]" : "") +"<reset>\n" +
                 "<gray>Addons:\n";
     }
 
