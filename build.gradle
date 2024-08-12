@@ -21,7 +21,6 @@ dependencies {
         transitive = false
     }
     compileOnly "com.github.decentsoftware-eu:decentholograms:2.8.8"
-    compileOnly files("libs/Vivecraft_Spigot_Extensions.jar")
     compileOnly files("libs/VulcanAPI.jar")
     implementation "org.jsoup:jsoup:1.17.2"
     implementation "com.github.SkriptLang:skript-reflect:2.4-dev1"

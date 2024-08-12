@@ -59,7 +59,6 @@ public class Skuishy extends JavaPlugin {
             addon = Skript.registerAddon(this);
             addon.setLanguageFileDirectory("lang");
             registerPluginElements("DecentHolograms", "DecentHolograms");
-            registerPluginElements("Vivecraft-Spigot-Extensions", "Vivecraft");
             registerPluginElements("Vulcan", "Vulcan");
             registerElements("General", "General");
             registerElements("Note", "Notes");
