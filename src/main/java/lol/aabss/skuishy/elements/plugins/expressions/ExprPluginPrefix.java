@@ -29,8 +29,8 @@ public class ExprPluginPrefix extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprPluginPrefix.class, String.class, ExpressionType.COMBINED,
-                "[the] [plugin] [log[ger]] prefix of %plugins%",
-                "%plugins%'s [plugin] [log[ger]] prefix"
+                "[the] plugin [log[ger]] prefix of %plugins%",
+                "%plugins%'s plugin [log[ger]] prefix"
         );
     }
 

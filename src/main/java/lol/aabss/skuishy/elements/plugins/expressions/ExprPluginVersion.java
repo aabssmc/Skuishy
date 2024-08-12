@@ -29,7 +29,7 @@ public class ExprPluginVersion extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprPluginVersion.class, String.class, ExpressionType.COMBINED,
-                "[the] [plugin] [:api] version of %plugins%",
+                "[the] plugin [:api] version of %plugins%",
                 "%plugins%'s [plugin] [:api] version"
         );
     }
