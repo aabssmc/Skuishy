@@ -37,8 +37,13 @@ public class EffHologramVisibility extends Effect {
     protected void execute(@NotNull Event event) {
         for (Hologram holo : hologram.getArray(event)) {
             for (Player p : player.getArray(event)) {
-                if (pattern == 0) holo.setHidePlayer(p);
-                else holo.setShowPlayer(p);
+                if (pattern == 0) {
+                    holo.setHidePlayer(p);
+                    holo.removeShowPlayer(p);
+                } else {
+                    holo.setShowPlayer(p);
+                    holo.removeHidePlayer(p);
+                }
             }
         }
     }
