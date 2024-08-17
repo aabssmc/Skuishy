@@ -14,6 +14,7 @@ import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.blueprints.Blueprint;
 import lol.aabss.skuishy.other.mineskin.data.Texture;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -84,6 +85,10 @@ public class EffSetSkin extends Effect {
                         } else if (skin instanceof BufferedImage image){
                             // images not supported by skuishy, but just in case you use another addon like SkImage :)
                             uploadSkin(image).whenCompleteAsync(getWhenComplete(event));
+                        } else if (skin instanceof OfflinePlayer op) {
+                            for (Player p : player.getArray(event)) {
+                                setSkin(p, op.getName());
+                            }
                         }
                     }
                 }
