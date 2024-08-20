@@ -1,15 +1,14 @@
 package lol.aabss.skuishy.elements.permissions;
 
 import ch.njol.skript.classes.ClassInfo;
+import ch.njol.skript.classes.EnumClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
-import ch.njol.skript.util.EnumUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 public class Types {
@@ -66,36 +65,11 @@ public class Types {
             );
         }
         if (Classes.getClassInfoNoError("permissiondefault") == null) {
-            EnumUtils<PermissionDefault> permdefault = new EnumUtils<>(PermissionDefault.class, "permissiondefault");
-            Classes.registerClass(new ClassInfo<>(PermissionDefault.class, "permissiondefault")
+            Classes.registerClass(new EnumClassInfo<>(PermissionDefault.class, "permissiondefault", "permissiondefault")
                     .user("permission ?defaults?")
                     .name("Permissions - Permission Default")
                     .description("Represents the possible default values for permissions.")
-                    .since("2.1")
-                    .parser(new Parser<>() {
-
-                        @Override
-                        @Nullable
-                        public PermissionDefault parse(@NotNull String input, @NotNull ParseContext context) {
-                            return permdefault.parse(input);
-                        }
-
-                        @Override
-                        public boolean canParse(@NotNull ParseContext context) {
-                            return true;
-                        }
-
-                        @Override
-                        public @NotNull String toVariableNameString(PermissionDefault perm) {
-                            return perm.name();
-                        }
-
-                        @Override
-                        public @NotNull String toString(PermissionDefault perm, int flags) {
-                            return toVariableNameString(perm);
-                        }
-                    })
-            );
+                    .since("2.1"));
         }
     }
 }

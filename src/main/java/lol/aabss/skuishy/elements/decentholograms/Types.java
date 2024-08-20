@@ -1,14 +1,13 @@
 package lol.aabss.skuishy.elements.decentholograms;
 
 import ch.njol.skript.classes.ClassInfo;
+import ch.njol.skript.classes.EnumClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
-import ch.njol.skript.util.EnumUtils;
 import eu.decentsoftware.holograms.api.actions.ClickType;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 public class Types {
@@ -39,35 +38,11 @@ public class Types {
             );
         }
         if (Classes.getClassInfoNoError("hologramclicktype") == null) {
-            EnumUtils<ClickType> clicktypes = new EnumUtils<>(ClickType.class, "hologramclicktype");
-            Classes.registerClass(new ClassInfo<>(ClickType.class, "hologramclicktype")
+            Classes.registerClass(new EnumClassInfo<>(ClickType.class, "hologramclicktype", "hologramclicktype")
                     .user("hologram ?click ?types?")
                     .name("hologramclicktype")
                     .description("Represents a decent holograms click type.")
                     .since("2.0")
-                    .parser(new Parser<>() {
-
-                        @Override
-                        @Nullable
-                        public ClickType parse(@NotNull String input, @NotNull ParseContext context) {
-                            return clicktypes.parse(input);
-                        }
-
-                        @Override
-                        public boolean canParse(@NotNull ParseContext context) {
-                            return true;
-                        }
-
-                        @Override
-                        public @NotNull String toVariableNameString(ClickType holo) {
-                            return holo.name().toLowerCase().replaceAll("_", " ");
-                        }
-
-                        @Override
-                        public @NotNull String toString(ClickType holo, int flags) {
-                            return toVariableNameString(holo);
-                        }
-                    })
             );
         }
         if (Classes.getClassInfoNoError("hologrampage") == null) {
