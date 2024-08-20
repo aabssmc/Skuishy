@@ -9,7 +9,7 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.*;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.blueprints.Blueprint;
+import lol.aabss.skuishy.other.Blueprint;
 import lol.aabss.skuishy.other.mineskin.Variant;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;

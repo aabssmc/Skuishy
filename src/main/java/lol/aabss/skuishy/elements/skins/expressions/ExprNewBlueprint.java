@@ -14,7 +14,7 @@ import ch.njol.skript.util.Color;
 import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.Skuishy;
-import lol.aabss.skuishy.other.blueprints.Blueprint;
+import lol.aabss.skuishy.other.Blueprint;
 import lol.aabss.skuishy.other.mineskin.Variant;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;

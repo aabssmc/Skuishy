@@ -10,7 +10,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.util.Color;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.blueprints.Blueprint;
+import lol.aabss.skuishy.other.Blueprint;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;

@@ -4,7 +4,6 @@ import ch.njol.skript.Skript;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import lol.aabss.skuishy.Skuishy;
-import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import lol.aabss.skuishy.other.mineskin.MineskinClient;
 import lol.aabss.skuishy.other.mineskin.SkinOptions;
 import lol.aabss.skuishy.other.mineskin.Variant;
@@ -101,7 +100,7 @@ public class SkinWrapper {
     }
 
     public static CompletableFuture<Texture> uploadSkin(BufferedImage image) throws IOException {
-        return client.generateUpload(image, SkinOptions.create("Skuishy-Upload", BlueprintUtils.getVariant(image), Visibility.PRIVATE))
+        return client.generateUpload(image, SkinOptions.create("Skuishy-Upload", Blueprint.getVariant(image), Visibility.PRIVATE))
                 .thenApply(result -> result.data.texture);
     }
 

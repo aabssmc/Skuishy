@@ -11,10 +11,9 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.Variable;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
-import lol.aabss.skuishy.other.blueprints.Blueprint;
+import lol.aabss.skuishy.other.Blueprint;
 import org.jetbrains.annotations.NotNull;
 
 @Name("Blueprint - Save/Load/Delete Blueprint")
@@ -52,9 +51,9 @@ public class EffSaveBlueprint extends Effect {
                 }
             } else{
                 if (var == null){
-                    BlueprintUtils.delete(name);
+                    Blueprint.delete(name);
                 } else{
-                    var.change(event, new Blueprint[]{BlueprintUtils.load(name)}, Changer.ChangeMode.SET);
+                    var.change(event, new Blueprint[]{Blueprint.loadBlueprint(name)}, Changer.ChangeMode.SET);
                 }
             }
         }

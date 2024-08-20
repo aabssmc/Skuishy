@@ -5,8 +5,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import lol.aabss.skuishy.other.blueprints.Blueprint;
-import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
+import lol.aabss.skuishy.other.Blueprint;
 import lol.aabss.skuishy.other.mineskin.Variant;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -41,11 +40,11 @@ public class ExprSkinModel extends SimplePropertyExpression<Object, Variant> {
             return Variant.valueOf(Bukkit.createProfile(p.getName()).getTextures().getSkinModel().name());
         } else if (object instanceof Blueprint print){
             if (print.model() == Variant.AUTO){
-                return BlueprintUtils.getVariant(print.image());
+                return Blueprint.getVariant(print.image());
             }
             return print.model();
         } else if (object instanceof BufferedImage img){
-            return BlueprintUtils.getVariant(img);
+            return Blueprint.getVariant(img);
         }
         return null;
     }

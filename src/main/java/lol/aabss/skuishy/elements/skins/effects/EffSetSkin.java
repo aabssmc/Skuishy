@@ -12,7 +12,7 @@ import ch.njol.skript.lang.UnparsedLiteral;
 import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.Skuishy;
-import lol.aabss.skuishy.other.blueprints.Blueprint;
+import lol.aabss.skuishy.other.Blueprint;
 import lol.aabss.skuishy.other.mineskin.data.Texture;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

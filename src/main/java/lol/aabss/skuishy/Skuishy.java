@@ -9,8 +9,7 @@ import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import lol.aabss.skuishy.other.UpdateChecker;
-import lol.aabss.skuishy.other.blueprints.Blueprint;
-import lol.aabss.skuishy.other.blueprints.BlueprintUtils;
+import lol.aabss.skuishy.other.Blueprint;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -52,7 +51,7 @@ public class Skuishy extends JavaPlugin {
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
-        BlueprintUtils.loadJson();
+        Blueprint.loadJson();
         getServer().getPluginManager().registerEvents(new UpdateChecker(), this);
         metrics = new Metrics(this, 20162);
         try {

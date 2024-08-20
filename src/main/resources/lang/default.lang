@@ -17,6 +17,7 @@ types:
     persistentdatacontainer: [persistent ?]data ?container¦s @a
     statistic: statistic¦s @a
     skipreason: skipreason¦s @a
+    blueprintpart: blueprintpart¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
@@ -133,3 +134,11 @@ skipreason:
     command: command
     custom: custom
     night_skip: night skip
+
+blueprintpart:
+    head: head
+    torso: torso, chest
+    right_arm: right arm
+    left_arm: left arm
+    right_leg: right leg
+    left_leg: left leg

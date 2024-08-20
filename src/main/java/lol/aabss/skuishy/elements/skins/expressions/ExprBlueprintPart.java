@@ -8,8 +8,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import lol.aabss.skuishy.other.blueprints.Blueprint;
-import lol.aabss.skuishy.other.blueprints.BlueprintPart;
+import lol.aabss.skuishy.other.Blueprint;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
@@ -29,19 +28,22 @@ public class ExprBlueprintPart extends PropertyExpression<Blueprint, Blueprint> 
 
     static {
         register(ExprBlueprintPart.class, Blueprint.class,
-                "(:head|:torso|(rarm:right arm|larm:left arm)|rleg:right leg|lleg:left leg) [without:without [the] outer layer]",
+                "%blueprintpart% [without:without [the] outer layer]",
                 "blueprints"
         );
     }
 
-    private BlueprintPart.Part part;
+    private Expression<Blueprint.Part> part;
     private boolean layer;
 
     @Override
-    protected Blueprint @NotNull [] get(@NotNull Event event, Blueprint[] source) {
+    protected Blueprint @NotNull [] get(@NotNull Event event, Blueprint @NotNull [] source) {
+        if (part == null){
+            return new Blueprint[]{};
+        }
         List<Blueprint> parts = new ArrayList<>();
         for (Blueprint print : source) {
-            parts.add(BlueprintPart.blueprintPart(print, part, layer));
+            parts.add(print.part(part.getSingle(event), layer));
         }
         return parts.toArray(Blueprint[]::new);
     }
@@ -57,20 +59,13 @@ public class ExprBlueprintPart extends PropertyExpression<Blueprint, Blueprint> 
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        setExpr((Expression<? extends Blueprint>) exprs[0]);
-        if (parseResult.hasTag("head")){
-            part = BlueprintPart.Part.HEAD;
-        } else if (parseResult.hasTag("torso")){
-            part = BlueprintPart.Part.TORSO;
-        } else if (parseResult.hasTag("rleg")){
-            part = BlueprintPart.Part.RIGHT_ARM;
-        } else if (parseResult.hasTag("lleg")){
-            part = BlueprintPart.Part.LEFT_LEG;
-        } else if (parseResult.hasTag("rarm")){
-            part = BlueprintPart.Part.RIGHT_ARM;
-        } else if (parseResult.hasTag("larm")){
-            part = BlueprintPart.Part.LEFT_ARM;
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+        if (matchedPattern == 0) {
+            part = (Expression<Blueprint.Part>) exprs[0];
+            setExpr((Expression<? extends Blueprint>) exprs[1]);
+        } else {
+            setExpr((Expression<? extends Blueprint>) exprs[0]);
+            part = (Expression<Blueprint.Part>) exprs[1];
         }
         layer = !parseResult.hasTag("without");
         return true;
