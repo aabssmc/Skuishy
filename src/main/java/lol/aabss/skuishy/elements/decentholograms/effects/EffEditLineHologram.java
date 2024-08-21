@@ -29,17 +29,17 @@ public class EffEditLineHologram extends Effect {
     static{
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("DecentHolograms")){
             Skript.registerEffect(EffEditLineHologram.class,
-                    "add [line] of [hologram] %holograms% to show [text] %string%",
-                    "remove [line] %integer% of [hologram] %holograms%",
-                    "create line from [page] %integer% of [hologram] %holograms% to show [text] %string%",
-                    "insert [line] %integer% of [hologram] %holograms% to show [text] %string%",
-                    "set [line] %integer% of [hologram] %holograms% to show [text] %string%"
+                    "add [line] of [hologram] %holograms/hologrampages% to show [text] %string%",
+                    "remove [line] %integer% of [hologram] %holograms/hologrampages%",
+                    "create line from [hologram] %holograms/hologrampages% to show [text] %string%",
+                    "insert [line] %integer% of [hologram] %holograms/hologrampages% to show [text] %string%",
+                    "set [line] %integer% of [hologram] %holograms/hologrampages% to show [text] %string%"
             );
         }
     }
 
     private String changetype;
-    private Expression<Hologram> hologram;
+    private Expression<Object> hologram;
     private Expression<String> text;
     private Expression<Integer> line;
     private Expression<Integer> page;
@@ -47,37 +47,40 @@ public class EffEditLineHologram extends Effect {
     @Override
     protected void execute(@NotNull Event event) {
         try {
-            for (Hologram holo : hologram.getArray(event)) {
+            for (Object holo : hologram.getArray(event)) {
+                HologramPage hologramPage;
+                if (holo instanceof Hologram) {
+                    hologramPage = ((Hologram) holo).getPage(0);
+                } else {
+                    hologramPage = (HologramPage) holo;
+                }
                 if (Objects.equals(changetype, "add")) {
                     String text = this.text.getSingle(event);
                     if (text != null) {
-                        DHAPI.addHologramLine(holo, text);
+                        DHAPI.addHologramLine(hologramPage, text);
                     }
                 } else if (Objects.equals(changetype, "remove")) {
                     Integer line = this.line.getSingle(event);
                     if (line != null) {
-                        DHAPI.removeHologramLine(holo, Skuishy.index(line));
+                        DHAPI.removeHologramLine(hologramPage, Skuishy.index(line));
                     }
                 } else if (Objects.equals(changetype, "create")) {
                     Integer page = this.page.getSingle(event);
                     String text = this.text.getSingle(event);
                     if (page != null && text != null) {
-                        HologramPage pagee = DHAPI.getHologramPage(holo, Skuishy.index(page));
-                        if (pagee != null) {
-                            DHAPI.createHologramLine(pagee, text);
-                        }
+                        DHAPI.createHologramLine(hologramPage, text);
                     }
                 } else if (Objects.equals(changetype, "insert")) {
                     Integer line = this.line.getSingle(event);
                     String text = this.text.getSingle(event);
                     if (line != null && text != null) {
-                        DHAPI.insertHologramLine(holo, Skuishy.index(line), text);
+                        DHAPI.insertHologramLine(hologramPage, Skuishy.index(line), text);
                     }
                 } else if (Objects.equals(changetype, "set")) {
                     Integer line = this.line.getSingle(event);
                     String text = this.text.getSingle(event);
                     if (line != null && text != null) {
-                        DHAPI.setHologramLine(holo, Skuishy.index(line), text);
+                        DHAPI.setHologramLine(hologramPage, Skuishy.index(line), text);
                     }
                 }
             }
@@ -95,26 +98,26 @@ public class EffEditLineHologram extends Effect {
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (matchedPattern == 0){
             changetype = "add";
-            hologram = (Expression<Hologram>) exprs[0];
+            hologram = (Expression<Object>) exprs[0];
             text = (Expression<String>) exprs[1];
         } else if (matchedPattern == 1){
             changetype = "remove";
             line = (Expression<Integer>) exprs[0];
-            hologram = (Expression<Hologram>) exprs[1];
+            hologram = (Expression<Object>) exprs[1];
         } else if (matchedPattern == 2){
             changetype = "create";
             page = (Expression<Integer>) exprs[0];
-            hologram = (Expression<Hologram>) exprs[1];
+            hologram = (Expression<Object>) exprs[1];
             text = (Expression<String>) exprs[2];
         } else if (matchedPattern == 3){
             changetype = "insert";
             line = (Expression<Integer>) exprs[0];
-            hologram = (Expression<Hologram>) exprs[1];
+            hologram = (Expression<Object>) exprs[1];
             text = (Expression<String>) exprs[2];
         } else if (matchedPattern == 4){
             changetype = "set";
             line = (Expression<Integer>) exprs[0];
-            hologram = (Expression<Hologram>) exprs[1];
+            hologram = (Expression<Object>) exprs[1];
             text = (Expression<String>) exprs[2];
         }
         return true;
