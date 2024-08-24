@@ -3,6 +3,7 @@ package lol.aabss.skuishy.elements.entities;
 import ch.njol.skript.classes.EnumClassInfo;
 import ch.njol.skript.registrations.Classes;
 import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.Rabbit;
 
 public class Types {
     static {
@@ -10,6 +11,12 @@ public class Types {
                 .user("axolotl ?variants?")
                 .name("Axolotl Variant")
                 .description("Represents a axolotl variant.")
+                .since("2.8"));
+
+        Classes.registerClass(new EnumClassInfo<>(Rabbit.Type.class, "rabbitvariant", "rabbitvariant")
+                .user("rabbit ?variants?")
+                .name("Rabbit Variant")
+                .description("Represents a rabbit variant.")
                 .since("2.8"));
     }
 }

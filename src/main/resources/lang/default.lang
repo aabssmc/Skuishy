@@ -150,3 +150,12 @@ axolotlvariant:
     gold: gold
     cyan: cyan
     blue: blue
+
+rabbittype:
+    brown: brown
+    white: white
+    black: black
+    black_and_white: blackwhite, black white
+    gold: gold
+    salt_and_pepper: saltpepper, salt pepper
+    the_killer_bunny: the killer bunny, killer bunny
