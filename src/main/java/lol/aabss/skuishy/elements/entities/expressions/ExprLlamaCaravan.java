@@ -1,5 +1,9 @@
 package lol.aabss.skuishy.elements.entities.expressions;
 
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -9,6 +13,12 @@ import org.bukkit.entity.Llama;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@Name("Llama - Caravan Part")
+@Description("Gets/sets the strength of a llama.")
+@Examples({
+        "set {_head} to llama caravan head of {_llama}"
+})
+@Since("2.8")
 public class ExprLlamaCaravan extends SimplePropertyExpression<Entity, Entity> {
 
     static {
@@ -37,7 +47,7 @@ public class ExprLlamaCaravan extends SimplePropertyExpression<Entity, Entity> {
     }
 
     @Override
-    public Class<? extends Entity> getReturnType() {
-        return null;
+    public @NotNull Class<? extends Entity> getReturnType() {
+        return Entity.class;
     }
 }
