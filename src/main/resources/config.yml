@@ -15,6 +15,9 @@ prefer-skript-index: false
 
 # elements -----
 
+# whether entity elements should be loaded
+entities-elements: true
+
 # whether general elements should be loaded
 general-elements: true
 

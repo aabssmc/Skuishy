@@ -59,6 +59,7 @@ public class Skuishy extends JavaPlugin {
             addon.setLanguageFileDirectory("lang");
             registerPluginElements("DecentHolograms", "DecentHolograms");
             registerPluginElements("Vulcan", "Vulcan");
+            registerElements("Entity", "Entities");
             registerElements("General", "General");
             registerElements("Note", "Notes");
             registerElements("Permission", "Permissions");

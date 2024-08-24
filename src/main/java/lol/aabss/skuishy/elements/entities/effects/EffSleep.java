@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.general.effects;
+package lol.aabss.skuishy.elements.entities.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
@@ -9,46 +9,53 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
-@Name("Player - Wake Up")
-@Description("Makes a player wake up and optionally sets their spawn.")
+@Name("Player - Sleep")
+@Description("Makes a player sleep at a specified location.")
 @Examples({
-        "make player wake up and set their spawn"
+        "attempt to make player sleep at {_loc}"
 })
 @Since("2.0")
-public class EffWakeUp extends Effect {
+public class EffSleep extends Effect {
 
     static {
-        Skript.registerEffect(EffWakeUp.class,
-                "make %players% wake up [spawn:and set the[ir] spawn [location]]"
+        Skript.registerEffect(EffSleep.class,
+                "(try|attempt) to make %players% sleep at %location%",
+                "(force|forcefully make) %players% [to] sleep at %location%"
         );
     }
 
-    boolean spawn;
-    Expression<Player> player;
+    private boolean force;
+    private Expression<Player> player;
+    private Expression<Location> loc;
 
     @Override
     protected void execute(@NotNull Event event) {
-        Player[] p = player.getArray(event);
-        for (Player player : p){
-            player.wakeup(spawn);
+        Location l = loc.getSingle(event);
+        if (l == null){
+            return;
+        }
+        for (Player player : player.getArray(event)) {
+            player.sleep(l, force);
         }
     }
 
     @Override
     public @NotNull String toString(@Nullable Event event, boolean debug) {
-        return "make player wakeup";
+        return "make player sleep";
     }
 
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        spawn = parseResult.hasTag("spawn");
+        force = matchedPattern == 1;
         player = (Expression<Player>) exprs[0];
+        loc = (Expression<Location>) exprs[1];
         return false;
     }
 }
