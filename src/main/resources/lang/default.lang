@@ -18,6 +18,7 @@ types:
     statistic: statistic¦s @a
     skipreason: skipreason¦s @a
     blueprintpart: blueprintpart¦s @a
+    axolotlvariant: axolotl ?variant¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
@@ -142,3 +143,10 @@ blueprintpart:
     left_arm: left arm
     right_leg: right leg
     left_leg: left leg
+
+axolotlvariant:
+    lucy: lucy
+    wild: wild
+    gold: gold
+    cyan: cyan
+    blue: blue
