@@ -5,68 +5,53 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.PropertyExpression;
-import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.SkriptParser;
-import ch.njol.util.Kleenean;
+import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.util.coll.CollectionUtils;
-import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
+import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("NullableProblems")
-@Name("Block - Command of Command Block")
+@Name("Command Block - Command")
 @Description("Sends the command in a command block.")
 @Examples({
         "send command of target block"
 })
-@Since("1.7.5")
+@Since("1.7.5, 2.8 (command minecart support)")
 
-public class ExprCommand extends PropertyExpression<Block, String> {
+public class ExprCommand extends SimplePropertyExpression<Object, String> {
 
     static{
         register(ExprCommand.class, String.class,
                 "command",
-                "blocks"
+                "blocks/entities"
         );
     }
 
     @Override
-    protected @Nullable String[] get(@NotNull Event event, Block @NotNull [] source) {
-        if (getExpr().getArray(event) instanceof CommandBlock[] c){
-            List<String> commands = new ArrayList<>();
-            for (CommandBlock b : c) {
-                commands.add(b.getCommand());
-            }
-            return commands.toArray(String[]::new);
+    protected String getPropertyName() {
+        return "command";
+    }
+
+    @Override
+    public @Nullable String convert(Object object) {
+        if (object instanceof CommandBlock) {
+            return ((CommandBlock) object).getCommand();
+        } else if (object instanceof CommandMinecart) {
+            return ((CommandMinecart) object).getCommand();
         }
-        return new String[]{null};
+        return null;
     }
 
     @Override
-    public boolean isSingle() {
-        return getExpr().isSingle();
+    public Class<? extends String> getReturnType() {
+        return String.class;
     }
 
     @Override
-    public void change(@NotNull Event event, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode){
-        if (mode == Changer.ChangeMode.SET) {
-            Block[] block = getExpr().getArray(event);
-            if (block instanceof CommandBlock[] cc){
-                for (CommandBlock c : cc) {
-                    c.setCommand((String) delta[0]);
-                }
-            }
-        }
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET) {
             return CollectionUtils.array(String.class);
         }
@@ -74,18 +59,17 @@ public class ExprCommand extends PropertyExpression<Block, String> {
     }
 
     @Override
-    public @NotNull Class<? extends String> getReturnType() {
-        return String.class;
-    }
-
-    @Override
-    public @NotNull String toString(@Nullable Event event, boolean debug) {
-        return "command of command block";
-    }
-
-    @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        setExpr((Expression<? extends Block>) exprs[0]);
-        return true;
+    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
+        if (mode == Changer.ChangeMode.SET) {
+            if (delta[0] instanceof String) {
+                for (Object object : getExpr().getArray(e)) {
+                    if (object instanceof CommandBlock) {
+                        ((CommandBlock) object).setCommand((String) delta[0]);
+                    } else if (object instanceof CommandMinecart) {
+                        ((CommandMinecart) object).setCommand((String) delta[0]);
+                    }
+                }
+            }
+        }
     }
 }

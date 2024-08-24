@@ -8,35 +8,32 @@ import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.TNTPrimed;
-import org.bukkit.entity.minecart.ExplosiveMinecart;
+import org.bukkit.entity.Minecart;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Entity - Fuse Ticks")
-@Description("Gets/sets the fuse ticks of a primed tnt or explosive minecart.")
+@Name("Minecart - Display Block Offset")
+@Description("Gets/sets the display block offset of a minecart.")
 @Examples({
-        "set fuse ticks of {_tnt} to 10"
+        "set display block offset of {_minecart} to 20"
 })
 @Since("2.8")
-public class ExprTntFuseTicks extends SimplePropertyExpression<Entity, Integer> {
+public class ExprMinecartDisplayBlockOffset extends SimplePropertyExpression<Entity, Integer> {
 
     static {
-        register(ExprTntFuseTicks.class, Integer.class, "[([primed[-| ]] tnt|minecart)] fuse ticks", "entities");
+        register(ExprMinecartDisplayBlockOffset.class, Integer.class, "[minecart] display block offset", "entities");
     }
 
     @Override
     protected @NotNull String getPropertyName() {
-        return "fuse ticks";
+        return "display block offset";
     }
 
     @Override
     public @Nullable Integer convert(Entity entity) {
-        if (entity instanceof TNTPrimed) {
-            return ((TNTPrimed) entity).getFuseTicks();
-        } else if (entity instanceof ExplosiveMinecart) {
-            return ((ExplosiveMinecart) entity).getFuseTicks();
+        if (entity instanceof Minecart) {
+            return ((Minecart) entity).getDisplayBlockOffset();
         }
         return null;
     }
@@ -59,10 +56,8 @@ public class ExprTntFuseTicks extends SimplePropertyExpression<Entity, Integer> 
         if (mode == Changer.ChangeMode.SET) {
             if (delta[0] instanceof Integer) {
                 for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof TNTPrimed) {
-                        ((TNTPrimed) entity).setFuseTicks((Integer) delta[0]);
-                    } else if (entity instanceof ExplosiveMinecart) {
-                        ((ExplosiveMinecart) entity).setFuseTicks((Integer) delta[0]);
+                    if (entity instanceof Minecart) {
+                        ((Minecart) entity).setDisplayBlockOffset((Integer) delta[0]);
                     }
                 }
             }
