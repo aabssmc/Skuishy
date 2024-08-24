@@ -19,6 +19,8 @@ types:
     skipreason: skipreason¦s @a
     blueprintpart: blueprintpart¦s @a
     axolotlvariant: axolotl ?variant¦s @a
+    rabbitvariant: rabbit ?variant¦s @a
+    llamavariant: llama ?variant¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
@@ -151,7 +153,7 @@ axolotlvariant:
     cyan: cyan
     blue: blue
 
-rabbittype:
+rabbitvariant:
     brown: brown
     white: white
     black: black
@@ -159,3 +161,9 @@ rabbittype:
     gold: gold
     salt_and_pepper: saltpepper, salt pepper
     the_killer_bunny: the killer bunny, killer bunny
+
+llamavariant:
+    creamy: creamy
+    white: white
+    brown: brown
+    gray: gray, grey
