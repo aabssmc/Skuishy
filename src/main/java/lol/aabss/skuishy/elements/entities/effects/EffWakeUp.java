@@ -5,15 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.lang.Effect;
-import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.SkriptParser;
-import ch.njol.util.Kleenean;
+import lol.aabss.skuishy.other.skript.SimpleEntityEffect;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 @Name("Player - Wake Up")
 @Description("Makes a player wake up and optionally sets their spawn.")
@@ -21,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
         "make player wake up and set their spawn"
 })
 @Since("2.0")
-public class EffWakeUp extends Effect {
+public class EffWakeUp extends SimpleEntityEffect<Player> {
 
     static {
         Skript.registerEffect(EffWakeUp.class,
@@ -29,26 +22,8 @@ public class EffWakeUp extends Effect {
         );
     }
 
-    boolean spawn;
-    Expression<Player> player;
-
     @Override
-    protected void execute(@NotNull Event event) {
-        Player[] p = player.getArray(event);
-        for (Player player : p){
-            player.wakeup(spawn);
-        }
-    }
-
-    @Override
-    public @NotNull String toString(@Nullable Event event, boolean debug) {
-        return "make player wakeup";
-    }
-
-    @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        spawn = parseResult.hasTag("spawn");
-        player = (Expression<Player>) exprs[0];
-        return false;
+    protected void execute(Player player) {
+        player.wakeup(tags.contains("spawn"));
     }
 }

@@ -5,14 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.lang.Effect;
-import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.SkriptParser;
-import ch.njol.util.Kleenean;
+import lol.aabss.skuishy.other.skript.SimpleEntityEffect;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Name("Player - Player Data")
 @Description(
@@ -28,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
         "load player's current data"
 })
 @Since("2.1")
-public class EffPlayerData extends Effect {
+public class EffPlayerData extends SimpleEntityEffect<Player> {
 
     static {
         Skript.registerEffect(EffPlayerData.class,
@@ -36,29 +30,12 @@ public class EffPlayerData extends Effect {
         );
     }
 
-    private boolean load;
-    private Expression<Player> players;
-
     @Override
-    protected void execute(@NotNull Event event) {
-        for (Player p : players.getArray(event)){
-            if (load) {
-                p.loadData();
-            } else {
-                p.saveData();
-            }
+    protected void execute(Player player) {
+        if (tags.contains("load")) {
+            player.loadData();
+        } else {
+            player.saveData();
         }
-    }
-
-    @Override
-    public @NotNull String toString(@Nullable Event event, boolean debug) {
-        return "load/save data of player";
-    }
-
-    @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        load = parseResult.hasTag("load");
-        players = (Expression<Player>) exprs[0];
-        return true;
     }
 }
