@@ -28,7 +28,7 @@ public class ExprBlueprintPart extends PropertyExpression<Blueprint, Blueprint> 
 
     static {
         register(ExprBlueprintPart.class, Blueprint.class,
-                "%blueprintpart% part [without:without [the] outer layer]",
+                "[blueprint] %blueprintpart% part [without:without [the] outer layer]",
                 "blueprints"
         );
     }

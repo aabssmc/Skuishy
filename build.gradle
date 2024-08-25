@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT"
+    compileOnly "io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT"
     implementation "net.kyori:adventure-text-minimessage:4.15.0"
     compileOnly ("com.github.SkriptLang:Skript:2.7.0") {
         transitive = false
