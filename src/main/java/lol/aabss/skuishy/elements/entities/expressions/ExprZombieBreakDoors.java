@@ -7,32 +7,33 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.util.coll.CollectionUtils;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Fox - Leaping")
-@Description("Gets/sets the fox leaping state.")
+@Name("Zombie - Can Break Doors")
+@Description("Gets/sets the can break doors state of a zombie.")
 @Examples({
-        "set fox leaping state of {_fox} to true"
+        "set break doors state of {_zombie} to true"
 })
 @Since("2.8")
-public class ExprFoxInterested extends SimplePropertyExpression<Entity, Boolean> {
+public class ExprZombieBreakDoors extends SimplePropertyExpression<Entity, Boolean> {
 
     static {
-        register(ExprFoxInterested.class, Boolean.class, "[fox] interested [mode|state]", "entities");
+        register(ExprZombieBreakDoors.class, Boolean.class, "[zombie] [can] break doors [mode|state]", "entities");
     }
 
     @Override
     protected @NotNull String getPropertyName() {
-        return "fox interested state";
+        return "zombie can break doors";
     }
 
     @Override
     public @Nullable Boolean convert(Entity entity) {
-        if (entity instanceof Fox) {
-            return ((Fox) entity).isInterested();
+        if (entity instanceof Zombie) {
+            return ((Zombie) entity).canBreakDoors();
         }
         return null;
     }
@@ -55,8 +56,8 @@ public class ExprFoxInterested extends SimplePropertyExpression<Entity, Boolean>
         if (mode == Changer.ChangeMode.SET) {
             if (delta[0] instanceof Boolean) {
                 for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof Fox) {
-                        ((Fox) entity).setInterested((Boolean) delta[0]);
+                    if (entity instanceof Zombie) {
+                        ((Zombie) entity).setCanBreakDoors((Boolean) delta[0]);
                     }
                 }
             }
