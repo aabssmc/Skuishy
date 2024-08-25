@@ -36,7 +36,7 @@ public class Types {
                 .description("Represents a boat variant.")
                 .since("2.8"));
 
-        Classes.registerClass(new EnumClassInfo<>(Boat.Type.class, "boatstatus", "boatstatus")
+        Classes.registerClass(new EnumClassInfo<>(Boat.Status.class, "boatstatus", "boatstatus")
                 .user("boat ?status[es]")
                 .name("Boat Status")
                 .description("Represents a boat Status.")
