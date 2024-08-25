@@ -22,6 +22,8 @@ types:
     rabbitvariant: rabbit ?variant¦s @a
     llamavariant: llama ?variant¦s @a
     foxvariant: fox ?variant¦s @a
+    boatvariant: boat ?variant¦s @a
+    boatstatus: boat ?status¦es @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
@@ -172,3 +174,22 @@ llamavariant:
 foxvariant:
     red: red, normal
     snow: white, snow, snowy
+
+boatvariant:
+    oak: oak
+    spruce: spruce
+    birch: birch
+    jungle: jungle
+    acacia: acacia
+    cherry: cherry
+    dark_oak: dark_oak
+    mangrove: mangrove
+    bamboo: bamboo
+
+boatstatus:
+    not_in_world: not in world
+    in_water: in water
+    under_water: under water
+    under_floating_water: under floating water
+    on_land: on land
+    in_air: in air

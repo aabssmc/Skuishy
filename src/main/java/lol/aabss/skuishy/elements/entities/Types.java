@@ -29,5 +29,17 @@ public class Types {
                 .name("Fox Variant")
                 .description("Represents a fox variant.")
                 .since("2.8"));
+
+        Classes.registerClass(new EnumClassInfo<>(Boat.Type.class, "boatvariant", "boatvariant")
+                .user("boat ?variants?")
+                .name("Boat Variant")
+                .description("Represents a boat variant.")
+                .since("2.8"));
+
+        Classes.registerClass(new EnumClassInfo<>(Boat.Type.class, "boatstatus", "boatstatus")
+                .user("boat ?status[es]")
+                .name("Boat Status")
+                .description("Represents a boat Status.")
+                .since("2.8"));
     }
 }
