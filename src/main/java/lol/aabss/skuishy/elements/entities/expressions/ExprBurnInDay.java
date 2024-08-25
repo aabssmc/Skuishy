@@ -9,13 +9,14 @@ import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.util.coll.CollectionUtils;
 import org.bukkit.entity.AbstractSkeleton;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Skeleton/Zombie - Burn In Day")
-@Description("Gets/sets the burn in day state of a skeleton or zombie.")
+@Name("Skeleton/Zombie/Phantom - Burn In Day")
+@Description("Gets/sets the burn in day state of a skeleton, zombie or phantom.")
 @Examples({
         "set burn in day state of {_skeleton} to true"
 })
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public class ExprBurnInDay extends SimplePropertyExpression<Entity, Boolean> {
 
     static {
-        register(ExprBurnInDay.class, Boolean.class, "[skeleton|zombie] [should] burn in day [state|mode]", "entities");
+        register(ExprBurnInDay.class, Boolean.class, "[skeleton|zombie|phantom] [should] burn in day [state|mode]", "entities");
     }
 
     @Override
@@ -37,6 +38,8 @@ public class ExprBurnInDay extends SimplePropertyExpression<Entity, Boolean> {
             return ((AbstractSkeleton) entity).shouldBurnInDay();
         } else if (entity instanceof Zombie) {
             return ((Zombie) entity).shouldBurnInDay();
+        } else if (entity instanceof Phantom) {
+            return ((Phantom) entity).shouldBurnInDay();
         }
         return null;
     }
@@ -63,6 +66,8 @@ public class ExprBurnInDay extends SimplePropertyExpression<Entity, Boolean> {
                         ((AbstractSkeleton) entity).setShouldBurnInDay((Boolean) delta[0]);
                     } else if (entity instanceof Zombie) {
                         ((Zombie) entity).setShouldBurnInDay((Boolean) delta[0]);
+                    } else if (entity instanceof Phantom) {
+                        ((Phantom) entity).setShouldBurnInDay((Boolean) delta[0]);
                     }
                 }
             }
