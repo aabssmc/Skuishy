@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.general.conditions.can;
+package lol.aabss.skuishy.elements.entities.conditions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.conditions.base.PropertyCondition;
