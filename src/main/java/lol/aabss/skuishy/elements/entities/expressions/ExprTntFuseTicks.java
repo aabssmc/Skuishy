@@ -6,7 +6,11 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
+import ch.njol.skript.lang.Expression;
+import ch.njol.skript.lang.SkriptParser;
+import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
+import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
@@ -14,8 +18,8 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Entity - Fuse Ticks")
-@Description("Gets/sets the fuse ticks of a primed tnt or explosive minecart.")
+@Name("Tnt/Minecart/Creeper - Fuse Ticks")
+@Description("Gets/sets the fuse ticks of a primed tnt, explosive minecart or creeper.")
 @Examples({
         "set fuse ticks of {_tnt} to 10"
 })
@@ -23,7 +27,15 @@ import org.jetbrains.annotations.Nullable;
 public class ExprTntFuseTicks extends SimplePropertyExpression<Entity, Integer> {
 
     static {
-        register(ExprTntFuseTicks.class, Integer.class, "[([primed[-| ]] tnt|minecart)] fuse ticks", "entities");
+        register(ExprTntFuseTicks.class, Integer.class, "[([primed[-| ]] tnt|minecart)] [:max] fuse ticks", "entities");
+    }
+
+    private boolean max;
+
+    @Override
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+        max = parseResult.hasTag("max");
+        return super.init(exprs, matchedPattern, isDelayed, parseResult);
     }
 
     @Override
@@ -37,6 +49,8 @@ public class ExprTntFuseTicks extends SimplePropertyExpression<Entity, Integer> 
             return ((TNTPrimed) entity).getFuseTicks();
         } else if (entity instanceof ExplosiveMinecart) {
             return ((ExplosiveMinecart) entity).getFuseTicks();
+        } else if (entity instanceof Creeper) {
+            return max ? ((Creeper) entity).getMaxFuseTicks() : ((Creeper) entity).getFuseTicks();
         }
         return null;
     }
