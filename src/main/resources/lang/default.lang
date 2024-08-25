@@ -21,6 +21,7 @@ types:
     axolotlvariant: axolotl ?variant¦s @a
     rabbitvariant: rabbit ?variant¦s @a
     llamavariant: llama ?variant¦s @a
+    foxvariant: fox ?variant¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
@@ -167,3 +168,7 @@ llamavariant:
     white: white
     brown: brown
     gray: gray, grey
+
+foxvariant:
+    red: red, normal
+    snow: white, snow, snowy
