@@ -10,7 +10,11 @@ import org.bukkit.Statistic;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.potion.PotionType;
+import org.bukkit.util.EulerAngle;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.skriptlang.skript.lang.converter.Converter;
+import org.skriptlang.skript.lang.converter.Converters;
 
 public class Types {
     static{
@@ -71,6 +75,43 @@ public class Types {
                     .description("Represents a reason for a time skip.")
                     .since("2.8")
             );
+        }
+        if (Classes.getClassInfoNoError("eulerangle") == null) {
+            Classes.registerClass(new ClassInfo<>(EulerAngle.class, "eulerangle")
+                    .user("euler ?angles?")
+                    .name("Euler Angle")
+                    .description("Represents a euler angle.")
+                    .since("2.8")
+                    .parser(new Parser<>() {
+
+                        @Override
+                        public boolean canParse(@NotNull ParseContext context) {
+                            return false;
+                        }
+
+                        @Override
+                        public @NotNull String toVariableNameString(EulerAngle angle) {
+                            return angle.getX()+", "+angle.getY()+", "+angle.getZ();
+                        }
+
+                        @Override
+                        public @NotNull String toString(EulerAngle angle, int flags) {
+                            return toVariableNameString(angle);
+                        }
+                    })
+            );
+            Converters.registerConverter(EulerAngle.class, Vector.class, new Converter<>() {
+                @Override
+                public @NotNull Vector convert(EulerAngle from) {
+                    return new Vector(from.getX(), from.getY(), from.getZ());
+                }
+            });
+            Converters.registerConverter(Vector.class, EulerAngle.class, new Converter<>() {
+                @Override
+                public @NotNull EulerAngle convert(Vector from) {
+                    return new EulerAngle(from.getX(), from.getY(), from.getZ());
+                }
+            });
         }
     }
 }
