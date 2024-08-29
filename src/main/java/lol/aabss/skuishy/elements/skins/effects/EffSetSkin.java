@@ -20,7 +20,9 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.function.BiConsumer;
 
@@ -36,7 +38,8 @@ import static lol.aabss.skuishy.other.SkinWrapper.uploadSkin;
         "set skin of player to \"{VALUE}\" #The full value of the skin (no signature)",
         "set skin of player to \"{VALUE}\" and \"{SIGNATURE}\" #The full value and signature of the skin.",
         "set skin of player to {_bufferedimage} # Images not supported by Skuishy, but just in case you want to use another addon like SkImage :)",
-        "set skin of player to {_blueprint} #A blueprint"
+        "set skin of player to {_blueprint} #A blueprint",
+        "set skin of player to \"C:/Users/User/Documents/Server/plugins/Skuishy/skin.png\" #A file"
 })
 @Since("2.3, 2.6/2.7 (fixed)")
 
@@ -72,6 +75,8 @@ public class EffSetSkin extends Effect {
                             } else {
                                 if (str.contains("://")) {
                                     uploadSkin(str).whenCompleteAsync(getWhenComplete(event));
+                                } else if (new File(str).exists()) {
+                                    uploadSkin(ImageIO.read(new File(str))).whenCompleteAsync(getWhenComplete(event));
                                 } else {
                                     if (value != null) {
                                         for (Player p : player.getArray(event)) {
