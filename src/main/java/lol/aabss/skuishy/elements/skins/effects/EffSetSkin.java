@@ -41,7 +41,7 @@ import static lol.aabss.skuishy.other.SkinWrapper.uploadSkin;
         "set skin of player to {_blueprint} #A blueprint",
         "set skin of player to \"C:/Users/User/Documents/Server/plugins/Skuishy/skin.png\" #A file"
 })
-@Since("2.3, 2.6/2.7 (fixed)")
+@Since("2.3, 2.6/2.7 (fixed), 2.8 (file support)")
 
 public class EffSetSkin extends Effect {
 
