@@ -19,6 +19,8 @@ You need Skript 2.7.0 and up to use.
 
 This addon is just a random addon I made to support/add random little things I thought would be nice to have in skript that for whatever reason any other GOOD addon doesn't have. I am always taking suggestions for syntaxes! Either message me on skUnity or join my Discord (I am more active on discord)
 
+If SkriptLang team wants to use whatever is in my addon, you can.
+
 <details>
 <summary>bStats</summary>
 
