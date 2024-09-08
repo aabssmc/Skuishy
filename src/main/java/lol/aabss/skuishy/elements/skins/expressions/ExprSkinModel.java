@@ -6,11 +6,11 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import lol.aabss.skuishy.other.Blueprint;
-import lol.aabss.skuishy.other.mineskin.Variant;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mineskin.data.Variant;
 
 import java.awt.image.BufferedImage;
 

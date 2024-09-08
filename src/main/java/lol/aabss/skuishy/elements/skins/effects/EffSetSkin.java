@@ -13,12 +13,12 @@ import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.Blueprint;
-import lol.aabss.skuishy.other.mineskin.data.Texture;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mineskin.data.Texture;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

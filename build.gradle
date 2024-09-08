@@ -22,8 +22,8 @@ dependencies {
     }
     compileOnly "com.github.decentsoftware-eu:decentholograms:2.8.8"
     compileOnly files("libs/VulcanAPI.jar")
-    implementation "org.jsoup:jsoup:1.17.2"
     implementation "com.github.SkriptLang:skript-reflect:2.4-dev1"
+    implementation "cc.aabss:mineskinclient:2.0.0"
 }
 
 java {
@@ -32,7 +32,7 @@ java {
 
 shadowJar {
     dependencies {
-        include(dependency("org.jsoup:jsoup:1.17.2"))
+        include(dependency("cc.aabss:mineskinclient:2.0.0"))
     }
 }
 

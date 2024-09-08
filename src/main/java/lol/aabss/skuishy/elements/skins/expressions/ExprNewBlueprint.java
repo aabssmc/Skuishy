@@ -15,11 +15,11 @@ import ch.njol.skript.util.LiteralUtils;
 import ch.njol.util.Kleenean;
 import lol.aabss.skuishy.Skuishy;
 import lol.aabss.skuishy.other.Blueprint;
-import lol.aabss.skuishy.other.mineskin.Variant;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mineskin.data.Variant;
 
 import java.net.MalformedURLException;
 import java.net.URL;

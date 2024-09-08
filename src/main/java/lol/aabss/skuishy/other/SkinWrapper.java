@@ -4,29 +4,29 @@ import ch.njol.skript.Skript;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import lol.aabss.skuishy.Skuishy;
-import lol.aabss.skuishy.other.mineskin.MineskinClient;
-import lol.aabss.skuishy.other.mineskin.SkinOptions;
-import lol.aabss.skuishy.other.mineskin.Variant;
-import lol.aabss.skuishy.other.mineskin.Visibility;
-import lol.aabss.skuishy.other.mineskin.data.Texture;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.profile.PlayerTextures;
+import org.mineskin.GenerateOptions;
+import org.mineskin.MineSkinClient;
+import org.mineskin.data.Texture;
+import org.mineskin.data.Variant;
+import org.mineskin.data.Visibility;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
 import java.util.concurrent.CompletableFuture;
 
 public class SkinWrapper {
 
-    public static MineskinClient client = new MineskinClient("Skuishy-Agent");
-    public static SkinOptions options = SkinOptions.create("Skuishy-Upload", Variant.AUTO, Visibility.PRIVATE);
+    public static MineSkinClient client = MineSkinClient.builder().userAgent("Skuishy-Agent").build();
+    public static GenerateOptions options = GenerateOptions.create().name("Skuishy-Upload").variant(Variant.AUTO).visibility(Visibility.UNLISTED);
 
     public static ProfileProperty getProfileProperties(PlayerProfile p) {
         return p.getProperties().iterator().next();
@@ -54,7 +54,7 @@ public class SkinWrapper {
     }
 
     public static void setSkin(Player player, Texture texture) {
-        setSkin(player, texture.value, texture.signature);
+        setSkin(player, texture.value(), texture.signature());
     }
 
     public static void setSkin(Player player, String value, @Nullable String signature){
@@ -67,7 +67,7 @@ public class SkinWrapper {
     private static BufferedImage getHead(String name, boolean helm) throws IOException {
         OfflinePlayer player = Bukkit.getOfflinePlayer(name);
         if (player.getPlayerProfile().getTextures().getSkin() == null){
-            return ImageIO.read(new URL("https://minotar.net/"+(helm ? "helm" : "avatar")+"/"+name+"/8.png"));
+            return ImageIO.read(URI.create("https://minotar.net/"+(helm ? "helm" : "avatar")+"/"+name+"/8.png").toURL());
         }
         BufferedImage skin = ImageIO.read(player.getPlayerProfile().getTextures().getSkin());
         BufferedImage front = skin.getSubimage(8, 8, 8, 8);
@@ -100,13 +100,13 @@ public class SkinWrapper {
     }
 
     public static CompletableFuture<Texture> uploadSkin(BufferedImage image) throws IOException {
-        return client.generateUpload(image, SkinOptions.create("Skuishy-Upload", Blueprint.getVariant(image), Visibility.PRIVATE))
-                .thenApply(result -> result.data.texture);
+        return client.generateUpload(image, options.variant(Blueprint.getVariant(image)))
+                .thenApply(result -> result.getSkin().data().texture());
     }
 
     public static CompletableFuture<Texture> uploadSkin(String url) {
-        return client.generateUrl(url, SkinOptions.create("Skuishy-Upload", Variant.AUTO, Visibility.PRIVATE))
-                .thenApply(result -> result.data.texture);
+        return client.generateUrl(url, options)
+                .thenApply(result -> result.getSkin().data().texture());
     }
 
 }
