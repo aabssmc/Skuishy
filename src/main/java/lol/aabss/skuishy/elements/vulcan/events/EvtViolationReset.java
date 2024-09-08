@@ -4,15 +4,15 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
 import me.frep.vulcan.api.event.VulcanViolationResetEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 public class EvtViolationReset extends SkriptEvent {
 
     static {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+        if (VulcanHook.vulcanEnabled()) {
             Skript.registerEvent("Vulcan - Violation Reset", EvtViolationReset.class, VulcanViolationResetEvent.class,
                     "[vulcan] violation[s] reset"
             )

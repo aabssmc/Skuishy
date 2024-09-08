@@ -9,12 +9,13 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import me.frep.vulcan.api.VulcanAPI;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
+import me.frep.vulcan.api.VulcanAPI$Factory;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Name("Vulcan - Freeze Player")
 @Description("Freezes/Unfreezes a player with vulcan.")
@@ -27,9 +28,11 @@ import org.jetbrains.annotations.NotNull;
 public class EffFreeze extends Effect {
 
     static {
-        Skript.registerEffect(EffFreeze.class,
-                "[vulcan] [:un]freeze %players%"
-        );
+        if (VulcanHook.vulcanEnabled()) {
+            Skript.registerEffect(EffFreeze.class,
+                    "[vulcan] [:un]freeze %players%"
+            );
+        }
     }
 
     private Expression<Player> p;
@@ -38,7 +41,7 @@ public class EffFreeze extends Effect {
     @Override
     protected void execute(@NotNull Event event) {
         for (Player p : this.p.getArray(event)){
-            VulcanAPI.Factory.getApi().setFrozen(p, freeze);
+            VulcanAPI$Factory.getApi().setFrozen(p, freeze);
         }
     }
 

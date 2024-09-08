@@ -6,16 +6,16 @@ import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
 import me.frep.vulcan.api.event.VulcanPunishEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 public class EvtVulcanPunish extends SkriptEvent {
 
     static {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+        if (VulcanHook.vulcanEnabled()) {
             Skript.registerEvent("Vulcan - Player Punish", EvtVulcanPunish.class, VulcanPunishEvent.class,
                     "[vulcan] [player] punish[ed]"
             )

@@ -5,7 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import me.frep.vulcan.api.VulcanAPI;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
+import me.frep.vulcan.api.VulcanAPI$Factory;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,16 +19,18 @@ import org.jetbrains.annotations.NotNull;
 public class CondHasAlertsEnabled extends PropertyCondition<Player> {
 
     static {
-        register(CondHasAlertsEnabled.class,
-                PropertyType.HAVE,
-                "[vulcan] alerts enabled",
-                "players"
-        );
+        if (VulcanHook.vulcanEnabled()) {
+            register(CondHasAlertsEnabled.class,
+                    PropertyType.HAVE,
+                    "[vulcan] alerts enabled",
+                    "players"
+            );
+        }
     }
 
     @Override
     public boolean check(Player player) {
-        return VulcanAPI.Factory.getApi().hasAlertsEnabled(player);
+        return VulcanAPI$Factory.getApi().hasAlertsEnabled(player);
     }
 
     @Override

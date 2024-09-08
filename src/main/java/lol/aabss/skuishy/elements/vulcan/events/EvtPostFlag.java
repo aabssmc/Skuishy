@@ -7,16 +7,16 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import ch.njol.skript.util.Timespan;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
 import me.frep.vulcan.api.event.VulcanPostFlagEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 public class EvtPostFlag extends SkriptEvent {
 
     static {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+        if (VulcanHook.vulcanEnabled()) {
             Skript.registerEvent("Vulcan - Post Flag", EvtPostFlag.class, VulcanPostFlagEvent.class,
                     "[vulcan] (pre|post)[( |-)]flag[ged]"
             )

@@ -8,12 +8,12 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import me.frep.vulcan.api.VulcanAPI;
-import org.bukkit.Bukkit;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
+import me.frep.vulcan.api.VulcanAPI$Factory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 public class ExprSensitivity extends PropertyExpression<Player, Integer> {
 
     static{
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+        if (VulcanHook.vulcanEnabled()) {
             register(ExprSensitivity.class, Integer.class,
                     "sens[itivity]",
                     "players");
@@ -39,7 +39,7 @@ public class ExprSensitivity extends PropertyExpression<Player, Integer> {
         if (source != null) {
             List<Integer> sensitivity = new ArrayList<>();
             for (Player p : source) {
-                sensitivity.add(VulcanAPI.Factory.getApi().getSensitivity(p));
+                sensitivity.add(VulcanAPI$Factory.getApi().getSensitivity(p));
             }
             return sensitivity.toArray(Integer[]::new);
         }

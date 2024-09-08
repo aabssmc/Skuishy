@@ -4,15 +4,15 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
 import me.frep.vulcan.api.event.VulcanJudgementDayStartEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 public class EvtJudgementDayStart extends SkriptEvent {
 
     static {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+        if (VulcanHook.vulcanEnabled()) {
             Skript.registerEvent("Vulcan - Judgement Day Start", EvtJudgementDayStart.class, VulcanJudgementDayStartEvent.class,
                     "[vulcan] judge[ment] [day] start[ed]"
             )

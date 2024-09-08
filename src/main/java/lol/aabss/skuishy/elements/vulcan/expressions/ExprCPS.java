@@ -8,12 +8,12 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import me.frep.vulcan.api.VulcanAPI;
-import org.bukkit.Bukkit;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
+import me.frep.vulcan.api.VulcanAPI$Factory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 public class ExprCPS extends PropertyExpression<Player, Number> {
 
     static{
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+        if (VulcanHook.vulcanEnabled()) {
             register(ExprCPS.class, Number.class,
                     "(cps|clicks[( |-)]per[( |-)]sec[ond])",
                     "players");
@@ -39,7 +39,7 @@ public class ExprCPS extends PropertyExpression<Player, Number> {
         if (source != null) {
             List<Number> cps = new ArrayList<>();
             for (Player p : source) {
-                cps.add(VulcanAPI.Factory.getApi().getCps(p));
+                cps.add(VulcanAPI$Factory.getApi().getCps(p));
             }
             return cps.toArray(Number[]::new);
         }

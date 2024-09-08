@@ -7,16 +7,16 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import ch.njol.skript.util.Timespan;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
 import me.frep.vulcan.api.event.VulcanEnableAlertsEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 public class EvtEnableAlerts extends SkriptEvent {
 
     static {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+        if (VulcanHook.vulcanEnabled()) {
             Skript.registerEvent("Vulcan - Enable Alerts", EvtEnableAlerts.class, VulcanEnableAlertsEvent.class,
                     "[vulcan] enable alert[s]"
             )

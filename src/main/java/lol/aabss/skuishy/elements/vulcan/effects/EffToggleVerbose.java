@@ -9,12 +9,12 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import me.frep.vulcan.api.VulcanAPI;
-import org.bukkit.Bukkit;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
+import me.frep.vulcan.api.VulcanAPI$Factory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Name("Vulcan - Toggle Verbose")
 @Description("Toggles verbose for a player.")
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public class EffToggleVerbose extends Effect {
 
     static{
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+        if (VulcanHook.vulcanEnabled()) {
             Skript.registerEffect(EffToggleVerbose.class,
                     "toggle [the] [vulcan] verbose for %players%"
             );
@@ -37,7 +37,7 @@ public class EffToggleVerbose extends Effect {
     @Override
     protected void execute(@NotNull Event event) {
         for (Player p : this.p.getArray(event)) {
-            VulcanAPI.Factory.getApi().toggleVerbose(p);
+            VulcanAPI$Factory.getApi().toggleVerbose(p);
         }
     }
 

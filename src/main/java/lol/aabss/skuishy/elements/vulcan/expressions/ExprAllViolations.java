@@ -10,12 +10,12 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import me.frep.vulcan.api.VulcanAPI;
-import org.bukkit.Bukkit;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
+import me.frep.vulcan.api.VulcanAPI$Factory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import java.util.List;
 public class ExprAllViolations extends SimpleExpression<Integer> {
 
     static{
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vulcan")) {
+        if (VulcanHook.vulcanEnabled()) {
             Skript.registerExpression(ExprAllViolations.class, Integer.class, ExpressionType.COMBINED,
                     "[all [[of] the]] violations of %players%",
                     "[all [[of] the]] combat violations of %players%",
@@ -50,31 +50,31 @@ public class ExprAllViolations extends SimpleExpression<Integer> {
         switch (vtype){
             case "all" -> {
                 for (Player p : this.player.getArray(event)) {
-                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getTotalViolations());
+                    violations.add(VulcanAPI$Factory.getApi().getPlayerData(p).getTotalViolations());
                 }
             } case "combat" -> {
                 for (Player p : this.player.getArray(event)) {
-                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getCombatViolations());
+                    violations.add(VulcanAPI$Factory.getApi().getPlayerData(p).getCombatViolations());
                 }
             } case "movement" -> {
                 for (Player p : this.player.getArray(event)) {
-                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getMovementViolations());
+                    violations.add(VulcanAPI$Factory.getApi().getPlayerData(p).getMovementViolations());
                 }
             } case "player" -> {
                 for (Player p : this.player.getArray(event)) {
-                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getPlayerViolations());
+                    violations.add(VulcanAPI$Factory.getApi().getPlayerData(p).getPlayerViolations());
                 }
             } case "auto clicker" -> {
                 for (Player p : this.player.getArray(event)) {
-                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getAutoClickerViolations());
+                    violations.add(VulcanAPI$Factory.getApi().getPlayerData(p).getAutoClickerViolations());
                 }
             } case "timer" -> {
                 for (Player p : this.player.getArray(event)) {
-                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getTimerViolations());
+                    violations.add(VulcanAPI$Factory.getApi().getPlayerData(p).getTimerViolations());
                 }
             } case "scaffold" -> {
                 for (Player p : this.player.getArray(event)) {
-                    violations.add(VulcanAPI.Factory.getApi().getPlayerData(p).getScaffoldViolations());
+                    violations.add(VulcanAPI$Factory.getApi().getPlayerData(p).getScaffoldViolations());
                 }
             } default -> {return new Integer[]{null};}
         } return violations.toArray(Integer[]::new);

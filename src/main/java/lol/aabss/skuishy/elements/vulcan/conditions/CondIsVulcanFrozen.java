@@ -5,7 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import me.frep.vulcan.api.VulcanAPI;
+import lol.aabss.skuishy.elements.vulcan.VulcanHook;
+import me.frep.vulcan.api.VulcanAPI$Factory;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,16 +19,18 @@ import org.jetbrains.annotations.NotNull;
 public class CondIsVulcanFrozen extends PropertyCondition<Player> {
 
     static {
-        register(CondIsVulcanFrozen.class,
-                PropertyType.BE,
-                "vulcan frozen",
-                "players"
-        );
+        if (VulcanHook.vulcanEnabled()) {
+            register(CondIsVulcanFrozen.class,
+                    PropertyType.BE,
+                    "vulcan frozen",
+                    "players"
+            );
+        }
     }
 
     @Override
     public boolean check(Player player) {
-        return VulcanAPI.Factory.getApi().isFrozen(player);
+        return VulcanAPI$Factory.getApi().isFrozen(player);
     }
 
     @Override
