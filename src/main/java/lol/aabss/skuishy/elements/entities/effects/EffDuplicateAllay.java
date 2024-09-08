@@ -11,9 +11,9 @@ import org.bukkit.entity.Allay;
 @Name("Allay - Duplicate")
 @Description("Makes an allay duplicate itself.")
 @Examples({
-        "add \"mama\" and \"papa\" to chat completions of all players"
+        "make {_allay} duplicate"
 })
-@Since("2.3")
+@Since("2.8")
 public class EffDuplicateAllay extends SimpleEntityEffect<Allay> {
 
     static {

@@ -48,6 +48,7 @@ public class Skuishy extends JavaPlugin {
     private static Metrics metrics;
     public static final boolean skript_reflect_supported = Skript.classExists("com.btk5h.skriptmirror.ObjectWrapper");
 
+    @SuppressWarnings("UnstableApiUsage")
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
@@ -173,8 +174,6 @@ public class Skuishy extends JavaPlugin {
         if (object instanceof String string) {
             String[] split = string.split(":");
             if (split.length > 1) {
-                String namespace = split[0];
-                String key = split[1];
                 return new NamespacedKey(split[0], split[1]);
             } else {
                 return new NamespacedKey(Skuishy.instance, string);

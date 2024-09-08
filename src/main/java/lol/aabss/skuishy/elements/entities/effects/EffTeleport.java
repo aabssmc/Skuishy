@@ -5,15 +5,10 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.lang.Effect;
-import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.SkriptParser;
-import ch.njol.util.Kleenean;
+import lol.aabss.skuishy.other.skript.EntityEffect;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.NotNull;
 
 @Name("Enderman - Teleport")
 @Description("Tries to make an enderman teleport either randomly or towards an entity.")
@@ -21,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
         "make {_e} teleport towards player"
 })
 @Since("2.3")
-public class EffTeleport extends Effect {
+public class EffTeleport extends EntityEffect<Enderman> {
 
     static {
         if (Skript.methodExists(Enderman.class, "teleport") && Skript.methodExists(Enderman.class, "teleportTowards", Entity.class)) {
@@ -31,39 +26,17 @@ public class EffTeleport extends Effect {
         }
     }
 
-    private Expression<Entity> enderman;
-    private Expression<Entity> entity;
-    private boolean random;
-
     @Override
-    protected void execute(@NotNull Event event) {
-        Entity enderman = this.enderman.getSingle(event);
-        if (enderman instanceof Enderman){
-            if (entity == null){
-                if (random) {
-                    ((Enderman) enderman).teleportRandomly();
-                } else {
-                    ((Enderman) enderman).teleport();
-                }
-            } else{
-                Entity entity = this.entity.getSingle(event);
-                if (entity != null){
-                    ((Enderman) enderman).teleportTowards(entity);
-                }
-            }
+    protected void execute(Enderman enderman, Event event) {
+        if (exprs.length >= 2 && exprs[1].getSingle(event) != null) {
+            Entity entity = (Entity) exprs[1].getSingle(event);
+            if (entity == null) return;
+            enderman.teleportTowards(entity);
+        } else if (tags.contains("random")) {
+            enderman.teleportRandomly();
+        } else {
+            enderman.teleport();
         }
     }
 
-    @Override
-    public @NotNull String toString(@Nullable Event event, boolean debug) {
-        return "make a enderman teleport";
-    }
-
-    @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        enderman = (Expression<Entity>) exprs[0];
-        entity = (Expression<Entity>) exprs[1];
-        random = parseResult.hasTag("randomly");
-        return true;
-    }
 }
