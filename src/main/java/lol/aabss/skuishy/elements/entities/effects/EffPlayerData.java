@@ -5,8 +5,9 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import lol.aabss.skuishy.other.skript.SimpleEntityEffect;
+import lol.aabss.skuishy.other.skript.EntityEffect;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 
 @Name("Player - Player Data")
 @Description(
@@ -22,7 +23,7 @@ import org.bukkit.entity.Player;
         "load player's current data"
 })
 @Since("2.1")
-public class EffPlayerData extends SimpleEntityEffect<Player> {
+public class EffPlayerData extends EntityEffect<Player> {
 
     static {
         Skript.registerEffect(EffPlayerData.class,
@@ -31,7 +32,7 @@ public class EffPlayerData extends SimpleEntityEffect<Player> {
     }
 
     @Override
-    protected void execute(Player player) {
+    protected void execute(Player player, Event event) {
         if (tags.contains("load")) {
             player.loadData();
         } else {

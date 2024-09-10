@@ -4,7 +4,6 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.google.common.reflect.TypeToken;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class EntityEffect<T extends Entity> extends Effect {
+public abstract class EntityEffect<T extends Entity> extends Effect implements EntityStatement<T> {
 
     private Expression<Entity> entities;
     protected int matchedPattern;
@@ -31,10 +30,6 @@ public abstract class EntityEffect<T extends Entity> extends Effect {
                 execute((T) entity, event);
             }
         }
-    }
-
-    private boolean accepts(Entity entity) {
-        return new TypeToken<T>(getClass()){}.getRawType().isAssignableFrom(entity.getClass());
     }
 
     @Override

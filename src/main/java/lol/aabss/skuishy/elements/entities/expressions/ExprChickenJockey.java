@@ -5,12 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.util.coll.CollectionUtils;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Chicken;
-import org.bukkit.entity.Entity;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Chicken - Chicken Jockey")
@@ -19,48 +15,21 @@ import org.jetbrains.annotations.Nullable;
         "set chicken jockey state of {_chicken} to true"
 })
 @Since("2.8")
-public class ExprChickenJockey extends SimplePropertyExpression<Entity, Boolean> {
+public class ExprChickenJockey extends EntityExpression<Chicken, Boolean> {
 
     static {
         register(ExprChickenJockey.class, Boolean.class, "chicken jockey [state|mode]", "entities");
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "chicken jockey";
+    public Boolean get(Chicken chicken) {
+        return chicken.isChickenJockey();
     }
 
     @Override
-    public @Nullable Boolean convert(Entity entity) {
-        if (entity instanceof Chicken) {
-            return ((Chicken) entity).isChickenJockey();
-        }
-        return null;
-    }
-
-    @Override
-    public @NotNull Class<? extends Boolean> getReturnType() {
-        return Boolean.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
-        }
-        return null;
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            if (delta[0] instanceof Boolean) {
-                for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof Chicken) {
-                        ((Chicken) entity).setIsChickenJockey((Boolean) delta[0]);
-                    }
-                }
-            }
+    public void change(Chicken chicken, @Nullable Boolean aBoolean, Changer.ChangeMode mode) {
+        if (aBoolean != null && mode == Changer.ChangeMode.SET) {
+            chicken.setIsChickenJockey(aBoolean);
         }
     }
 }

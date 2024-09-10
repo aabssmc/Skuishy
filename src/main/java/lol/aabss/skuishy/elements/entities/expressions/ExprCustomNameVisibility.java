@@ -5,79 +5,31 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.PropertyExpression;
-import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.SkriptParser;
-import ch.njol.util.Kleenean;
-import ch.njol.util.coll.CollectionUtils;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Entity;
-import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@SuppressWarnings("NullableProblems")
 @Name("Entity - Custom Name Visibility")
 @Description("Gets/sets the custom name visibility of entities.")
 @Examples({
         "set custom name visibility of target entity to true"
 })
 @Since("1.7.5")
-public class ExprCustomNameVisibility extends PropertyExpression<Entity, Boolean> {
+public class ExprCustomNameVisibility extends EntityExpression<Entity, Boolean> {
 
     static {
-        register(ExprCustomNameVisibility.class, Boolean.class,
-                "custom[ ]name visib(le|ility)",
-                "entities"
-        );
+        register(ExprCustomNameVisibility.class, Boolean.class, "custom[ ]name visib(le|ility)", "entities");
     }
 
     @Override
-    protected @Nullable Boolean[] get(@NotNull Event event, Entity @NotNull [] source) {
-        List<Boolean> entities = new ArrayList<>();
-        for (Entity entity : getExpr().getArray(event))
-            entities.add(entity.isCustomNameVisible());
-        return entities.toArray(Boolean[]::new);
+    public Boolean get(Entity entity) {
+        return entity.isCustomNameVisible();
     }
 
     @Override
-    public void change(@NotNull Event event, Object @Nullable [] delta, Changer.@NotNull ChangeMode mode){
-        if (mode == Changer.ChangeMode.SET && delta != null) {
-            Entity[] en = getExpr().getArray(event);
-            for (Entity entity : en) {
-                entity.setCustomNameVisible((Boolean) delta[0]);
-            }
+    public void change(Entity entity, @Nullable Boolean aBoolean, Changer.ChangeMode mode) {
+        if (aBoolean != null && mode == Changer.ChangeMode.SET) {
+            entity.setCustomNameVisible(aBoolean);
         }
-    }
-
-    @Override
-    public boolean isSingle() {
-        return getExpr().isSingle();
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(final Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
-        }
-        return null;
-    }
-
-    @Override
-    public @NotNull Class<? extends Boolean> getReturnType() {
-        return Boolean.class;
-    }
-
-    @Override
-    public @NotNull String toString(@Nullable Event event, boolean debug) {
-        return "custom name visibility";
-    }
-
-    @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        setExpr((Expression<? extends Entity>) exprs[0]);
-        return true;
     }
 }

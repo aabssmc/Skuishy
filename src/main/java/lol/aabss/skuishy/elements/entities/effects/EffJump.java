@@ -7,10 +7,11 @@ import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import com.destroystokyo.paper.event.entity.EntityJumpEvent;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
-import lol.aabss.skuishy.other.skript.SimpleEntityEffect;
+import lol.aabss.skuishy.other.skript.EntityEffect;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
@@ -22,14 +23,14 @@ import static org.bukkit.Statistic.JUMP;
         "make all players jump"
 })
 @Since("2.4")
-public class EffJump extends SimpleEntityEffect<LivingEntity> {
+public class EffJump extends EntityEffect<LivingEntity> {
 
     static {
         Skript.registerEffect(EffJump.class, "make %livingentities% jump");
     }
 
     @Override
-    protected void execute(LivingEntity p) {
+    protected void execute(LivingEntity p, Event event) {
         Vector from = p.getVelocity();
         float f = p.getWorld().getBlockState(p.getLocation()).getBlock().getType() == Material.HONEY_BLOCK ? 0.5F : 1.0F;
         float g = p.getWorld().getBlockState(p.getVelocity().toLocation(p.getWorld())).getBlock().getType() == Material.HONEY_BLOCK ? 0.5F : 1.0F;

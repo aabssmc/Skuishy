@@ -5,12 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.util.coll.CollectionUtils;
-import org.bukkit.entity.Entity;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Minecart;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Minecart - Slow When Empty")
@@ -19,48 +15,21 @@ import org.jetbrains.annotations.Nullable;
         "set slow when empty of {_minecart} to false"
 })
 @Since("2.8")
-public class ExprMinecartSlowWhenEmpty extends SimplePropertyExpression<Entity, Boolean> {
+public class ExprMinecartSlowWhenEmpty extends EntityExpression<Minecart, Boolean> {
 
     static {
         register(ExprMinecartSlowWhenEmpty.class, Boolean.class, "[minecart] slow when empty [mode|state]", "entities");
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "slow when empty";
+    public Boolean get(Minecart minecart) {
+        return minecart.isSlowWhenEmpty();
     }
 
     @Override
-    public @Nullable Boolean convert(Entity entity) {
-        if (entity instanceof Minecart) {
-            return ((Minecart) entity).isSlowWhenEmpty();
-        }
-        return null;
-    }
-
-    @Override
-    public @NotNull Class<? extends Boolean> getReturnType() {
-        return Boolean.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
-        }
-        return null;
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            if (delta[0] instanceof Boolean) {
-                for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof Minecart) {
-                        ((Minecart) entity).setSlowWhenEmpty((Boolean) delta[0]);
-                    }
-                }
-            }
+    public void change(Minecart minecart, @Nullable Boolean aBoolean, Changer.ChangeMode mode) {
+        if (aBoolean != null && mode == Changer.ChangeMode.SET) {
+            minecart.setSlowWhenEmpty(aBoolean);
         }
     }
 }

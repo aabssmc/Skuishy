@@ -5,11 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.util.coll.CollectionUtils;
-import org.bukkit.entity.*;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
+import lol.aabss.skuishy.other.skript.EntityExpression;
+import org.bukkit.entity.IronGolem;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Iron Golem - Player Created ")
@@ -18,48 +15,21 @@ import org.jetbrains.annotations.Nullable;
         "set player created state of {_irongolem} to true"
 })
 @Since("2.8")
-public class ExprIronGolemPlayerCreated extends SimplePropertyExpression<Entity, Boolean> {
+public class ExprIronGolemPlayerCreated extends EntityExpression<IronGolem, Boolean> {
 
     static {
         register(ExprIronGolemPlayerCreated.class, Boolean.class, "[[iron] golem] player created [state|mode]", "entities");
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "player created state";
+    public Boolean get(IronGolem ironGolem) {
+        return ironGolem.isPlayerCreated();
     }
 
     @Override
-    public @Nullable Boolean convert(Entity entity) {
-        if (entity instanceof IronGolem) {
-            return ((IronGolem) entity).isPlayerCreated();
-        }
-        return null;
-    }
-
-    @Override
-    public @NotNull Class<? extends Boolean> getReturnType() {
-        return Boolean.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
-        }
-        return null;
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            if (delta[0] instanceof Boolean) {
-                for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof IronGolem) {
-                        ((IronGolem) entity).setPlayerCreated((Boolean) delta[0]);
-                    }
-                }
-            }
+    public void change(IronGolem ironGolem, @Nullable Boolean aBoolean, Changer.ChangeMode mode) {
+        if (aBoolean != null && mode == Changer.ChangeMode.SET) {
+            ironGolem.setPlayerCreated(aBoolean);
         }
     }
 }

@@ -5,8 +5,9 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import lol.aabss.skuishy.other.skript.SimpleEntityEffect;
+import lol.aabss.skuishy.other.skript.EntityEffect;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 
 @Name("Player - Wake Up")
 @Description("Makes a player wake up and optionally sets their spawn.")
@@ -14,7 +15,7 @@ import org.bukkit.entity.Player;
         "make player wake up and set their spawn"
 })
 @Since("2.0")
-public class EffWakeUp extends SimpleEntityEffect<Player> {
+public class EffWakeUp extends EntityEffect<Player> {
 
     static {
         Skript.registerEffect(EffWakeUp.class,
@@ -23,7 +24,7 @@ public class EffWakeUp extends SimpleEntityEffect<Player> {
     }
 
     @Override
-    protected void execute(Player player) {
+    protected void execute(Player player, Event event) {
         player.wakeup(tags.contains("spawn"));
     }
 }

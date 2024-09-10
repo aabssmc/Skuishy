@@ -5,8 +5,9 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import lol.aabss.skuishy.other.skript.SimpleEntityEffect;
+import lol.aabss.skuishy.other.skript.EntityEffect;
 import org.bukkit.entity.Allay;
+import org.bukkit.event.Event;
 
 @Name("Allay - Dancing")
 @Description("Makes an allay start/stop dancing.")
@@ -14,7 +15,7 @@ import org.bukkit.entity.Allay;
         "make {_allay} allay dance"
 })
 @Since("2.8")
-public class EffAllayDancing extends SimpleEntityEffect<Allay> {
+public class EffAllayDancing extends EntityEffect<Allay> {
 
     static {
         Skript.registerEffect(EffAllayDancing.class,
@@ -23,7 +24,7 @@ public class EffAllayDancing extends SimpleEntityEffect<Allay> {
     }
 
     @Override
-    protected void execute(Allay allay) {
+    protected void execute(Allay allay, Event event) {
         if (tags.contains("stop")) {
             allay.startDancing();
         } else {

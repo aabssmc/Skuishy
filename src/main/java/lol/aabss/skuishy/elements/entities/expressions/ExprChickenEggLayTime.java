@@ -5,12 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.util.coll.CollectionUtils;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Chicken;
-import org.bukkit.entity.Entity;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Chicken - Egg Lay Time")
@@ -19,48 +15,22 @@ import org.jetbrains.annotations.Nullable;
         "set egg lay time of {_chicken} to 20 # 1 second"
 })
 @Since("2.8")
-public class ExprChickenEggLayTime extends SimplePropertyExpression<Entity, Integer> {
+public class ExprChickenEggLayTime extends EntityExpression<Chicken, Integer> {
 
     static {
         register(ExprChickenEggLayTime.class, Integer.class, "[chicken] egg lay time", "entities");
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "egg lay time";
+    public Integer get(Chicken chicken) {
+        return chicken.getEggLayTime();
     }
 
     @Override
-    public @Nullable Integer convert(Entity entity) {
-        if (entity instanceof Chicken) {
-            return ((Chicken) entity).getEggLayTime();
-        }
-        return null;
-    }
-
-    @Override
-    public @NotNull Class<? extends Integer> getReturnType() {
-        return Integer.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Integer.class);
-        }
-        return null;
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            if (delta[0] instanceof Integer) {
-                for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof Chicken) {
-                        ((Chicken) entity).setEggLayTime((Integer) delta[0]);
-                    }
-                }
-            }
+    public void change(Chicken chicken, @Nullable Integer integer, Changer.ChangeMode mode) {
+        if (integer != null && mode == Changer.ChangeMode.SET) {
+            chicken.setEggLayTime(integer);
         }
     }
+
 }

@@ -5,8 +5,9 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import lol.aabss.skuishy.other.skript.SimpleEntityEffect;
+import lol.aabss.skuishy.other.skript.EntityEffect;
 import org.bukkit.entity.Allay;
+import org.bukkit.event.Event;
 
 @Name("Allay - Duplicate")
 @Description("Makes an allay duplicate itself.")
@@ -14,7 +15,7 @@ import org.bukkit.entity.Allay;
         "make {_allay} duplicate"
 })
 @Since("2.8")
-public class EffDuplicateAllay extends SimpleEntityEffect<Allay> {
+public class EffDuplicateAllay extends EntityEffect<Allay> {
 
     static {
         Skript.registerEffect(EffDuplicateAllay.class,
@@ -24,7 +25,7 @@ public class EffDuplicateAllay extends SimpleEntityEffect<Allay> {
     }
 
     @Override
-    protected void execute(Allay allay) {
+    protected void execute(Allay allay, Event event) {
         allay.duplicateAllay();
     }
 }

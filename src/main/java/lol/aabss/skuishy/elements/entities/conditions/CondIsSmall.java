@@ -1,13 +1,11 @@
 package lol.aabss.skuishy.elements.entities.conditions;
 
-import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import lol.aabss.skuishy.other.skript.EntityCondition;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.NotNull;
 
 @Name("Armor Stand - Is Small")
 @Description("True if the armorstand is small.")
@@ -16,22 +14,15 @@ import org.jetbrains.annotations.NotNull;
         "\tset small state of {_armorstand} to false"
 })
 @Since("2.8")
-public class CondIsSmall extends PropertyCondition<Entity> {
+public class CondIsSmall extends EntityCondition<ArmorStand> {
 
     static {
         register(CondIsSmall.class, PropertyType.HAVE, "[armor[ |-]stand] small", "entities");
     }
 
     @Override
-    public boolean check(Entity entity) {
-        if (entity instanceof ArmorStand) {
-            return ((ArmorStand) entity).isSmall();
-        }
-        return false;
+    protected boolean run(ArmorStand armorStand) {
+        return armorStand.isSmall();
     }
 
-    @Override
-    protected @NotNull String getPropertyName() {
-        return "small";
-    }
 }

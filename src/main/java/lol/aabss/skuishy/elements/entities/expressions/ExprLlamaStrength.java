@@ -5,12 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.util.coll.CollectionUtils;
-import org.bukkit.entity.Entity;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Llama;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Llama - Strength")
@@ -19,48 +15,21 @@ import org.jetbrains.annotations.Nullable;
         "set llama strength of {_minecart} to 100"
 })
 @Since("2.8")
-public class ExprLlamaStrength extends SimplePropertyExpression<Entity, Integer> {
+public class ExprLlamaStrength extends EntityExpression<Llama, Integer> {
 
     static {
         register(ExprLlamaStrength.class, Integer.class, "llama strength", "entities");
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "llama strength";
+    public Integer get(Llama llama) {
+        return llama.getStrength();
     }
 
     @Override
-    public @Nullable Integer convert(Entity entity) {
-        if (entity instanceof Llama) {
-            return ((Llama) entity).getStrength();
-        }
-        return null;
-    }
-
-    @Override
-    public @NotNull Class<? extends Integer> getReturnType() {
-        return Integer.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Integer.class);
-        }
-        return null;
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            if (delta[0] instanceof Integer) {
-                for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof Llama) {
-                        ((Llama) entity).setStrength((Integer) delta[0]);
-                    }
-                }
-            }
+    public void change(Llama llama, @Nullable Integer integer, Changer.ChangeMode mode) {
+        if (integer != null && mode == Changer.ChangeMode.SET) {
+            llama.setStrength(integer);
         }
     }
 }

@@ -1,13 +1,11 @@
 package lol.aabss.skuishy.elements.entities.conditions;
 
-import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import lol.aabss.skuishy.other.skript.EntityCondition;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.NotNull;
 
 @Name("Armor Stand - Has Arms")
 @Description("True if the armorstand has arms.")
@@ -16,22 +14,15 @@ import org.jetbrains.annotations.NotNull;
         "\tset arms state of {_armorstand} to false"
 })
 @Since("2.8")
-public class CondHasArms extends PropertyCondition<Entity> {
+public class CondHasArms extends EntityCondition<ArmorStand> {
 
     static {
         register(CondHasArms.class, PropertyType.HAVE, "[armor[ |-]stand] arms", "entities");
     }
 
     @Override
-    public boolean check(Entity entity) {
-        if (entity instanceof ArmorStand) {
-            return ((ArmorStand) entity).hasArms();
-        }
-        return false;
+    protected boolean run(ArmorStand armorStand) {
+        return armorStand.hasArms();
     }
 
-    @Override
-    protected @NotNull String getPropertyName() {
-        return "arms";
-    }
 }

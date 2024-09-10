@@ -5,12 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.util.coll.CollectionUtils;
-import org.bukkit.entity.Entity;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Zombie;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Zombie - Can Break Doors")
@@ -19,48 +15,21 @@ import org.jetbrains.annotations.Nullable;
         "set break doors state of {_zombie} to true"
 })
 @Since("2.8")
-public class ExprZombieBreakDoors extends SimplePropertyExpression<Entity, Boolean> {
+public class ExprZombieBreakDoors extends EntityExpression<Zombie, Boolean> {
 
     static {
         register(ExprZombieBreakDoors.class, Boolean.class, "[zombie] [can] break doors [mode|state]", "entities");
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "zombie can break doors";
+    public Boolean get(Zombie zombie) {
+        return zombie.canBreakDoors();
     }
 
     @Override
-    public @Nullable Boolean convert(Entity entity) {
-        if (entity instanceof Zombie) {
-            return ((Zombie) entity).canBreakDoors();
-        }
-        return null;
-    }
-
-    @Override
-    public @NotNull Class<? extends Boolean> getReturnType() {
-        return Boolean.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
-        }
-        return null;
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            if (delta[0] instanceof Boolean) {
-                for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof Zombie) {
-                        ((Zombie) entity).setCanBreakDoors((Boolean) delta[0]);
-                    }
-                }
-            }
+    public void change(Zombie zombie, @Nullable Boolean aBoolean, Changer.ChangeMode mode) {
+        if (aBoolean != null && mode == Changer.ChangeMode.SET) {
+            zombie.setCanBreakDoors(aBoolean);
         }
     }
 }

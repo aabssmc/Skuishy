@@ -5,13 +5,11 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.util.coll.CollectionUtils;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Allay;
-import org.bukkit.entity.Entity;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 @Name("Allay - Duplication Cooldown")
 @Description("Gets/sets the duplication cooldown of an allay in ticks.")
@@ -19,50 +17,28 @@ import org.jetbrains.annotations.Nullable;
         "set duplication cooldown of {_allay} to 20 # 1 second"
 })
 @Since("2.8")
-public class ExprAllayDuplicationCooldown extends SimplePropertyExpression<Entity, Long> {
+public class ExprAllayDuplicationCooldown extends EntityExpression<Allay, Long> {
 
     static {
         register(ExprAllayDuplicationCooldown.class, Long.class, "[allay] duplication cooldown [ticks]", "entities");
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "duplication cooldown ticks";
+    public Long get(Allay allay) {
+        return allay.getDuplicationCooldown();
     }
 
     @Override
-    public @Nullable Long convert(Entity entity) {
-        if (entity instanceof Allay) {
-            return ((Allay) entity).getDuplicationCooldown();
+    public void change(Allay allay, @Nullable Long aLong, Changer.ChangeMode mode) {
+        if (mode == Changer.ChangeMode.SET && aLong != null) {
+            allay.setDuplicationCooldown(aLong);
+        } else {
+            allay.resetDuplicationCooldown();
         }
-        return null;
     }
 
     @Override
-    public @NotNull Class<? extends Long> getReturnType() {
-        return Long.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.RESET) {
-            return CollectionUtils.array(Long.class);
-        }
-        return null;
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        for (Entity entity : getExpr().getArray(e)) {
-            if (entity instanceof Allay) {
-                if (mode == Changer.ChangeMode.SET) {
-                    if (delta[0] instanceof Long) {
-                        ((Allay) entity).setDuplicationCooldown((Long) delta[0]);
-                    }
-                } else if (mode == Changer.ChangeMode.RESET) {
-                    ((Allay) entity).resetDuplicationCooldown();
-                }
-            }
-        }
+    public List<Changer.ChangeMode> acceptedChanges() {
+        return List.of(Changer.ChangeMode.SET, Changer.ChangeMode.RESET);
     }
 }

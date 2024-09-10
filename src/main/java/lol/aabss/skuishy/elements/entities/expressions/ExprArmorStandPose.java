@@ -5,16 +5,9 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.SkriptParser;
-import ch.njol.util.Kleenean;
-import ch.njol.util.coll.CollectionUtils;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.bukkit.event.Event;
 import org.bukkit.util.EulerAngle;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Armor Stand - Poses")
@@ -23,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
         "set {_angle} to head pose of {_armorstand}"
 })
 @Since("2.8")
-public class ExprArmorStandPose extends SimplePropertyExpression<Entity, EulerAngle> {
+public class ExprArmorStandPose extends EntityExpression<ArmorStand, EulerAngle> {
 
     static {
         register(ExprArmorStandPose.class, EulerAngle.class,
@@ -32,64 +25,31 @@ public class ExprArmorStandPose extends SimplePropertyExpression<Entity, EulerAn
         );
     }
 
-    private String part;
-
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        part = parseResult.tags.getFirst();
-        return super.init(exprs, matchedPattern, isDelayed, parseResult);
+    public EulerAngle get(ArmorStand armorStand) {
+        return switch (tags.getFirst()) {
+            case "head" -> armorStand.getHeadPose();
+            case "torso" -> armorStand.getBodyPose();
+            case "right arm" -> armorStand.getRightArmPose();
+            case "left arm" -> armorStand.getLeftArmPose();
+            case "right leg" -> armorStand.getRightLegPose();
+            case "left leg" -> armorStand.getLeftLegPose();
+            default -> null;
+        };
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "armor stand pose";
-    }
-
-    @Override
-    public @Nullable EulerAngle convert(Entity entity) {
-        if (entity instanceof ArmorStand) {
-            return switch (part) {
-                case "head" -> ((ArmorStand) entity).getHeadPose();
-                case "torso" -> ((ArmorStand) entity).getBodyPose();
-                case "right arm" -> ((ArmorStand) entity).getRightArmPose();
-                case "left arm" -> ((ArmorStand) entity).getLeftArmPose();
-                case "right leg" -> ((ArmorStand) entity).getRightLegPose();
-                case "left leg" -> ((ArmorStand) entity).getLeftLegPose();
-                default -> null;
+    public void change(ArmorStand armorStand, @Nullable EulerAngle eulerAngle, Changer.ChangeMode mode) {
+        if (eulerAngle != null && mode == Changer.ChangeMode.SET) {
+            switch (tags.getFirst()) {
+                case "head" -> armorStand.setHeadPose(eulerAngle);
+                case "torso" -> armorStand.setBodyPose(eulerAngle);
+                case "right arm" -> armorStand.setRightArmPose(eulerAngle);
+                case "left arm" -> armorStand.setLeftArmPose(eulerAngle);
+                case "right leg" -> armorStand.setRightLegPose(eulerAngle);
+                case "left leg" -> armorStand.setLeftLegPose(eulerAngle);
             };
         }
-        return null;
     }
 
-    @Override
-    public @NotNull Class<? extends EulerAngle> getReturnType() {
-        return EulerAngle.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE) {
-            return CollectionUtils.array(EulerAngle.class);
-        }
-        return CollectionUtils.array();
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        for (Entity entity : getExpr().getArray(e)) {
-            if (!(entity instanceof ArmorStand)){
-                continue;
-            }
-            if (mode == Changer.ChangeMode.SET) {
-                switch (part) {
-                    case "head" -> ((ArmorStand) entity).setHeadPose((EulerAngle) delta[0]);
-                    case "torso" -> ((ArmorStand) entity).setBodyPose((EulerAngle) delta[0]);
-                    case "right arm" -> ((ArmorStand) entity).setRightArmPose((EulerAngle) delta[0]);
-                    case "left arm" -> ((ArmorStand) entity).setLeftArmPose((EulerAngle) delta[0]);
-                    case "right leg" -> ((ArmorStand) entity).setRightLegPose((EulerAngle) delta[0]);
-                    case "left leg" -> ((ArmorStand) entity).setLeftLegPose((EulerAngle) delta[0]);
-                };
-            }
-        }
-    }
 }

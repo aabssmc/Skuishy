@@ -1,13 +1,11 @@
 package lol.aabss.skuishy.elements.entities.conditions;
 
-import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
+import lol.aabss.skuishy.other.skript.EntityCondition;
 import org.bukkit.entity.Allay;
-import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.NotNull;
 
 @Name("Allay - Is Dancing")
 @Description("True if the allay is dancing.")
@@ -16,22 +14,15 @@ import org.jetbrains.annotations.NotNull;
         "\tset dash state of {_allay} to false"
 })
 @Since("2.8")
-public class CondIsDancing extends PropertyCondition<Entity> {
+public class CondIsDancing extends EntityCondition<Allay> {
 
     static {
         register(CondIsDancing.class, "[allay] dancing", "entities");
     }
 
     @Override
-    public boolean check(Entity entity) {
-        if (entity instanceof Allay) {
-            return ((Allay) entity).isDancing();
-        }
-        return false;
+    protected boolean run(Allay allay) {
+        return allay.isDancing();
     }
 
-    @Override
-    protected @NotNull String getPropertyName() {
-        return "dancing";
-    }
 }

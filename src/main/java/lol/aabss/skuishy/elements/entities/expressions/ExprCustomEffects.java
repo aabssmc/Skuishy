@@ -26,10 +26,7 @@ import org.jetbrains.annotations.Nullable;
 public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> {
 
     static {
-        register(ExprCustomEffects.class, PotionEffect.class,
-                "[custom] [potion] effects",
-                "entity"
-        );
+        register(ExprCustomEffects.class, PotionEffect.class, "[custom] [potion] effects", "entity");
     }
 
     @Override

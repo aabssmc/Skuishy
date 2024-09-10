@@ -5,12 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.util.coll.CollectionUtils;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Armor Stand - Baseplate")
@@ -19,49 +15,23 @@ import org.jetbrains.annotations.Nullable;
         "set baseplate state of {_armorstand} to true"
 })
 @Since("2.8")
-public class ExprArmorStandBaseplate extends SimplePropertyExpression<Entity, Boolean> {
+public class ExprArmorStandBaseplate extends EntityExpression<ArmorStand, Boolean> {
 
     static {
         register(ExprArmorStandBaseplate.class, Boolean.class, "[armor[ |-]stand] baseplate [mode|state]", "entities");
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "baseplate";
+    public Boolean get(ArmorStand armorStand) {
+        return armorStand.hasBasePlate();
     }
 
     @Override
-    public @Nullable Boolean convert(Entity entity) {
-        if (entity instanceof ArmorStand) {
-            return ((ArmorStand) entity).hasBasePlate();
-        }
-        return null;
-    }
-
-    @Override
-    public @NotNull Class<? extends Boolean> getReturnType() {
-        return Boolean.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
-        }
-        return null;
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            if (delta[0] instanceof Boolean) {
-                for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof ArmorStand) {
-                        ((ArmorStand) entity).setBasePlate((Boolean) delta[0]);
-                    }
-                }
-            }
+    public void change(ArmorStand armorStand, @Nullable Boolean aBoolean, Changer.ChangeMode mode) {
+        if (aBoolean != null && mode == Changer.ChangeMode.SET) {
+            armorStand.setBasePlate(aBoolean);
         }
     }
+
 }
 

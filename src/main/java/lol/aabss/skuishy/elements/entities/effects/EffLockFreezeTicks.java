@@ -5,8 +5,9 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import lol.aabss.skuishy.other.skript.SimpleEntityEffect;
+import lol.aabss.skuishy.other.skript.EntityEffect;
 import org.bukkit.entity.Entity;
+import org.bukkit.event.Event;
 
 @Name("Entity - Lock Freeze Ticks")
 @Description("Locks/Unlocks freeze ticks of player")
@@ -15,7 +16,7 @@ import org.bukkit.entity.Entity;
 })
 @Since("1.9")
 
-public class EffLockFreezeTicks extends SimpleEntityEffect<Entity> {
+public class EffLockFreezeTicks extends EntityEffect<Entity> {
 
     static{
         if (Skript.methodExists(Entity.class, "lockFreezeTicks", Boolean.class)) {
@@ -26,7 +27,7 @@ public class EffLockFreezeTicks extends SimpleEntityEffect<Entity> {
     }
 
     @Override
-    protected void execute(Entity entity) {
+    protected void execute(Entity entity, Event event) {
         entity.lockFreezeTicks(tags.contains("un"));
     }
 }

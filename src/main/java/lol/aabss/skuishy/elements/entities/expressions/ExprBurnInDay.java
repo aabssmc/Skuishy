@@ -5,14 +5,11 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import ch.njol.util.coll.CollectionUtils;
+import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.AbstractSkeleton;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Zombie;
-import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Name("Skeleton/Zombie/Phantom - Burn In Day")
@@ -21,19 +18,14 @@ import org.jetbrains.annotations.Nullable;
         "set burn in day state of {_skeleton} to true"
 })
 @Since("2.8")
-public class ExprBurnInDay extends SimplePropertyExpression<Entity, Boolean> {
+public class ExprBurnInDay extends EntityExpression<Entity, Boolean> {
 
     static {
         register(ExprBurnInDay.class, Boolean.class, "[skeleton|zombie|phantom] [should] burn in day [state|mode]", "entities");
     }
 
     @Override
-    protected @NotNull String getPropertyName() {
-        return "burn in day";
-    }
-
-    @Override
-    public @Nullable Boolean convert(Entity entity) {
+    public Boolean get(Entity entity) {
         if (entity instanceof AbstractSkeleton) {
             return ((AbstractSkeleton) entity).shouldBurnInDay();
         } else if (entity instanceof Zombie) {
@@ -45,31 +37,14 @@ public class ExprBurnInDay extends SimplePropertyExpression<Entity, Boolean> {
     }
 
     @Override
-    public @NotNull Class<? extends Boolean> getReturnType() {
-        return Boolean.class;
-    }
-
-    @Override
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            return CollectionUtils.array(Boolean.class);
-        }
-        return null;
-    }
-
-    @Override
-    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (mode == Changer.ChangeMode.SET) {
-            if (delta[0] instanceof Boolean) {
-                for (Entity entity : getExpr().getArray(e)) {
-                    if (entity instanceof AbstractSkeleton) {
-                        ((AbstractSkeleton) entity).setShouldBurnInDay((Boolean) delta[0]);
-                    } else if (entity instanceof Zombie) {
-                        ((Zombie) entity).setShouldBurnInDay((Boolean) delta[0]);
-                    } else if (entity instanceof Phantom) {
-                        ((Phantom) entity).setShouldBurnInDay((Boolean) delta[0]);
-                    }
-                }
+    public void change(Entity entity, @Nullable Boolean aBoolean, Changer.ChangeMode mode) {
+        if (aBoolean != null && mode == Changer.ChangeMode.SET) {
+            if (entity instanceof AbstractSkeleton) {
+                ((AbstractSkeleton) entity).setShouldBurnInDay(aBoolean);
+            } else if (entity instanceof Zombie) {
+                ((Zombie) entity).setShouldBurnInDay(aBoolean);
+            } else if (entity instanceof Phantom) {
+                ((Phantom) entity).setShouldBurnInDay(aBoolean);
             }
         }
     }
