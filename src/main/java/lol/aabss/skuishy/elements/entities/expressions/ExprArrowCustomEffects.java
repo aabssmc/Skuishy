@@ -23,10 +23,10 @@ import org.jetbrains.annotations.Nullable;
         "clear effects of last shot arrow"
 })
 @Since("2.1")
-public class ExprCustomEffects extends PropertyExpression<Entity, PotionEffect> {
+public class ExprArrowCustomEffects extends PropertyExpression<Entity, PotionEffect> {
 
     static {
-        register(ExprCustomEffects.class, PotionEffect.class, "[custom] [potion] effects", "entity");
+        register(ExprArrowCustomEffects.class, PotionEffect.class, "[custom] [potion] effects", "entity");
     }
 
     @Override

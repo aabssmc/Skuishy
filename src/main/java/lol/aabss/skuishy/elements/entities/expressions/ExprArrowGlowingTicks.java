@@ -15,10 +15,10 @@ import org.jetbrains.annotations.Nullable;
         "set glow ticks of {_spectralarrow} to 10"
 })
 @Since("2.8")
-public class ExprSpectralArrowGlowingTicks extends EntityExpression<SpectralArrow, Integer> {
+public class ExprArrowGlowingTicks extends EntityExpression<SpectralArrow, Integer> {
 
     static {
-        register(ExprSpectralArrowGlowingTicks.class, Integer.class, "[spectral[ |-]arrow] glow[ing] ticks", "entities");
+        register(ExprArrowGlowingTicks.class, Integer.class, "[spectral[ |-]arrow] glow[ing] ticks", "entities");
     }
 
     @Override

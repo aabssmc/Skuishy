@@ -13,10 +13,10 @@ import org.bukkit.entity.Skeleton;
         "set {_time} to powdered snow time of {_skeleton}"
 })
 @Since("2.8")
-public class ExprPowderedSnowTime extends EntityExpression<Skeleton, Integer> {
+public class ExprSkeletonPowderedSnowTime extends EntityExpression<Skeleton, Integer> {
 
     static {
-        register(ExprPowderedSnowTime.class, Integer.class, "[in] powdered snow time", "entities");
+        register(ExprSkeletonPowderedSnowTime.class, Integer.class, "[in] powdered snow time", "entities");
     }
 
     @Override

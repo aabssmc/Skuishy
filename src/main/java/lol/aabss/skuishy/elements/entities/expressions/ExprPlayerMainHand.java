@@ -14,10 +14,10 @@ import org.bukkit.entity.Player;
         "send player's main hand"
 })
 @Since("1.2")
-public class ExprMainHand extends EntityExpression<Player, String> {
+public class ExprPlayerMainHand extends EntityExpression<Player, String> {
 
     static {
-        register(ExprMainHand.class, String.class, "main[(-| )]hand", "players");
+        register(ExprPlayerMainHand.class, String.class, "main[(-| )]hand", "players");
     }
 
     @Override

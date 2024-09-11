@@ -17,11 +17,11 @@ import org.jetbrains.annotations.Nullable;
         "set base potion type to strong harming"
 })
 @Since("2.1")
-public class ExprBaseEffect extends EntityExpression<Arrow, PotionType> {
+public class ExprArrowBaseEffect extends EntityExpression<Arrow, PotionType> {
 
     static {
         if (Skript.methodExists(Arrow.class, "getBasePotionType")) {
-            register(ExprBaseEffect.class, PotionType.class, "base (potion|effect) type", "entities");
+            register(ExprArrowBaseEffect.class, PotionType.class, "base (potion|effect) type", "entities");
         }
     }
 

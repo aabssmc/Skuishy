@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.entities.expressions;
+package lol.aabss.skuishy.elements.notes.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
