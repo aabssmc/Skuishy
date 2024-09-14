@@ -24,7 +24,6 @@ types:
     foxvariant: fox ?variant¦s @a
     boatvariant: boat ?variant¦s @a
     boatstatus: boat ?status¦es @a
-    eulerangle: euler ?angle¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
