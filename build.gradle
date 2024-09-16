@@ -23,7 +23,7 @@ dependencies {
     compileOnly "com.github.decentsoftware-eu:decentholograms:2.8.8"
     compileOnly files("libs/VulcanAPI.jar")
     implementation "com.github.SkriptLang:skript-reflect:2.4-dev1"
-    implementation "cc.aabss:mineskinclient:2.0.0"
+    implementation "cc.aabss:mineskinclient:2.0.1"
 }
 
 java {
