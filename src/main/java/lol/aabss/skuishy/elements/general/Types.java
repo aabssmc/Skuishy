@@ -1,11 +1,11 @@
 package lol.aabss.skuishy.elements.general;
 
 import ch.njol.skript.classes.ClassInfo;
-import ch.njol.skript.classes.EnumClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import io.papermc.paper.datapack.Datapack;
+import lol.aabss.skuishy.other.EnumWrapper;
 import org.bukkit.Statistic;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.world.TimeSkipEvent;
@@ -40,7 +40,7 @@ public class Types {
             );
         }
         if (Classes.getClassInfoNoError("spawncategory") == null) {
-            Classes.registerClass(new EnumClassInfo<>(SpawnCategory.class, "spawncategory", "spawncategory")
+            Classes.registerClass(new EnumWrapper<>(SpawnCategory.class).getClassInfo("spawncategory")
                     .user("spawn ?categor(y|ies)")
                     .name("spawn category")
                     .description("Represents a spawn category.")
@@ -49,7 +49,7 @@ public class Types {
         }
 
         if (Classes.getClassInfoNoError("potionitemtype") == null) {
-            Classes.registerClass(new EnumClassInfo<>(PotionType.class, "potionitemtype", "potionitemtype")
+            Classes.registerClass(new EnumWrapper<>(PotionType.class).getClassInfo("potionitemtype")
                     .user("potion[ ]item[ ]type")
                     .name("Potion Item Type")
                     .description("Represents a potion item type that matches each potion state that can be obtained from the Creative mode inventory.")
@@ -57,7 +57,7 @@ public class Types {
             );
         }
         if (Classes.getClassInfoNoError("statistic") == null) {
-            Classes.registerClass(new EnumClassInfo<>(Statistic.class, "statistic", "statistic")
+            Classes.registerClass(new EnumWrapper<>(Statistic.class).getClassInfo("statistic")
                     .user("statistics?")
                     .name("Statistic")
                     .description("Represents a statistic of a player.")
@@ -65,7 +65,7 @@ public class Types {
             );
         }
         if (Classes.getClassInfoNoError("skipreason") == null) {
-            Classes.registerClass(new EnumClassInfo<>(TimeSkipEvent.SkipReason.class, "skipreason", "skipreason")
+            Classes.registerClass(new EnumWrapper<>(TimeSkipEvent.SkipReason.class).getClassInfo("skipreason")
                     .user("skipreasons?")
                     .name("Time Skip Reason")
                     .description("Represents a reason for a time skip.")

@@ -1,13 +1,13 @@
 package lol.aabss.skuishy.elements.decentholograms;
 
 import ch.njol.skript.classes.ClassInfo;
-import ch.njol.skript.classes.EnumClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import eu.decentsoftware.holograms.api.actions.ClickType;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramPage;
+import lol.aabss.skuishy.other.EnumWrapper;
 import org.jetbrains.annotations.NotNull;
 
 public class Types {
@@ -38,7 +38,7 @@ public class Types {
             );
         }
         if (Classes.getClassInfoNoError("hologramclicktype") == null) {
-            Classes.registerClass(new EnumClassInfo<>(ClickType.class, "hologramclicktype", "hologramclicktype")
+            Classes.registerClass(new EnumWrapper<>(ClickType.class).getClassInfo("hologramclicktype")
                     .user("hologram ?click ?types?")
                     .name("hologramclicktype")
                     .description("Represents a decent holograms click type.")

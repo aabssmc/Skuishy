@@ -1,10 +1,10 @@
 package lol.aabss.skuishy.elements.permissions;
 
 import ch.njol.skript.classes.ClassInfo;
-import ch.njol.skript.classes.EnumClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
+import lol.aabss.skuishy.other.EnumWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
@@ -65,7 +65,7 @@ public class Types {
             );
         }
         if (Classes.getClassInfoNoError("permissiondefault") == null) {
-            Classes.registerClass(new EnumClassInfo<>(PermissionDefault.class, "permissiondefault", "permissiondefault")
+            Classes.registerClass(new EnumWrapper<>(PermissionDefault.class).getClassInfo("permissiondefault")
                     .user("permission ?defaults?")
                     .name("Permissions - Permission Default")
                     .description("Represents the possible default values for permissions.")

@@ -1,10 +1,10 @@
 package lol.aabss.skuishy.elements.notes;
 
 import ch.njol.skript.classes.ClassInfo;
-import ch.njol.skript.classes.EnumClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
+import lol.aabss.skuishy.other.EnumWrapper;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,7 @@ public class Types {
         }
 
         if (Classes.getClassInfoNoError("tone") == null) {
-            Classes.registerClass(new EnumClassInfo<>(Note.Tone.class, "tone", "tone")
+            Classes.registerClass(new EnumWrapper<>(Note.Tone.class).getClassInfo("tone")
                     .user("tones?")
                     .name("tone")
                     .description("Represents a note block note's tone.")
@@ -50,7 +50,7 @@ public class Types {
 
 
         if (Classes.getClassInfoNoError("instrument") == null) {
-            Classes.registerClass(new EnumClassInfo<>(Instrument.class, "instrument", "instrument")
+            Classes.registerClass(new EnumWrapper<>(Instrument.class).getClassInfo("instrument")
                     .user("instruments?")
                     .name("instrument")
                     .description("Represents a note block instrument.")

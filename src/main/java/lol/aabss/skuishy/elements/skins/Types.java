@@ -1,11 +1,11 @@
 package lol.aabss.skuishy.elements.skins;
 
 import ch.njol.skript.classes.ClassInfo;
-import ch.njol.skript.classes.EnumClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import lol.aabss.skuishy.other.Blueprint;
+import lol.aabss.skuishy.other.EnumWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.mineskin.data.Variant;
 
@@ -38,14 +38,14 @@ public class Types {
             );
         }
         if (Classes.getClassInfoNoError("skinmodel") == null) {
-            Classes.registerClass(new EnumClassInfo<>(Variant.class, "skinmodel", "skinmodel")
+            Classes.registerClass(new EnumWrapper<>(Variant.class).getClassInfo("skinmodel")
                     .user("skin ?models?")
                     .name("Skin - Skin Model")
                     .description("Represents a skin model.")
                     .since("2.6"));
         }
         if (Classes.getClassInfoNoError("blueprintpart") == null) {
-            Classes.registerClass(new EnumClassInfo<>(Blueprint.Part.class, "blueprintpart", "blueprintpart")
+            Classes.registerClass(new EnumWrapper<>(Blueprint.Part.class).getClassInfo("blueprintpart")
                     .user("blueprint ?parts?")
                     .name("Skin - Blueprint Part")
                     .description("Represents a part of a blueprint.")
