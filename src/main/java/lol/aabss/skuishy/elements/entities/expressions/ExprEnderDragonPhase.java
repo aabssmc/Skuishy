@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class ExprEnderDragonPhase extends EntityExpression<EnderDragon, EnderDragon.Phase> {
 
     static {
-        register(ExprEnderDragonPodium.class, EnderDragon.Phase.class, "[ender] dragon phase", "entities");
+        register(ExprEnderDragonPhase.class, EnderDragon.Phase.class, "[ender] dragon phase", "entities");
     }
 
     @Override
