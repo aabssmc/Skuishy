@@ -32,7 +32,7 @@ java {
 
 shadowJar {
     dependencies {
-        include(dependency("cc.aabss:mineskinclient:2.0.0"))
+        include(dependency("cc.aabss:mineskinclient:2.0.1"))
     }
 }
 
