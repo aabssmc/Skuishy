@@ -53,5 +53,13 @@ public class Types {
                     .description("Represents a boat Status.")
                     .since("2.8"));
         }
+
+        if (Classes.getClassInfoNoError("dragonphase") == null) {
+            Classes.registerClass(new EnumWrapper<>(EnderDragon.Phase.class).getClassInfo("dragonphase")
+                    .user("[ender ?]dragon ?phase[s]")
+                    .name("Dragon Phase")
+                    .description("Represents the phase of a dragon.")
+                    .since("2.8"));
+        }
     }
 }
