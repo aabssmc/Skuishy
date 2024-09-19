@@ -26,6 +26,7 @@ types:
     boatstatus: boat ?status¦es @a
     dragonphase: [ender ?]dragon phase¦s @an
     catvariant: cat ?variant¦s @a
+    frogvariant: frog ?variant¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a

@@ -5,7 +5,7 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import lol.aabss.skuishy.other.CatVariant;
+import lol.aabss.skuishy.other.KeyedToEnum;
 import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Cat;
 import org.jetbrains.annotations.Nullable;
@@ -16,19 +16,19 @@ import org.jetbrains.annotations.Nullable;
         "set cat variant of {_cat} to tabby"
 })
 @Since("2.8")
-public class ExprCatVariant extends EntityExpression<Cat, CatVariant> {
+public class ExprCatVariant extends EntityExpression<Cat, KeyedToEnum.CatVariant> {
 
     static {
-        register(ExprCatVariant.class, CatVariant.class, "cat (variant|type)", "entities");
+        register(ExprCatVariant.class, KeyedToEnum.CatVariant.class, "cat (variant|type)", "entities");
     }
 
     @Override
-    public CatVariant get(Cat cat) {
-        return CatVariant.fromBukkit(cat.getCatType());
+    public KeyedToEnum.CatVariant get(Cat cat) {
+        return KeyedToEnum.CatVariant.fromBukkit(cat.getCatType());
     }
 
     @Override
-    public void change(Cat cat, @Nullable CatVariant type, Changer.ChangeMode mode) {
+    public void change(Cat cat, @Nullable KeyedToEnum.CatVariant type, Changer.ChangeMode mode) {
         if (type != null && mode == Changer.ChangeMode.SET) {
             cat.setCatType(type.toBukkit());
         }

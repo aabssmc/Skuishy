@@ -1,8 +1,8 @@
 package lol.aabss.skuishy.elements.entities;
 
 import ch.njol.skript.registrations.Classes;
-import lol.aabss.skuishy.other.CatVariant;
 import lol.aabss.skuishy.other.EnumWrapper;
+import lol.aabss.skuishy.other.KeyedToEnum;
 import org.bukkit.entity.*;
 
 public class Types {
@@ -62,11 +62,20 @@ public class Types {
                     .description("Represents the phase of a dragon.")
                     .since("2.8"));
         }
+
         if (Classes.getClassInfoNoError("catvariant") == null) {
-            Classes.registerClass(new EnumWrapper<>(CatVariant.class).getClassInfo("catvariant")
+            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.CatVariant.class).getClassInfo("catvariant")
                     .user("cat ?variants?")
                     .name("Cat Variant")
                     .description("Represents a variant of a cat.")
+                    .since("2.8"));
+        }
+
+        if (Classes.getClassInfoNoError("frogvariant") == null) {
+            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.FrogVariant.class).getClassInfo("frogvariant")
+                    .user("frog ?variants?")
+                    .name("Frog Variant")
+                    .description("Represents a variant of a frog.")
                     .since("2.8"));
         }
     }
