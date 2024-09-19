@@ -17,7 +17,7 @@ import org.bukkit.entity.Allay;
 public class CondCanDuplicate extends EntityCondition<Allay> {
     static{
         if (Skript.classExists("org.bukkit.entity.Allay")) {
-            register(CondCanDuplicate.class, PropertyType.CAN, "dup(e|licate)", "livingentities");
+            register(CondCanDuplicate.class, PropertyType.CAN, "[allay] dup(e|licate)", "livingentities");
         }
     }
 

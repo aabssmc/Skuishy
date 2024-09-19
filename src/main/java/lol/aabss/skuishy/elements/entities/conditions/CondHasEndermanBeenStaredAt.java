@@ -17,7 +17,7 @@ import org.bukkit.entity.Enderman;
 public class CondHasEndermanBeenStaredAt extends EntityCondition<Enderman> {
 
     static {
-        register(CondHasEndermanBeenStaredAt.class, PropertyType.HAVE, "stared at", "entities");
+        register(CondHasEndermanBeenStaredAt.class, PropertyType.HAVE, "[enderman] stared at", "entities");
     }
 
     @Override

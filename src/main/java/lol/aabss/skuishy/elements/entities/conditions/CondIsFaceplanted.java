@@ -17,7 +17,7 @@ import org.bukkit.entity.Fox;
 public class CondIsFaceplanted extends EntityCondition<Fox> {
 
     static {
-        register(CondIsFaceplanted.class, "faceplanted", "entities");
+        register(CondIsFaceplanted.class, "[fox] faceplanted", "entities");
     }
 
     @Override

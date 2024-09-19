@@ -17,7 +17,7 @@ import org.bukkit.entity.Axolotl;
 public class CondIsPlayingDead extends EntityCondition<Axolotl> {
 
     static {
-        register(CondIsPlayingDead.class, "playing dead", "entities");
+        register(CondIsPlayingDead.class, "[axolotl] playing dead", "entities");
     }
 
     @Override

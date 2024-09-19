@@ -17,7 +17,7 @@ import org.bukkit.entity.Fox;
 public class CondIsLeaping extends EntityCondition<Fox> {
 
     static {
-        register(CondIsLeaping.class, "leaping", "entities");
+        register(CondIsLeaping.class, "[fox] leaping", "entities");
     }
 
     @Override

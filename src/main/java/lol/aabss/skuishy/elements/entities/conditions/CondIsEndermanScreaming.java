@@ -17,7 +17,7 @@ import org.bukkit.entity.Enderman;
 public class CondIsEndermanScreaming extends EntityCondition<Enderman> {
 
     static {
-        register(CondIsEndermanScreaming.class, "screaming", "entities");
+        register(CondIsEndermanScreaming.class, "[enderman] screaming", "entities");
     }
 
     @Override

@@ -17,7 +17,7 @@ import org.bukkit.entity.Minecart;
 public class CondIsSlowWhenEmpty extends EntityCondition<Minecart> {
 
     static {
-        register(CondIsSlowWhenEmpty.class, "slow when empty", "entities");
+        register(CondIsSlowWhenEmpty.class, "[minecart] slow when empty", "entities");
     }
 
     @Override

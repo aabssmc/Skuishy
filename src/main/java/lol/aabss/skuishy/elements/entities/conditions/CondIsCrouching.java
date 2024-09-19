@@ -17,7 +17,7 @@ import org.bukkit.entity.Fox;
 public class CondIsCrouching extends EntityCondition<Fox> {
 
     static {
-        register(CondIsCrouching.class, "crouching", "entities");
+        register(CondIsCrouching.class, "[fox] crouching", "entities");
     }
 
     @Override

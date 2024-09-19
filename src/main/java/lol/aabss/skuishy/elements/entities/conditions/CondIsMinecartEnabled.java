@@ -17,7 +17,7 @@ import org.bukkit.entity.minecart.HopperMinecart;
 public class CondIsMinecartEnabled extends EntityCondition<HopperMinecart> {
 
     static {
-        register(CondIsMinecartEnabled.class, "(hopper|minecart) enabled", "entities");
+        register(CondIsMinecartEnabled.class, "[hopper] minecart enabled", "entities");
     }
 
     @Override

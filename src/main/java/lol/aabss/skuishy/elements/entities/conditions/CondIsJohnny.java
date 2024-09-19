@@ -17,7 +17,7 @@ import org.bukkit.entity.Vindicator;
 public class CondIsJohnny extends EntityCondition<Vindicator> {
 
     static {
-        register(CondIsJohnny.class, "johnny", "entities");
+        register(CondIsJohnny.class, "[vindicator] johnny", "entities");
     }
 
     @Override

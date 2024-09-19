@@ -17,7 +17,7 @@ import org.bukkit.entity.EnderCrystal;
 public class CondIsCrystalShowingBottom extends EntityCondition<EnderCrystal> {
 
     static {
-        register(CondIsCrystalShowingBottom.class, "showing bottom", "entities");
+        register(CondIsCrystalShowingBottom.class, "[[end[er]] crystal] showing bottom", "entities");
     }
 
     @Override

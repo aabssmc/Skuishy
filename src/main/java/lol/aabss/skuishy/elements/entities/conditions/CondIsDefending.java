@@ -17,7 +17,7 @@ import org.bukkit.entity.Fox;
 public class CondIsDefending extends EntityCondition<Fox> {
 
     static {
-        register(CondIsDefending.class, "defending", "entities");
+        register(CondIsDefending.class, "[fox] defending", "entities");
     }
 
     @Override

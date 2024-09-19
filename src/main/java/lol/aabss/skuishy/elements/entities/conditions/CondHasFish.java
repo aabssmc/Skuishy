@@ -17,7 +17,7 @@ import org.bukkit.entity.Dolphin;
 public class CondHasFish extends EntityCondition<Dolphin> {
 
     static {
-        register(CondHasFish.class, PropertyType.HAVE, "[dolphin] has", "entities");
+        register(CondHasFish.class, PropertyType.HAVE, "[dolphin] fish", "entities");
     }
 
     @Override
