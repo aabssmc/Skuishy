@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class ExprGuardianHasLaser extends EntityExpression<Guardian, Boolean> {
 
     static {
-        register(ExprGuardianHasLaser.class, Boolean.class, "[[guardian] has laser [state|mode]", "entities");
+        register(ExprGuardianHasLaser.class, Boolean.class, "[guardian] has laser [state|mode]", "entities");
     }
 
     @Override
