@@ -27,6 +27,8 @@ types:
     dragonphase: [ender ?]dragon phase¦s @an
     catvariant: cat ?variant¦s @a
     frogvariant: frog ?variant¦s @a
+    horsecolor: horse ?color¦s @a
+    horsestyle: horse ?style¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a

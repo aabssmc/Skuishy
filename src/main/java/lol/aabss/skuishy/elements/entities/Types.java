@@ -78,5 +78,21 @@ public class Types {
                     .description("Represents a variant of a frog.")
                     .since("2.8"));
         }
+
+        if (Classes.getClassInfoNoError("horsecolor") == null) {
+            Classes.registerClass(new EnumWrapper<>(Horse.Color.class).getClassInfo("horsecolor")
+                    .user("horse ?colors?")
+                    .name("Horse Color")
+                    .description("Represents a color of a horse.")
+                    .since("2.8"));
+        }
+
+        if (Classes.getClassInfoNoError("horsestyle") == null) {
+            Classes.registerClass(new EnumWrapper<>(Horse.Style.class).getClassInfo("horsestyle")
+                    .user("horse ?styles?")
+                    .name("Horse Style")
+                    .description("Represents a style of a horse.")
+                    .since("2.8"));
+        }
     }
 }

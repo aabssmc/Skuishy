@@ -13,7 +13,7 @@ import org.bukkit.entity.Hoglin;
         "if {_hoglin} is immune to zombification:",
         "\tbroadcast \"abc123abc123abc123\""
 })
-@Since("2.0")
+@Since("2.8")
 public class CondIsHoglinImmuneToZombification extends EntityCondition<Hoglin> {
 
     static {
