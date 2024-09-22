@@ -94,5 +94,12 @@ public class Types {
                     .description("Represents a style of a horse.")
                     .since("2.8"));
         }
+        if (Classes.getClassInfoNoError("mushroomcowvariant") == null) {
+            Classes.registerClass(new EnumWrapper<>(MushroomCow.Variant.class).getClassInfo("mushroomcowvariant")
+                    .user("mushroom ?cow ?variants?")
+                    .name("Mushroom Cow Variant")
+                    .description("Represents a variant of a mushroom cow.")
+                    .since("2.8"));
+        }
     }
 }
