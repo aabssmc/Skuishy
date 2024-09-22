@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 @Name("Llama - Strength")
 @Description("Gets/sets the strength of a llama.")
 @Examples({
-        "set llama strength of {_minecart} to 100"
+        "set llama strength of {_llama} to 100"
 })
 @Since("2.8")
 public class ExprLlamaStrength extends EntityExpression<Llama, Integer> {
