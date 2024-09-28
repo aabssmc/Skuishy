@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 @Name("Slime - Wander")
 @Description("Gets/sets the wander state of the slime.")
 @Examples({
-        "set wander state of {_slime} to true"
+        "set slime wander state of {_slime} to true"
 })
 @Since("2.8")
 public class ExprSlimeWander extends EntityExpression<Slime, Boolean> {
