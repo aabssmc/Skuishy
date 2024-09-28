@@ -30,6 +30,7 @@ types:
     horsecolor: horse ?color¦s @a
     horsestyle: horse ?style¦s @a
     mushroomcowvariant: mushroom ?cow ?variant¦s @a
+    pandagene: panda ?gene¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
