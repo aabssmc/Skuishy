@@ -110,5 +110,12 @@ public class Types {
                     .description("Represents a gene of a panda.")
                     .since("2.8"));
         }
+        if (Classes.getClassInfoNoError("parrotvariant") == null) {
+            Classes.registerClass(new EnumWrapper<>(Parrot.Variant.class).getClassInfo("parrotvariant")
+                    .user("parrot ?variants?")
+                    .name("Parrot Variant")
+                    .description("Represents a variant of a parrot.")
+                    .since("2.8"));
+        }
     }
 }
