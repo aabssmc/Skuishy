@@ -118,5 +118,13 @@ public class Types {
                     .description("Represents a state of a sniffer.")
                     .since("2.8"));
         }
+
+        if (Classes.getClassInfoNoError("tropicalfishpattern") == null) {
+            Classes.registerClass(new EnumWrapper<>(TropicalFish.Pattern.class).getClassInfo("tropicalfishpattern")
+                    .user("tropical ?fish ?patterns?")
+                    .name("Tropical Fish Pattern")
+                    .description("Represents a pattern of a tropical fish.")
+                    .since("2.8"));
+        }
     }
 }
