@@ -103,13 +103,6 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("pandagene") == null) {
-            Classes.registerClass(new EnumWrapper<>(Panda.Gene.class).getClassInfo("pandagene")
-                    .user("panda ?genes?")
-                    .name("Panda Gene")
-                    .description("Represents a gene of a panda.")
-                    .since("2.8"));
-        }
         if (Classes.getClassInfoNoError("parrotvariant") == null) {
             Classes.registerClass(new EnumWrapper<>(Parrot.Variant.class).getClassInfo("parrotvariant")
                     .user("parrot ?variants?")
