@@ -5,10 +5,7 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import lol.aabss.skuishy.other.skript.EntityCondition;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Hoglin;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 
 @Name("Skeleton/Zombie/Hoglin - Is Converting")
 @Description("True if the skeleton/zombie/hoglin is converting.")
@@ -31,6 +28,8 @@ public class CondIsConverting extends EntityCondition<Entity> {
             return ((Zombie) entity).isConverting();
         } else if (entity instanceof Hoglin) {
             return ((Hoglin) entity).isConverting();
+        } else if (entity instanceof PiglinAbstract) {
+            return ((PiglinAbstract) entity).isConverting();
         }
         return false;
     }

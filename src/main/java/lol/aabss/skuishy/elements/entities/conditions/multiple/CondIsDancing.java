@@ -8,9 +8,10 @@ import lol.aabss.skuishy.other.skript.EntityCondition;
 import org.bukkit.entity.Allay;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Parrot;
+import org.bukkit.entity.Piglin;
 
-@Name("Allay/Parrot - Is Dancing")
-@Description("True if the allay or parrot is dancing.")
+@Name("Allay/Parrot/Piglin - Is Dancing")
+@Description("True if the allay, parrot or piglin is dancing.")
 @Examples({
         "if {_allay} is dancing:",
         "\tset dance state of {_allay} to false"
@@ -19,7 +20,7 @@ import org.bukkit.entity.Parrot;
 public class CondIsDancing extends EntityCondition<LivingEntity> {
 
     static {
-        register(CondIsDancing.class, "[allay|parrot] dancing", "entities");
+        register(CondIsDancing.class, "[allay|parrot|piglin] dancing", "entities");
     }
 
     @Override
@@ -28,6 +29,8 @@ public class CondIsDancing extends EntityCondition<LivingEntity> {
             return ((Allay) entity).isDancing();
         } else if (entity instanceof Parrot) {
             return ((Parrot) entity).isDancing();
+        }else if (entity instanceof Piglin) {
+            return ((Piglin) entity).isDancing();
         }
         return false;
     }

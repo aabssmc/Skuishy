@@ -6,14 +6,11 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import lol.aabss.skuishy.other.skript.EntityExpression;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Hoglin;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Skeleton/Zombie/Hoglin - Conversion Time")
-@Description("Gets/sets the conversion time of a skeleton, zombie or hoglin.")
+@Name("Skeleton/Zombie/Hoglin/Piglin - Conversion Time")
+@Description("Gets/sets the conversion time of a skeleton, zombie, hoglin or piglin.")
 @Examples({
         "set conversion time of {_zombie} to 3"
 })
@@ -21,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class ExprConversionTime extends EntityExpression<Entity, Integer> {
 
     static {
-        register(ExprConversionTime.class, Integer.class, "[skeleton|zombie|hoglin] conversion time", "entities");
+        register(ExprConversionTime.class, Integer.class, "[skeleton|zombie|hoglin|piglin] conversion time", "entities");
     }
 
     @Override
@@ -32,6 +29,8 @@ public class ExprConversionTime extends EntityExpression<Entity, Integer> {
             return ((Zombie) entity).getConversionTime();
         } else if (entity instanceof Hoglin) {
             return ((Hoglin) entity).getConversionTime();
+        } else if (entity instanceof PiglinAbstract) {
+            return ((PiglinAbstract) entity).getConversionTime();
         }
         return null;
     }
@@ -45,6 +44,8 @@ public class ExprConversionTime extends EntityExpression<Entity, Integer> {
                 ((Zombie) entity).setConversionTime(integer);
             } else if (entity instanceof Hoglin) {
                 ((Hoglin) entity).setConversionTime(integer);
+            } else if (entity instanceof Piglin) {
+                ((Piglin) entity).setConversionTime(integer);
             }
         }
     }
