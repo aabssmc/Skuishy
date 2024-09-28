@@ -17,7 +17,7 @@ public abstract class EntityCondition<T extends Entity> extends PropertyConditio
     protected abstract boolean run(T t);
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         this.tags = parseResult.tags;
         return super.init(exprs, matchedPattern, isDelayed, parseResult);
     }

@@ -11,10 +11,10 @@ public interface EntityStatement<T extends Entity> {
         return new TypeToken<T>(getClass()){}.getRawType().isAssignableFrom(entity.getClass());
     }
 
-    default boolean setExists() {
+    default boolean changeExists() {
         Method[] methods = this.getClass().getDeclaredMethods();
         for (Method method : methods) {
-            if (method.getName().equals("set")) {
+            if (method.getName().equals("change")) {
                 return true;
             }
         }

@@ -65,7 +65,7 @@ public abstract class EntityExpression<F extends Entity, T> extends SimpleProper
 
     @Override
     public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
-        if (setExists()) {
+        if (changeExists()) {
             if (acceptedChanges().contains(mode)) {
                 return CollectionUtils.array(new TypeToken<T>(getClass()){}.getRawType());
             }
@@ -75,7 +75,7 @@ public abstract class EntityExpression<F extends Entity, T> extends SimpleProper
 
     @Override
     public void change(@NotNull Event event, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
-        if (setExists()){
+        if (changeExists()){
             for (Entity f : getExpr().getArray(event)) {
                 if (accepts(f)) change((F) f, delta.length >= 1 ? (T) delta[0] : null, mode);
             }
