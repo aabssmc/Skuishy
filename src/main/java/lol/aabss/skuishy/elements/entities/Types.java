@@ -110,5 +110,13 @@ public class Types {
                     .description("Represents a variant of a parrot.")
                     .since("2.8"));
         }
+
+        if (Classes.getClassInfoNoError("snifferstate") == null) {
+            Classes.registerClass(new EnumWrapper<>(Sniffer.State.class).getClassInfo("snifferstate")
+                    .user("sniffer ?states?")
+                    .name("Sniffer States")
+                    .description("Represents a state of a sniffer.")
+                    .since("2.8"));
+        }
     }
 }

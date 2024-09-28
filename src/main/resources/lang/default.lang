@@ -31,6 +31,7 @@ types:
     horsestyle: horse ?style¦s @a
     mushroomcowvariant: mushroom ?cow ?variant¦s @a
     parrotvariant: parrot ?variant¦s @a
+    snifferstate: sniffer ?state¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
