@@ -19,7 +19,7 @@ import org.bukkit.event.Event;
 public class EffGoatRam extends EntityEffect<Goat> {
 
     static {
-        Skript.registerEffect(EffJump.class, "make %livingentities% ram into %livingentities%");
+        Skript.registerEffect(EffGoatRam.class, "make %livingentities% ram into %livingentities%");
     }
 
     @Override
