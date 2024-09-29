@@ -1,4 +1,4 @@
-package lol.aabss.skuishy.elements.general.conditions.has;
+package lol.aabss.skuishy.elements.entities.conditions;
 
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
@@ -15,10 +15,10 @@ import org.jetbrains.annotations.NotNull;
         "if target entity has a egg:"
 })
 @Since("2.0")
-public class CondHasEgg extends PropertyCondition<LivingEntity> {
+public class CondHasTurtleEgg extends PropertyCondition<LivingEntity> {
 
     static{
-        register(CondHasEgg.class, PropertyType.HAVE, "[a] egg", "livingentities");
+        register(CondHasTurtleEgg.class, PropertyType.HAVE, "[turtle] [a] egg", "livingentities");
     }
 
     @Override
