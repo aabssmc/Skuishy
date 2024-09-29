@@ -364,7 +364,7 @@ public class BlockEvents extends SkriptEvent {
             EventValues.registerEventValue(BrewingStartEvent.class, Integer.class, new Getter<>() {
                 @Override
                 public Integer get(BrewingStartEvent e) {
-                    return e.getTotalBrewTime();
+                    return e.getBrewingTime();
                 }
             }, 0);
         }

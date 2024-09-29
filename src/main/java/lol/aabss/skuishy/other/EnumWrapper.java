@@ -23,7 +23,7 @@ import java.util.Locale;
  * </p>
  * thanks shanebee
  *
- * @author Peter Güttinger (original)
+ * @author Peter GÃ¼ttinger (original)
  */
 public final class EnumWrapper<E extends Enum<E>> {
 
