@@ -7,6 +7,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.Frog;
+import org.bukkit.entity.Villager;
 import org.bukkit.entity.Wolf;
 
 public class KeyedToEnum {
@@ -93,6 +94,68 @@ public class KeyedToEnum {
 
         public static WolfVariant fromBukkit(Wolf.Variant bukkit) {
             return WolfVariant.valueOf(bukkit.key().value().toUpperCase());
+        }
+    }
+
+    public enum VillagerProfession {
+        NONE("none"),
+        ARMORER("armorer"),
+        BUTCHER("butcher"),
+        CARTOGRAPHER("cartographer"),
+        CLERIC("cleric"),
+        FARMER("farmer"),
+        FISHERMAN("fisherman"),
+        FLETCHER("fletcher"),
+        VLEATHERWORKER("leatherworker"),
+        LIBRARIAN("librarian"),
+        MASON("mason"),
+        NITWIT("nitwit"),
+        SHEPHERD("shepherd"),
+        TOOLSMITH("toolsmith"),
+        WEAPONSMITH("weaponsmith");
+
+        private final String key;
+
+        VillagerProfession(String key) {
+            this.key = key;
+        }
+
+        public Villager.Profession toBukkit(){
+            NamespacedKey namespacedKey = NamespacedKey.minecraft(key);
+            Villager.Profession type = RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_PROFESSION).get(namespacedKey);
+            Preconditions.checkNotNull(type, "No villager profession found for %s. This is a bug.", namespacedKey);
+            return type;
+        }
+
+        public static VillagerProfession fromBukkit(Villager.Profession bukkit) {
+            return VillagerProfession.valueOf(bukkit.key().value().toUpperCase());
+        }
+    }
+
+    public enum VillagerType {
+        DESERT("desert"),
+        JUNGLE("jungle"),
+        PLAINS("plains"),
+        SAVANNA("savanna"),
+        SNOW("snow"),
+        SWAMP("swamp"),
+        TAIGA("taiga");
+
+        private final String key;
+
+        VillagerType(String key) {
+            this.key = key;
+        }
+
+        public Villager.Type toBukkit(){
+            NamespacedKey namespacedKey = NamespacedKey.minecraft(key);
+            Villager.Type type = RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_TYPE).get(namespacedKey);
+            Preconditions.checkNotNull(type, "No villager type found for %s. This is a bug.", namespacedKey);
+            return type;
+        }
+
+        public static VillagerType fromBukkit(Villager.Type bukkit) {
+            return VillagerType.valueOf(bukkit.key().value().toUpperCase());
         }
     }
 

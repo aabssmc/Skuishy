@@ -129,9 +129,25 @@ public class Types {
 
         if (Classes.getClassInfoNoError("wolfvariant") == null) {
             Classes.registerClass(new EnumWrapper<>(KeyedToEnum.WolfVariant.class).getClassInfo("wolfvariant")
-                    .user("wolf ?variant?")
+                    .user("wolf ?variants?")
                     .name("Wolf Variant")
                     .description("Represents a variant of a wolf.")
+                    .since("2.8"));
+        }
+
+        if (Classes.getClassInfoNoError("villagerprofession") == null) {
+            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.VillagerProfession.class).getClassInfo("villagerprofession")
+                    .user("villager ?professions?")
+                    .name("Villager Profession")
+                    .description("Represents a profession of a villager.")
+                    .since("2.8"));
+        }
+
+        if (Classes.getClassInfoNoError("villagertype") == null) {
+            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.VillagerType.class).getClassInfo("villagertype")
+                    .user("villager ?types?")
+                    .name("Villager Type")
+                    .description("Represents a type of a villager.")
                     .since("2.8"));
         }
     }
