@@ -25,7 +25,6 @@ types:
     boatvariant: boat ?variant¦s @a
     boatstatus: boat ?status¦es @a
     dragonphase: [ender ?]dragon phase¦s @an
-    catvariant: cat ?variant¦s @a
     frogvariant: frog ?variant¦s @a
     horsecolor: horse ?color¦s @a
     horsestyle: horse ?style¦s @a

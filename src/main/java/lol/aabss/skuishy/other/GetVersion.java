@@ -19,24 +19,6 @@ public class GetVersion {
         return Bukkit.getBukkitVersion().split("-")[0];
     }
 
-    public static int datapackVersion(){
-        String v = version();
-        return switch (v){
-            case "1.13", "1.13.1", "1.13.2", "1.13.3", "1.14", "1.14.1", "1.14.2", "1.14.3", "1.14.4" -> 4;
-            case "1.15", "1.15.1", "1.15.2", "1.16", "1.16.1" -> 5;
-            case "1.16.2", "1.16.3", "1.16.4", "1.16.5" -> 6;
-            case "1.17", "1.17.1" -> 7;
-            case "1.18", "1.18.1" -> 8;
-            case "1.18.2" -> 9;
-            case "1.19", "1.19.1", "1.19.2", "1.19.3" -> 10;
-            case "1.19.4" -> 12;
-            case "1.20", "1.20.1" -> 15;
-            case "1.20.2" -> 18;
-            case "1.20.3", "1.20.4" -> 26;
-            default -> 0;
-        };
-    }
-
     public static String latestVersion() {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

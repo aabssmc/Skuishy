@@ -65,15 +65,6 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("catvariant") == null) {
-            Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.CAT_VARIANT),
-                            Cat.Type.class, "catvariant")
-                    .user("cat ?variants?")
-                    .name("Cat Variant")
-                    .description("Represents a variant of a cat.")
-                    .since("2.8"));
-        }
-
         if (Classes.getClassInfoNoError("frogvariant") == null) {
             Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.FROG_VARIANT),
                             Frog.Variant.class, "frogvariant")

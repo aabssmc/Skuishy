@@ -156,6 +156,7 @@ public class RegistryClassInfo<T extends Keyed> extends ClassInfo<T> {
                 return false;
             }
         });
+        this.supplier(registry::iterator);
     }
 
     /**
