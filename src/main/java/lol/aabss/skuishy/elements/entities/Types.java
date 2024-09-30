@@ -126,5 +126,13 @@ public class Types {
                     .description("Represents a pattern of a tropical fish.")
                     .since("2.8"));
         }
+
+        if (Classes.getClassInfoNoError("wolfvariant") == null) {
+            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.WolfVariant.class).getClassInfo("wolfvariant")
+                    .user("wolf ?variant?")
+                    .name("Wolf Variant")
+                    .description("Represents a variant of a wolf.")
+                    .since("2.8"));
+        }
     }
 }

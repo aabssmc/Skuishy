@@ -33,6 +33,7 @@ types:
     parrotvariant: parrot ?variant¦s @a
     snifferstate: sniffer ?state¦s @a
     tropicalfishpattern: tropical ?fish ?pattern¦s @a
+    wolfvariant: wolf ?variant¦s @a
 
     hologramclicktype: hologram ?click ?type¦s @a
     hologram: hologram¦s @a
