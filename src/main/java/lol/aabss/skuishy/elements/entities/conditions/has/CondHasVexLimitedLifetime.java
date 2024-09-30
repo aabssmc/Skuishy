@@ -10,10 +10,10 @@ import org.bukkit.entity.Vex;
         "if {_vex} has limited lifetime:"
 })
 @Since("2.8")
-public class CondVexHasLimitedLifetime extends EntityCondition<Vex> {
+public class CondHasVexLimitedLifetime extends EntityCondition<Vex> {
 
     static {
-        register(CondVexHasLimitedLifetime.class, PropertyType.HAVE, "[vex] limited lifetime", "entities");
+        register(CondHasVexLimitedLifetime.class, PropertyType.HAVE, "[vex] limited lifetime", "entities");
     }
 
     @Override
