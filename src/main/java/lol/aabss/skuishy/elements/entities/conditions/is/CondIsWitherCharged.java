@@ -5,23 +5,30 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import lol.aabss.skuishy.other.skript.EntityCondition;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Wither;
+import org.bukkit.entity.WitherSkull;
 
-@Name("Wither - Is Charged")
-@Description("Returns true if the wither is charged.")
+@Name("Wither/Wither Skull - Is Charged")
+@Description("Returns true if the wither or wither skull is charged.")
 @Examples({
         "if last spawned wither is charged:"
 })
 @Since("2.8")
-public class CondIsWitherCharged extends EntityCondition<Wither> {
+public class CondIsWitherCharged extends EntityCondition<Entity> {
 
     static {
-        register(CondIsWitherCharged.class, "[wither] charged", "entities");
+        register(CondIsWitherCharged.class, "[wither [skull]] charged", "entities");
     }
 
     @Override
-    protected boolean run(Wither wither) {
-        return wither.isCharged();
+    protected boolean run(Entity entity) {
+        if (entity instanceof WitherSkull) {
+            return ((WitherSkull) entity).isCharged();
+        } else if (entity instanceof Wither) {
+            return ((Wither) entity).isCharged();
+        }
+        return false;
     }
 }
 
