@@ -21,6 +21,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class SkinWrapper {
@@ -80,6 +82,10 @@ public class SkinWrapper {
     @SuppressWarnings("deprecation")
     public static String sendHead(String name, boolean helm, String... texts) {
         try {
+            List<String> textList = new ArrayList<>();
+            for (String s : texts) {
+                textList.addAll(List.of(s.split("\n")));
+            }
             BufferedImage img = getHead(name, helm);
             String[] result = new String[8];
             for (int y = 0; y < 8; y++) {
@@ -88,8 +94,8 @@ public class SkinWrapper {
                     ChatColor c = ChatColor.of(new Color(img.getRGB(x, y)));
                     result[y] += (c.toString() + "\u2588").replaceAll("\\?", "");
                 }
-                if (texts.length > y) {
-                    result[y] += " " + ChatColor.RESET + texts[y];
+                if (textList.size() > y) {
+                    result[y] += " " + ChatColor.RESET + textList.get(y);
                 }
             }
             return String.join("\n", result);
