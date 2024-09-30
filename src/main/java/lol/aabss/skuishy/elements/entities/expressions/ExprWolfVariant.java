@@ -5,7 +5,6 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import lol.aabss.skuishy.other.KeyedToEnum;
 import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Wolf;
 
@@ -17,21 +16,21 @@ import javax.annotation.Nullable;
         "set variant of {_wolf} to cold"
 })
 @Since("2.8")
-public class ExprWolfVariant extends EntityExpression<Wolf, KeyedToEnum.WolfVariant> {
+public class ExprWolfVariant extends EntityExpression<Wolf, Wolf.Variant> {
 
     static {
-        register(ExprWolfVariant.class, KeyedToEnum.WolfVariant.class, "wolf variant", "entities");
+        register(ExprWolfVariant.class, Wolf.Variant.class, "wolf variant", "entities");
     }
 
     @Override
-    public KeyedToEnum.WolfVariant get(Wolf wolf) {
-        return KeyedToEnum.WolfVariant.fromBukkit(wolf.getVariant());
+    public Wolf.Variant get(Wolf wolf) {
+        return wolf.getVariant();
     }
 
     @Override
-    public void change(Wolf wolf, @Nullable KeyedToEnum.WolfVariant variant, Changer.ChangeMode mode) {
+    public void change(Wolf wolf, @Nullable Wolf.Variant variant, Changer.ChangeMode mode) {
         if (variant != null && mode == Changer.ChangeMode.SET) {
-            wolf.setVariant(variant.toBukkit());
+            wolf.setVariant(variant);
         }
     }
 }

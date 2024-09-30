@@ -5,10 +5,8 @@ import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
-import lol.aabss.skuishy.other.KeyedToEnum;
 import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.Frog;
-import org.jetbrains.annotations.Nullable;
 
 @Name("Frog - Variant")
 @Description("Gets/sets the variant of an frog.")
@@ -16,21 +14,21 @@ import org.jetbrains.annotations.Nullable;
         "set frog variant of {_frog} to cold"
 })
 @Since("2.8")
-public class ExprFrogVariant extends EntityExpression<Frog, KeyedToEnum.FrogVariant> {
+public class ExprFrogVariant extends EntityExpression<Frog, Frog.Variant> {
 
     static {
-        register(ExprFrogVariant.class, KeyedToEnum.FrogVariant.class, "frog (variant|type)", "entities");
+        register(ExprFrogVariant.class, Frog.Variant.class, "frog (variant|type)", "entities");
     }
 
     @Override
-    public KeyedToEnum.FrogVariant get(Frog frog) {
-        return KeyedToEnum.FrogVariant.fromBukkit(frog.getVariant());
+    public Frog.Variant get(Frog frog) {
+        return frog.getVariant();
     }
 
     @Override
-    public void change(Frog frog, KeyedToEnum.@Nullable FrogVariant type, Changer.ChangeMode mode) {
+    public void change(Frog frog, Frog.Variant type, Changer.ChangeMode mode) {
         if (type != null && mode == Changer.ChangeMode.SET) {
-            frog.setVariant(type.toBukkit());
+            frog.setVariant(type);
         }
     }
 }

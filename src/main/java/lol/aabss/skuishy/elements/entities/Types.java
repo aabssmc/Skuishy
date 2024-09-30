@@ -1,8 +1,10 @@
 package lol.aabss.skuishy.elements.entities;
 
 import ch.njol.skript.registrations.Classes;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
 import lol.aabss.skuishy.other.EnumWrapper;
-import lol.aabss.skuishy.other.KeyedToEnum;
+import lol.aabss.skuishy.other.RegistryClassInfo;
 import org.bukkit.entity.*;
 
 public class Types {
@@ -64,7 +66,8 @@ public class Types {
         }
 
         if (Classes.getClassInfoNoError("catvariant") == null) {
-            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.CatVariant.class).getClassInfo("catvariant")
+            Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.CAT_VARIANT),
+                            Cat.Type.class, "catvariant")
                     .user("cat ?variants?")
                     .name("Cat Variant")
                     .description("Represents a variant of a cat.")
@@ -72,7 +75,8 @@ public class Types {
         }
 
         if (Classes.getClassInfoNoError("frogvariant") == null) {
-            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.FrogVariant.class).getClassInfo("frogvariant")
+            Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.FROG_VARIANT),
+                            Frog.Variant.class, "frogvariant")
                     .user("frog ?variants?")
                     .name("Frog Variant")
                     .description("Represents a variant of a frog.")
@@ -128,7 +132,8 @@ public class Types {
         }
 
         if (Classes.getClassInfoNoError("wolfvariant") == null) {
-            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.WolfVariant.class).getClassInfo("wolfvariant")
+            Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.WOLF_VARIANT),
+                            Wolf.Variant.class, "wolfvariant")
                     .user("wolf ?variants?")
                     .name("Wolf Variant")
                     .description("Represents a variant of a wolf.")
@@ -136,7 +141,8 @@ public class Types {
         }
 
         if (Classes.getClassInfoNoError("villagerprofession") == null) {
-            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.VillagerProfession.class).getClassInfo("villagerprofession")
+            Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_PROFESSION),
+                            Villager.Profession.class, "villagerprofession")
                     .user("villager ?professions?")
                     .name("Villager Profession")
                     .description("Represents a profession of a villager.")
@@ -144,7 +150,8 @@ public class Types {
         }
 
         if (Classes.getClassInfoNoError("villagertype") == null) {
-            Classes.registerClass(new EnumWrapper<>(KeyedToEnum.VillagerType.class).getClassInfo("villagertype")
+            Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_TYPE),
+                            Villager.Type.class, "villagertype")
                     .user("villager ?types?")
                     .name("Villager Type")
                     .description("Represents a type of a villager.")
