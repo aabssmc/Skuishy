@@ -192,12 +192,12 @@ public class OtherEvents extends SkriptEvent {
             }, 0);
         }
 
-        if (Skript.classExists("com.destroystokyo.paper.event.inventory.PrepareResultEvent")) {
-            Skript.registerEvent("Other - Prepare Result Event", OtherEvents.class, TimeSkipEvent.class,
-                            "prepare [inventory] result"
+        if (Skript.classExists("org.bukkit.event.world.TimeSkipEvent")) {
+            Skript.registerEvent("Other - Time Skip Event", OtherEvents.class, TimeSkipEvent.class,
+                            "time skip"
                     )
-                    .description("Called when an item is put in an inventory containing a result slot.")
-                    .examples("on prepare result:")
+                    .description("Called when the time skips in a world.")
+                    .examples("on time skip:")
                     .since("2.8");
             EventValues.registerEventValue(TimeSkipEvent.class, World.class, new Getter<>() {
                 @Override
@@ -235,7 +235,7 @@ public class OtherEvents extends SkriptEvent {
             }, 0);
         }
         if (Skript.classExists("org.bukkit.event.server.PluginDisableEvent")) {
-            Skript.registerEvent("Plugin - Player Enable Event", OtherEvents.class, PluginDisableEvent.class,
+            Skript.registerEvent("Plugin - Plugin Disable Event", OtherEvents.class, PluginDisableEvent.class,
                             "plugin disable[d]"
                     )
                     .description("Called when a plugin is disabled.")
