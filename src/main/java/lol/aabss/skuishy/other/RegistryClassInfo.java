@@ -7,7 +7,6 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.util.StringUtils;
 import ch.njol.yggdrasil.Fields;
 import com.google.common.base.Preconditions;
-import lol.aabss.skuishy.Skuishy;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -216,9 +215,22 @@ public class RegistryClassInfo<T extends Keyed> extends ClassInfo<T> {
         }
         string = string.trim();
 
-        NamespacedKey key = Skuishy.namespacedKeyFromObject(string);
+        NamespacedKey key = getNamespacedKey(string);
         if (key == null) return null;
         return this.registry.get(key);
+    }
+
+    @Nullable
+    private static NamespacedKey getNamespacedKey(@NotNull String key) {
+        if (!key.contains(":")) key = "minecraft:" + key;
+        if (key.length() > 255) {
+            return null;
+        }
+        key = key.toLowerCase();
+        if (key.contains(" ")) {
+            key = key.replace(" ", "_");
+        }
+        return NamespacedKey.fromString(key);
     }
 
 }
