@@ -191,20 +191,20 @@ public class Skuishy extends JavaPlugin {
 
     public static class Logger{
 
-        public static void success(String message){
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + message);
+        public static void success(@Nullable Object message){
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.GREEN + (message != null ? message.toString() : "null"));
         }
 
-        public static void log(String message){
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.WHITE + message);
+        public static void log(@Nullable Object message){
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.WHITE + (message != null ? message.toString() : "null"));
         }
 
-        public static void warn(String message){
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.YELLOW + message);
+        public static void warn(@Nullable Object message){
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.YELLOW + (message != null ? message.toString() : "null"));
         }
 
-        public static void error(String message){
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + message);
+        public static void error(@Nullable Object message){
+            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + (message != null ? message.toString() : "null"));
         }
 
         public static void exception(Throwable throwable) {
