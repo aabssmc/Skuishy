@@ -5,6 +5,7 @@ import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import lol.aabss.skuishy.other.EnumWrapper;
 import lol.aabss.skuishy.other.RegistryClassInfo;
+import org.bukkit.Art;
 import org.bukkit.entity.*;
 
 public class Types {
@@ -137,6 +138,14 @@ public class Types {
                     .user("villager ?types?")
                     .name("Villager Type")
                     .description("Represents a type of a villager.")
+                    .since("2.8"));
+        }
+
+        if (Classes.getClassInfoNoError("art") == null) {
+            Classes.registerClass(new EnumWrapper<>(Art.class).getClassInfo("art")
+                    .user("arts?")
+                    .name("Art")
+                    .description("Represents a piece of art.")
                     .since("2.8"));
         }
     }

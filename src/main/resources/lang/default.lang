@@ -36,6 +36,7 @@ types:
     tropicalfishpattern: tropical fish pattern¦s @a
     villagerprofession: villager profession¦s @a
     villagertype: villager type¦s @a
+    art: art¦s @a
 
     hologramclicktype: hologram click type¦s @a
     hologram: hologram¦s @a
