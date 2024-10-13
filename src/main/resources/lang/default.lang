@@ -37,6 +37,7 @@ types:
     villagerprofession: villager profession¦s @a
     villagertype: villager type¦s @a
     art: art¦s @a
+    angerlevel: anger level¦s @an
 
     hologramclicktype: hologram click type¦s @a
     hologram: hologram¦s @a

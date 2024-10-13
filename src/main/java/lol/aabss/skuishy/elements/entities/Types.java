@@ -148,5 +148,13 @@ public class Types {
                     .description("Represents a piece of art.")
                     .since("2.8"));
         }
+
+        if (Classes.getClassInfoNoError("angerlevel") == null) {
+            Classes.registerClass(new EnumWrapper<>(Warden.AngerLevel.class).getClassInfo("angerlevel")
+                    .user("anger ?levels?")
+                    .name("Anger Level")
+                    .description("Represents an anger level.")
+                    .since("2.8"));
+        }
     }
 }
