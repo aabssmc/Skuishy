@@ -28,7 +28,7 @@ public class ExprPolarBearStanding extends EntityExpression<PolarBear, Boolean> 
     @Override
     public void change(PolarBear polarBear, Boolean object, Changer.ChangeMode mode) {
         if (object != null && mode == Changer.ChangeMode.SET) {
-            polarBear.isStanding();
+            polarBear.setStanding(object);
         }
     }
 }
