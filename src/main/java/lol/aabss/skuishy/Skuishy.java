@@ -79,7 +79,7 @@ public class Skuishy extends JavaPlugin {
         }, 0L, 144000L);
         data_path = this.getDataFolder().getAbsolutePath();
 
-        LifecycleEventManager<Plugin> manager = this.getLifecycleManager();
+        LifecycleEventManager<@org.jetbrains.annotations.NotNull Plugin> manager = this.getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             Commands commands = event.registrar();
             commands.register(

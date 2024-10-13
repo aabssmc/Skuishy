@@ -122,15 +122,6 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("wolfvariant") == null) {
-            Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.WOLF_VARIANT),
-                            Wolf.Variant.class, "wolfvariant")
-                    .user("wolf ?variants?")
-                    .name("Wolf Variant")
-                    .description("Represents a variant of a wolf.")
-                    .since("2.8"));
-        }
-
         if (Classes.getClassInfoNoError("villagerprofession") == null) {
             Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_PROFESSION),
                             Villager.Profession.class, "villagerprofession")

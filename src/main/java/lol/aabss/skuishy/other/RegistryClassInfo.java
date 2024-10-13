@@ -213,6 +213,9 @@ public class RegistryClassInfo<T extends Keyed> extends ClassInfo<T> {
             if (!string.contains(this.suffix)) return null;
             string = string.replace("_" + suffix, "").replace(suffix, "");
         }
+        if (!string.contains(":")) {
+            string = "minecraft:" + string;
+        }
         string = string.trim();
 
         NamespacedKey key = getNamespacedKey(string);
