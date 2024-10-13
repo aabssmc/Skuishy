@@ -15,7 +15,7 @@ public class Types {
         if (Classes.getClassInfoNoError("hologram") == null) {
             Classes.registerClass(new ClassInfo<>(Hologram.class, "hologram")
                     .user("holograms?")
-                    .name("hologram")
+                    .name("DecentHolograms - Hologram")
                     .description("Represents a decent hologram hologram.")
                     .since("1.6")
                     .parser(new Parser<>() {
@@ -40,7 +40,7 @@ public class Types {
         if (Classes.getClassInfoNoError("hologramclicktype") == null) {
             Classes.registerClass(new EnumWrapper<>(ClickType.class).getClassInfo("hologramclicktype")
                     .user("hologram ?click ?types?")
-                    .name("hologramclicktype")
+                    .name("DecentHolograms - Hologram Click Type")
                     .description("Represents a decent holograms click type.")
                     .since("2.0")
             );

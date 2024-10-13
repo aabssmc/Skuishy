@@ -4,38 +4,39 @@ types:
     note: note¦s @a
     tone: tone¦s @a
     instrument: instrument¦s @a
-    datapack: datapack¦s @a
-    spawncategory: spawn ?category¦s @a
-    potionitemtype: potion ?item ?type¦s @a
-    bukkitpermission: bukkitpermission¦s @a
-    permissionattachment: permission ?attachment¦s @a
-    permissiondefault: permission ?default¦s @a
+    datapack: data pack¦s @a
+    spawncategory: spawn category¦s @a
+    potionitemtype: potion item type¦s @a
+    bukkitpermission: bukkit permission¦s @a
+    permissionattachment: permission attachment¦s @a
+    permissiondefault: permission default¦s @a
     plugin: plugin¦s @a
     blueprint: blueprint¦s @a
-    skinmodel: skinmodel¦s @a
-    namespacedkey: namespacedkey¦s @a
-    persistentdatacontainer: [persistent ?]data ?container¦s @a
+    skinmodel: skin model¦s @a
+    namespacedkey: namespaced key¦s @a
+    persistentdatacontainer: persistent data container¦s @a
+    persistentdatacontainer.pattern: [persistent ?]data ?container
     statistic: statistic¦s @a
-    skipreason: skipreason¦s @a
-    blueprintpart: blueprintpart¦s @a
-    axolotlvariant: axolotl ?variant¦s @a
-    rabbitvariant: rabbit ?variant¦s @a
-    llamavariant: llama ?variant¦s @a
-    foxvariant: fox ?variant¦s @a
-    boatvariant: boat ?variant¦s @a
-    boatstatus: boat ?status¦es @a
-    dragonphase: [ender ?]dragon phase¦s @an
-    frogvariant: frog ?variant¦s @a
-    horsecolor: horse ?color¦s @a
-    horsestyle: horse ?style¦s @a
-    mushroomcowvariant: mushroom ?cow ?variant¦s @a
-    parrotvariant: parrot ?variant¦s @a
-    snifferstate: sniffer ?state¦s @a
-    tropicalfishpattern: tropical ?fish ?pattern¦s @a
-    villagerprofession: villager ?profession¦s @a
-    villagertype: villager ?type¦s @a
+    skipreason: skip reason¦s @a
+    blueprintpart: blueprint part¦s @a
+    axolotlvariant: axolotl variant¦s @a
+    rabbitvariant: rabbit variant¦s @a
+    llamavariant: llama variant¦s @a
+    foxvariant: fox variant¦s @a
+    boatvariant: boat variant¦s @a
+    boatstatus: boat status¦es @a
+    dragonphase: dragon phase¦s @an
+    dragonphase.pattern: [ender ?]dragon phase
+    frogvariant: frog variant¦s @a
+    horsecolor: horse color¦s @a
+    horsestyle: horse style¦s @a
+    mushroomcowvariant: mushroom cow variant¦s @a
+    parrotvariant: parrot variant¦s @a
+    snifferstate: sniffer state¦s @a
+    tropicalfishpattern: tropical fish pattern¦s @a
+    villagerprofession: villager profession¦s @a
+    villagertype: villager type¦s @a
 
-    hologramclicktype: hologram ?click ?type¦s @a
+    hologramclicktype: hologram click type¦s @a
     hologram: hologram¦s @a
-    hologrampage: hologram ?page¦s @a
-    viveplayer: vive ?player¦s @a
+    hologrampage: hologram page¦s @a

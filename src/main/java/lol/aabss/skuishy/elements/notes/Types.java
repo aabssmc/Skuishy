@@ -14,7 +14,7 @@ public class Types {
         if (Classes.getClassInfoNoError("note") == null) {
             Classes.registerClass(new ClassInfo<>(Note.class, "note")
                     .user("notes?")
-                    .name("note")
+                    .name("Note")
                     .description("Represents a note block note.")
                     .since("1.6")
                     .parser(new Parser<>() {
@@ -42,7 +42,7 @@ public class Types {
         if (Classes.getClassInfoNoError("tone") == null) {
             Classes.registerClass(new EnumWrapper<>(Note.Tone.class).getClassInfo("tone")
                     .user("tones?")
-                    .name("tone")
+                    .name("Tone")
                     .description("Represents a note block note's tone.")
                     .since("1.6")
             );
@@ -52,7 +52,7 @@ public class Types {
         if (Classes.getClassInfoNoError("instrument") == null) {
             Classes.registerClass(new EnumWrapper<>(Instrument.class).getClassInfo("instrument")
                     .user("instruments?")
-                    .name("instrument")
+                    .name("Instrument")
                     .description("Represents a note block instrument.")
                     .since("1.6")
             );

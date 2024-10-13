@@ -16,8 +16,8 @@ public class Types {
     static{
         if (Classes.getClassInfoNoError("datapack") == null) {
             Classes.registerClass(new ClassInfo<>(Datapack.class, "datapack")
-                    .user("datapacks?")
-                    .name("datapack")
+                    .user("data ?packs?")
+                    .name("Datapack")
                     .description("Represents a datapack.")
                     .since("1.7")
                     .parser(new Parser<>() {
@@ -42,7 +42,7 @@ public class Types {
         if (Classes.getClassInfoNoError("spawncategory") == null) {
             Classes.registerClass(new EnumWrapper<>(SpawnCategory.class).getClassInfo("spawncategory")
                     .user("spawn ?categor(y|ies)")
-                    .name("spawn category")
+                    .name("Spawn Category")
                     .description("Represents a spawn category.")
                     .since("1.7.5")
             );
@@ -66,7 +66,7 @@ public class Types {
         }
         if (Classes.getClassInfoNoError("skipreason") == null) {
             Classes.registerClass(new EnumWrapper<>(TimeSkipEvent.SkipReason.class).getClassInfo("skipreason")
-                    .user("skipreasons?")
+                    .user("skip ?reasons?")
                     .name("Time Skip Reason")
                     .description("Represents a reason for a time skip.")
                     .since("2.8")

@@ -17,7 +17,7 @@ public class Types {
     static {
         if (Classes.getExactClassInfo(NamespacedKey.class) == null) {
             Classes.registerClass(new ClassInfo<>(NamespacedKey.class, "namespacedkey")
-                    .user("namespacedkeys?")
+                    .user("namespaced ?keys?")
                     .name("Persistence - NamespacedKey")
                     .description("Mirror of [SkBee](https://github.com/ShaneBeee/SkBee)'s namespaced key type. For use when [SkBee](https://github.com/ShaneBeee/SkBee) is not installed.",
                             "Represents a minecraft namespaced key. For use when SkBee is not installed.",
