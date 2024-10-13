@@ -9,7 +9,7 @@ import lol.aabss.skuishy.other.skript.EntityExpression;
 import org.bukkit.entity.ItemFrame;
 import org.jetbrains.annotations.Nullable;
 
-@Name("Item Frame - Fixed state")
+@Name("Item Frame - Fixed State")
 @Description("Gets/sets the fixed state of an item frame.")
 @Examples({
         "set itemframe fixed mode of {_itemframe} to false"

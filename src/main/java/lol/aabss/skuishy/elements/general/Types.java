@@ -1,11 +1,14 @@
 package lol.aabss.skuishy.elements.general;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import io.papermc.paper.datapack.Datapack;
 import lol.aabss.skuishy.other.EnumWrapper;
+import org.bukkit.Art;
+import org.bukkit.Rotation;
 import org.bukkit.Statistic;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.world.TimeSkipEvent;
@@ -71,6 +74,22 @@ public class Types {
                     .description("Represents a reason for a time skip.")
                     .since("2.8")
             );
+        }
+
+        if (Classes.getClassInfoNoError("art") == null) {
+            Classes.registerClass(new EnumWrapper<>(Art.class).getClassInfo("art")
+                    .user("arts?")
+                    .name("Art")
+                    .description("Represents a piece of art.")
+                    .since("2.8"));
+        }
+
+        if (Classes.getClassInfoNoError("rotation") == null && Skript.classExists("org.bukkit.Rotation")) {
+            Classes.registerClass(new EnumWrapper<>(Rotation.class).getClassInfo("rotation")
+                    .user("rotations?")
+                    .name("Rotation")
+                    .description("Represents a rotation.")
+                    .since("2.8"));
         }
     }
 }
