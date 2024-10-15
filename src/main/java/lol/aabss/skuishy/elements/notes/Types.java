@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.notes;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Types {
     static {
-        if (Classes.getClassInfoNoError("note") == null) {
+        if (Skript.classExists("org.bukkit.Note") && Classes.getExactClassInfo(Note.class) == null) {
             Classes.registerClass(new ClassInfo<>(Note.class, "note")
                     .user("notes?")
                     .name("Note")
@@ -39,7 +40,7 @@ public class Types {
             );
         }
 
-        if (Classes.getClassInfoNoError("tone") == null) {
+        if (Skript.classExists("org.bukkit.Note"/*$Tone*/) && Classes.getExactClassInfo(Note.Tone.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Note.Tone.class).getClassInfo("tone")
                     .user("tones?")
                     .name("Tone")
@@ -49,7 +50,7 @@ public class Types {
         }
 
 
-        if (Classes.getClassInfoNoError("instrument") == null) {
+        if (Skript.classExists("org.bukkit.Instrument") && Classes.getExactClassInfo(Instrument.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Instrument.class).getClassInfo("instrument")
                     .user("instruments?")
                     .name("Instrument")

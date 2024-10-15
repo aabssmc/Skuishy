@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Types {
     static{
-        if (Classes.getClassInfoNoError("datapack") == null) {
+        if (Skript.classExists("io.papermc.paper.datapack.Datapack") && Classes.getExactClassInfo(Datapack.class) == null) {
             Classes.registerClass(new ClassInfo<>(Datapack.class, "datapack")
                     .user("data ?packs?")
                     .name("Datapack")
@@ -42,7 +42,7 @@ public class Types {
                     })
             );
         }
-        if (Classes.getClassInfoNoError("spawncategory") == null) {
+        if (Skript.classExists("org.bukkit.entity.SpawnCategory") && Classes.getExactClassInfo(SpawnCategory.class) == null) {
             Classes.registerClass(new EnumWrapper<>(SpawnCategory.class).getClassInfo("spawncategory")
                     .user("spawn ?categor(y|ies)")
                     .name("Spawn Category")
@@ -51,7 +51,7 @@ public class Types {
             );
         }
 
-        if (Classes.getClassInfoNoError("potionitemtype") == null) {
+        if (Skript.classExists("org.bukkit.potion.PotionType") && Classes.getExactClassInfo(PotionType.class) == null) {
             Classes.registerClass(new EnumWrapper<>(PotionType.class).getClassInfo("potionitemtype")
                     .user("potion[ ]item[ ]type")
                     .name("Potion Item Type")
@@ -59,7 +59,7 @@ public class Types {
                     .since("2.1")
             );
         }
-        if (Classes.getClassInfoNoError("statistic") == null) {
+        if (Skript.classExists("org.bukkit.Statistic") && Classes.getExactClassInfo(Statistic.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Statistic.class).getClassInfo("statistic")
                     .user("statistics?")
                     .name("Statistic")
@@ -67,7 +67,7 @@ public class Types {
                     .since("2.8")
             );
         }
-        if (Classes.getClassInfoNoError("skipreason") == null) {
+        if (Skript.classExists("org.bukkit.event.world.TimeSkinEvent.SkipReason") && Classes.getExactClassInfo(TimeSkipEvent.SkipReason.class) == null) {
             Classes.registerClass(new EnumWrapper<>(TimeSkipEvent.SkipReason.class).getClassInfo("skipreason")
                     .user("skip ?reasons?")
                     .name("Time Skip Reason")
@@ -76,7 +76,7 @@ public class Types {
             );
         }
 
-        if (Classes.getClassInfoNoError("art") == null) {
+        if (Skript.classExists("org.bukkit.Art") && Classes.getExactClassInfo(Art.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Art.class).getClassInfo("art")
                     .user("arts?")
                     .name("Art")
@@ -84,7 +84,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("rotation") == null && Skript.classExists("org.bukkit.Rotation")) {
+        if (Skript.classExists("org.bukkit.Rotation") && Classes.getExactClassInfo(Rotation.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Rotation.class).getClassInfo("rotation")
                     .user("rotations?")
                     .name("Rotation")

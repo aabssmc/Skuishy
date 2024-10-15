@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.permissions;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
@@ -13,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Types {
     static {
-        if (Classes.getClassInfoNoError("bukkitpermission") == null) {
+        if (Skript.classExists("org.bukkit.permissions.Permission") && Classes.getExactClassInfo(Permission.class) == null) {
             Classes.registerClass(new ClassInfo<>(Permission.class, "bukkitpermission")
                     .user("bukkit ?permissions?")
                     .name("Permissions - Bukkit Permission")
@@ -38,7 +39,7 @@ public class Types {
                     })
             );
         }
-        if (Classes.getClassInfoNoError("permissionattachment") == null) {
+        if (Skript.classExists("org.bukkit.permissions.PermissionAttachment") && Classes.getExactClassInfo(PermissionAttachment.class) == null) {
             Classes.registerClass(new ClassInfo<>(PermissionAttachment.class, "permissionattachment")
                     .user("permission ?attachments?")
                     .name("Permissions - Permission Attachment")
@@ -64,7 +65,7 @@ public class Types {
                     })
             );
         }
-        if (Classes.getClassInfoNoError("permissiondefault") == null) {
+        if (Skript.classExists("org.bukkit.permissions.PermissionDefault") && Classes.getExactClassInfo(PermissionDefault.class) == null) {
             Classes.registerClass(new EnumWrapper<>(PermissionDefault.class).getClassInfo("permissiondefault")
                     .user("permission ?defaults?")
                     .name("Permissions - Permission Default")

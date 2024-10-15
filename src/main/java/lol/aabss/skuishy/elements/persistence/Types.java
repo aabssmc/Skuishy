@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.persistence;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.classes.Serializer;
@@ -15,7 +16,7 @@ import java.io.StreamCorruptedException;
 
 public class Types {
     static {
-        if (Classes.getExactClassInfo(NamespacedKey.class) == null) {
+        if (Skript.classExists("org.bukkit.NamespacedKey") && Classes.getExactClassInfo(NamespacedKey.class) == null) {
             Classes.registerClass(new ClassInfo<>(NamespacedKey.class, "namespacedkey")
                     .user("namespaced ?keys?")
                     .name("Persistence - NamespacedKey")
@@ -59,7 +60,7 @@ public class Types {
                     }));
         }
 
-        if (Classes.getExactClassInfo(PersistentDataContainer.class) == null){
+        if (Skript.classExists("org.bukkit.persistence.PersistentDataContainer") && Classes.getExactClassInfo(PersistentDataContainer.class) == null){
             Classes.registerClass(new ClassInfo<>(PersistentDataContainer.class, "persistentdatacontainer")
                     .user("[persistent ?]data ?containers?")
                     .name("Persistence - Persistent Data Container")

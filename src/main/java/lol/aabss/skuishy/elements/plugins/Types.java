@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.plugins;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Types {
     static {
-        if (Classes.getClassInfoNoError("plugin") == null) {
+        if (Skript.classExists("org.bukkit.plugin.Plugin") && Classes.getExactClassInfo(Plugin.class) == null) {
             Classes.registerClass(new ClassInfo<>(Plugin.class, "plugin")
                     .user("plugins?")
                     .name("Plugin - Plugin")

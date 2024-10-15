@@ -1,5 +1,6 @@
 package lol.aabss.skuishy.elements.entities;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.registrations.Classes;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
@@ -9,7 +10,7 @@ import org.bukkit.entity.*;
 
 public class Types {
     static {
-        if (Classes.getClassInfoNoError("axolotlvariant") == null) {
+        if (Skript.classExists("org.bukkit.entity.Axolotl") && Classes.getExactClassInfo(Axolotl.Variant.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Axolotl.Variant.class).getClassInfo("axolotlvariant")
                     .user("axolotl ?variants?")
                     .name("Axolotl Variant")
@@ -17,7 +18,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("rabbitvariant") == null) {
+        if (Skript.classExists("org.bukkit.entity.Rabbit") && Classes.getExactClassInfo(Rabbit.Type.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Rabbit.Type.class).getClassInfo("rabbitvariant")
                     .user("rabbit ?variants?")
                     .name("Rabbit Variant")
@@ -25,7 +26,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("llamavariant") == null) {
+        if (Skript.classExists("org.bukkit.entity.Llama") && Classes.getExactClassInfo(Llama.Color.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Llama.Color.class).getClassInfo("llamavariant")
                     .user("llama ?variants?")
                     .name("Llama Variant")
@@ -33,7 +34,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("foxvariant") == null) {
+        if (Skript.classExists("org.bukkit.entity.Fox") && Classes.getExactClassInfo(Fox.Type.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Fox.Type.class).getClassInfo("foxvariant")
                     .user("fox ?variants?")
                     .name("Fox Variant")
@@ -41,7 +42,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("boatvariant") == null) {
+        if (Skript.classExists("org.bukkit.entity.Boat") && Classes.getExactClassInfo(Boat.Type.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Boat.Type.class).getClassInfo("boatvariant")
                     .user("boat ?variants?")
                     .name("Boat Variant")
@@ -49,7 +50,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("boatstatus") == null) {
+        if (Skript.classExists("org.bukkit.entity.Boat") && Classes.getExactClassInfo(Boat.Status.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Boat.Status.class).getClassInfo("boatstatus")
                     .user("boat ?status[es]")
                     .name("Boat Status")
@@ -57,7 +58,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("dragonphase") == null) {
+        if (Skript.classExists("org.bukkit.entity.EnderDragon") && Classes.getExactClassInfo(EnderDragon.Phase.class) == null) {
             Classes.registerClass(new EnumWrapper<>(EnderDragon.Phase.class).getClassInfo("dragonphase")
                     .user("[ender ?]dragon ?phase[s]")
                     .name("Dragon Phase")
@@ -65,7 +66,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("frogvariant") == null) {
+        if (Skript.classExists("org.bukkit.entity.Frog") && Classes.getExactClassInfo(Frog.Variant.class) == null) {
             Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.FROG_VARIANT),
                             Frog.Variant.class, "frogvariant")
                     .user("frog ?variants?")
@@ -74,7 +75,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("horsecolor") == null) {
+        if (Skript.classExists("org.bukkit.entity.Horse") && Classes.getExactClassInfo(Horse.Color.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Horse.Color.class).getClassInfo("horsecolor")
                     .user("horse ?colors?")
                     .name("Horse Color")
@@ -82,7 +83,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("horsestyle") == null) {
+        if (Skript.classExists("org.bukkit.entity.Horse") && Classes.getExactClassInfo(Horse.Style.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Horse.Style.class).getClassInfo("horsestyle")
                     .user("horse ?styles?")
                     .name("Horse Style")
@@ -90,7 +91,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("mushroomcowvariant") == null) {
+        if (Skript.classExists("org.bukkit.entity.MushroomCow") && Classes.getExactClassInfo(MushroomCow.Variant.class) == null) {
             Classes.registerClass(new EnumWrapper<>(MushroomCow.Variant.class).getClassInfo("mushroomcowvariant")
                     .user("mushroom ?cow ?variants?")
                     .name("Mushroom Cow Variant")
@@ -98,7 +99,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("parrotvariant") == null) {
+        if (Skript.classExists("org.bukkit.entity.Parrot") && Classes.getExactClassInfo(Parrot.Variant.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Parrot.Variant.class).getClassInfo("parrotvariant")
                     .user("parrot ?variants?")
                     .name("Parrot Variant")
@@ -106,7 +107,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("snifferstate") == null) {
+        if (Skript.classExists("org.bukkit.entity.Sniffer") && Classes.getExactClassInfo(Sniffer.State.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Sniffer.State.class).getClassInfo("snifferstate")
                     .user("sniffer ?states?")
                     .name("Sniffer States")
@@ -114,7 +115,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("tropicalfishpattern") == null) {
+        if (Skript.classExists("org.bukkit.entity.TropicalFish") && Classes.getExactClassInfo(TropicalFish.Pattern.class) == null) {
             Classes.registerClass(new EnumWrapper<>(TropicalFish.Pattern.class).getClassInfo("tropicalfishpattern")
                     .user("tropical ?fish ?patterns?")
                     .name("Tropical Fish Pattern")
@@ -122,7 +123,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("villagerprofession") == null) {
+        if (Skript.classExists("org.bukkit.entity.Villager") && Classes.getExactClassInfo(Villager.Profession.class) == null) {
             Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_PROFESSION),
                             Villager.Profession.class, "villagerprofession")
                     .user("villager ?professions?")
@@ -131,7 +132,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("villagertype") == null) {
+        if (Skript.classExists("org.bukkit.entity.Villager") && Classes.getExactClassInfo(Villager.Type.class) == null) {
             Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_TYPE),
                             Villager.Type.class, "villagertype")
                     .user("villager ?types?")
@@ -140,7 +141,7 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Classes.getClassInfoNoError("angerlevel") == null) {
+        if (Skript.classExists("org.bukkit.entity.Warden") && Classes.getExactClassInfo(Warden.AngerLevel.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Warden.AngerLevel.class).getClassInfo("angerlevel")
                     .user("anger ?levels?")
                     .name("Anger Level")
