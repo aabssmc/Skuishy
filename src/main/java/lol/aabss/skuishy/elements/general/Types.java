@@ -81,7 +81,8 @@ public class Types {
                     .user("arts?")
                     .name("Art")
                     .description("Represents a piece of art.")
-                    .since("2.8"));
+                    .since("2.8")
+            );
         }
 
         if (Skript.classExists("org.bukkit.Rotation") && Classes.getExactClassInfo(Rotation.class) == null) {
@@ -89,7 +90,9 @@ public class Types {
                     .user("rotations?")
                     .name("Rotation")
                     .description("Represents a rotation.")
-                    .since("2.8"));
+                    .since("2.8")
+            );
         }
+
     }
 }
