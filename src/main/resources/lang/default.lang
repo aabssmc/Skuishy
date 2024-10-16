@@ -34,8 +34,6 @@ types:
     parrotvariant: parrot variant¦s @a
     snifferstate: sniffer state¦s @a
     tropicalfishpattern: tropical fish pattern¦s @a
-    villagerprofession: villager profession¦s @a
-    villagertype: villager type¦s @a
     art: art¦s @a
     angerlevel: anger level¦s @an
     rotation: rotation¦s @a

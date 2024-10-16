@@ -123,24 +123,6 @@ public class Types {
                     .since("2.8"));
         }
 
-        if (Skript.classExists("org.bukkit.entity.Villager") && Classes.getExactClassInfo(Villager.Profession.class) == null) {
-            Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_PROFESSION),
-                            Villager.Profession.class, "villagerprofession")
-                    .user("villager ?professions?")
-                    .name("Villager Profession")
-                    .description("Represents a profession of a villager.")
-                    .since("2.8"));
-        }
-
-        if (Skript.classExists("org.bukkit.entity.Villager") && Classes.getExactClassInfo(Villager.Type.class) == null) {
-            Classes.registerClass(RegistryClassInfo.create(RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_TYPE),
-                            Villager.Type.class, "villagertype")
-                    .user("villager ?types?")
-                    .name("Villager Type")
-                    .description("Represents a type of a villager.")
-                    .since("2.8"));
-        }
-
         if (Skript.classExists("org.bukkit.entity.Warden") && Classes.getExactClassInfo(Warden.AngerLevel.class) == null) {
             Classes.registerClass(new EnumWrapper<>(Warden.AngerLevel.class).getClassInfo("angerlevel")
                     .user("anger ?levels?")
