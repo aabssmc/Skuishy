@@ -60,10 +60,12 @@ public class SkinWrapper {
     }
 
     public static void setSkin(Player player, String value, @Nullable String signature){
-        PlayerProfile profile = player.getPlayerProfile();
-        profile.removeProperties(profile.getProperties());
-        profile.setProperty(new ProfileProperty("textures", value, signature));
-        player.setPlayerProfile(profile);
+        Bukkit.getScheduler().runTask(Skuishy.instance, () -> {
+            PlayerProfile profile = player.getPlayerProfile();
+            profile.removeProperties(profile.getProperties());
+            profile.setProperty(new ProfileProperty("textures", value, signature));
+            player.setPlayerProfile(profile);
+        });
     }
 
     private static BufferedImage getHead(String name, boolean helm) throws IOException {
