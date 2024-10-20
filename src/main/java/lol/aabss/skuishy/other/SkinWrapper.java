@@ -10,6 +10,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.profile.PlayerTextures;
 import org.mineskin.GenerateOptions;
+import org.mineskin.Java11RequestHandler;
 import org.mineskin.MineSkinClient;
 import org.mineskin.data.Texture;
 import org.mineskin.data.Variant;
@@ -27,7 +28,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class SkinWrapper {
 
-    public static MineSkinClient client = MineSkinClient.builder().userAgent("Skuishy-Agent").build();
+    public static MineSkinClient client = MineSkinClient.builder().userAgent("Skuishy-Agent").requestHandler(Java11RequestHandler::new).build();
     public static GenerateOptions options = GenerateOptions.create().name("Skuishy-Upload").variant(Variant.AUTO).visibility(Visibility.UNLISTED);
 
     public static ProfileProperty getProfileProperties(PlayerProfile p) {

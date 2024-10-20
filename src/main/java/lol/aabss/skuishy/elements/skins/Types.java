@@ -27,7 +27,7 @@ public class Types {
 
                         @Override
                         public @NotNull String toVariableNameString(Blueprint blueprint) {
-                            return "blueprint";
+                            return blueprint.model().getName() + " blueprint";
                         }
 
                         @Override

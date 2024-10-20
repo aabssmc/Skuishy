@@ -215,6 +215,12 @@ public class Skuishy extends JavaPlugin {
                     prefix+ChatColor.RED+throwable+"\n"+ChatColor.DARK_RED
             );
             ComponentBuilder stackTrace = new ComponentBuilder();
+            Bukkit.getConsoleSender().sendMessage(
+                    prefix+"Stacktrace Message: "+ChatColor.RED+throwable.getMessage()
+            );
+            Bukkit.getConsoleSender().sendMessage(
+                    prefix+"Cause: "+ChatColor.RED+throwable.getCause()
+            );
             for (StackTraceElement element : throwable.getStackTrace()) {
                 Bukkit.getConsoleSender().sendMessage(
                         prefix+"| "+ChatColor.RED+element
